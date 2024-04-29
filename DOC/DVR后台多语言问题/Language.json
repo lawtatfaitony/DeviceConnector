@@ -1,0 +1,2189 @@
+[
+	{
+		"key_name": "Account_ForgetPassword",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "忘记密码",
+		"zh_hk": "忘記密碼",
+		"en_us": "Forget Password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Account_RegisterAddNew",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增系统用户",
+		"zh_hk": "新增系統用戶",
+		"en_us": "Add System User",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Account_SystemUser",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "系统用户",
+		"zh_hk": "系統用戶",
+		"en_us": "System User",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "AddLibrary_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增库分类",
+		"zh_hk": "新增庫分類",
+		"en_us": "Add Library",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "AddPerson_Add",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增人员",
+		"zh_hk": "新增人員",
+		"en_us": "Add Person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "AddPerson_Update",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更新人员",
+		"zh_hk": "更新人員",
+		"en_us": "Update Person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "AddTask_Add",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增任务",
+		"zh_hk": "新增任務",
+		"en_us": "Task Add New",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "AddTask_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增任务成功",
+		"zh_hk": "新增任務成功",
+		"en_us": "Add task success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "AddTask_Update",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务更新",
+		"zh_hk": "任務更新",
+		"en_us": "Task Update",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamAddNewResult_Fail",
+		"key_type": "ControllerName_ActionMethod_ActionReturnVar",
+		"zh_cn": "新增镜头失败",
+		"zh_hk": "新增鏡頭失敗",
+		"en_us": "Camera add new failure!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamAddNewResult_SUCC",
+		"key_type": "ControllerName_ActionMethod_ActionReturnVar",
+		"zh_cn": "新增镜头成功",
+		"zh_hk": "新增鏡頭成功",
+		"en_us": "Camera add new successfully!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamAdd_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增镜头",
+		"zh_hk": "新增鏡頭",
+		"en_us": "Add Camera",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamApiModelInput_Name",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "镜头名称",
+		"zh_hk": "鏡頭名稱",
+		"en_us": "Camera Name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamApiModelInput_Remark",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "备注",
+		"zh_hk": "備註",
+		"en_us": "Remark",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamApiModelInput_Rtsp",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "镜头RTSP连接",
+		"zh_hk": "鏡頭RTSP連接",
+		"en_us": "Camera RTSP URL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamApiModelInput_Rtsp_Tips",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头RTSP连接是由镜头厂商按RTSP协议格式约定",
+		"zh_hk": "鏡頭RTSP連接是由鏡頭廠商按RTSP協議格式約定",
+		"en_us": "The Camera RTSP connection is agreed by the manufacturer according to the RTSP protocol format",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CameraAdd_SearchCamera",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "搜索系统镜头",
+		"zh_hk": "搜索系統鏡頭",
+		"en_us": "Search system Camera",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CameraList_ComfirmNoTips",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "OK!再考虑一下先吧！",
+		"zh_hk": "OK!再考慮一下先吧！",
+		"en_us": "OK! I  think about it!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CameraRtspGet_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取镜头RTSP失败",
+		"zh_hk": "獲取鏡頭RTSP失敗",
+		"en_us": "Camera RTSP Get  FAIL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CameraRtspGet_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取成功",
+		"zh_hk": "獲取成功",
+		"en_us": "Get CameraRtsp Success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_CameraId",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "镜头编号",
+		"zh_hk": "鏡頭編號",
+		"en_us": "Camera ID",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_ComfirmTips",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "确认删除当前镜头设置吗？",
+		"zh_hk": "確認刪除當前鏡頭設置嗎？",
+		"en_us": "Comfirm to delete camer setting?",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_CreateDate",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "创建日期",
+		"zh_hk": "創建日期",
+		"en_us": "Create Date",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_InfoTips2",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "如果删除镜头设置可能造成任务错误哦！请先确认任务是否已排除当前设置",
+		"zh_hk": "如果刪除鏡頭設置可能造成任務錯誤哦！請先確認任務是否已排除當前設置",
+		"en_us": "If you delete the Camera settings, it may cause a task error! Please confirm if the task has excluded the current settings",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_Name",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "镜头名称",
+		"zh_hk": "鏡頭名稱",
+		"en_us": "Camera Name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_Online",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "状态",
+		"zh_hk": "狀態",
+		"en_us": "State",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_Rtsp",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "镜头连接(RTSP)",
+		"zh_hk": "鏡頭連接(RTSP)",
+		"en_us": "Camera RTSP",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Camera_Type",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "类型",
+		"zh_hk": "類型",
+		"en_us": "Type",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamManagement_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头设备管理",
+		"zh_hk": "鏡頭設備管理",
+		"en_us": "Camera Manage",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamMpeg_ADD_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "MPEG 文件信息新增失败",
+		"zh_hk": "MPEG 文件信息新增失敗",
+		"en_us": "MPEG file info was added fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAMMPEG_DEVICE_SERIAL_NO_NOT_EXIST",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "设备序列号不存",
+		"zh_hk": "設備序列號不存",
+		"en_us": "DEVICE SERIAL NO NOT EXIST",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamMpeg_EXIST_THE_NAME",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "已存在文件名称",
+		"zh_hk": "已存在文件名稱",
+		"en_us": "EXIST THE FILE NAME",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamMpeg_MPEG_WRONG_FORMAT",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "MPEG 格式错误",
+		"zh_hk": "MPEG 格式錯誤",
+		"en_us": "MPEG WRONG FORMAT",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamSearchResult_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "成功返回搜索结果",
+		"zh_hk": "成功返回搜索結果",
+		"en_us": "Camera Search Result  Return SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamUpdateResult_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头设置更新失败",
+		"zh_hk": "鏡頭設置更新失敗",
+		"en_us": "Camera Update FAIL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CamUpdateResult_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头设置更新成功",
+		"zh_hk": "鏡頭設置更新成功",
+		"en_us": "Camera Update SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_CAMERA_NOT_EXIST",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "不存在镜头记录",
+		"zh_hk": "不存在鏡頭記錄",
+		"en_us": "CAMERA NOT EXIST",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_DELTET_SUCCESS",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头定义删除成功",
+		"zh_hk": "鏡頭定義刪除成功",
+		"en_us": "Camera is deleted successfully",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_EXIST_THE_SAME_NAME",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "存在相同的镜头名称",
+		"zh_hk": "存在相同的鏡頭名稱",
+		"en_us": "Camera list exist the same name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_GET_CAMLIST_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取镜头列表失败",
+		"zh_hk": "獲取鏡頭列表失敗",
+		"en_us": "GET CAMERA LIST FAIL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_GET_DETAILS_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取镜头资料出错",
+		"zh_hk": "獲取鏡頭資料出錯",
+		"en_us": "Fail to get camera details",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_IS_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "在线",
+		"zh_hk": "在線",
+		"en_us": "VISIBLE",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Cam_Name_required",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "请填入镜头名称",
+		"zh_hk": "請填入鏡頭名稱",
+		"en_us": "Camera name is required",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "CAM_NOT_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "下线",
+		"zh_hk": "下線",
+		"en_us": "IN VISIBLE",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Cam_QueryCameraList",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头列表",
+		"zh_hk": "鏡頭列表",
+		"en_us": "Camera List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Cam_Rtsp_Format",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "请填入正确的镜头RTSP连接格式",
+		"zh_hk": "請填入正確的鏡頭RTSP連接格式",
+		"en_us": "Camera RTSP URL format  is required",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Cam_Rtsp_required",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "请填入镜头的RTSP连接",
+		"zh_hk": "請填入鏡頭的RTSP連接",
+		"en_us": "Camera RTSP URL is required",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteCamera_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除镜头失败",
+		"zh_hk": "刪除鏡頭失敗",
+		"en_us": "DeleteCamera FAIL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteCamera_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除镜头成功",
+		"zh_hk": "刪除鏡頭成功",
+		"en_us": "DeleteCamera SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteLibrary_ComfirmNoTips",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "好吧，还是再考虑一下吧！",
+		"zh_hk": "好吧，還是再考慮一下吧！",
+		"en_us": "No,Let me think about!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteLibrary_ComfirmTips",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除库分类吗？",
+		"zh_hk": "刪除庫分類嗎？",
+		"en_us": "Comfirm to delete library",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteLibrary_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除库单元成功",
+		"zh_hk": "刪除庫單元成功",
+		"en_us": "Delete Library SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeletePerson_ComfirmTips",
+		"key_type": "ControllerName_ActionMethod_JsMethod_JsVar",
+		"zh_cn": "OK! 确定删除？",
+		"zh_hk": "OK! 確定刪除？",
+		"en_us": "OK!  sure to delete!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteTask_ComfirmNoTips",
+		"key_type": "ControllerName_ActionMethod_JsMethod_JsVar",
+		"zh_cn": "OK! 再考虑一下先吧！",
+		"zh_hk": "OK! 再考慮一下先吧！",
+		"en_us": "OK! Let me think about it!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteTask_ComfirmTips",
+		"key_type": "ControllerName_ActionMethod_JsMethod_JsVar",
+		"zh_cn": "确定要删除任务吗？",
+		"zh_hk": "確定要刪除任務嗎？",
+		"en_us": "Are you sure to delete current task?",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DeleteTask_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除任务成功",
+		"zh_hk": "刪除任務成功",
+		"en_us": "Delete task success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "DEVICE_AUTHORIZATION_ERROR",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "设备授权错误",
+		"zh_hk": "設備授權錯誤",
+		"en_us": "Device authorization error",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "dfgdfgdsfg",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "的分公司电饭锅",
+		"zh_hk": "的分公司電飯鍋",
+		"en_us": "sdfgsdfgdsg",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "FFFFFFFFdddd",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "阿斯顿发斯蒂芬",
+		"zh_hk": "速度发斯蒂芬",
+		"en_us": "sdfasfdasfsfsd",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "FILESIZE_IS_LIMITED",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "文件尺寸太大",
+		"zh_hk": "文件尺寸太大",
+		"en_us": "File size is limited",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "FILE_BACKEND_CLOSED",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "后端上存接口已关闭",
+		"zh_hk": "后端上存接口已關閉",
+		"en_us": "Backend server is closed!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "FILE_UPLOAD_FAIL",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "文件上存失败",
+		"zh_hk": "文件上存失敗",
+		"en_us": "file upload FAIL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "FILE_UPLOAD_SUCCESS",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "文件上存成功",
+		"zh_hk": "文件上存成功",
+		"en_us": "file upload success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Genders_FEMALE",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "女",
+		"zh_hk": "女",
+		"en_us": "Female",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Genders_MALE",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "男",
+		"zh_hk": "男",
+		"en_us": "MALE",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Genders_Unknow",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "未知",
+		"zh_hk": "未知",
+		"en_us": "UnKnow",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Genders_UNKNOWN",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "未知",
+		"zh_hk": "未知",
+		"en_us": "UnKnow",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_AccessDenied",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "拒绝访问",
+		"zh_hk": "拒絕訪問",
+		"en_us": "Access Denied",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_AddNew",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "新增",
+		"zh_hk": "新增",
+		"en_us": "Add New",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_ApiServiceFail",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "API 服务失败",
+		"zh_hk": "API 服務失敗",
+		"en_us": "Api Service Fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_AUTH_WRONG_USERNAME_OR_PASSWORD",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "授权的密码或者用户名错误",
+		"zh_hk": "授權的密碼或者用戶名錯誤",
+		"en_us": "Access Denied,UserName Or Password wrong!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Browse",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "浏览",
+		"zh_hk": "瀏覽",
+		"en_us": "Browse",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_ClickToCopy",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "点击复制",
+		"zh_hk": "點擊復制",
+		"en_us": "Click to copy",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Comfirm",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "确认",
+		"zh_hk": "確認",
+		"en_us": "Comfirm",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_ComfirmNoTips",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "好的，先考虑一下先吧！",
+		"zh_hk": "好的，先考慮一下先吧！",
+		"en_us": "Ok, Let me think about it!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_CreateDate",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "创建时间",
+		"zh_hk": "創建時間",
+		"en_us": "Create Date",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Delete",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "删除",
+		"zh_hk": "刪除",
+		"en_us": "Delete",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Details",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "详情",
+		"zh_hk": "詳情",
+		"en_us": "Details",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Edit",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "编 辑",
+		"zh_hk": "編 輯",
+		"en_us": "Edit",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_EXCEPTION",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "代码遇到意外情况",
+		"zh_hk": "代碼遇到意外情況",
+		"en_us": "EXCEPTION",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Fail",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "失败",
+		"zh_hk": "失敗",
+		"en_us": "Fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Gender",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "性别",
+		"zh_hk": "性别",
+		"en_us": "Gender",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Home",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "主页",
+		"zh_hk": "主頁",
+		"en_us": "Home",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_ILLEGAL_RTSP",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "RTSP 格式不对",
+		"zh_hk": "RTSP 格式不對",
+		"en_us": "ILLEGAL_RTSP",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_InfoTips",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "提示",
+		"zh_hk": "提示",
+		"en_us": "Info",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Isee",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "OK!我明白了~~~",
+		"zh_hk": "OK!我明白了~~~",
+		"en_us": "I see!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_List",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "列表",
+		"zh_hk": "列表",
+		"en_us": "List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Login",
+		"key_type": "GeneralUI",
+		"zh_cn": "登录",
+		"zh_hk": "Login",
+		"en_us": "Login",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_LoginFail",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "登录失败",
+		"zh_hk": "登錄失敗",
+		"en_us": "Login Fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_LoginSucc",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "登录成功",
+		"zh_hk": "登錄成功",
+		"en_us": "Login Success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Loogin",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "登录",
+		"zh_hk": "登陸",
+		"en_us": "Loogin",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Modify",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更 改",
+		"zh_hk": "更 改",
+		"en_us": "Change",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_NetWorkDisconnected",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "网络中断",
+		"zh_hk": "網絡中斷",
+		"en_us": "NetWork is Disconnected",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_NO",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "NO",
+		"zh_hk": "NO",
+		"en_us": "NO",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_NoRecord",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "没有记录",
+		"zh_hk": "沒有記錄",
+		"en_us": "There are no Record",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_OK",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "OK",
+		"zh_hk": "OK",
+		"en_us": "OK",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Optional",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "可选",
+		"zh_hk": "可选",
+		"en_us": "Optional",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_OrginalPasswordNotMatch",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "原始密码不匹配",
+		"zh_hk": "原始密碼不匹配",
+		"en_us": "Orginal password is not match!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_PAGE_NO_ERR",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "页面错误，默认页为1",
+		"zh_hk": "頁面錯誤，默認頁為1",
+		"en_us": "Page no error,default value is 1",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_PasswordModify",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更改密码",
+		"zh_hk": "更改密碼",
+		"en_us": "Change Password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Register",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "注册",
+		"zh_hk": "注册",
+		"en_us": "Register",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Remark",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "备注",
+		"zh_hk": "備註",
+		"en_us": "Remark",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Return",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "返回",
+		"zh_hk": "返回",
+		"en_us": "Return",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_ReturnResult",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "返回结果",
+		"zh_hk": "返回結果",
+		"en_us": "Return",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Search",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "搜索",
+		"zh_hk": "搜索",
+		"en_us": "Search",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Select",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "选择",
+		"zh_hk": "选择",
+		"en_us": "Select",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_ServerError",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "服务器内部错误",
+		"zh_hk": "服務器內部錯誤",
+		"en_us": "ServerError",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_SignOut",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "注销",
+		"zh_hk": "SignOut",
+		"en_us": "SignOut",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_SignOutSuccess",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "登出系统成功",
+		"zh_hk": "登出系統成功",
+		"en_us": "Sign Out Success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Submit",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "提交",
+		"zh_hk": "提交",
+		"en_us": "Submit",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_SUCC",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "成功",
+		"zh_hk": "成功",
+		"en_us": "SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_UNAUTHORIED",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "非授权 或 TOKEN过期",
+		"zh_hk": "非授權 或 TOKEN過期",
+		"en_us": "UNAUTHORIED",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Update",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "更新",
+		"zh_hk": "更新",
+		"en_us": "Update",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Welcome",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "Welcome",
+		"zh_hk": "Welcome",
+		"en_us": "Welcome",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GeneralUI_Yes",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "Yes",
+		"zh_hk": "Yes",
+		"en_us": "Yes",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GetSystemConfigInput_Fail",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取服务器存储配置失败",
+		"zh_hk": "獲取服務器存儲配置失敗",
+		"en_us": "Get system config Failure",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "GetSystemConfigInput_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取服务器存储配置成功",
+		"zh_hk": "獲取服務器存儲配置成功",
+		"en_us": "Get system config successful",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Job_IndustryName",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "行业",
+		"zh_hk": "行业",
+		"en_us": "Industry",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LibraryApiModelInput_SUCC",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "新增库成功",
+		"zh_hk": "新增库成功",
+		"en_us": "Create New Success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LibraryManagement_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库管理",
+		"zh_hk": "庫管理",
+		"en_us": "Library Manage",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_LibId",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "库分类ID",
+		"zh_hk": "庫分類ID",
+		"en_us": "Library ID",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_libId_Required",
+		"key_type": "GeneralUI_Name",
+		"zh_cn": "libId是必须",
+		"zh_hk": "libId是必须",
+		"en_us": "libId is required",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_Name",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "库分类名",
+		"zh_hk": "庫分類名",
+		"en_us": "Library Name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_Name_required",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库分类名称是必要的",
+		"zh_hk": "庫分類名稱是必要的",
+		"en_us": "Library Name is required",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_Remark",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "库分类备注",
+		"zh_hk": "庫分類備注",
+		"en_us": "Library Remark",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库分类",
+		"zh_hk": "庫分類",
+		"en_us": "Library Category",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Library_Type",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "库分类类型",
+		"zh_hk": "庫分類類型",
+		"en_us": "Library Type",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_ADD_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库添加失败",
+		"zh_hk": "庫添加失敗",
+		"en_us": "Library add fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_DELETE_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除库定义失败",
+		"zh_hk": "刪除庫定義失敗",
+		"en_us": "Delete the library Failure",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_DELETE_SUCCESS",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "删除库定义成功",
+		"zh_hk": "刪除庫定義成功",
+		"en_us": "Delete the library successfully",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_DELTET_SUCCESS",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库定义删除成功",
+		"zh_hk": "庫定義刪除成功",
+		"en_us": "the definition of library is deleted successfully",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_DEL_STATUS_NOT_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "库处于删除中",
+		"zh_hk": "庫處于刪除中",
+		"en_us": "the library is deleted",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_DETAILS_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取库详细失败",
+		"zh_hk": "獲取庫詳細失敗",
+		"en_us": "the details of library is failure.",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_EXIST_THE_NAME",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库定义存在同名",
+		"zh_hk": "庫定義存在同名",
+		"en_us": "the definition of library is existed the same name.",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_EXIST_THE_SAME_NAME",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "存在相同的库名称，如Update要求不相同的名稱",
+		"zh_hk": "存在相同的庫名稱，如Update要求不相同的名稱",
+		"en_us": "The same library name is existed,If modified,It will be a new name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_GET_DETAILS_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "获取库明细资料失败",
+		"zh_hk": "獲取庫明細資料失敗",
+		"en_us": "Fail to get the details of Library",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_IS_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "库状态正常",
+		"zh_hk": "庫狀態正常",
+		"en_us": "the satus of library is normal",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_LIST_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库列表失败",
+		"zh_hk": "庫列表失敗",
+		"en_us": "Query library fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_NOT_EXIST",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库定义不存在",
+		"zh_hk": "庫定義不存在",
+		"en_us": "the definition of library is not exist",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIB_UPDATE_SUCCESS",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库定义更新成功",
+		"zh_hk": "庫定義更新成功",
+		"en_us": "Library is updated successfully",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LIST_NO_RECORD",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "列表无记录",
+		"zh_hk": "列表無記錄",
+		"en_us": "LIST NO RECORD",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LoginSessionTimeOut",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "登录会话超时",
+		"zh_hk": "登錄會話超時",
+		"en_us": "Login session time out!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "LoginViewModel_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "系统登录",
+		"zh_hk": "系統登錄",
+		"en_us": "sign in the System",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Login_ModifyComfirmed_Inconsistent",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "密码不一致",
+		"zh_hk": "密碼不一致",
+		"en_us": "Inconsistent passwords",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Login_ModifyComfirmed_Reqiured",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "确认密码",
+		"zh_hk": "確認密碼",
+		"en_us": "Comfirmed Password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Login_OrginalPassword_Reqiured",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "需要填入原始密码",
+		"zh_hk": "需要填入原始密碼",
+		"en_us": "Orginal password is reqiured",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Login_Password_Reqiured",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "需要填入密码",
+		"zh_hk": "需要填入密碼",
+		"en_us": "Password is reqiured",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Login_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "Login",
+		"zh_hk": "Login",
+		"en_us": "Login",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Login_UserName_Reqiured",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "需要填入用户名",
+		"zh_hk": "需要填入用戶名",
+		"en_us": "UserName is reqiured",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PasswordModify_PasswordNotAllowSame",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "原始密码不能与新密码相同",
+		"zh_hk": "原始密碼不能與新密碼相同",
+		"en_us": "The original password cannot be the same as the new password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PersonCategory_BLOCKED",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "黑名单",
+		"zh_hk": "黑名單",
+		"en_us": "BLOCKED",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PersonCategory_UNBLOCKED",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "白名单",
+		"zh_hk": "白名單",
+		"en_us": "UNBLOCKED",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PersonModelInput_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增人员成功",
+		"zh_hk": "新增人員成功",
+		"en_us": "Add person success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_ADD_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "新增人员失败",
+		"zh_hk": "新增人員失敗",
+		"en_us": "Fail to add person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_CardNo",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "证件号",
+		"zh_hk": "證件號",
+		"en_us": "CardNo",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Category",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "类型",
+		"zh_hk": "类型",
+		"en_us": "Category",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_DELETE_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员删除失败",
+		"zh_hk": "人員刪除失敗",
+		"en_us": "Fail to delete the details of current person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_DELTET_SUCCESS",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员记录成功设置删除状态",
+		"zh_hk": "人員記錄成功設置刪除狀態",
+		"en_us": "Successfully to delete the person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_DETAILS_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员信息获取失败",
+		"zh_hk": "人員信息獲取失敗",
+		"en_us": "Fail to retrive the details of current person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_EXIST_THE_NAME",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "已存在姓名",
+		"zh_hk": "已存在姓名",
+		"en_us": "the person name is exist",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Id",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员ID",
+		"zh_hk": "人員ID",
+		"en_us": "Person ID",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_INVALID_NAME",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "无效的姓名",
+		"zh_hk": "無效的姓名",
+		"en_us": "the person name is invalid",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_INVLID_LIBRARY_ID",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "无效的库Id(Library Id)",
+		"zh_hk": "无效的库Id(Library Id)",
+		"en_us": "invlid library id",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_IS_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员记录正常展示",
+		"zh_hk": "人員記錄正常展示",
+		"en_us": "the person is normal",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_LibId_required",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "必须选择库单元",
+		"zh_hk": "必須選擇庫單元",
+		"en_us": "Library Unit is Requird",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Library",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "所属库分类",
+		"zh_hk": "所屬庫分類",
+		"en_us": "Of Library",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_LIST_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员列表失败",
+		"zh_hk": "人員列表失敗",
+		"en_us": "fail to list person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Management",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "人员管理",
+		"zh_hk": "人員管理",
+		"en_us": "Person Manage",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Name",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "姓名",
+		"zh_hk": "姓名",
+		"en_us": "Name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Name_required",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "姓名是必要的",
+		"zh_hk": "姓名是必要的",
+		"en_us": "Person Name is Requird",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_NOT_EXIST",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员不存在",
+		"zh_hk": "人員不存在",
+		"en_us": "the person is not exist",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_NOT_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员记录处于删除状态",
+		"zh_hk": "人員記錄處于刪除狀態",
+		"en_us": "person is Invisible",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Phone",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "手机号",
+		"zh_hk": "手機號",
+		"en_us": "Phone Number",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_PicClientUrl_required",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "FastConnector头像图片",
+		"zh_hk": "FastConnector头像图片",
+		"en_us": "FastConnector Avatar",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_PicUrl",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "头像",
+		"zh_hk": "头像",
+		"en_us": "PicUrl",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_PicUrlTips",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "要求上存清晰的头像近照",
+		"zh_hk": "要求上存清晰的頭像近照",
+		"en_us": "Require upload a clear Avatar",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_PicUrl_required",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "必须上载图片",
+		"zh_hk": "必須上載圖片",
+		"en_us": "Person picture is Requird",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Person_Sex",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "性别",
+		"zh_hk": "性别",
+		"en_us": "Gender",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_UPDATE_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员更新失败",
+		"zh_hk": "人員更新失敗",
+		"en_us": "Fail to update the details of current person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PERSON_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员记录正常",
+		"zh_hk": "人員記錄正常",
+		"en_us": "person is visible",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PICTURE_EXIST",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "图片已存在",
+		"zh_hk": "圖片已存在",
+		"en_us": "PICTURE IS EXIST",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PICTURE_INVALID",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "图片无效的",
+		"zh_hk": "圖片無效的",
+		"en_us": "PICTURE IS INVALID",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PICTURE_NOT_EXIST",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "图片不存在",
+		"zh_hk": "圖片不存在",
+		"en_us": "PICTURE IS NOT EXIST",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PICTURE_UPDATE_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "人员图片更新失败",
+		"zh_hk": "人員圖片更新失敗",
+		"en_us": "Fail to update the picture of the current person",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "PICTURE_VALID",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "图片有效的",
+		"zh_hk": "圖片有效的",
+		"en_us": "PICTURE IS VALID",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QueryCameraList_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头查询成功",
+		"zh_hk": "鏡頭查詢成功",
+		"en_us": "Query CameraList SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QueryLibraryListResult_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "成功返回库单元列表",
+		"zh_hk": "成功返回庫單元列表",
+		"en_us": "Query Library List Result Success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QueryLibraryList_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "库分类列表",
+		"zh_hk": "庫分類列表",
+		"en_us": "Query Library List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QueryPersonList_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "查询人员失败",
+		"zh_hk": "查詢人員失敗",
+		"en_us": "Query Person List SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QueryPersonList_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "人员列表",
+		"zh_hk": "人員列表",
+		"en_us": "Person List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QueryTaskList_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务列表",
+		"zh_hk": "任務列表",
+		"en_us": "Task List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "QUERY_CAMERA_LIST_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "获取镜头列表失败",
+		"zh_hk": "獲取鏡頭列表失敗",
+		"en_us": "Query camera list fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "RegisterView_HasRegistedToLogin",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "已注册，登录",
+		"zh_hk": "已注冊，登錄",
+		"en_us": "To Login",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "RegisterView_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "注册系统用户",
+		"zh_hk": "注冊系統用戶",
+		"en_us": "Register a user",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Register_ExistUserName",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "已存在的用户",
+		"zh_hk": "已存在的用戶",
+		"en_us": "Exist the user",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Register_Fail",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "注册失败",
+		"zh_hk": "注冊失敗",
+		"en_us": "Register Fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "RTSP_WRONG_FORMAT",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "RTSP URI 格式错误",
+		"zh_hk": "RTSP URI 格式错误",
+		"en_us": "RTSP WRONG FORMAT",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "SearchCamPanel_ModalTitle",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "输入镜头IP 或 登录名 或 密码",
+		"zh_hk": "輸入鏡頭IP 或 登錄名 或 密碼",
+		"en_us": "Enter Camera IP or login name or password to Search",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "StartTask_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "启动任务成功",
+		"zh_hk": "啟動任務成功",
+		"en_us": "Start task success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "StopTask_SUCC",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "停止任务成功",
+		"zh_hk": "停止任務成功",
+		"en_us": "Stop Task successfully!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_ADD_SUCCESS",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增任务成功",
+		"zh_hk": "新增任務成功",
+		"en_us": "Task is added sucessfully",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_CameraList1",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "入口镜头组",
+		"zh_hk": "入口鏡頭組",
+		"en_us": "CameraList1",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_CameraList1_Required",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "镜头列表1是必要的",
+		"zh_hk": "鏡頭列表1是必要的",
+		"en_us": "CameraList1 is required",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_CameraList2",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "出口镜头组",
+		"zh_hk": "出口鏡頭組",
+		"en_us": "CameraList2",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_CaseOfNoCameraListVal",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "没有值，强制选择镜头列表镜头1",
+		"zh_hk": "沒有值，強制選擇鏡頭列表鏡頭1",
+		"en_us": "No value, forced to select one of the  Camera list",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_DELETE_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务删除失败",
+		"zh_hk": "任務刪除失敗",
+		"en_us": "Failed to delete the task",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_DELETE_SUCCESS",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务已被删除",
+		"zh_hk": "任務已被刪除",
+		"en_us": "Task is deleted",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_DEL_STATUS_IS_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务处于正常状态",
+		"zh_hk": "任務處于正常狀態",
+		"en_us": "TASK is normal",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_DEL_STATUS_NOT_VISIBLE",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务处于删除状态",
+		"zh_hk": "任務處于刪除狀態",
+		"en_us": "Task is under deleted status",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_ILLEGAL_NAME",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "不合规则的任务名称",
+		"zh_hk": "不合規則的任務名稱",
+		"en_us": "It is a illegal task name!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_Interval",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "间隔",
+		"zh_hk": "間隔",
+		"en_us": "Interval",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_LibList",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "所属库分类",
+		"zh_hk": "所屬庫分類",
+		"en_us": "Libary List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_LIST_FAIL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "查询任务列表失败",
+		"zh_hk": "查詢任務列表失敗",
+		"en_us": "Fail to Get the task list",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_Management",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务管理",
+		"zh_hk": "任務管理",
+		"en_us": "Task Manage",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_Name_Required",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务名称是必要的",
+		"zh_hk": "任務名稱是必要的",
+		"en_us": "Task name is required!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_Plan",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "计划",
+		"zh_hk": "計劃",
+		"en_us": "Plan",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_QueryTaskList_Title",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务列表",
+		"zh_hk": "任務列表",
+		"en_us": "Task List",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_START",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务启动",
+		"zh_hk": "任務啟動",
+		"en_us": "TASK START",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_START_STATUS_DESC",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务运行中",
+		"zh_hk": "任務運行中",
+		"en_us": "Task is running!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_State",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "状态",
+		"zh_hk": "狀態",
+		"en_us": "State",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_STOP",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务停止",
+		"zh_hk": "任務停止",
+		"en_us": "TASK STOP",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_STOP_STATUS_DESC",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务处于停止状态",
+		"zh_hk": "任務處于停止狀態",
+		"en_us": "Task is stopped",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_TaskId",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "任务ID",
+		"zh_hk": "任務ID",
+		"en_us": "Task ID",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_TaskName",
+		"key_type": "ControllerName_ActionMethod_JsMethod_JsVar",
+		"zh_cn": "任务名称",
+		"zh_hk": "任務名稱",
+		"en_us": "Task Name",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_Threshold",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "阀值",
+		"zh_hk": "閥值",
+		"en_us": "Threshold",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Task_Type",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "Type",
+		"zh_hk": "Type",
+		"en_us": "Type",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_UPDATE_FAIL",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务更新失败",
+		"zh_hk": "任務更新失敗",
+		"en_us": "Task update  is fail",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "TASK_UPDATE_SUCCESS",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "任务更新成功",
+		"zh_hk": "任務更新成功",
+		"en_us": "Task is updated sucessfully!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "Type_GENERAL",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "普通",
+		"zh_hk": "普通",
+		"en_us": "GENERAL",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "UpdatePerson_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更新人员成功",
+		"zh_hk": "更新人員成功",
+		"en_us": "Update person success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "UpdateTask_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更新任务成功",
+		"zh_hk": "更新任務成功",
+		"en_us": "Update task success",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "UpdSystemConfigResult_Fail",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更新服务器存储配置失败",
+		"zh_hk": "更新服務器存儲配置失敗",
+		"en_us": "Update System Storage Server Config FAILURE",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "UpdSystemConfigResult_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "更新服务器存储配置成功",
+		"zh_hk": "更新服務器存儲配置成功",
+		"en_us": "Update System Storage Server Config SUCCESS",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "UploadPersonPicture_Fail",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "上载图片失败",
+		"zh_hk": "上載圖片失敗",
+		"en_us": "It is Failure to upload the picture!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "UploadToApiServer_SUCC",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "新增图片成功",
+		"zh_hk": "新增圖片成功",
+		"en_us": "Upload to  server successfully!",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_ComfirmedPassword",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "密码和确认密码不相符",
+		"zh_hk": "密碼和確認密碼不相符",
+		"en_us": "Password does not match confirmation password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_OrginalPassword",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "原始密码",
+		"zh_hk": "原始密碼",
+		"en_us": "Orginal password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_Password",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "密码",
+		"zh_hk": "密碼",
+		"en_us": "Password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_Password_Comfirmed",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "确认密码",
+		"zh_hk": "確認密碼",
+		"en_us": "Comfirmed password",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_Password_Format_TooShort",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "密码太短",
+		"zh_hk": "密碼太短",
+		"en_us": "Password required the min 6 letter",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_UserName",
+		"key_type": "Modal_PropertyName",
+		"zh_cn": "登录用户名",
+		"zh_hk": "登錄用戶名",
+		"en_us": "UserName",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_UserNamePasswordNotNull",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "用户名或者密码格式错误(不允许空)",
+		"zh_hk": "用戶名或者密碼格式錯誤(不允許空)",
+		"en_us": "Username or Password is not allowed null",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	},
+	{
+		"key_name": "User_UserName_Format",
+		"key_type": "ModalView_PropertyName",
+		"zh_cn": "登录用户必须是数字和字母",
+		"zh_hk": "登錄用戶必須是數字和字母",
+		"en_us": "Letter Or Digits",
+		"IndustryIdArr": "",
+		"MainComIdArr": ""
+	}
+]
