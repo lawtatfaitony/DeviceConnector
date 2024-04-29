@@ -1,0 +1,40 @@
+﻿
+
+首先打开cmd ，切换到对应的项目目录，例如：S:\NexxxI\tocxxxo\toxxmo\DataBaseBusiness
+
+$ dotnet ef dbcontext Scaffold-DbContext "Server=localhost;Database=camera_guard_business;User=root;Password=root;TreatTinyAsBoolean=true;"  "Pomelo.EntityFrameworkCore.MySql" -force -OutputDir Models -Context BusinessContext
+
+
+Scaffold-DbContext "Server=localhost;Database=camera_guard_business;User=root;Password=root;TreatTinyAsBoolean=true;"  "Pomelo.EntityFrameworkCore.MySql" -force -OutputDir Models -Context BusinessContext
+
+生成的BusinessContext.cs 对应的错误进行更正，代码如下：
+
+先引用命名空间：using MySql.Data.EntityFrameworkCore.Extensions;
+
+.ForMySQLHasCharset("utf8")
+.HasCollation("utf8_general_ci");
+更改为：
+.ForMySQLHasCharset("utf8")
+.ForMySQLHasCollation("utf8_general_ci");
+
+然后同理，Nuget Console 运行如下命令
+
+Scaffold-DbContext "Server=localhost;Database=camera_guard_history;User=root;Password=root;TreatTinyAsBoolean=true;"  "Pomelo.EntityFrameworkCore.MySql" -force -OutputDir ModelHistory -Context HistoryContext
+
+
+Scaffold-DbContext "Data Source=81.71.74.135;Database=camera_guard_history;User ID=root;Password=Admin@62595738;pooling=true;port=3306;sslmode=none;CharSet=utf8;"  "Pomelo.EntityFrameworkCore.MySql" -force -OutputDir ModelHistory -Context HistoryContext
+Scaffold-DbContext "Data Source=81.71.74.135;Database=camera_guard_business;User ID=root;Password=Admin@62595738;pooling=true;port=3306;sslmode=none;CharSet=utf8;"  "Pomelo.EntityFrameworkCore.MySql" -force -OutputDir Models -Context BusinessContext
+
+
+
+
+
+
+
+For shalifei
+
+"Data Source=81.71.74.135;Database=camera_guard_history;User ID=root;Password=Admin@62595738;pooling=true;port=3306;sslmode=none;CharSet=utf8;" 
+
+succeed @2022年7月21日
+
+http://81.71.74.135:5002/zh-HK/
