@@ -1,0 +1,5388 @@
+using LanguageResource;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LanguageResource
+{
+    public partial class Lang
+    {
+        #region  多语言资源
+
+			
+
+				 ///<summary>忘記密碼</summary>
+				public static string Account_ForgetPassword
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "忘记密码";
+								 case "zh-HK":
+									 return "忘記密碼";
+								  case "en-US":
+									 return "Forget Password";
+ 								 
+ 								 default:									 
+									 return "Forget Password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增系統用戶</summary>
+				public static string Account_RegisterAddNew
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增系统用户";
+								 case "zh-HK":
+									 return "新增系統用戶";
+								  case "en-US":
+									 return "Add System User";
+ 								 
+ 								 default:									 
+									 return "Add System User";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>系統用戶</summary>
+				public static string Account_SystemUser
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "系统用户";
+								 case "zh-HK":
+									 return "系統用戶";
+								  case "en-US":
+									 return "System User";
+ 								 
+ 								 default:									 
+									 return "System User";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增庫分類</summary>
+				public static string AddLibrary_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增库分类";
+								 case "zh-HK":
+									 return "新增庫分類";
+								  case "en-US":
+									 return "Add Library";
+ 								 
+ 								 default:									 
+									 return "Add Library";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增人員</summary>
+				public static string AddPerson_Add
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增人员";
+								 case "zh-HK":
+									 return "新增人員";
+								  case "en-US":
+									 return "Add Person";
+ 								 
+ 								 default:									 
+									 return "Add Person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更新人員</summary>
+				public static string AddPerson_Update
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更新人员";
+								 case "zh-HK":
+									 return "更新人員";
+								  case "en-US":
+									 return "Update Person";
+ 								 
+ 								 default:									 
+									 return "Update Person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增任務</summary>
+				public static string AddTask_Add
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增任务";
+								 case "zh-HK":
+									 return "新增任務";
+								  case "en-US":
+									 return "Task Add New";
+ 								 
+ 								 default:									 
+									 return "Task Add New";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增任務成功</summary>
+				public static string AddTask_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增任务成功";
+								 case "zh-HK":
+									 return "新增任務成功";
+								  case "en-US":
+									 return "Add task success";
+ 								 
+ 								 default:									 
+									 return "Add task success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務更新</summary>
+				public static string AddTask_Update
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务更新";
+								 case "zh-HK":
+									 return "任務更新";
+								  case "en-US":
+									 return "Task Update";
+ 								 
+ 								 default:									 
+									 return "Task Update";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增鏡頭失敗</summary>
+				public static string CamAddNewResult_Fail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增镜头失败";
+								 case "zh-HK":
+									 return "新增鏡頭失敗";
+								  case "en-US":
+									 return "Camera add new failure!";
+ 								 
+ 								 default:									 
+									 return "Camera add new failure!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增鏡頭成功</summary>
+				public static string CamAddNewResult_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增镜头成功";
+								 case "zh-HK":
+									 return "新增鏡頭成功";
+								  case "en-US":
+									 return "Camera add new successfully!";
+ 								 
+ 								 default:									 
+									 return "Camera add new successfully!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增鏡頭</summary>
+				public static string CamAdd_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增镜头";
+								 case "zh-HK":
+									 return "新增鏡頭";
+								  case "en-US":
+									 return "Add Camera";
+ 								 
+ 								 default:									 
+									 return "Add Camera";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭名稱</summary>
+				public static string CamApiModelInput_Name
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头名称";
+								 case "zh-HK":
+									 return "鏡頭名稱";
+								  case "en-US":
+									 return "Camera Name";
+ 								 
+ 								 default:									 
+									 return "Camera Name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>備註</summary>
+				public static string CamApiModelInput_Remark
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "备注";
+								 case "zh-HK":
+									 return "備註";
+								  case "en-US":
+									 return "Remark";
+ 								 
+ 								 default:									 
+									 return "Remark";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭RTSP連接</summary>
+				public static string CamApiModelInput_Rtsp
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头RTSP连接";
+								 case "zh-HK":
+									 return "鏡頭RTSP連接";
+								  case "en-US":
+									 return "Camera RTSP URL";
+ 								 
+ 								 default:									 
+									 return "Camera RTSP URL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭RTSP連接是由鏡頭廠商按RTSP協議格式約定</summary>
+				public static string CamApiModelInput_Rtsp_Tips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头RTSP连接是由镜头厂商按RTSP协议格式约定";
+								 case "zh-HK":
+									 return "鏡頭RTSP連接是由鏡頭廠商按RTSP協議格式約定";
+								  case "en-US":
+									 return "The Camera RTSP connection is agreed by the manufacturer according to the RTSP protocol format";
+ 								 
+ 								 default:									 
+									 return "The Camera RTSP connection is agreed by the manufacturer according to the RTSP protocol format";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>搜索系統鏡頭</summary>
+				public static string CameraAdd_SearchCamera
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "搜索系统镜头";
+								 case "zh-HK":
+									 return "搜索系統鏡頭";
+								  case "en-US":
+									 return "Search system Camera";
+ 								 
+ 								 default:									 
+									 return "Search system Camera";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>OK!再考慮一下先吧！</summary>
+				public static string CameraList_ComfirmNoTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "OK!再考虑一下先吧！";
+								 case "zh-HK":
+									 return "OK!再考慮一下先吧！";
+								  case "en-US":
+									 return "OK! I  think about it!";
+ 								 
+ 								 default:									 
+									 return "OK! I  think about it!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取鏡頭RTSP失敗</summary>
+				public static string CameraRtspGet_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取镜头RTSP失败";
+								 case "zh-HK":
+									 return "獲取鏡頭RTSP失敗";
+								  case "en-US":
+									 return "Camera RTSP Get  FAIL";
+ 								 
+ 								 default:									 
+									 return "Camera RTSP Get  FAIL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取成功</summary>
+				public static string CameraRtspGet_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取成功";
+								 case "zh-HK":
+									 return "獲取成功";
+								  case "en-US":
+									 return "Get CameraRtsp Success";
+ 								 
+ 								 default:									 
+									 return "Get CameraRtsp Success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭編號</summary>
+				public static string Camera_CameraId
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头编号";
+								 case "zh-HK":
+									 return "鏡頭編號";
+								  case "en-US":
+									 return "Camera ID";
+ 								 
+ 								 default:									 
+									 return "Camera ID";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>確認刪除當前鏡頭設置嗎？</summary>
+				public static string Camera_ComfirmTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "确认删除当前镜头设置吗？";
+								 case "zh-HK":
+									 return "確認刪除當前鏡頭設置嗎？";
+								  case "en-US":
+									 return "Comfirm to delete camer setting?";
+ 								 
+ 								 default:									 
+									 return "Comfirm to delete camer setting?";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>圖片生成間隔</summary>
+				public static string Camera_ConfigSavePictRate
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "图片生成间隔";
+								 case "zh-HK":
+									 return "圖片生成間隔";
+								  case "en-US":
+									 return "Render Picture Interal";
+ 								 
+ 								 default:									 
+									 return "Render Picture Interal";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>創建日期</summary>
+				public static string Camera_CreateDate
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "创建日期";
+								 case "zh-HK":
+									 return "創建日期";
+								  case "en-US":
+									 return "Create Date";
+ 								 
+ 								 default:									 
+									 return "Create Date";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>如果刪除鏡頭設置可能造成任務錯誤哦！請先確認任務是否已排除當前設置</summary>
+				public static string Camera_InfoTips2
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "如果删除镜头设置可能造成任务错误哦！请先确认任务是否已排除当前设置";
+								 case "zh-HK":
+									 return "如果刪除鏡頭設置可能造成任務錯誤哦！請先確認任務是否已排除當前設置";
+								  case "en-US":
+									 return "If you delete the Camera settings, it may cause a task error! Please confirm if the task has excluded the current settings";
+ 								 
+ 								 default:									 
+									 return "If you delete the Camera settings, it may cause a task error! Please confirm if the task has excluded the current settings";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭名稱</summary>
+				public static string Camera_Name
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头名称";
+								 case "zh-HK":
+									 return "鏡頭名稱";
+								  case "en-US":
+									 return "Camera Name";
+ 								 
+ 								 default:									 
+									 return "Camera Name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>狀態</summary>
+				public static string Camera_Online
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "状态";
+								 case "zh-HK":
+									 return "狀態";
+								  case "en-US":
+									 return "State";
+ 								 
+ 								 default:									 
+									 return "State";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭連接(RTSP)</summary>
+				public static string Camera_Rtsp
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头连接(RTSP)";
+								 case "zh-HK":
+									 return "鏡頭連接(RTSP)";
+								  case "en-US":
+									 return "Camera RTSP";
+ 								 
+ 								 default:									 
+									 return "Camera RTSP";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>類型</summary>
+				public static string Camera_Type
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "类型";
+								 case "zh-HK":
+									 return "類型";
+								  case "en-US":
+									 return "Type";
+ 								 
+ 								 default:									 
+									 return "Type";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭設備管理</summary>
+				public static string CamManagement_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头设备管理";
+								 case "zh-HK":
+									 return "鏡頭設備管理";
+								  case "en-US":
+									 return "Camera Manage";
+ 								 
+ 								 default:									 
+									 return "Camera Manage";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>MPEG 文件信息新增失敗</summary>
+				public static string CamMpeg_ADD_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "MPEG 文件信息新增失败";
+								 case "zh-HK":
+									 return "MPEG 文件信息新增失敗";
+								  case "en-US":
+									 return "MPEG file info was added fail";
+ 								 
+ 								 default:									 
+									 return "MPEG file info was added fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>設備序列號不存</summary>
+				public static string CAMMPEG_DEVICE_SERIAL_NO_NOT_EXIST
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "设备序列号不存";
+								 case "zh-HK":
+									 return "設備序列號不存";
+								  case "en-US":
+									 return "DEVICE SERIAL NO NOT EXIST";
+ 								 
+ 								 default:									 
+									 return "DEVICE SERIAL NO NOT EXIST";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>已存在文件名稱</summary>
+				public static string CamMpeg_EXIST_THE_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "已存在文件名称";
+								 case "zh-HK":
+									 return "已存在文件名稱";
+								  case "en-US":
+									 return "EXIST THE FILE NAME";
+ 								 
+ 								 default:									 
+									 return "EXIST THE FILE NAME";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>MPEG 格式錯誤</summary>
+				public static string CamMpeg_MPEG_WRONG_FORMAT
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "MPEG 格式错误";
+								 case "zh-HK":
+									 return "MPEG 格式錯誤";
+								  case "en-US":
+									 return "MPEG WRONG FORMAT";
+ 								 
+ 								 default:									 
+									 return "MPEG WRONG FORMAT";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>成功返回搜索結果</summary>
+				public static string CamSearchResult_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "成功返回搜索结果";
+								 case "zh-HK":
+									 return "成功返回搜索結果";
+								  case "en-US":
+									 return "Camera Search Result  Return SUCCESS";
+ 								 
+ 								 default:									 
+									 return "Camera Search Result  Return SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭設置更新失敗</summary>
+				public static string CamUpdateResult_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头设置更新失败";
+								 case "zh-HK":
+									 return "鏡頭設置更新失敗";
+								  case "en-US":
+									 return "Camera Update FAIL";
+ 								 
+ 								 default:									 
+									 return "Camera Update FAIL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭設置更新成功</summary>
+				public static string CamUpdateResult_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头设置更新成功";
+								 case "zh-HK":
+									 return "鏡頭設置更新成功";
+								  case "en-US":
+									 return "Camera Update SUCCESS";
+ 								 
+ 								 default:									 
+									 return "Camera Update SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>不存在鏡頭記錄</summary>
+				public static string CAM_CAMERA_NOT_EXIST
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "不存在镜头记录";
+								 case "zh-HK":
+									 return "不存在鏡頭記錄";
+								  case "en-US":
+									 return "CAMERA NOT EXIST";
+ 								 
+ 								 default:									 
+									 return "CAMERA NOT EXIST";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭定義刪除成功</summary>
+				public static string CAM_DELTET_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头定义删除成功";
+								 case "zh-HK":
+									 return "鏡頭定義刪除成功";
+								  case "en-US":
+									 return "Camera is deleted successfully";
+ 								 
+ 								 default:									 
+									 return "Camera is deleted successfully";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>存在相同的鏡頭名稱</summary>
+				public static string CAM_EXIST_THE_SAME_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "存在相同的镜头名称";
+								 case "zh-HK":
+									 return "存在相同的鏡頭名稱";
+								  case "en-US":
+									 return "Camera list exist the same name";
+ 								 
+ 								 default:									 
+									 return "Camera list exist the same name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取鏡頭列表失敗</summary>
+				public static string CAM_GET_CAMLIST_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取镜头列表失败";
+								 case "zh-HK":
+									 return "獲取鏡頭列表失敗";
+								  case "en-US":
+									 return "GET CAMERA LIST FAIL";
+ 								 
+ 								 default:									 
+									 return "GET CAMERA LIST FAIL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取鏡頭資料出錯</summary>
+				public static string CAM_GET_DETAILS_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取镜头资料出错";
+								 case "zh-HK":
+									 return "獲取鏡頭資料出錯";
+								  case "en-US":
+									 return "Fail to get camera details";
+ 								 
+ 								 default:									 
+									 return "Fail to get camera details";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>在線</summary>
+				public static string CAM_IS_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "在线";
+								 case "zh-HK":
+									 return "在線";
+								  case "en-US":
+									 return "VISIBLE";
+ 								 
+ 								 default:									 
+									 return "VISIBLE";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>請填入鏡頭名稱</summary>
+				public static string Cam_Name_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "请填入镜头名称";
+								 case "zh-HK":
+									 return "請填入鏡頭名稱";
+								  case "en-US":
+									 return "Camera name is required";
+ 								 
+ 								 default:									 
+									 return "Camera name is required";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>下線</summary>
+				public static string CAM_NOT_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "下线";
+								 case "zh-HK":
+									 return "下線";
+								  case "en-US":
+									 return "IN VISIBLE";
+ 								 
+ 								 default:									 
+									 return "IN VISIBLE";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭列表</summary>
+				public static string Cam_QueryCameraList
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头列表";
+								 case "zh-HK":
+									 return "鏡頭列表";
+								  case "en-US":
+									 return "Camera List";
+ 								 
+ 								 default:									 
+									 return "Camera List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>請填入正確的鏡頭RTSP連接格式</summary>
+				public static string Cam_Rtsp_Format
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "请填入正确的镜头RTSP连接格式";
+								 case "zh-HK":
+									 return "請填入正確的鏡頭RTSP連接格式";
+								  case "en-US":
+									 return "Camera RTSP URL format  is required";
+ 								 
+ 								 default:									 
+									 return "Camera RTSP URL format  is required";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>請填入鏡頭的RTSP連接</summary>
+				public static string Cam_Rtsp_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "请填入镜头的RTSP连接";
+								 case "zh-HK":
+									 return "請填入鏡頭的RTSP連接";
+								  case "en-US":
+									 return "Camera RTSP URL is required";
+ 								 
+ 								 default:									 
+									 return "Camera RTSP URL is required";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除鏡頭失敗</summary>
+				public static string DeleteCamera_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除镜头失败";
+								 case "zh-HK":
+									 return "刪除鏡頭失敗";
+								  case "en-US":
+									 return "DeleteCamera FAIL";
+ 								 
+ 								 default:									 
+									 return "DeleteCamera FAIL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除鏡頭成功</summary>
+				public static string DeleteCamera_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除镜头成功";
+								 case "zh-HK":
+									 return "刪除鏡頭成功";
+								  case "en-US":
+									 return "DeleteCamera SUCCESS";
+ 								 
+ 								 default:									 
+									 return "DeleteCamera SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>好吧，還是再考慮一下吧！</summary>
+				public static string DeleteLibrary_ComfirmNoTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "好吧，还是再考虑一下吧！";
+								 case "zh-HK":
+									 return "好吧，還是再考慮一下吧！";
+								  case "en-US":
+									 return "No,Let me think about!";
+ 								 
+ 								 default:									 
+									 return "No,Let me think about!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除庫分類嗎？</summary>
+				public static string DeleteLibrary_ComfirmTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除库分类吗？";
+								 case "zh-HK":
+									 return "刪除庫分類嗎？";
+								  case "en-US":
+									 return "Comfirm to delete library";
+ 								 
+ 								 default:									 
+									 return "Comfirm to delete library";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除庫單元成功</summary>
+				public static string DeleteLibrary_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除库单元成功";
+								 case "zh-HK":
+									 return "刪除庫單元成功";
+								  case "en-US":
+									 return "Delete Library SUCCESS";
+ 								 
+ 								 default:									 
+									 return "Delete Library SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>OK! 確定刪除？</summary>
+				public static string DeletePerson_ComfirmTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "OK! 确定删除？";
+								 case "zh-HK":
+									 return "OK! 確定刪除？";
+								  case "en-US":
+									 return "OK!  sure to delete!";
+ 								 
+ 								 default:									 
+									 return "OK!  sure to delete!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>OK! 再考慮一下先吧！</summary>
+				public static string DeleteTask_ComfirmNoTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "OK! 再考虑一下先吧！";
+								 case "zh-HK":
+									 return "OK! 再考慮一下先吧！";
+								  case "en-US":
+									 return "OK! Let me think about it!";
+ 								 
+ 								 default:									 
+									 return "OK! Let me think about it!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>確定要刪除任務嗎？</summary>
+				public static string DeleteTask_ComfirmTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "确定要删除任务吗？";
+								 case "zh-HK":
+									 return "確定要刪除任務嗎？";
+								  case "en-US":
+									 return "Are you sure to delete current task?";
+ 								 
+ 								 default:									 
+									 return "Are you sure to delete current task?";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除任務成功</summary>
+				public static string DeleteTask_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除任务成功";
+								 case "zh-HK":
+									 return "刪除任務成功";
+								  case "en-US":
+									 return "Delete task success";
+ 								 
+ 								 default:									 
+									 return "Delete task success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>設備授權錯誤</summary>
+				public static string DEVICE_AUTHORIZATION_ERROR
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "设备授权错误";
+								 case "zh-HK":
+									 return "設備授權錯誤";
+								  case "en-US":
+									 return "Device authorization error";
+ 								 
+ 								 default:									 
+									 return "Device authorization error";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>的分公司電飯鍋</summary>
+				public static string dfgdfgdsfg
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "的分公司电饭锅";
+								 case "zh-HK":
+									 return "的分公司電飯鍋";
+								  case "en-US":
+									 return "sdfgsdfgdsg";
+ 								 
+ 								 default:									 
+									 return "sdfgsdfgdsg";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>速度发斯蒂芬</summary>
+				public static string FFFFFFFFdddd
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "阿斯顿发斯蒂芬";
+								 case "zh-HK":
+									 return "速度发斯蒂芬";
+								  case "en-US":
+									 return "sdfasfdasfsfsd";
+ 								 
+ 								 default:									 
+									 return "sdfasfdasfsfsd";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>文件尺寸太大</summary>
+				public static string FILESIZE_IS_LIMITED
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "文件尺寸太大";
+								 case "zh-HK":
+									 return "文件尺寸太大";
+								  case "en-US":
+									 return "File size is limited";
+ 								 
+ 								 default:									 
+									 return "File size is limited";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>后端上存接口已關閉</summary>
+				public static string FILE_BACKEND_CLOSED
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "后端上存接口已关闭";
+								 case "zh-HK":
+									 return "后端上存接口已關閉";
+								  case "en-US":
+									 return "Backend server is closed!";
+ 								 
+ 								 default:									 
+									 return "Backend server is closed!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>文件上存失敗</summary>
+				public static string FILE_UPLOAD_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "文件上存失败";
+								 case "zh-HK":
+									 return "文件上存失敗";
+								  case "en-US":
+									 return "file upload FAIL";
+ 								 
+ 								 default:									 
+									 return "file upload FAIL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>文件上存成功</summary>
+				public static string FILE_UPLOAD_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "文件上存成功";
+								 case "zh-HK":
+									 return "文件上存成功";
+								  case "en-US":
+									 return "file upload success";
+ 								 
+ 								 default:									 
+									 return "file upload success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>女</summary>
+				public static string Genders_FEMALE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "女";
+								 case "zh-HK":
+									 return "女";
+								  case "en-US":
+									 return "Female";
+ 								 
+ 								 default:									 
+									 return "Female";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>男</summary>
+				public static string Genders_MALE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "男";
+								 case "zh-HK":
+									 return "男";
+								  case "en-US":
+									 return "MALE";
+ 								 
+ 								 default:									 
+									 return "MALE";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>未知</summary>
+				public static string Genders_Unknow
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "未知";
+								 case "zh-HK":
+									 return "未知";
+								  case "en-US":
+									 return "UnKnow";
+ 								 
+ 								 default:									 
+									 return "UnKnow";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>未知</summary>
+				public static string Genders_UNKNOWN
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "未知";
+								 case "zh-HK":
+									 return "未知";
+								  case "en-US":
+									 return "UnKnow";
+ 								 
+ 								 default:									 
+									 return "UnKnow";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>拒絕訪問</summary>
+				public static string GeneralUI_AccessDenied
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "拒绝访问";
+								 case "zh-HK":
+									 return "拒絕訪問";
+								  case "en-US":
+									 return "Access Denied";
+ 								 
+ 								 default:									 
+									 return "Access Denied";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增</summary>
+				public static string GeneralUI_AddNew
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增";
+								 case "zh-HK":
+									 return "新增";
+								  case "en-US":
+									 return "Add New";
+ 								 
+ 								 default:									 
+									 return "Add New";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>API 服務失敗</summary>
+				public static string GeneralUI_ApiServiceFail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "API 服务失败";
+								 case "zh-HK":
+									 return "API 服務失敗";
+								  case "en-US":
+									 return "Api Service Fail";
+ 								 
+ 								 default:									 
+									 return "Api Service Fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>授權的密碼或者用戶名錯誤</summary>
+				public static string GeneralUI_AUTH_WRONG_USERNAME_OR_PASSWORD
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "授权的密码或者用户名错误";
+								 case "zh-HK":
+									 return "授權的密碼或者用戶名錯誤";
+								  case "en-US":
+									 return "Access Denied,UserName Or Password wrong!";
+ 								 
+ 								 default:									 
+									 return "Access Denied,UserName Or Password wrong!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>瀏覽</summary>
+				public static string GeneralUI_Browse
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "浏览";
+								 case "zh-HK":
+									 return "瀏覽";
+								  case "en-US":
+									 return "Browse";
+ 								 
+ 								 default:									 
+									 return "Browse";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>點擊復制</summary>
+				public static string GeneralUI_ClickToCopy
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "点击复制";
+								 case "zh-HK":
+									 return "點擊復制";
+								  case "en-US":
+									 return "Click to copy";
+ 								 
+ 								 default:									 
+									 return "Click to copy";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>確認</summary>
+				public static string GeneralUI_Comfirm
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "确认";
+								 case "zh-HK":
+									 return "確認";
+								  case "en-US":
+									 return "Comfirm";
+ 								 
+ 								 default:									 
+									 return "Comfirm";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>好的，先考慮一下先吧！</summary>
+				public static string GeneralUI_ComfirmNoTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "好的，先考虑一下先吧！";
+								 case "zh-HK":
+									 return "好的，先考慮一下先吧！";
+								  case "en-US":
+									 return "Ok, Let me think about it!";
+ 								 
+ 								 default:									 
+									 return "Ok, Let me think about it!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>創建時間</summary>
+				public static string GeneralUI_CreateDate
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "创建时间";
+								 case "zh-HK":
+									 return "創建時間";
+								  case "en-US":
+									 return "Create Date";
+ 								 
+ 								 default:									 
+									 return "Create Date";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除</summary>
+				public static string GeneralUI_Delete
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除";
+								 case "zh-HK":
+									 return "刪除";
+								  case "en-US":
+									 return "Delete";
+ 								 
+ 								 default:									 
+									 return "Delete";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>詳情</summary>
+				public static string GeneralUI_Details
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "详情";
+								 case "zh-HK":
+									 return "詳情";
+								  case "en-US":
+									 return "Details";
+ 								 
+ 								 default:									 
+									 return "Details";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>編 輯</summary>
+				public static string GeneralUI_Edit
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "编 辑";
+								 case "zh-HK":
+									 return "編 輯";
+								  case "en-US":
+									 return "Edit";
+ 								 
+ 								 default:									 
+									 return "Edit";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>代碼遇到意外情況</summary>
+				public static string GeneralUI_EXCEPTION
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "代码遇到意外情况";
+								 case "zh-HK":
+									 return "代碼遇到意外情況";
+								  case "en-US":
+									 return "EXCEPTION";
+ 								 
+ 								 default:									 
+									 return "EXCEPTION";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>失敗</summary>
+				public static string GeneralUI_Fail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "失败";
+								 case "zh-HK":
+									 return "失敗";
+								  case "en-US":
+									 return "Fail";
+ 								 
+ 								 default:									 
+									 return "Fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>性别</summary>
+				public static string GeneralUI_Gender
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "性别";
+								 case "zh-HK":
+									 return "性别";
+								  case "en-US":
+									 return "Gender";
+ 								 
+ 								 default:									 
+									 return "Gender";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>主頁</summary>
+				public static string GeneralUI_Home
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "主页";
+								 case "zh-HK":
+									 return "主頁";
+								  case "en-US":
+									 return "Home";
+ 								 
+ 								 default:									 
+									 return "Home";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>RTSP 格式不對</summary>
+				public static string GeneralUI_ILLEGAL_RTSP
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "RTSP 格式不对";
+								 case "zh-HK":
+									 return "RTSP 格式不對";
+								  case "en-US":
+									 return "ILLEGAL_RTSP";
+ 								 
+ 								 default:									 
+									 return "ILLEGAL_RTSP";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>提示</summary>
+				public static string GeneralUI_InfoTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "提示";
+								 case "zh-HK":
+									 return "提示";
+								  case "en-US":
+									 return "Info";
+ 								 
+ 								 default:									 
+									 return "Info";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>OK!我明白了~~~</summary>
+				public static string GeneralUI_Isee
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "OK!我明白了~~~";
+								 case "zh-HK":
+									 return "OK!我明白了~~~";
+								  case "en-US":
+									 return "I see!";
+ 								 
+ 								 default:									 
+									 return "I see!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>列表</summary>
+				public static string GeneralUI_List
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "列表";
+								 case "zh-HK":
+									 return "列表";
+								  case "en-US":
+									 return "List";
+ 								 
+ 								 default:									 
+									 return "List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>Login</summary>
+				public static string GeneralUI_Login
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录";
+								 case "zh-HK":
+									 return "Login";
+								  case "en-US":
+									 return "Login";
+ 								 
+ 								 default:									 
+									 return "Login";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登錄失敗</summary>
+				public static string GeneralUI_LoginFail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录失败";
+								 case "zh-HK":
+									 return "登錄失敗";
+								  case "en-US":
+									 return "Login Fail";
+ 								 
+ 								 default:									 
+									 return "Login Fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登錄成功</summary>
+				public static string GeneralUI_LoginSucc
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录成功";
+								 case "zh-HK":
+									 return "登錄成功";
+								  case "en-US":
+									 return "Login Success";
+ 								 
+ 								 default:									 
+									 return "Login Success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登陸</summary>
+				public static string GeneralUI_Loogin
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录";
+								 case "zh-HK":
+									 return "登陸";
+								  case "en-US":
+									 return "Loogin";
+ 								 
+ 								 default:									 
+									 return "Loogin";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更 改</summary>
+				public static string GeneralUI_Modify
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更 改";
+								 case "zh-HK":
+									 return "更 改";
+								  case "en-US":
+									 return "Change";
+ 								 
+ 								 default:									 
+									 return "Change";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>網絡中斷</summary>
+				public static string GeneralUI_NetWorkDisconnected
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "网络中断";
+								 case "zh-HK":
+									 return "網絡中斷";
+								  case "en-US":
+									 return "NetWork is Disconnected";
+ 								 
+ 								 default:									 
+									 return "NetWork is Disconnected";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>NO</summary>
+				public static string GeneralUI_NO
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "NO";
+								 case "zh-HK":
+									 return "NO";
+								  case "en-US":
+									 return "NO";
+ 								 
+ 								 default:									 
+									 return "NO";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>沒有記錄</summary>
+				public static string GeneralUI_NoRecord
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "没有记录";
+								 case "zh-HK":
+									 return "沒有記錄";
+								  case "en-US":
+									 return "There are no Record";
+ 								 
+ 								 default:									 
+									 return "There are no Record";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>OK</summary>
+				public static string GeneralUI_OK
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "OK";
+								 case "zh-HK":
+									 return "OK";
+								  case "en-US":
+									 return "OK";
+ 								 
+ 								 default:									 
+									 return "OK";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>可选</summary>
+				public static string GeneralUI_Optional
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "可选";
+								 case "zh-HK":
+									 return "可选";
+								  case "en-US":
+									 return "Optional";
+ 								 
+ 								 default:									 
+									 return "Optional";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>原始密碼不匹配</summary>
+				public static string GeneralUI_OrginalPasswordNotMatch
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "原始密码不匹配";
+								 case "zh-HK":
+									 return "原始密碼不匹配";
+								  case "en-US":
+									 return "Orginal password is not match!";
+ 								 
+ 								 default:									 
+									 return "Orginal password is not match!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>頁面錯誤，默認頁為1</summary>
+				public static string GeneralUI_PAGE_NO_ERR
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "页面错误，默认页为1";
+								 case "zh-HK":
+									 return "頁面錯誤，默認頁為1";
+								  case "en-US":
+									 return "Page no error,default value is 1";
+ 								 
+ 								 default:									 
+									 return "Page no error,default value is 1";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更改密碼</summary>
+				public static string GeneralUI_PasswordModify
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更改密码";
+								 case "zh-HK":
+									 return "更改密碼";
+								  case "en-US":
+									 return "Change Password";
+ 								 
+ 								 default:									 
+									 return "Change Password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>注册</summary>
+				public static string GeneralUI_Register
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "注册";
+								 case "zh-HK":
+									 return "注册";
+								  case "en-US":
+									 return "Register";
+ 								 
+ 								 default:									 
+									 return "Register";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>備註</summary>
+				public static string GeneralUI_Remark
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "备注";
+								 case "zh-HK":
+									 return "備註";
+								  case "en-US":
+									 return "Remark";
+ 								 
+ 								 default:									 
+									 return "Remark";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>返回</summary>
+				public static string GeneralUI_Return
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "返回";
+								 case "zh-HK":
+									 return "返回";
+								  case "en-US":
+									 return "Return";
+ 								 
+ 								 default:									 
+									 return "Return";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>返回結果</summary>
+				public static string GeneralUI_ReturnResult
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "返回结果";
+								 case "zh-HK":
+									 return "返回結果";
+								  case "en-US":
+									 return "Return";
+ 								 
+ 								 default:									 
+									 return "Return";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>搜索</summary>
+				public static string GeneralUI_Search
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "搜索";
+								 case "zh-HK":
+									 return "搜索";
+								  case "en-US":
+									 return "Search";
+ 								 
+ 								 default:									 
+									 return "Search";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>选择</summary>
+				public static string GeneralUI_Select
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "选择";
+								 case "zh-HK":
+									 return "选择";
+								  case "en-US":
+									 return "Select";
+ 								 
+ 								 default:									 
+									 return "Select";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>服務器內部錯誤</summary>
+				public static string GeneralUI_ServerError
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "服务器内部错误";
+								 case "zh-HK":
+									 return "服務器內部錯誤";
+								  case "en-US":
+									 return "ServerError";
+ 								 
+ 								 default:									 
+									 return "ServerError";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>SignOut</summary>
+				public static string GeneralUI_SignOut
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "注销";
+								 case "zh-HK":
+									 return "SignOut";
+								  case "en-US":
+									 return "SignOut";
+ 								 
+ 								 default:									 
+									 return "SignOut";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登出系統成功</summary>
+				public static string GeneralUI_SignOutSuccess
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登出系统成功";
+								 case "zh-HK":
+									 return "登出系統成功";
+								  case "en-US":
+									 return "Sign Out Success";
+ 								 
+ 								 default:									 
+									 return "Sign Out Success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>提交</summary>
+				public static string GeneralUI_Submit
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "提交";
+								 case "zh-HK":
+									 return "提交";
+								  case "en-US":
+									 return "Submit";
+ 								 
+ 								 default:									 
+									 return "Submit";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>成功</summary>
+				public static string GeneralUI_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "成功";
+								 case "zh-HK":
+									 return "成功";
+								  case "en-US":
+									 return "SUCCESS";
+ 								 
+ 								 default:									 
+									 return "SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>非授權 或 TOKEN過期</summary>
+				public static string GeneralUI_UNAUTHORIED
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "非授权 或 TOKEN过期";
+								 case "zh-HK":
+									 return "非授權 或 TOKEN過期";
+								  case "en-US":
+									 return "UNAUTHORIED";
+ 								 
+ 								 default:									 
+									 return "UNAUTHORIED";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更新</summary>
+				public static string GeneralUI_Update
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更新";
+								 case "zh-HK":
+									 return "更新";
+								  case "en-US":
+									 return "Update";
+ 								 
+ 								 default:									 
+									 return "Update";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>Welcome</summary>
+				public static string GeneralUI_Welcome
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "Welcome";
+								 case "zh-HK":
+									 return "Welcome";
+								  case "en-US":
+									 return "Welcome";
+ 								 
+ 								 default:									 
+									 return "Welcome";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>Yes</summary>
+				public static string GeneralUI_Yes
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "Yes";
+								 case "zh-HK":
+									 return "Yes";
+								  case "en-US":
+									 return "Yes";
+ 								 
+ 								 default:									 
+									 return "Yes";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取服務器存儲配置失敗</summary>
+				public static string GetSystemConfigInput_Fail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取服务器存储配置失败";
+								 case "zh-HK":
+									 return "獲取服務器存儲配置失敗";
+								  case "en-US":
+									 return "Get system config Failure";
+ 								 
+ 								 default:									 
+									 return "Get system config Failure";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取服務器存儲配置成功</summary>
+				public static string GetSystemConfigInput_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取服务器存储配置成功";
+								 case "zh-HK":
+									 return "獲取服務器存儲配置成功";
+								  case "en-US":
+									 return "Get system config successful";
+ 								 
+ 								 default:									 
+									 return "Get system config successful";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>行业</summary>
+				public static string Job_IndustryName
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "行业";
+								 case "zh-HK":
+									 return "行业";
+								  case "en-US":
+									 return "Industry";
+ 								 
+ 								 default:									 
+									 return "Industry";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增库成功</summary>
+				public static string LibraryApiModelInput_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增库成功";
+								 case "zh-HK":
+									 return "新增库成功";
+								  case "en-US":
+									 return "Create New Success";
+ 								 
+ 								 default:									 
+									 return "Create New Success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫管理</summary>
+				public static string LibraryManagement_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库管理";
+								 case "zh-HK":
+									 return "庫管理";
+								  case "en-US":
+									 return "Library Manage";
+ 								 
+ 								 default:									 
+									 return "Library Manage";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類ID</summary>
+				public static string Library_LibId
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类ID";
+								 case "zh-HK":
+									 return "庫分類ID";
+								  case "en-US":
+									 return "Library ID";
+ 								 
+ 								 default:									 
+									 return "Library ID";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>libId是必须</summary>
+				public static string Library_libId_Required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "libId是必须";
+								 case "zh-HK":
+									 return "libId是必须";
+								  case "en-US":
+									 return "libId is required";
+ 								 
+ 								 default:									 
+									 return "libId is required";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類名</summary>
+				public static string Library_Name
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类名";
+								 case "zh-HK":
+									 return "庫分類名";
+								  case "en-US":
+									 return "Library Name";
+ 								 
+ 								 default:									 
+									 return "Library Name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類名稱是必要的</summary>
+				public static string Library_Name_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类名称是必要的";
+								 case "zh-HK":
+									 return "庫分類名稱是必要的";
+								  case "en-US":
+									 return "Library Name is required";
+ 								 
+ 								 default:									 
+									 return "Library Name is required";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類備注</summary>
+				public static string Library_Remark
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类备注";
+								 case "zh-HK":
+									 return "庫分類備注";
+								  case "en-US":
+									 return "Library Remark";
+ 								 
+ 								 default:									 
+									 return "Library Remark";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類</summary>
+				public static string Library_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类";
+								 case "zh-HK":
+									 return "庫分類";
+								  case "en-US":
+									 return "Library Category";
+ 								 
+ 								 default:									 
+									 return "Library Category";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類類型</summary>
+				public static string Library_Type
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类类型";
+								 case "zh-HK":
+									 return "庫分類類型";
+								  case "en-US":
+									 return "Library Type";
+ 								 
+ 								 default:									 
+									 return "Library Type";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫添加失敗</summary>
+				public static string LIB_ADD_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库添加失败";
+								 case "zh-HK":
+									 return "庫添加失敗";
+								  case "en-US":
+									 return "Library add fail";
+ 								 
+ 								 default:									 
+									 return "Library add fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除庫定義失敗</summary>
+				public static string LIB_DELETE_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除库定义失败";
+								 case "zh-HK":
+									 return "刪除庫定義失敗";
+								  case "en-US":
+									 return "Delete the library Failure";
+ 								 
+ 								 default:									 
+									 return "Delete the library Failure";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>刪除庫定義成功</summary>
+				public static string LIB_DELETE_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "删除库定义成功";
+								 case "zh-HK":
+									 return "刪除庫定義成功";
+								  case "en-US":
+									 return "Delete the library successfully";
+ 								 
+ 								 default:									 
+									 return "Delete the library successfully";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫定義刪除成功</summary>
+				public static string LIB_DELTET_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库定义删除成功";
+								 case "zh-HK":
+									 return "庫定義刪除成功";
+								  case "en-US":
+									 return "the definition of library is deleted successfully";
+ 								 
+ 								 default:									 
+									 return "the definition of library is deleted successfully";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫處于刪除中</summary>
+				public static string LIB_DEL_STATUS_NOT_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库处于删除中";
+								 case "zh-HK":
+									 return "庫處于刪除中";
+								  case "en-US":
+									 return "the library is deleted";
+ 								 
+ 								 default:									 
+									 return "the library is deleted";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取庫詳細失敗</summary>
+				public static string LIB_DETAILS_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取库详细失败";
+								 case "zh-HK":
+									 return "獲取庫詳細失敗";
+								  case "en-US":
+									 return "the details of library is failure.";
+ 								 
+ 								 default:									 
+									 return "the details of library is failure.";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫定義存在同名</summary>
+				public static string LIB_EXIST_THE_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库定义存在同名";
+								 case "zh-HK":
+									 return "庫定義存在同名";
+								  case "en-US":
+									 return "the definition of library is existed the same name.";
+ 								 
+ 								 default:									 
+									 return "the definition of library is existed the same name.";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>存在相同的庫名稱，如Update要求不相同的名稱</summary>
+				public static string LIB_EXIST_THE_SAME_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "存在相同的库名称，如Update要求不相同的名稱";
+								 case "zh-HK":
+									 return "存在相同的庫名稱，如Update要求不相同的名稱";
+								  case "en-US":
+									 return "The same library name is existed,If modified,It will be a new name";
+ 								 
+ 								 default:									 
+									 return "The same library name is existed,If modified,It will be a new name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取庫明細資料失敗</summary>
+				public static string LIB_GET_DETAILS_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取库明细资料失败";
+								 case "zh-HK":
+									 return "獲取庫明細資料失敗";
+								  case "en-US":
+									 return "Fail to get the details of Library";
+ 								 
+ 								 default:									 
+									 return "Fail to get the details of Library";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫狀態正常</summary>
+				public static string LIB_IS_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库状态正常";
+								 case "zh-HK":
+									 return "庫狀態正常";
+								  case "en-US":
+									 return "the satus of library is normal";
+ 								 
+ 								 default:									 
+									 return "the satus of library is normal";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫列表失敗</summary>
+				public static string LIB_LIST_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库列表失败";
+								 case "zh-HK":
+									 return "庫列表失敗";
+								  case "en-US":
+									 return "Query library fail";
+ 								 
+ 								 default:									 
+									 return "Query library fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫定義不存在</summary>
+				public static string LIB_NOT_EXIST
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库定义不存在";
+								 case "zh-HK":
+									 return "庫定義不存在";
+								  case "en-US":
+									 return "the definition of library is not exist";
+ 								 
+ 								 default:									 
+									 return "the definition of library is not exist";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫定義更新成功</summary>
+				public static string LIB_UPDATE_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库定义更新成功";
+								 case "zh-HK":
+									 return "庫定義更新成功";
+								  case "en-US":
+									 return "Library is updated successfully";
+ 								 
+ 								 default:									 
+									 return "Library is updated successfully";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>列表無記錄</summary>
+				public static string LIST_NO_RECORD
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "列表无记录";
+								 case "zh-HK":
+									 return "列表無記錄";
+								  case "en-US":
+									 return "LIST NO RECORD";
+ 								 
+ 								 default:									 
+									 return "LIST NO RECORD";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登錄會話超時</summary>
+				public static string LoginSessionTimeOut
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录会话超时";
+								 case "zh-HK":
+									 return "登錄會話超時";
+								  case "en-US":
+									 return "Login session time out!";
+ 								 
+ 								 default:									 
+									 return "Login session time out!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>系統登錄</summary>
+				public static string LoginViewModel_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "系统登录";
+								 case "zh-HK":
+									 return "系統登錄";
+								  case "en-US":
+									 return "sign in the System";
+ 								 
+ 								 default:									 
+									 return "sign in the System";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>密碼不一致</summary>
+				public static string Login_ModifyComfirmed_Inconsistent
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "密码不一致";
+								 case "zh-HK":
+									 return "密碼不一致";
+								  case "en-US":
+									 return "Inconsistent passwords";
+ 								 
+ 								 default:									 
+									 return "Inconsistent passwords";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>確認密碼</summary>
+				public static string Login_ModifyComfirmed_Reqiured
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "确认密码";
+								 case "zh-HK":
+									 return "確認密碼";
+								  case "en-US":
+									 return "Comfirmed Password";
+ 								 
+ 								 default:									 
+									 return "Comfirmed Password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>需要填入原始密碼</summary>
+				public static string Login_OrginalPassword_Reqiured
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "需要填入原始密码";
+								 case "zh-HK":
+									 return "需要填入原始密碼";
+								  case "en-US":
+									 return "Orginal password is reqiured";
+ 								 
+ 								 default:									 
+									 return "Orginal password is reqiured";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>需要填入密碼</summary>
+				public static string Login_Password_Reqiured
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "需要填入密码";
+								 case "zh-HK":
+									 return "需要填入密碼";
+								  case "en-US":
+									 return "Password is reqiured";
+ 								 
+ 								 default:									 
+									 return "Password is reqiured";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>Login</summary>
+				public static string Login_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "Login";
+								 case "zh-HK":
+									 return "Login";
+								  case "en-US":
+									 return "Login";
+ 								 
+ 								 default:									 
+									 return "Login";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>需要填入用戶名</summary>
+				public static string Login_UserName_Reqiured
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "需要填入用户名";
+								 case "zh-HK":
+									 return "需要填入用戶名";
+								  case "en-US":
+									 return "UserName is reqiured";
+ 								 
+ 								 default:									 
+									 return "UserName is reqiured";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>原始密碼不能與新密碼相同</summary>
+				public static string PasswordModify_PasswordNotAllowSame
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "原始密码不能与新密码相同";
+								 case "zh-HK":
+									 return "原始密碼不能與新密碼相同";
+								  case "en-US":
+									 return "The original password cannot be the same as the new password";
+ 								 
+ 								 default:									 
+									 return "The original password cannot be the same as the new password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>黑名單</summary>
+				public static string PersonCategory_BLOCKED
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "黑名单";
+								 case "zh-HK":
+									 return "黑名單";
+								  case "en-US":
+									 return "BLOCKED";
+ 								 
+ 								 default:									 
+									 return "BLOCKED";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>白名單</summary>
+				public static string PersonCategory_UNBLOCKED
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "白名单";
+								 case "zh-HK":
+									 return "白名單";
+								  case "en-US":
+									 return "UNBLOCKED";
+ 								 
+ 								 default:									 
+									 return "UNBLOCKED";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增人員成功</summary>
+				public static string PersonModelInput_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增人员成功";
+								 case "zh-HK":
+									 return "新增人員成功";
+								  case "en-US":
+									 return "Add person success";
+ 								 
+ 								 default:									 
+									 return "Add person success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增人員失敗</summary>
+				public static string PERSON_ADD_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增人员失败";
+								 case "zh-HK":
+									 return "新增人員失敗";
+								  case "en-US":
+									 return "Fail to add person";
+ 								 
+ 								 default:									 
+									 return "Fail to add person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>證件號</summary>
+				public static string Person_CardNo
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "证件号";
+								 case "zh-HK":
+									 return "證件號";
+								  case "en-US":
+									 return "CardNo";
+ 								 
+ 								 default:									 
+									 return "CardNo";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>类型</summary>
+				public static string Person_Category
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "类型";
+								 case "zh-HK":
+									 return "类型";
+								  case "en-US":
+									 return "Category";
+ 								 
+ 								 default:									 
+									 return "Category";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員刪除失敗</summary>
+				public static string PERSON_DELETE_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员删除失败";
+								 case "zh-HK":
+									 return "人員刪除失敗";
+								  case "en-US":
+									 return "Fail to delete the details of current person";
+ 								 
+ 								 default:									 
+									 return "Fail to delete the details of current person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員記錄成功設置刪除狀態</summary>
+				public static string PERSON_DELTET_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员记录成功设置删除状态";
+								 case "zh-HK":
+									 return "人員記錄成功設置刪除狀態";
+								  case "en-US":
+									 return "Successfully to delete the person";
+ 								 
+ 								 default:									 
+									 return "Successfully to delete the person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員信息獲取失敗</summary>
+				public static string PERSON_DETAILS_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员信息获取失败";
+								 case "zh-HK":
+									 return "人員信息獲取失敗";
+								  case "en-US":
+									 return "Fail to retrive the details of current person";
+ 								 
+ 								 default:									 
+									 return "Fail to retrive the details of current person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>已存在姓名</summary>
+				public static string PERSON_EXIST_THE_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "已存在姓名";
+								 case "zh-HK":
+									 return "已存在姓名";
+								  case "en-US":
+									 return "the person name is exist";
+ 								 
+ 								 default:									 
+									 return "the person name is exist";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員ID</summary>
+				public static string Person_Id
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员ID";
+								 case "zh-HK":
+									 return "人員ID";
+								  case "en-US":
+									 return "Person ID";
+ 								 
+ 								 default:									 
+									 return "Person ID";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>無效的姓名</summary>
+				public static string PERSON_INVALID_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "无效的姓名";
+								 case "zh-HK":
+									 return "無效的姓名";
+								  case "en-US":
+									 return "the person name is invalid";
+ 								 
+ 								 default:									 
+									 return "the person name is invalid";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>无效的库Id(Library Id)</summary>
+				public static string PERSON_INVLID_LIBRARY_ID
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "无效的库Id(Library Id)";
+								 case "zh-HK":
+									 return "无效的库Id(Library Id)";
+								  case "en-US":
+									 return "invlid library id";
+ 								 
+ 								 default:									 
+									 return "invlid library id";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員記錄正常展示</summary>
+				public static string PERSON_IS_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员记录正常展示";
+								 case "zh-HK":
+									 return "人員記錄正常展示";
+								  case "en-US":
+									 return "the person is normal";
+ 								 
+ 								 default:									 
+									 return "the person is normal";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>必須選擇庫單元</summary>
+				public static string Person_LibId_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "必须选择库单元";
+								 case "zh-HK":
+									 return "必須選擇庫單元";
+								  case "en-US":
+									 return "Library Unit is Requird";
+ 								 
+ 								 default:									 
+									 return "Library Unit is Requird";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>所屬庫分類</summary>
+				public static string Person_Library
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "所属库分类";
+								 case "zh-HK":
+									 return "所屬庫分類";
+								  case "en-US":
+									 return "Of Library";
+ 								 
+ 								 default:									 
+									 return "Of Library";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員列表失敗</summary>
+				public static string PERSON_LIST_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员列表失败";
+								 case "zh-HK":
+									 return "人員列表失敗";
+								  case "en-US":
+									 return "fail to list person";
+ 								 
+ 								 default:									 
+									 return "fail to list person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員管理</summary>
+				public static string Person_Management
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员管理";
+								 case "zh-HK":
+									 return "人員管理";
+								  case "en-US":
+									 return "Person Manage";
+ 								 
+ 								 default:									 
+									 return "Person Manage";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>姓名</summary>
+				public static string Person_Name
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "姓名";
+								 case "zh-HK":
+									 return "姓名";
+								  case "en-US":
+									 return "Name";
+ 								 
+ 								 default:									 
+									 return "Name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>姓名是必要的</summary>
+				public static string Person_Name_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "姓名是必要的";
+								 case "zh-HK":
+									 return "姓名是必要的";
+								  case "en-US":
+									 return "Person Name is Requird";
+ 								 
+ 								 default:									 
+									 return "Person Name is Requird";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員不存在</summary>
+				public static string PERSON_NOT_EXIST
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员不存在";
+								 case "zh-HK":
+									 return "人員不存在";
+								  case "en-US":
+									 return "the person is not exist";
+ 								 
+ 								 default:									 
+									 return "the person is not exist";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員記錄處于刪除狀態</summary>
+				public static string PERSON_NOT_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员记录处于删除状态";
+								 case "zh-HK":
+									 return "人員記錄處于刪除狀態";
+								  case "en-US":
+									 return "person is Invisible";
+ 								 
+ 								 default:									 
+									 return "person is Invisible";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>手機號</summary>
+				public static string Person_Phone
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "手机号";
+								 case "zh-HK":
+									 return "手機號";
+								  case "en-US":
+									 return "Phone Number";
+ 								 
+ 								 default:									 
+									 return "Phone Number";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>FastConnector头像图片</summary>
+				public static string Person_PicClientUrl_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "FastConnector头像图片";
+								 case "zh-HK":
+									 return "FastConnector头像图片";
+								  case "en-US":
+									 return "FastConnector Avatar";
+ 								 
+ 								 default:									 
+									 return "FastConnector Avatar";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>头像</summary>
+				public static string Person_PicUrl
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "头像";
+								 case "zh-HK":
+									 return "头像";
+								  case "en-US":
+									 return "PicUrl";
+ 								 
+ 								 default:									 
+									 return "PicUrl";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>要求上存清晰的頭像近照</summary>
+				public static string Person_PicUrlTips
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "要求上存清晰的头像近照";
+								 case "zh-HK":
+									 return "要求上存清晰的頭像近照";
+								  case "en-US":
+									 return "Require upload a clear Avatar";
+ 								 
+ 								 default:									 
+									 return "Require upload a clear Avatar";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>必須上載圖片</summary>
+				public static string Person_PicUrl_required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "必须上载图片";
+								 case "zh-HK":
+									 return "必須上載圖片";
+								  case "en-US":
+									 return "Person picture is Requird";
+ 								 
+ 								 default:									 
+									 return "Person picture is Requird";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>性别</summary>
+				public static string Person_Sex
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "性别";
+								 case "zh-HK":
+									 return "性别";
+								  case "en-US":
+									 return "Gender";
+ 								 
+ 								 default:									 
+									 return "Gender";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員更新失敗</summary>
+				public static string PERSON_UPDATE_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员更新失败";
+								 case "zh-HK":
+									 return "人員更新失敗";
+								  case "en-US":
+									 return "Fail to update the details of current person";
+ 								 
+ 								 default:									 
+									 return "Fail to update the details of current person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員記錄正常</summary>
+				public static string PERSON_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员记录正常";
+								 case "zh-HK":
+									 return "人員記錄正常";
+								  case "en-US":
+									 return "person is visible";
+ 								 
+ 								 default:									 
+									 return "person is visible";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>圖片已存在</summary>
+				public static string PICTURE_EXIST
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "图片已存在";
+								 case "zh-HK":
+									 return "圖片已存在";
+								  case "en-US":
+									 return "PICTURE IS EXIST";
+ 								 
+ 								 default:									 
+									 return "PICTURE IS EXIST";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>圖片無效的</summary>
+				public static string PICTURE_INVALID
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "图片无效的";
+								 case "zh-HK":
+									 return "圖片無效的";
+								  case "en-US":
+									 return "PICTURE IS INVALID";
+ 								 
+ 								 default:									 
+									 return "PICTURE IS INVALID";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>圖片不存在</summary>
+				public static string PICTURE_NOT_EXIST
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "图片不存在";
+								 case "zh-HK":
+									 return "圖片不存在";
+								  case "en-US":
+									 return "PICTURE IS NOT EXIST";
+ 								 
+ 								 default:									 
+									 return "PICTURE IS NOT EXIST";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員圖片更新失敗</summary>
+				public static string PICTURE_UPDATE_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员图片更新失败";
+								 case "zh-HK":
+									 return "人員圖片更新失敗";
+								  case "en-US":
+									 return "Fail to update the picture of the current person";
+ 								 
+ 								 default:									 
+									 return "Fail to update the picture of the current person";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>圖片有效的</summary>
+				public static string PICTURE_VALID
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "图片有效的";
+								 case "zh-HK":
+									 return "圖片有效的";
+								  case "en-US":
+									 return "PICTURE IS VALID";
+ 								 
+ 								 default:									 
+									 return "PICTURE IS VALID";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭查詢成功</summary>
+				public static string QueryCameraList_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头查询成功";
+								 case "zh-HK":
+									 return "鏡頭查詢成功";
+								  case "en-US":
+									 return "Query CameraList SUCCESS";
+ 								 
+ 								 default:									 
+									 return "Query CameraList SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>成功返回庫單元列表</summary>
+				public static string QueryLibraryListResult_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "成功返回库单元列表";
+								 case "zh-HK":
+									 return "成功返回庫單元列表";
+								  case "en-US":
+									 return "Query Library List Result Success";
+ 								 
+ 								 default:									 
+									 return "Query Library List Result Success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>庫分類列表</summary>
+				public static string QueryLibraryList_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "库分类列表";
+								 case "zh-HK":
+									 return "庫分類列表";
+								  case "en-US":
+									 return "Query Library List";
+ 								 
+ 								 default:									 
+									 return "Query Library List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>查詢人員失敗</summary>
+				public static string QueryPersonList_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "查询人员失败";
+								 case "zh-HK":
+									 return "查詢人員失敗";
+								  case "en-US":
+									 return "Query Person List SUCCESS";
+ 								 
+ 								 default:									 
+									 return "Query Person List SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>人員列表</summary>
+				public static string QueryPersonList_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "人员列表";
+								 case "zh-HK":
+									 return "人員列表";
+								  case "en-US":
+									 return "Person List";
+ 								 
+ 								 default:									 
+									 return "Person List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務列表</summary>
+				public static string QueryTaskList_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务列表";
+								 case "zh-HK":
+									 return "任務列表";
+								  case "en-US":
+									 return "Task List";
+ 								 
+ 								 default:									 
+									 return "Task List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>獲取鏡頭列表失敗</summary>
+				public static string QUERY_CAMERA_LIST_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "获取镜头列表失败";
+								 case "zh-HK":
+									 return "獲取鏡頭列表失敗";
+								  case "en-US":
+									 return "Query camera list fail";
+ 								 
+ 								 default:									 
+									 return "Query camera list fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>已注冊，登錄</summary>
+				public static string RegisterView_HasRegistedToLogin
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "已注册，登录";
+								 case "zh-HK":
+									 return "已注冊，登錄";
+								  case "en-US":
+									 return "To Login";
+ 								 
+ 								 default:									 
+									 return "To Login";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>注冊系統用戶</summary>
+				public static string RegisterView_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "注册系统用户";
+								 case "zh-HK":
+									 return "注冊系統用戶";
+								  case "en-US":
+									 return "Register a user";
+ 								 
+ 								 default:									 
+									 return "Register a user";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>已存在的用戶</summary>
+				public static string Register_ExistUserName
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "已存在的用户";
+								 case "zh-HK":
+									 return "已存在的用戶";
+								  case "en-US":
+									 return "Exist the user";
+ 								 
+ 								 default:									 
+									 return "Exist the user";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>注冊失敗</summary>
+				public static string Register_Fail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "注册失败";
+								 case "zh-HK":
+									 return "注冊失敗";
+								  case "en-US":
+									 return "Register Fail";
+ 								 
+ 								 default:									 
+									 return "Register Fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>RTSP URI 格式错误</summary>
+				public static string RTSP_WRONG_FORMAT
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "RTSP URI 格式错误";
+								 case "zh-HK":
+									 return "RTSP URI 格式错误";
+								  case "en-US":
+									 return "RTSP WRONG FORMAT";
+ 								 
+ 								 default:									 
+									 return "RTSP WRONG FORMAT";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>輸入鏡頭IP 或 登錄名 或 密碼</summary>
+				public static string SearchCamPanel_ModalTitle
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "输入镜头IP 或 登录名 或 密码";
+								 case "zh-HK":
+									 return "輸入鏡頭IP 或 登錄名 或 密碼";
+								  case "en-US":
+									 return "Enter Camera IP or login name or password to Search";
+ 								 
+ 								 default:									 
+									 return "Enter Camera IP or login name or password to Search";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>啟動任務成功</summary>
+				public static string StartTask_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "启动任务成功";
+								 case "zh-HK":
+									 return "啟動任務成功";
+								  case "en-US":
+									 return "Start task success";
+ 								 
+ 								 default:									 
+									 return "Start task success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>停止任務成功</summary>
+				public static string StopTask_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "停止任务成功";
+								 case "zh-HK":
+									 return "停止任務成功";
+								  case "en-US":
+									 return "Stop Task successfully!";
+ 								 
+ 								 default:									 
+									 return "Stop Task successfully!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增任務成功</summary>
+				public static string TASK_ADD_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增任务成功";
+								 case "zh-HK":
+									 return "新增任務成功";
+								  case "en-US":
+									 return "Task is added sucessfully";
+ 								 
+ 								 default:									 
+									 return "Task is added sucessfully";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>入口鏡頭組</summary>
+				public static string Task_CameraList1
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "入口镜头组";
+								 case "zh-HK":
+									 return "入口鏡頭組";
+								  case "en-US":
+									 return "CameraList1";
+ 								 
+ 								 default:									 
+									 return "CameraList1";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>鏡頭列表1是必要的</summary>
+				public static string Task_CameraList1_Required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "镜头列表1是必要的";
+								 case "zh-HK":
+									 return "鏡頭列表1是必要的";
+								  case "en-US":
+									 return "CameraList1 is required";
+ 								 
+ 								 default:									 
+									 return "CameraList1 is required";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>出口鏡頭組</summary>
+				public static string Task_CameraList2
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "出口镜头组";
+								 case "zh-HK":
+									 return "出口鏡頭組";
+								  case "en-US":
+									 return "CameraList2";
+ 								 
+ 								 default:									 
+									 return "CameraList2";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>沒有值，強制選擇鏡頭列表鏡頭1</summary>
+				public static string Task_CaseOfNoCameraListVal
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "没有值，强制选择镜头列表镜头1";
+								 case "zh-HK":
+									 return "沒有值，強制選擇鏡頭列表鏡頭1";
+								  case "en-US":
+									 return "No value, forced to select one of the  Camera list";
+ 								 
+ 								 default:									 
+									 return "No value, forced to select one of the  Camera list";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務刪除失敗</summary>
+				public static string TASK_DELETE_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务删除失败";
+								 case "zh-HK":
+									 return "任務刪除失敗";
+								  case "en-US":
+									 return "Failed to delete the task";
+ 								 
+ 								 default:									 
+									 return "Failed to delete the task";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務已被刪除</summary>
+				public static string TASK_DELETE_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务已被删除";
+								 case "zh-HK":
+									 return "任務已被刪除";
+								  case "en-US":
+									 return "Task is deleted";
+ 								 
+ 								 default:									 
+									 return "Task is deleted";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務處于正常狀態</summary>
+				public static string TASK_DEL_STATUS_IS_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务处于正常状态";
+								 case "zh-HK":
+									 return "任務處于正常狀態";
+								  case "en-US":
+									 return "TASK is normal";
+ 								 
+ 								 default:									 
+									 return "TASK is normal";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務處于刪除狀態</summary>
+				public static string TASK_DEL_STATUS_NOT_VISIBLE
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务处于删除状态";
+								 case "zh-HK":
+									 return "任務處于刪除狀態";
+								  case "en-US":
+									 return "Task is under deleted status";
+ 								 
+ 								 default:									 
+									 return "Task is under deleted status";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>不合規則的任務名稱</summary>
+				public static string TASK_ILLEGAL_NAME
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "不合规则的任务名称";
+								 case "zh-HK":
+									 return "不合規則的任務名稱";
+								  case "en-US":
+									 return "It is a illegal task name!";
+ 								 
+ 								 default:									 
+									 return "It is a illegal task name!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>間隔</summary>
+				public static string Task_Interval
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "间隔";
+								 case "zh-HK":
+									 return "間隔";
+								  case "en-US":
+									 return "Interval";
+ 								 
+ 								 default:									 
+									 return "Interval";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>所屬庫分類</summary>
+				public static string Task_LibList
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "所属库分类";
+								 case "zh-HK":
+									 return "所屬庫分類";
+								  case "en-US":
+									 return "Libary List";
+ 								 
+ 								 default:									 
+									 return "Libary List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>查詢任務列表失敗</summary>
+				public static string TASK_LIST_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "查询任务列表失败";
+								 case "zh-HK":
+									 return "查詢任務列表失敗";
+								  case "en-US":
+									 return "Fail to Get the task list";
+ 								 
+ 								 default:									 
+									 return "Fail to Get the task list";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務管理</summary>
+				public static string Task_Management
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务管理";
+								 case "zh-HK":
+									 return "任務管理";
+								  case "en-US":
+									 return "Task Manage";
+ 								 
+ 								 default:									 
+									 return "Task Manage";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務名稱是必要的</summary>
+				public static string Task_Name_Required
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务名称是必要的";
+								 case "zh-HK":
+									 return "任務名稱是必要的";
+								  case "en-US":
+									 return "Task name is required!";
+ 								 
+ 								 default:									 
+									 return "Task name is required!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>計劃</summary>
+				public static string Task_Plan
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "计划";
+								 case "zh-HK":
+									 return "計劃";
+								  case "en-US":
+									 return "Plan";
+ 								 
+ 								 default:									 
+									 return "Plan";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務列表</summary>
+				public static string Task_QueryTaskList_Title
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务列表";
+								 case "zh-HK":
+									 return "任務列表";
+								  case "en-US":
+									 return "Task List";
+ 								 
+ 								 default:									 
+									 return "Task List";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務啟動</summary>
+				public static string TASK_START
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务启动";
+								 case "zh-HK":
+									 return "任務啟動";
+								  case "en-US":
+									 return "TASK START";
+ 								 
+ 								 default:									 
+									 return "TASK START";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務運行中</summary>
+				public static string TASK_START_STATUS_DESC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务运行中";
+								 case "zh-HK":
+									 return "任務運行中";
+								  case "en-US":
+									 return "Task is running!";
+ 								 
+ 								 default:									 
+									 return "Task is running!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>狀態</summary>
+				public static string Task_State
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "状态";
+								 case "zh-HK":
+									 return "狀態";
+								  case "en-US":
+									 return "State";
+ 								 
+ 								 default:									 
+									 return "State";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務停止</summary>
+				public static string TASK_STOP
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务停止";
+								 case "zh-HK":
+									 return "任務停止";
+								  case "en-US":
+									 return "TASK STOP";
+ 								 
+ 								 default:									 
+									 return "TASK STOP";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務處于停止狀態</summary>
+				public static string TASK_STOP_STATUS_DESC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务处于停止状态";
+								 case "zh-HK":
+									 return "任務處于停止狀態";
+								  case "en-US":
+									 return "Task is stopped";
+ 								 
+ 								 default:									 
+									 return "Task is stopped";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務ID</summary>
+				public static string Task_TaskId
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务ID";
+								 case "zh-HK":
+									 return "任務ID";
+								  case "en-US":
+									 return "Task ID";
+ 								 
+ 								 default:									 
+									 return "Task ID";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務名稱</summary>
+				public static string Task_TaskName
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务名称";
+								 case "zh-HK":
+									 return "任務名稱";
+								  case "en-US":
+									 return "Task Name";
+ 								 
+ 								 default:									 
+									 return "Task Name";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>閥值</summary>
+				public static string Task_Threshold
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "阀值";
+								 case "zh-HK":
+									 return "閥值";
+								  case "en-US":
+									 return "Threshold";
+ 								 
+ 								 default:									 
+									 return "Threshold";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>Type</summary>
+				public static string Task_Type
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "Type";
+								 case "zh-HK":
+									 return "Type";
+								  case "en-US":
+									 return "Type";
+ 								 
+ 								 default:									 
+									 return "Type";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務更新失敗</summary>
+				public static string TASK_UPDATE_FAIL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务更新失败";
+								 case "zh-HK":
+									 return "任務更新失敗";
+								  case "en-US":
+									 return "Task update  is fail";
+ 								 
+ 								 default:									 
+									 return "Task update  is fail";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>任務更新成功</summary>
+				public static string TASK_UPDATE_SUCCESS
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "任务更新成功";
+								 case "zh-HK":
+									 return "任務更新成功";
+								  case "en-US":
+									 return "Task is updated sucessfully!";
+ 								 
+ 								 default:									 
+									 return "Task is updated sucessfully!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>普通</summary>
+				public static string Type_GENERAL
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "普通";
+								 case "zh-HK":
+									 return "普通";
+								  case "en-US":
+									 return "GENERAL";
+ 								 
+ 								 default:									 
+									 return "GENERAL";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更新人員成功</summary>
+				public static string UpdatePerson_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更新人员成功";
+								 case "zh-HK":
+									 return "更新人員成功";
+								  case "en-US":
+									 return "Update person success";
+ 								 
+ 								 default:									 
+									 return "Update person success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更新任務成功</summary>
+				public static string UpdateTask_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更新任务成功";
+								 case "zh-HK":
+									 return "更新任務成功";
+								  case "en-US":
+									 return "Update task success";
+ 								 
+ 								 default:									 
+									 return "Update task success";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更新服務器存儲配置失敗</summary>
+				public static string UpdSystemConfigResult_Fail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更新服务器存储配置失败";
+								 case "zh-HK":
+									 return "更新服務器存儲配置失敗";
+								  case "en-US":
+									 return "Update System Storage Server Config FAILURE";
+ 								 
+ 								 default:									 
+									 return "Update System Storage Server Config FAILURE";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>更新服務器存儲配置成功</summary>
+				public static string UpdSystemConfigResult_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "更新服务器存储配置成功";
+								 case "zh-HK":
+									 return "更新服務器存儲配置成功";
+								  case "en-US":
+									 return "Update System Storage Server Config SUCCESS";
+ 								 
+ 								 default:									 
+									 return "Update System Storage Server Config SUCCESS";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>上載圖片失敗</summary>
+				public static string UploadPersonPicture_Fail
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "上载图片失败";
+								 case "zh-HK":
+									 return "上載圖片失敗";
+								  case "en-US":
+									 return "It is Failure to upload the picture!";
+ 								 
+ 								 default:									 
+									 return "It is Failure to upload the picture!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>新增圖片成功</summary>
+				public static string UploadToApiServer_SUCC
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "新增图片成功";
+								 case "zh-HK":
+									 return "新增圖片成功";
+								  case "en-US":
+									 return "Upload to  server successfully!";
+ 								 
+ 								 default:									 
+									 return "Upload to  server successfully!";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>密碼和確認密碼不相符</summary>
+				public static string User_ComfirmedPassword
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "密码和确认密码不相符";
+								 case "zh-HK":
+									 return "密碼和確認密碼不相符";
+								  case "en-US":
+									 return "Password does not match confirmation password";
+ 								 
+ 								 default:									 
+									 return "Password does not match confirmation password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>原始密碼</summary>
+				public static string User_OrginalPassword
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "原始密码";
+								 case "zh-HK":
+									 return "原始密碼";
+								  case "en-US":
+									 return "Orginal password";
+ 								 
+ 								 default:									 
+									 return "Orginal password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>密碼</summary>
+				public static string User_Password
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "密码";
+								 case "zh-HK":
+									 return "密碼";
+								  case "en-US":
+									 return "Password";
+ 								 
+ 								 default:									 
+									 return "Password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>確認密碼</summary>
+				public static string User_Password_Comfirmed
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "确认密码";
+								 case "zh-HK":
+									 return "確認密碼";
+								  case "en-US":
+									 return "Comfirmed password";
+ 								 
+ 								 default:									 
+									 return "Comfirmed password";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>密碼太短</summary>
+				public static string User_Password_Format_TooShort
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "密码太短";
+								 case "zh-HK":
+									 return "密碼太短";
+								  case "en-US":
+									 return "Password required the min 6 letter";
+ 								 
+ 								 default:									 
+									 return "Password required the min 6 letter";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登錄用戶名</summary>
+				public static string User_UserName
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录用户名";
+								 case "zh-HK":
+									 return "登錄用戶名";
+								  case "en-US":
+									 return "UserName";
+ 								 
+ 								 default:									 
+									 return "UserName";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>用戶名或者密碼格式錯誤(不允許空)</summary>
+				public static string User_UserNamePasswordNotNull
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "用户名或者密码格式错误(不允许空)";
+								 case "zh-HK":
+									 return "用戶名或者密碼格式錯誤(不允許空)";
+								  case "en-US":
+									 return "Username or Password is not allowed null";
+ 								 
+ 								 default:									 
+									 return "Username or Password is not allowed null";
+							} 
+ 					}
+				}
+
+
+				 ///<summary>登錄用戶必須是數字和字母</summary>
+				public static string User_UserName_Format
+				{
+					get
+					{
+
+						 switch (LangUtilities.LanguageCode)
+							{
+								 case "zh-CN":
+									 return "登录用户必须是数字和字母";
+								 case "zh-HK":
+									 return "登錄用戶必須是數字和字母";
+								  case "en-US":
+									 return "Letter Or Digits";
+ 								 
+ 								 default:									 
+									 return "Letter Or Digits";
+							} 
+ 					}
+				}
+
+
+        #endregion
+         
+    }
+
+}

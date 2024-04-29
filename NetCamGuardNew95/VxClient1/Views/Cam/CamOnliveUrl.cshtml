@@ -1,0 +1,45 @@
+﻿@using LanguageResource
+@using EnumCode
+@using VxGuardClient.Context
+@using Common
+@using VideoGuard.ApiModels.CamApiModel
+@using VideoGuard.ApiModels
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.CamOnliveUrl_Title;
+    Layout = "_LayoutBlank";
+
+    CameraOnLiveModel cameraOnLive = Model.data as CameraOnLiveModel;
+    string onliveUrl = cameraOnLive.OonliveUrl;
+    int deviceId = cameraOnLive.DeviceId;
+}
+
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{ 
+     <div id="dplayer1"></div>
+     <script>
+        $(document).ready(function () {
+            var reqHttpLiveStart = "@cameraOnLive.PlayUrl" ;
+
+            const dp1 = new DPlayer({
+                container: document.getElementById('dplayer1'),
+                autoplay: true,
+                screenshot: true,
+                video: {
+                    url: '@onliveUrl',
+                    type: 'auto'
+                }
+            }); 
+            
+        });
+
+
+
+     </script>
+}
+
+ 

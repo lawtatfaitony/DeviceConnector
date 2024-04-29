@@ -1,0 +1,341 @@
+﻿@using LanguageResource
+@using Common
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using Microsoft.AspNetCore.Http
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@using VxClient.Models
+@using VideoGuard.Business
+@inject IHttpContextAccessor httpContextAccessor
+@model ResponseModalX
+@{
+    if (Model.meta.Success == false)
+    {
+        <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+    }
+    Door door = new Door();
+
+    if(Model.data!=null)
+    {
+        door = Model.data as Door;
+    }
+}
+
+<style>
+    /* height: calc(100% - (3.5rem + 1px));**/
+    .main-sidebar-camera-tree {
+        height: 80vh;
+        min-width: 250px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        z-index: 1038;
+        border: 0;
+        outline: none;
+        overflow-y: auto;
+        padding-bottom: 23px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0;
+    }
+
+    .main-sidebar-camera-tree a:-moz-focusring {
+        border: 0;
+        outline: none;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 bg-gradient-light pt-0 mt-0">
+            <aside id="sidebar_screen" class="main-sidebar-camera-tree sidebar-light-dark elevation-1 rounded border m-b-1" 
+                style="margin-top: 0px; padding-top: 10px; padding-left: 5px; padding-right: 5px;overflow:hidden;">
+                <div class="container-fluid rounded-top" style="border-top:groove;border-top-width:3px;border-top-color:blue;">
+                    <fieldset>
+                        <legend>
+                            <label id="DoorTreePanelTitle" class="bootstrap-switch-label mt-2">@Lang.DoorTreePanel_Title</label> 
+                        </legend> 
+                    </fieldset>
+                </div>
+                <div id="DoorSiteTreeModel" class="p-0 DoorSiteTreeModelPanel" style="max-height:800px;p-b-1">
+                    <i class="fas fa-spinner fa-spin fa-3x m-5"></i>
+                </div> 
+                <span class="border  border-success border-bottom-1"></span>
+            </aside>
+           
+        </div>
+        <div id="flatScreen" class="col-9 p-0 m-0">
+            <div id="fourScreens1" class="container-fluid" style="height:100%;">
+                <div  class="container col-lg-offset-3 col-md-offset-3 pt-3" style="max-width:600px;">
+                    <form asp-action="AddOrUpdateDoor" asp-controller="Door" asp-route-Language="@LangExtend.LanguageCode" 
+                          data-ajax-success="handleAddOrUpdateDoor" onsubmit="onBeginSubmit" asp-ajax-onFailure="errAddOrUpdateDoor"
+                          data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="formDoor" id="formDoor">
+                        <input type="hidden" asp-for="@door.MaincomId" name="MaincomId" hidden />
+                        <input type="hidden" asp-for="@door.DoorId"  name="DoorId"  hidden />
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title text-dark"> <i class='fas fa-door-open text-warning'></i>@Lang.DoorTreePanel_Title</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="control-label" for="DeviceId"><i class="fas fa-venus-mars text-success"></i> @Lang.Door_OfDevice</label>
+                                    <div class="input-group col-10">
+                                        <select asp-for="@door.DeviceId" name="DeviceId" asp-items="@Html.DeviceDropDownList(door.MaincomId,door.DeviceId)" class="border-right-0 form-control form-control-sm bold">
+                                            <option value="0">@Lang.GeneralUI_Select</option>
+                                        </select>
+                                        <div class="input-group-append input-group-sm">
+                                            <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Door_OfDevice  @Lang.GeneralUI_Optional">
+                                                <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="@door.DeviceId" class="text-danger"></span>
+                                    <span class="label pl-2" data-toggle="tooltip" title="@Lang.Door_OfDeviceTips ">
+                                        <i class="far fa-lightbulb text-warning"></i>
+                                         @Lang.Door_OfDeviceTips
+                                    </span>
+                                </div>
+
+                                <div class="form-group  mb-1">
+                                    <label class="control-label  col-12" for="DoorName"><i class="fas fa-door-open text-success" ></i> @Lang.Door_DoorName</label>
+                                    <div class="input-group  col-10">
+                                        <input asp-for="@door.DoorName" name="DoorName" data-val="true" class="border-right-0 form-control  form-control-sm" type="text" placeholder="@Lang.Door_DoorName" data-toggle="title" title="@Lang.Door_DoorName" />
+                                        <div class="input-group-append input-group-sm">
+                                            <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Door_DoorName">
+                                                <i class="fas fa-asterisk"></i>
+                                            </span>
+                                        </div>
+                                    </div> 
+                                    <span asp-validation-for="@door.DoorName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-1">
+                                    <label class="control-label  col-12" for="SiteId"><i class="fas fa-sitemap text-success"></i> @Lang.Door_SiteId</label>
+                                    <div class="input-group  col-10">
+                                        <label id="lblDoorName" class="border-warning col-form-label mt-2"></label>
+                                        <input asp-for="@door.SiteId" name="SiteId"  data-val="true"  type="hidden"/>
+                                    </div>
+                                    <span asp-validation-for="@door.SiteId"  class="text-danger"></span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="container card-footer">
+                            <div class="row pl-3">
+                                <div class="margin-left5 padding-left5">
+                                    <button type="submit" id="btnSubmit" class="btn btn-primary padding-left15 margin-left5">
+                                        @if (door.DoorId == 0)
+                                        {
+                                            @Lang.GeneralUI_AddNew
+                                        }
+                                        else
+                                        {
+                                            @Lang.GeneralUI_Update
+                                        }
+                                    </button>
+
+                                    <button type="button" id="btnDelete" class="btn btn-danger ml-3" onclick="javascript: DeleteDoor();" hidden>
+                                        @Lang.GeneralUI_Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div><!-- /.content -->
+    </div>
+</div>
+
+
+<script>
+
+    var mainComId = "@door.MaincomId";
+
+     loadDoorSiteTree("#DoorSiteTreeModel", "@LangUtilities.LanguageCode", "@WebCookie.MainComId", 0, "#DoorId", "#lblDoorName");
+
+     setInterval(
+            function () {
+                 loadDoorSiteTree("#DoorSiteTreeModel", "@LangUtilities.LanguageCode", "@WebCookie.MainComId", 0, "#DoorId", "#lblDoorName");
+            }
+      , 60000);
+
+     function loadDoorSiteTree(ID, LanguageCode, MaincomId, ParentsId, tagetId, targetLabel) {
+         //debugger;
+         var treeUrl = "/" + LanguageCode + "/Door/GetDoorsTreeNodeOfSite/" + MaincomId + "/parentsSiteId=" + ParentsId;
+         console.log(treeUrl);
+         $.ajax({
+             url: treeUrl,
+             success: function (result) {
+
+                 console.log("REQUEST:loadDoorSiteTree......" + new Date());
+
+                 $(ID).treeview({
+                     enableLinks: true,
+                     expandIcon: "glyphicon glyphicon-stop",
+                     collapseIcon: "glyphicon glyphicon-unchecked",
+                     nodeIcon: "glyphicon glyphicon-user",
+                     color: "#FCFCFC",
+                     backColor: "#222D32",
+                     onhoverColor: "#374A51",
+                     borderColor: "white",
+                     showBorder: false,
+                     levels: 5,
+                     showTags: true,
+                     highlightSelected: true,
+                     selectedColor: "yellow",
+                     selectedBackColor: "#374A51",
+                     data: result,
+                     nodeCollapsed: function (event, node) {
+                         console.log("nodeid=" + node.nodeid + ";text=" + node.text);
+                     },
+                     onNodeSelected: function (event, node) {
+
+                         if (node.nodeid != "0")
+                         {
+                             console.log("nodeid=" + node.nodeid + ";text=" + node.text);
+                         }
+
+                         if (node != undefined || node != null) {
+
+                             if (node.doorId != undefined || node.doorId != null) {
+
+                                 $(".card-title").html("<i class='fas fa-door-open'></i>" + node.text);
+
+                                 $("input[name=DoorId]").val(node.doorId);
+                                 $("input[name=DoorName]").val(node.doorName);
+                                 $("select[name=DeviceId]").val(node.deviceId);
+                                 $("input[name=SiteId]").val(node.siteId);
+
+                                 console.log(node.deviceId);
+
+                                 $(targetLabel).text(node.siteId + " - " + node.siteName);
+
+                                 $("#btnDelete").show();
+                                 $("#btnDelete").removeAttr('hidden');
+                                 $("#btnDelete").data("maincomid", node.mainComId);
+                                 $("#btnDelete").data("doorid", node.doorId);
+
+                                  $("#btnSubmit").text("@Lang.GeneralUI_Update");
+
+                             } else {
+                                 $(".card-title").html("<i class='fas fa-door-open text-warning'></i>ADD NEW");
+
+                                 $("input[name=DoorId]").val(0);
+                                 $("input[name=DoorName]").val("");
+
+                                 $(tagetId).val(node.nodeid);
+                                 $(targetLabel).text(node.nodeid + " - " + node.text);
+                                 $("input[name=SiteId]").val(node.nodeid);
+
+                                 $("#btnDelete").hide();
+                                 $("#btnDelete").attr("hidden", "hidden");
+
+
+
+                                 $("#btnSubmit").text("@Lang.GeneralUI_AddNew");
+                             }
+                         }
+                     }
+                 });
+                 // console.log(data)
+             }
+         });//end ajax get json data
+    }
+
+
+
+    function handleAddOrUpdateDoor(result) {
+
+        layer.close(layer.index);
+
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+        });
+
+        var httpUrl = "/@LangUtilities.LanguageCode/Door/DoorTreePanel/0";
+
+        setTimeout(
+            function () {
+                window.location.href = httpUrl;
+            }
+            , 3000);
+    }
+
+
+    function errAddOrUpdateDoor(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errAddOrUpdateDoor");
+    }
+
+    function DeleteDoor(e)
+    { 
+        var DoorId = $("input[name=DoorId]").val();
+
+        layer.confirm('@Lang.Door_ComfirmDeleteTips', {
+            title: DoorId,
+            btn: ['@Lang.GeneralUI_Delete✔', 'CANCEL✘'] //btn
+        }, function () {
+            var response = DeleteDoorPost(mainComId, DoorId);
+            console.log(response);
+
+        }, function () {
+
+            console.log({ "CANCEL": "CANCEL" });
+            layerTips("Cancel!");
+
+        });
+    }
+
+    function DeleteDoorPost(MainComId, DoorId)
+    {
+        var httpUrl = "/@LangUtilities.LanguageCode/Door/DeleteDoor";
+
+        var myparamsObject = { "MaincomId": MainComId, "DoorId": DoorId };
+
+        console.log("INPUT JSON FOR DEL:");
+        console.log(myparamsObject);
+
+        $.ajax({
+            url: httpUrl,
+            async: false, // 使用同步方式
+            data: JSON.stringify(myparamsObject),
+            contentType: "application/json;charset=utf-8",
+            type: "POST",
+            dataType: 'json',
+            error: function (data) {
+                console.log(JSON.stringify(data));
+                alert("Func:DeleteDoorPost.Ajax.Error\n" + JSON.stringify(data));
+            },
+            success: function (data) {
+
+                console.log({ "SUCCESS RETURN": data });
+
+                layer.msg(data.meta.message, { icon: 1 }, {
+                    time: 9000,
+                    btn: ['OK']
+                });
+
+                return data;
+            }
+        });
+    }
+
+    $('.DoorSiteTreeModelPanel').slimscroll({
+            disableFadeOut: false,
+            height: '620px',
+            size:"8px", //滚动条宽度
+            color:"#8B1313", //滚动条颜色,默认#000000 // 暗紅色=#8B1313
+            alwaysVisible: true, //是否禁用隐藏滚动条,默认false
+            opacity:1  // 滚动条透明度
+   });
+</script>
+
+

@@ -1,0 +1,116 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@model DeviceStatus
+
+<div class="modal fade" id="deviceStatusModal" tabindex="-1"
+     role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="deviceStatusModal" aria-hidden="true">
+    <form asp-action="ChangeDeviceStatus" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode"
+          data-ajax-success="handleDeviceStatus"
+          asp-ajax-onFailure="errDeviceStatus" data-ajax="true" data-ajax-method="post" class="form-horizontal form-inline"
+          name="formDeviceStatus" id="formDeviceStatus">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">@Lang.DeviceStatus_Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <input asp-for="@Model.DeviceId" name="DeviceId" type="hidden" class="DeviceId" />
+                        <input asp-for="@Model.MaincomId" name="MaincomId" type="hidden" class="MainComId" />
+
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label class="control-label float-left" for="Status">
+                                    <i class="fas fa-play-circle mr-1" style="color:forestgreen"></i>
+                                    @Lang.Device_Status
+                                </label>
+                            </div>
+                            <div class="input-group">
+                                <select asp-for="@Model.Status" name="Status" asp-items="@Html.GeneralStatusDropDownList(Model.Status.ToString())"
+                                        class="Status ModalStatus border-right-0 form-control form-control-sm" style="min-width:200px;">
+                                    <option value="0">@Lang.GeneralUI_Select</option>
+                                </select>
+                                <div class="input-group-append input-group-sm">
+                                    <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Device_Status  @Lang.GeneralUI_Required">
+                                        <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span  class="Device_StatusTips text-primary small">@Lang.Device_StatusTips</span>
+                            <span asp-validation-for="@Model.Status" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="deviceStatusSubmit" class="btn btn-primary btn-sm ml-3">Save changes</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<script> 
+    function handleDeviceStatus(result) {
+        layer.close(layer.index);
+        console.log(result);
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'}
+         ); 
+         if (result.meta.success === true)
+         {
+                redirectLocaleUrl = "@Url.Action("DeviceList", "Device",new {Language=LangUtilities.LanguageCode})";
+                redirectLocaleUrl = redirectLocaleUrl + "?search=" + result.data.deviceName;
+                console.log(redirectLocaleUrl);
+                setTimeout(
+                    function() {
+                        window.location.href = redirectLocaleUrl;
+                    }
+                , 3000);
+         }
+    }
+
+    function errDeviceStatus(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errDeviceStatus");
+    }
+    $('#deviceStatusModal').on('show.bs.modal', function (event) {
+        var CONST_DAVICE_TYPE_DVR = "@EnumBusiness.DeviceType.DESTOP_DVR.ToString()";
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var deviceId = button.data('deviceid');
+        var maincomId = button.data('maincomid')
+        var deviceName = button.data('devicename');
+        var deviceStatus = button.data('status');
+        var deviceType = button.data('devicetype'); 
+        console.log("deviceId=" + deviceId + "| maincomId=" + maincomId + "| deviceName =" + deviceName +"|  deviceStatus =" + deviceStatus);
+        var modal = $(this);
+        modal.find('.modal-title').text(deviceName);
+        //field
+        modal.find('.DeviceId').val(deviceId);
+        modal.find('.MainComId').val(maincomId);
+        modal.find(".Status").val(deviceStatus);
+        if(deviceType==CONST_DAVICE_TYPE_DVR)
+        {
+             modal.find(".Status").attr("disabled","disabled"); 
+             modal.find(".Device_StatusTips").removeAttr("hidden"); //显示提示
+             modal.find("#deviceStatusSubmit").hide(); //submit hide
+        }else{
+             modal.find(".Status").removeAttr("disabled");
+             modal.find(".Device_StatusTips").attr("hidden"); //隐藏提示
+             modal.find("#deviceStatusSubmit").show(); //submit hide
+        }
+    })
+</script>

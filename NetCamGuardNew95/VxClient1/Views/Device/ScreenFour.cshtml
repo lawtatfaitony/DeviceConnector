@@ -1,0 +1,735 @@
+﻿@using LanguageResource
+@using Common
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using Microsoft.AspNetCore.Http
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@using VxClient.Models
+@inject IHttpContextAccessor httpContextAccessor
+@model ResponseModalX
+@{
+    if (Model.meta.Success == false)
+    {
+        <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+    }
+
+    var deviceDVRModel = Model.data as DeviceDVRModel;
+}
+
+<style>
+    /* height: calc(100% - (3.5rem + 1px));**/
+    .main-sidebar-camera-tree {
+        height: 60vh;
+        min-width: 250px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        z-index: 1038;
+        border: 0;
+        outline: none;
+        overflow-y: auto;
+        padding-bottom: 23px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0;
+    }
+
+        .main-sidebar-camera-tree a:-moz-focusring {
+            border: 0;
+            outline: none;
+        }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 bg-gradient-light pt-0 mt-0">
+            <aside id="sidebar_screen" class="main-sidebar-camera-tree sidebar-light-dark elevation-1 rounded border" style="margin-top: 0px; padding-top: 10px; padding-left: 5px; padding-right: 5px;">
+
+
+                <!--Select a player-->
+                <div class="container-fluid mb-3">
+                    <fieldset>
+                        <legend><label class="bootstrap-switch-label">Select a player:</label></legend>
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="radio" class="selectPlayer" id="SelPlyer1" name="SelPlyer" value="1">
+                                <label for="SelPlyer1">1</label>
+                            </div>
+                            <div class="col-3">
+                                <input type="radio" class="selectPlayer" id="SelPlyer2" name="SelPlyer" value="2">
+                                <label for="SelPlyer2">2</label>
+                            </div>
+
+                            <div class="col-3">
+                                <input type="radio" class="selectPlayer" id="SelPlyer3" name="SelPlyer" value="3">
+                                <label for="SelPlyer3">3</label>
+                            </div>
+
+                            <div class="col-3">
+                                <input type="radio" class="selectPlayer" id="SelPlyer4" name="SelPlyer" value="4">
+                                <label for="SelPlyer4">4</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="DeviceSiteTreeModel" class="p-0" style="max-height:600px;"></div>
+
+
+                <!--https://www.jianshu.com/p/122c49056554   screenfull.js-->
+                <div class="container-fluid mt-3 ml-1">
+                    <div class="row">
+                        <button id="btnScreenFull" type="button" class="btn btn-outline-success p-2">
+                            <i class="fas fa-expand mr-2"></i>FULL SCREEN
+                        </button>
+                    </div>
+
+                    <div class="row">
+
+                        <span id="screenFullTips" class="small"></span>
+
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+        <div id="flatScreen" class="col-9 p-0 m-0">
+            <div id="fourScreens1" class="container-fluid" style="height:100%;">
+                <div class="row" style="height:50%;">
+                    <div class="SCREEN col-6  m-0 p-0" style="float: left; background-color: #ecf7d2;">
+                        <input type="text" id="dplayerUrlInput1" class="small" style="width:100%;" />
+                        <div id="dplayer1" class="player">1</div>
+                        <video id="video1" style="width:100%;"></video>
+                    </div>
+                    <div class="SCREEN col-6 m-0 p-0" style="float: left; background-color: #ecebfa;">
+                        <input type="text" id="dplayerUrlInput2" class="small" style="width:100%;" />
+                        <div id="dplayer2" class="player">2</div>
+                        <video id="video2" style="width:100%;"></video>
+                    </div>
+                </div>
+                <div class="row" style="height:50%;">
+                    <div class="SCREEN col-6 m-0 p-0" style="float: left; background-color: #fcebf0; ">
+                        <input type="text" id="dplayerUrlInput3" class="small" style="width:100%;" />
+                        <div id="dplayer3" class="player">3</div>
+                        <video id="video3" style="width:100%;"></video>
+                    </div>
+                    <div class="SCREEN col-6 m-0 p-0" style="float: left; background-color: #d1eaff; ">
+                        <input type="text" id="dplayerUrlInput4" class="small" style="width:100%;" />
+                        <div id="dplayer4" class="player">4</div>
+                        <video id="video4" style="width:100%;"></video>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div><!-- /.content -->
+    </div>
+</div>
+
+
+<script>
+    var NVR_TYPE = "@deviceDVRModel.NvrType";
+    $("#flatScreen").css("height", window.innerHeight-60);
+    if (Hls.isSupported()) {
+         console.log('hello hls.js!');
+    }
+
+    $("#sidebar_screen").slimscroll({
+        disableFadeOut: false,
+        height: window.innerHeight + 50
+    });
+    var pleaseSelectaPlayerFirst = "@Lang.GeneralUI_PleaseSelectaPlayerFirst";
+    var noMediaServerStart = "@Lang.GeneralUI_NoMediaServerStart";
+    var requestFail = "@Lang.GeneralUI_RequestFail";
+    var corsPolicyIsNotAllowed = "@Lang.GeneralUI_CorsPolicyIsNotAllowed";
+    var livePauseTips = "@Lang.GeneralUI_LivePauseTips"
+    var sheme = "http";
+    var deviceId = parseInt('@deviceDVRModel.DeviceId');
+    var maincomId = "@deviceDVRModel.MaincomId";
+    var languageCode = "@LangUtilities.LanguageCode.ToLower()";
+    var dvrIp = "@deviceDVRModel.DvrIp";
+    var dvrPort = "@deviceDVRModel.DvrPort";
+    var bearerToken = "Bearer @deviceDVRModel.Password";
+    //var DeviceDVRModelList;
+    //GetDeviceCameraUrlHlsWithToken(languageCode, maincomId, deviceId);
+    //console.log({ "DeviceDVRModelList RESPONSE:": DeviceDVRModelList });
+
+    $(document).ready(function () {
+        $(".left-menu-switch-icon1").click(); //collapse the left menu
+        GetDeviceCameraNodeOfSites("#DeviceSiteTreeModel", languageCode, maincomId, deviceId);
+    });
+
+    var cameraHlsUrl = "http://clappr.io/highline.mp4";  //sample mp4 http://clappr.io/highline.mp4
+
+    //Device Camera TreeView
+    function GetDeviceCameraNodeOfSites(ID, languageCode, maincomId, deviceId) {
+
+        var treeUrl = "/" + languageCode + "/Device/GetDeviceCameraNodeOfSites/" + maincomId + "/" + deviceId;
+        //treeUrl = "/" + languageCode + "/Site/GetNodeOfSites/" + maincomId + "/parentsSiteId=" + 0;
+        console.log(treeUrl);
+
+        $.ajax({
+            url: treeUrl,
+            success: function (data) {
+                console.log(data);
+                if(isJsonString(data)==false)
+                {
+                     alert("No camera list data!");
+                }
+
+                var result = $.parseJSON(data);
+
+                $(ID).treeview({
+                    enableLinks: true,
+                    expandIcon: "glyphicon glyphicon-stop",
+                    collapseIcon: "glyphicon glyphicon-unchecked",
+                    checkedIcon: "glyphicon glyphicon-check", //節點被選中時顯示的圖示         String
+                    nodeIcon: "glyphicon glyphicon-user",
+                    color: "#FCFCFC",
+                    backColor: "#3c64a6",
+                    onhoverColor: "#374A51",
+                    borderColor: "white",
+                    showBorder: false,
+                    levels: 3,
+                    showTags: true,
+                    highlightSelected: true,
+                    selectedColor: "yellow",
+                    selectable: true,
+                    selectedBackColor: "#374A51",
+                    data: result,
+                    nodeCollapsed: function (event, node) {
+                        console.log("nodeid=" + node.nodeid + ";text=" + node.text);
+                        console.log(node);
+                    },
+                    onNodeSelected: function (event, node) {
+
+                        console.log("nodeid=" + node.nodeid + ";text=" + node.text);
+                        console.log(node);
+
+                        if (node.cameraId != undefined && node.deviceId != undefined) {
+
+                            if ($('.selectPlayer').is(':checked'))
+                            {
+                                console.log({ "TreeViewSelect": node.deviceId });
+
+                                var selradio = readradio("SelPlyer");
+                                var selectPlayerValue = parseInt(selradio);
+
+                                RequestCameraUrlHls(languageCode, maincomId, node.deviceId, node.cameraId, selectPlayerValue);
+
+                            } else {
+
+                                 layer.open({
+                                            title: '@Lang.GeneralUI_ReturnResult'
+                                            , content: pleaseSelectaPlayerFirst
+                                            , btn: '@Lang.GeneralUI_OK'
+                                    });
+                            }
+                        }
+                    },
+                    showIcon: true
+                });
+                // console.log(data)
+            }
+        });//end ajax get json data
+    }
+
+    //獲取屏幕radio>value
+    function GetSelectPlayerId(val) {
+        return "dplayer" + val
+    }
+    //get the input for save the camer url
+    function GetInputOnliveUrlId(val) {
+        return "#dplayerUrlInput" + val
+    }
+
+    //獲取屏幕radio>value
+    function GetVideoPlayerId(val) {
+        return "video" + val
+    }
+
+    //Get Camera onlive play url & play api
+    function GetDeviceCameraUrlHlsWithToken(languageCode, maincomId, deviceId) {
+
+        var requestUrl = "/" + languageCode + "/Device/GetDeviceCameraUrlHlsWithToken/" + maincomId + "/" + deviceId ;
+
+        $.ajax({
+            url: requestUrl,
+            type: "get",
+            success: function (res) {
+
+                console.log({ "GetDeviceCameraUrlHlsWithToken RESPONSE:": res });
+
+                if (res.meta.success) {
+
+                    $(dplayerUrlInputId).val(cameraHlsUrl);
+
+                } else {
+                    layerTips("Fail to GetDeviceCameraUrlHlsWithToken");
+                }
+            }
+        });//end ajax get json data
+    }
+
+    //Get camera hls url
+    function RequestCameraUrlHls(languageCode, maincomId, deviceId, cameraId, selectPlayerValue)
+    {
+        var cameraHlsUrl = "http://clappr.io/highline.mp4";
+
+        var dplayerUrlInputId = GetInputOnliveUrlId(selectPlayerValue);
+
+        $(dplayerUrlInputId).val(cameraHlsUrl);
+
+        var requestUrl = "/" + languageCode + "/Device/RequestCameraUrlHls/" + maincomId + "/" + deviceId + "/" + cameraId;
+
+        console.log({ "RequestCameraUrlHls RequestUrl": requestUrl });
+
+        $.ajax({
+            url: requestUrl,
+            type:"get",
+            success: function (res) {
+
+                console.log({"RequestCameraUrlHls RESPONSE:":res});
+                if (res.meta.success) {
+                    var plyerId = GetSelectPlayerId(selectPlayerValue);
+
+                    cameraHlsUrl = res.data.cameraHlsUrl;
+
+                    console.log({ "plyerId": plyerId, "cameraHlsUrl": cameraHlsUrl });
+
+                    $(dplayerUrlInputId).val(cameraHlsUrl);
+
+                    //video1
+                    var videoSrc = cameraHlsUrl; // 'http://192.168.0.146:180/hls/11/1/1/index.m3u8?token=2ccd575f54be0d71277a82f8baf2e8ea';
+                    var videoId = GetVideoPlayerId(selectPlayerValue);
+
+                    console.log("videoId = " + videoId + "; cameraHlsUrl = " + cameraHlsUrl);
+
+                    mediaPlayOpen(selectPlayerValue, cameraId, plyerId, cameraHlsUrl);
+
+                } else {
+                    layerTips("Fail to get  camera Hls url,then return test mp4");
+                }
+            }
+        });//end ajax get json data
+
+    }
+
+
+    function readradio(name) {
+
+        var item = null;
+        var obj = document.getElementsByName(name)
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].checked) {
+                item = obj[i].value;
+            }
+        }
+        if(item==null)
+        {
+             alert("please select!");
+        }
+        return item;
+    }
+
+    function mediaPlayOpen(selectPlayerValue,cameraId,plyerId, cameraHlsUrl) {
+
+        var playUrl = sheme + "://" + dvrIp + ":" + dvrPort + "/play?deviceId=" + cameraId + "&channel=1&stream=1";
+        //alert(playUrl);
+        console.log("playUrl\n");
+        console.log(playUrl);
+        console.log("playUrl\n");
+
+        if(NVR_TYPE == "@EnumCode.EnumBusiness.NVR_TYPE.MEDIA.ToString()")
+        {
+            $.ajax({
+            url: playUrl,
+            headers: { "Authorization": bearerToken},
+            type: "get",
+            statusCode: {
+                401: function () {
+                    alert("token error(Authorized fail)");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+                console.log("jqXHR  = \n");
+                console.log(jqXHR);
+                console.log("\n");
+
+                if (jqXHR.status == 401) {
+                    alert("token error(Authorized fail) " + jqXHR.responseText);
+                }
+                /*弹出jqXHR对象的信息*/
+                console.log("jqXHR.responseText=" + jqXHR.responseText);
+                console.log("jqXHR.status=" + jqXHR.status);
+                console.log("jqXHR.readyState=" + jqXHR.readyState);
+                console.log("jqXHR.statusText=" + jqXHR.statusText);
+
+                /*弹出其他两个参数的信息*/
+                console.log("jqXHR./*弹出其他两个参数的信息*/");
+                console.log("textStatus = " + textStatus);
+                console.log("errorThrown = " + errorThrown);
+            },
+            success: function (res) {
+
+                var dplayerUrlInputIdX = GetInputOnliveUrlId(selectPlayerValue);
+                console.log({ "media server play required": res});
+                //switch to Dplayer
+                switch (selectPlayerValue) {
+
+                    case 1:
+                        var indexLoad1 = layer.load();
+                        const dp1 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer1",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                mutex: false,
+                                customType: {
+                                    customHls: function (video, player1) {
+                                        const hls = new Hls();
+                                        //test
+                                        //cameraHlsUrl = "http://192.168.0.177:8080/hls/8/index.m3u8?token=7ad166bdb8395514bb54cc0ac21db289";
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player1);
+                                    },
+                                },
+                            }
+                        });
+
+                        layer.close(indexLoad1);
+
+                        dp1.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp1 player pause event');
+                            dp1.play();
+                        });
+
+                        $(dplayerUrlInputIdX).hide();
+
+                        console.log("plyerId = " + plyerId);
+
+                        break;
+
+                    case 2:
+
+                        var indexLoad2 = layer.load();
+
+                        const dp2 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer2",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                customType: {
+                                    customHls: function (video, player2) {
+                                        const hls = new Hls();
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player2);
+                                    },
+                                },
+                            }
+                        });
+
+                        layer.close(indexLoad2);
+
+                        dp2.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp2 player pause event');
+                            dp2.play();
+                        });
+
+                        $(dplayerUrlInputIdX).hide();
+
+                        console.log("plyerId = " + plyerId);
+
+                        break;
+
+                    case 3:
+                        var indexLoad3 = layer.load();
+
+                        const dp3 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer3",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                customType: {
+                                    customHls: function (video, player3) {
+                                        const hls = new Hls();
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player3);
+                                    },
+                                },
+                            }
+                        });
+
+                        dp3.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp3 player pause event');
+                            dp3.play();
+                        });
+
+                        layer.close(indexLoad3);
+
+                        $(dplayerUrlInputIdX).hide();
+
+                        console.log("plyerId = " + plyerId);
+
+                        break;
+
+                    case 4:
+                        var indexLoad4 = layer.load();
+
+                        const dp4 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer4",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                customType: {
+                                    customHls: function (video, player4) {
+                                        const hls = new Hls();
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player4);
+                                    },
+                                },
+                            }
+                        });
+
+                        dp4.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp4 player pause event');
+                            dp4.play();
+                        });
+
+                        layer.close(indexLoad4);
+
+                        setTimeout(function () {
+                            $(dplayerUrlInputIdX).hide();
+                        }, 10000);
+
+                        console.log("plyerId = " + plyerId);
+                        break;
+                    default:
+                        return;
+                }
+            }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.log("jqXHR  = \n");
+                console.log(jqXHR);
+                console.log("\n");
+                console.log("Media server api : /play :\n" + playUrl);
+                layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: "1."+noMediaServerStart+"<br>2."+requestFail+"<br>3."+corsPolicyIsNotAllowed
+                    , btn: '@Lang.GeneralUI_OK'
+                });
+                console.log("1.NO MEDIA SERVER START\n2.REQUEST FAIL (net::ERR_FILE_NOT_FOUND)\n3.CORS POLICY IS NOT ALLOWED!");
+                //alert("NO MEDIA SERVER START / REQUEST FAIL (net::ERR_FILE_NOT_FOUND)/CORS POLICY IS NOT ALLOWED! " );
+            });
+        }else  // MediaGuard 模式
+        {
+                var dplayerUrlInputIdX = GetInputOnliveUrlId(selectPlayerValue);
+                console.log({ "media guard server mode selectPlayerValue":selectPlayerValue});
+                //switch to Dplayer
+                switch (selectPlayerValue) {
+
+                    case 1:
+                        var indexLoad1 = layer.load();
+                        const dp1 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer1",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                mutex: false,
+                                customType: {
+                                    customHls: function (video, player1) {
+                                        const hls = new Hls();
+                                        //test
+                                        //cameraHlsUrl = "http://192.168.0.177:8080/hls/8/index.m3u8?token=7ad166bdb8395514bb54cc0ac21db289";
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player1);
+                                    },
+                                },
+                            }
+                        });
+
+                        layer.close(indexLoad1);
+
+                        dp1.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp1 player pause event');
+                            dp1.play();
+                        });
+
+                        $(dplayerUrlInputIdX).hide();
+
+                        console.log("plyerId = " + plyerId);
+
+                        break;
+
+                    case 2:
+
+                        var indexLoad2 = layer.load();
+
+                        const dp2 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer2",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                customType: {
+                                    customHls: function (video, player2) {
+                                        const hls = new Hls();
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player2);
+                                    },
+                                },
+                            }
+                        });
+
+                        layer.close(indexLoad2);
+
+                        dp2.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp2 player pause event');
+                            dp2.play();
+                        });
+
+                        $(dplayerUrlInputIdX).hide();
+
+                        console.log("plyerId = " + plyerId);
+
+                        break;
+
+                    case 3:
+                        var indexLoad3 = layer.load();
+
+                        const dp3 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer3",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                customType: {
+                                    customHls: function (video, player3) {
+                                        const hls = new Hls();
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player3);
+                                    },
+                                },
+                            }
+                        });
+
+                        dp3.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp3 player pause event');
+                            dp3.play();
+                        });
+
+                        layer.close(indexLoad3);
+
+                        $(dplayerUrlInputIdX).hide();
+
+                        console.log("plyerId = " + plyerId);
+
+                        break;
+
+                    case 4:
+                        var indexLoad4 = layer.load();
+
+                        const dp4 = new DPlayer({
+                            container: document.getElementById(plyerId),//"dplayer4",//plyerId
+                            screenshot: true,
+                            autoplay: true,
+                            mutex: false,
+                            video: {
+                                url: cameraHlsUrl,
+                                type: 'customHls',
+                                autoplay: true,
+                                customType: {
+                                    customHls: function (video, player4) {
+                                        const hls = new Hls();
+                                        hls.loadSource(cameraHlsUrl);
+                                        hls.attachMedia(video);
+                                        console.log(player4);
+                                    },
+                                },
+                            }
+                        });
+
+                        dp4.on('pause', function () {
+                            console.log(livePauseTips);
+                            console.log('dp4 player pause event');
+                            dp4.play();
+                        });
+
+                        layer.close(indexLoad4);
+
+                        setTimeout(function () {
+                            $(dplayerUrlInputIdX).hide();
+                        }, 10000);
+
+                        console.log("plyerId = " + plyerId);
+                        break;
+                    default:
+                        return;
+                }
+        }
+    }
+</script>
+
+<!--SCREEN FULL-->
+<script>
+    $("#btnScreenFull").on('click', function () {
+        if (IsFullScreenCurrently())
+            GoOutFullscreen();
+        else
+            GoInFullscreen($("#fourScreens1").get(0));
+    });
+
+    $(document).on('fullscreenchange webkitfullscreenchange mozfullscreenchange MSFullscreenChange', function () {
+        if (IsFullScreenCurrently()) {
+            $("#screenFullTips").text('Full Screen Mode Enabled');
+        }
+        else {
+            $("#screenFullTips").text('Full Screen Mode Disabled');
+        }
+    });
+</script>
+
+

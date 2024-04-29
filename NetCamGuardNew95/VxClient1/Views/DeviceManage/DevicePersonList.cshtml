@@ -1,0 +1,352 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using VxClient.Models
+@using VideoGuard.ApiModels
+@using VideoGuard.Device
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using EnumCode; 
+@model VideoGuard.ApiModels.ResponseModalX
+@{ 
+    ViewBag.Title = $"{Lang.GeneralUI_Device}{Lang.QueryPersonList_Title}";
+    int x = 0;
+    DevicePersonListReturn devicePersonListReturn = Model.data as DevicePersonListReturn;
+    DevicePersonListInput input = ViewBag.DevicePersonListInput as DevicePersonListInput;
+}
+<form asp-action="DevicePersonList" asp-controller="DeviceManage" asp-route-Language="@LangExtend.LanguageCode" method="get" placeholder="Search" class="form-inline ml-1" id="form_Search">
+
+    <div class="row mb-1">
+        <div class="input-group input-group-sm mb-3">
+            <input asp-for="@input.MaincomId" value="@input.MaincomId" name="MaincomId" type="hidden" />
+            <input asp-for="@input.DeviceId" value="@input.DeviceId" name="DeviceId" type="hidden" />
+            <input asp-for="@input.Search" value="@input.Search" name="Search" class="form-control form-control-navbar" onclick="javascript:this.value='';" placeholder="Search" />
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-flat"> <i class="fas fa-search"></i>Go!</button>
+            </span>
+        </div>
+        <div class="d-inline pull-right ml-3">
+            <a asp-action="DeviceList" asp-controller="Device" asp-route-Language="@LangExtend.LanguageCode"
+               class="btn btn-primary btn-sm text-white pt-1 pb-1 pr-2 pl-2 " title="@Lang.GeneralUI_List" data-toggle="tooltip">
+                <i class="fas fa-list font-weight-bold"></i>
+            </a>
+            <a asp-action="DevicePersonList" asp-controller="DeviceManage"  asp-route-Language="@LangExtend.LanguageCode" asp-route-DeviceId="@input.DeviceId"
+               class="btn btn-success btn-sm text-white pt-1 pb-1 pr-2 pl-2 " title="@Lang.GeneralUI_Refresh" data-toggle="tooltip">
+                <i class="fas fa-sync font-weight-bold"></i>
+            </a>
+        </div>
+    </div>
+</form>
+
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    <div class="box-body  table-responsive" style="min-height:600px;">
+        <table class="table table-striped table-hover">
+            <tr>
+                <!--1.ID-->
+                <th>
+                    <div class="text-nowrap " title="@string.Format("{0} OR {1}",Lang.Person_Id,Lang.Person_OuterId)" data-toggle="tooltip">
+                        <span><i class="fas fa-box text-green"></i> ID</span> <!--fa-caret-right-->
+                    </div>
+                </th>
+                <!--2.PicClientUrl-->
+                <th>
+                    <div class="text-nowrap " title="@Lang.Person_PicUrl" data-toggle="tooltip">
+                        <span><i class="fas fa-icons text-green"></i> @Lang.Person_PicUrl </span> <!--fa-caret-right-->
+                    </div>
+                </th>
+                <!--3.LibraryName-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Library_NameTips" data-toggle="tooltip"><span><i class="fas fa-cogs text-green"></i> @Lang.Library_Name </span></div>
+                </th>
+                <!--4.NAME-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_Name" data-toggle="tooltip"><span><i class="fas fa-id-card text-green"></i> @Lang.Person_Name </span></div>
+                </th>
+                <!--5.PersonCategory-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_Category" data-toggle="tooltip"><span><i class="fas fa-network-wired text-green"></i> @Lang.Person_Category </span></div>
+                </th>
+                <!--6.INSERT-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.DevicePerson_DownInsertStatus" data-toggle="tooltip">
+                        <span><i class="fas fa-sort-amount-down-alt text-green"></i> @Lang.DevicePerson_DownInsertStatus </span>
+                     </div>
+                </th>
+                <!--7.UPDATE-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.DevicePerson_DownUpdateStatus" data-toggle="tooltip"><span><i class="fas fa-sort-amount-down-alt text-green"></i> @Lang.DevicePerson_DownUpdateStatus </span></div>
+                </th>
+                <!--8.DEL-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.DevicePerson_DownDelStatus" data-toggle="tooltip"><span><i class="fas fa-sort-amount-down-alt text-green"></i> @Lang.DevicePerson_DownDelStatus </span></div>
+                </th>
+                <!--9.DEVICE PERSON LIBRARY-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.DevicePerson_Library" data-toggle="tooltip"><span><i class="fas fa-th-list text-green"></i> @Lang.DevicePerson_Library </span></div>
+                </th>
+            </tr>
+
+            @if (devicePersonListReturn.TotalCount != 0)
+            {
+                foreach (var item in devicePersonListReturn.DevicePersonModelList)
+                {
+                    x++;
+        <tr id="@string.Format("tr{0}",item.PersonId)" class="ui-controlgroup-item">
+            <!--1.ID-->
+            <td id="@string.Format("td{0}", item.PersonId)" class="text-omit">
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <div class="bd-highlight">
+                        <div class="text-nowrap"> 
+                            <a asp-action="UpdatePerson" asp-controller="Person" asp-route-Language="@LangExtend.LanguageCode" asp-route-PersonId="@item.PersonId"
+                               class="btn btn-outline-dark btn-xs text-white text-nowrap p-2" title="@Lang.Person_Details" data-toggle="tooltip">
+                                <span id="@string.Format("sp{0}", item.PersonId)" class="text-white bg-black rounded pl-1 pr-1 " title="@Lang.Person_Id " data-toggle="tooltip" style="cursor:pointer;">@item.PersonId</span>
+                                <i class="fas fa-undo-alt"></i>
+                            </a>
+                        </div> 
+                    </div>
+                    @if (!string.IsNullOrEmpty(item.OuterId))
+                    {
+                        <div class="bd-highlight mt-1">
+                            <label id="@string.Format("CLIDBOARD{0}", item.OuterId)" title="@Lang.Person_OuterId (@Lang.GeneralUI_ClickToCopy)" data-toggle="tooltip" class="clipboard p-1 small text-white text-bold bg-gradient-gray-dark rounded" style="cursor:pointer;" onclick="getClipboardText()"
+                                   data-clipboard-text="@item.OuterId">@item.OuterId</label>
+                            </div>
+                        }
+                </div>
+            </td>
+            <!--2.PicClientUrl-->
+            <td class="text-wrap pt-2">
+                <div class="d-flex flex-column bd-highlight">
+
+                    @if (!string.IsNullOrEmpty(item.PicClientUrl))
+                    {
+                        <div class="p-1 bd-highlight">
+                            <img src="@item.PicClientUrl" class="img-responsive img-thumbnail img-size-64" />
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(item.CardNo))
+                    {
+                        <div class="p-1 bd-highlight">
+                            <label class="badge badge-success pt-2 pl-1 pr-1 pb-1 text-nowrap" title="@Lang.Person_CardNo" data-toggle="tooltip">
+                                @item.CardNo
+                            </label>
+                        </div>
+                    }
+                </div>
+            </td>
+            <!--3.LibraryName-->
+            <td class="text-wrap">
+                <label class="rounded bg-black text-primary p-2" data-toggle="tooltip" title="@Lang.Library_Name">
+                    <span class="badge badge-danger pt-2 pl-1 pr-1 pb-1 mr-1">@item.LibId</span>@item.LibName
+                </label>
+                @if (item.LibIdGroupsList?.Count() > 0)
+                {
+                    <details class="p-0 ml-0">
+                        <summary class="text-nowrap p-0">
+                            <span class="p-1 text-bold text-white bg-primary rounded">@Lang.Person_LibIdGroups </span>
+                        </summary>
+                        <p>
+                            <div class="d-flex flex-column bd-highlight">
+                                @foreach (var lib in item.LibIdGroupsList)
+                                {
+                                    <div class="p-1 bd-highlight bg-secondary rounded mb-1" data-toggle="tooltip" title="@lib.Name">
+                                        <span class="p-1 text-bold"><i class="fas fa-stop"></i> @lib.Id  @lib.Name </span>
+                                    </div>
+                                }
+                            </div>
+                        </p>
+                    </details>
+                }
+            </td>
+            <!--4.NAME-->
+            <td class="text-wrap">
+                <label class="rounded bg-black text-nowrap text-primary p-1">@item.PersonName</label>
+            </td>
+            <!--5.PersonCategory-->
+            <td class="text-wrap">
+                @{
+                    PersonCategory category = (PersonCategory)item.Category;
+                    if (category == PersonCategory.BLOCKED)
+                    {
+                        <label class="label label-primary p-1 bg-secondary rounded text-nowrap">
+                            <i class="fas fa-lock text-danger"></i>
+                            @Lang.PersonCategory_BLOCKED
+                        </label>
+                    }
+                    else if (category == PersonCategory.UNBLOCKED)
+                    {
+                        <label class="label label-primary p-1 bg-gradient-dark rounded text-nowrap">
+                            <i class="fas fa-unlock text-warning"></i>
+                            @Lang.PersonCategory_UNBLOCKED
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="label label-primary p-1 bg-gradient-gray-dark rounded text-nowrap">
+                            <i class="fas fa-user text-success"></i>
+                            OTHER
+                        </label>
+                    }
+                }
+            </td>
+
+            <!--6.INSERT-->
+            <td class="text-wrap">
+                @{
+                    DevicePersonDownInsertStatus downInsertStatus = (DevicePersonDownInsertStatus)item.DownInsertStatus;
+
+                    <div class="d-flex flex-column bd-highlight">
+                        <div class="p-1 bd-highlight text-nowrap">
+                            <label class="label label-primary pt-2 pl-1 pr-1 pb-1 text-nowrap">
+                                @LangUtilities.GetStringReflectKeyName(downInsertStatus.ToString())
+                            </label>
+                            @if(downInsertStatus == DevicePersonDownInsertStatus.DEVICE_PERSON_DOWN_INSERT_NO_OPERATE)
+                            {
+                                    <button class="btn btn-sm btn-outline-success rounded" data-maincomid="@item.MaincomId" data-personid="@item.PersonId" data-deviceid="@item.DeviceId" data-deviceoperatemode="@DeviceOperateMode.DEVICE_OPERATE_MODE_INSERT.ToString()"
+                                        data-toggle="modal" data-target="#DEVICE_PERSON_DOWN_MODAL" data-backdrop="static" style="cursor:pointer;">Submit</button>
+                            }          
+                        </div>
+                        <div class="p-1 bd-highlight">
+                            <label class="label label-primary  p-1 small"> @string.Format("{0:yyyy-MM-dd HH:mm}", item.DownInsertStatusDt)</label>
+                        </div>
+                    </div>
+                }
+            </td>
+
+            <!--7.UPDATE-->
+            <td class="text-wrap">
+                @{
+                    DevicePersonDownUpdateStatus downUpdateStatus = (DevicePersonDownUpdateStatus)item.DownUpdateStatus;
+
+                    <div class="d-flex flex-column bd-highlight">
+                        <div class="p-1 bd-highlight">
+                            <label class="label label-primary  p-1 rounded"> @LangUtilities.GetStringReflectKeyName(downUpdateStatus.ToString())</label>
+                                        @if(downUpdateStatus == DevicePersonDownUpdateStatus.DEVICE_PERSON_DOWN_UPDATE_NO_OPERATE)
+                                        {
+                                            <button class="btn btn-sm btn-outline-success rounded" data-maincomid="@item.MaincomId" data-personid="@item.PersonId" data-deviceid="@item.DeviceId" data-deviceoperatemode="@DeviceOperateMode.DEVICE_OPERATE_MODE_UPDATE.ToString()"
+                                                data-toggle="modal" data-target="#DEVICE_PERSON_DOWN_MODAL" data-backdrop="static" style="cursor:pointer;">Submit</button>
+                                        }  
+                        </div>
+                    <div class="p-1 bd-highlight">
+                        <label class="label label-primary  p-1 small"> @string.Format("{0:yyyy-MM-dd HH:mm}", item.DownUpdateStatusDt)</label>
+                    </div>
+                </div>
+                }
+            </td>
+            <!--8.DEL-->
+            <td class="text-wrap">
+                @{
+                    DevicePersonDownDelStatus downDelStatus = (DevicePersonDownDelStatus)item.DownDelStatus;
+
+                    <div class="d-flex flex-column bd-highlight">
+                        <div class="p-1 bd-highlight">
+                            <label class="label label-primary  p-1 rounded">@LangUtilities.GetStringReflectKeyName(downDelStatus.ToString())</label>
+                            @if(downDelStatus == DevicePersonDownDelStatus.DEVICE_PERSON_DOWN_DEL_NO_OPERATE)
+                            {
+                                    <button class="btn btn-sm btn-outline-success rounded" data-maincomid="@item.MaincomId" data-personid="@item.PersonId" data-deviceid="@item.DeviceId" data-deviceoperatemode="@DeviceOperateMode.DEVICE_OPERATE_MODE_DELETE.ToString()"
+                                    data-toggle="modal" data-target="#DEVICE_PERSON_DOWN_MODAL" data-backdrop="static" style="cursor:pointer;">Submit</button>
+                                        
+                            }
+                        </div>
+                    <div class="p-1 bd-highlight">
+                        <label class="label label-primary  p-1 small"> @string.Format("{0:yyyy-MM-dd HH:mm}", item.DownDelStatusDt)</label>
+                      
+                    </div>
+                </div>
+                }
+            </td>
+            <!--9.DEVICE PERSON LIBRARY-->
+            <td class="text-wrap" data-toggle="tooltip" title="@item.DeviceLibId">
+                <div class="d-flex flex-column bd-highlight">
+                    <div class="bd-highlight">
+                        <label class="label label-primary p-1 rounded">  @item.DeviceLibName</label>
+                    </div>
+                    <div class="bd-highlight">
+                        <label class="label label-primary  p-1 rounded"> @item.DeviceLibId</label>
+                    </div>
+                </div> 
+            </td> 
+        </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        <span class="h2"></span> @Lang.GeneralUI_NoRecord
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    </div>
+    <!--DEVICE_OPERATE_MODE_INSERT = DEFAULT VALUE-->
+    OperateStatusSubmitInput operateStatusSubmit = new OperateStatusSubmitInput { MainComId = input.MaincomId,DeviceOperateMode=DeviceOperateMode.DEVICE_OPERATE_MODE_INSERT};
+    <partial name="Device/DevicePersonDownModal" for="@operateStatusSubmit" />
+
+    if (devicePersonListReturn.PageCount > 1)
+    {
+        <div class="btn-xs">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("DevicePersonList", "DeviceManage", new { Language = LangUtilities.LanguageCode, Search = input.Search, sortOrder = input.SortOrder, page = page }), new PagedListRenderOptionsBase
+            {
+                ContainerDivClasses = new[] { "pagination pagination-sm" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+                MaximumPageNumbersToDisplay = 15
+        })
+        </div>
+    }
+}
+<script>
+    function DeletePerson(LibId,PersonId)
+    {
+        console.log(LibId);
+
+        layer.confirm('@Lang.DeletePerson_ComfirmTips', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+            var httpDelUrl = "/@LangUtilities.LanguageCode/Person/DeletePerson";
+
+            var myparamsObject = { "LibId": LibId,"PersonId":PersonId};
+            $.ajax({
+                url: httpDelUrl,
+                data: myparamsObject,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    console.log(JSON.stringify(data));
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: data.meta.Message
+                    , btn:'@Lang.GeneralUI_OK'
+                    });
+                    if (data.meta.Success == true) {
+                        var pr_obj = "#td" + PersonId;
+                        $(pr_obj).addClass("bg-warning-gradient");
+                        setTimeout(function () {
+                            $(pr_obj).parent().remove();
+                        }, 3000);
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.GeneralUI_ComfirmNoTips', { icon: 1 }, {
+                    time: 6000,
+                    btn: ['@Lang.GeneralUI_Isee']
+                });
+            });
+    }
+</script>
+

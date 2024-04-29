@@ -1,0 +1,150 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+<!DOCTYPE html>
+<html ng-app="layout_app">
+<head>
+    <title>@ViewBag.Title | Video</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminLTE305/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/summernote/summernote-bs4.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+
+        .modal-backdrop {
+            z-index: 0;
+        }
+
+        @@font-face {
+            font-family: Microsoft YaHei, simhei,Verdana, Arial, Helvetica, sans-serif !important;
+            font-weight: normal;
+            font-style: normal;
+            src: url('/fonts/yahei.ttf') format('truetype');
+        }
+
+        body {
+            font-family: Microsoft YaHei, simhei,Verdana, Arial, Helvetica, sans-serif !important;
+            background: -webkit-linear-gradient(bottom, rgb(234, 230, 211) 0%, rgb(238, 223, 198) 32%, rgba(242, 213, 180, 0.1) 78%, rgba(244, 208, 171, 0.98) 100%);
+            background: -o-linear-gradient(bottom, rgb(234, 230, 211) 0%, rgb(238, 223, 198) 32%, rgba(242, 213, 180, 0.1) 78%, rgba(244, 208, 171, 0.98) 100%);
+            background: -moz-linear-gradient(bottom, rgb(234, 230, 211) 0%, rgb(238, 223, 198) 32%, rgba(242, 213, 180, 0.1) 78%, rgba(244, 208, 171, 0.98) 100%);
+            background: linear-gradient(to top, rgb(234, 230, 211) 0%, rgb(238, 223, 198) 32%, rgba(242, 213, 180, 0.1) 78%, rgba(244, 208, 171, 0.98) 100%);
+            background-repeat: no-repeat;
+        }
+    </style>
+
+    <!-- jQuery -->
+    <script src="~/AdminLTE305/plugins/jquery/jquery.min.js"></script>
+    <!--angularJS 1.75 To Top-->
+    <script src="~/lib/angular/angular.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/AdminLTE305/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/AdminLTE305/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/AdminLTE305/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/AdminLTE305/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/AdminLTE305/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/AdminLTE305/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/AdminLTE305/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/AdminLTE305/plugins/moment/moment.min.js"></script>
+    <script src="~/AdminLTE305/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/AdminLTE305/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/AdminLTE305/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/AdminLTE305/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- popper 205 -->
+    <script src="~/AdminLTE305/plugins/popper205/popper.js"></script>
+    <!--slimscroll-->
+    <script src="~/AdminLTE305/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/AdminLTE305/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) ~/AdminLTE305/js/pages/dashboard.js-->
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/AdminLTE305/js/demo.js"></script>
+    <!--jquery-validation-->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <!--jquery-validation-unobtrusive-->
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <!--jquery.unobtrusive-ajax-->
+    <script src="~/lib/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
+    <!--clipboard-->
+    <script src="~/AdminLTE305/plugins/clipboard/dist/clipboard.min.js"></script>
+    <!--layer-v3.1.1-->
+    <script src="~/AdminLTE305/plugins/layer-v3.1.1/layer/layer.js"></script>
+
+    <!--video-js-->
+    <link href="~/AdminLTE305/plugins/VideoJS/video-js.css" rel="stylesheet" />
+
+    <!--Hls ref before Dplayerjs-->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <!--hls-->
+    <script type="text/javascript" src="~/js/hls/hls.js"></script>
+
+     <!--flv-->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/flvjs/flv.js"></script>
+
+    <!--DPlayer-->
+    <script type="text/javascript" src="~/js/dplayer/DPlayer.min.js"></script>
+
+    <!--timeline-canvas-master--></>
+    <script src="~/AdminLTE305/plugins/timeline-canvas-master/timeline-canvas1.js" asp-append-version="true"></script>
+
+    <script src="~/js/Main.js"></script>
+
+    <script>
+        var app = angular.module('layout_app', []);
+    </script>
+</head>
+ 
+<body class="m-0 p-0" style="overflow:hidden;width:100%;height:100%">
+    <div class="m-0 p-0" style="overflow: hidden; width: 100%; height: 100%">
+        @RenderBody()
+    </div>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        var bootstrapButton = $.fn.button.noConflict(); // return $.fn.button to previously assigned value
+        $.fn.bootstrapBtn = bootstrapButton;            // give $().bootstrapBtn the Bootstrap functionality
+    </script>
+
+    <!--video-js-->
+    <script src="~/AdminLTE305/plugins/VideoJS/video.min.js"></script>
+
+</body>
+</html>

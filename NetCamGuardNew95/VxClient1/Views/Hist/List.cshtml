@@ -1,0 +1,217 @@
+﻿@using LanguageResource
+@using EnumCode
+@using Common
+@using VxClient.Models
+@using VideoGuard.ApiModels
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using DataBaseBusiness.ModelHistory
+
+@model IEnumerable<DataBaseBusiness.ModelHistory.HistRecognizeRecord>
+@{
+    ViewBag.Title = Lang.HistList_Title;
+    int x = 0;
+    HistListInput input = ViewBag.HistListInput as HistListInput;
+
+    string EntriesLogImagesPath = ViewBag.EntriesLogImagesPath as string;
+}
+
+<style>
+    .layui-layer.layui-layer-loading .layui-layer-content {
+        width: 100px;
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 5px;
+        background-image: url(/images/loading2.gif);
+        background-position: top center;
+        background-position-y: 15px;
+        background-repeat: no-repeat;
+        background-size: 50px;
+        color: #FFFFFF;
+        height: auto;
+        padding-top: 70px;
+        padding-left: 10px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+<form asp-action="List" asp-controller="Hist" asp-route-Language="@LangUtilities.LanguageCode" method="get" class="form-horizontal" name="form1" id="form1">
+    <div class="pb-1 col-md-6 col-lg-5">
+        <div class="input-group input-group-sm">
+            <input asp-for="@input.MaincomId" name="MaincomId" type="hidden" />
+            <input asp-for="@input.Page" name="Page" type="hidden" />
+            <input asp-for="@input.PageSize" name="PageSize" type="hidden" />
+
+            <input asp-for="@input.OccurDateTimeRange" name="OccurDateTimeRange" ondblclick="javascript:this.value='';" class="OccurDateTimeRange form-control  form-control-sm border-right-0 " type="text" autocomplete="off" />
+
+            <input asp-for="@input.Search" name="Search" ondlbclick="javascript:this.value='';" class="form-control  form-control-sm border-right-0" style="border-left-width:2px;border-left-color:#e1da7d;border-left-style:dashed;" type="text" />
+
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-success btn-flat loading"><i class="fas fa fa-search"></i> Go!</button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<div class="box-body  table-responsive pb-5" style="min-height:600px;">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                <div class="text-nowrap" title="@Lang.GeneralUI_RecordId" data-toggle="tooltip">
+                    <span><i class="fa fa-id-card" style="color:mediumslateblue"> </i>ID </span> <!--fa-caret-right-->
+                </div>
+            </th>
+            <th>
+                <div class="text-nowrap" title="@Lang.Person_Name" data-toggle="tooltip" style="max-width:80px;overflow-x:hidden"><span><i class="far fa-id-card" style="color:mediumslateblue"> </i>@Lang.Person_Name </span></div>
+            </th>
+            <th>
+                <div class="text-nowrap" title="@Lang.GeneralUI_OccurDateTime" data-toggle="tooltip">
+                    <span><i class="fa fa-user" style="color:mediumslateblue"> </i>@Lang.GeneralUI_OccurDateTime </span>
+                </div>
+            </th>
+            <th>
+                <div class="text-nowrap hidden-xs" title="@Lang.Person_CardNo" data-toggle="tooltip"><span><i class="far fa-address-card" style="color:mediumslateblue"> </i>@Lang.Person_CardNo</span></div>
+            </th>
+            <th>
+                <div class="text-nowrap hidden-xs" title="@Lang.GeneralUI_PersonnelRecognized" data-toggle="tooltip"><span><i class="fas fa-user text-warning"> </i>@Lang.GeneralUI_PersonnelRecognized</span></div>
+            </th>
+            <th>
+                <div class="text-nowrap hidden-xs" title="@Lang.GeneralUI_RecordAndPicture" data-toggle="tooltip"><span><i class="fas fa-images text-warning"> </i>@Lang.GeneralUI_RecordAndPicture</span></div>
+            </th>
+            <th>
+                <div class="text-nowrap hidden-xs text-nowrap" title="@Lang.GeneralUI_Device" data-toggle="tooltip">
+                    <span><i class="fa fa-cog" style="color:mediumslateblue"> </i>@Lang.GeneralUI_Device </span>
+                </div>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            x++;
+            DateTime occurDatetime = DateTimeHelp.ConvertToDateTime(item.OccurDatetime);
+            DeviceMediaType deviceMediaType = new DeviceMediaType { AttendanceMode = (EnumBusiness.AttendanceMode)item.Mode, CatchPictureFileNameIfHave = !string.IsNullOrEmpty(item.CapturePath) ? string.Format("{0}{1:yyyyMM}/{2}", EntriesLogImagesPath, occurDatetime, item.CapturePath) : string.Empty };
+                    <tr>
+                        <td id="@string.Format("td{0}",item.Id)" class="text-omit small" data-toggle="tooltip" title="@item.Id">
+                            <div id="@string.Format("div{0}",item.Id)" class="text-nowrap d-flex flex-row" style="cursor:pointer;">
+                                <div class="mr-1">
+                                    <span id="@string.Format("sp{0}",item.Id)" class="badge badge-dark" data-toggle="tooltip" style="cursor:pointer;">@x</span>
+                                </div>
+                                <div id="@string.Format("CLIDBOARD{0}",item.Id)" class="p-0 text-dark clipboard" style="cursor:pointer;" title="@Lang.GeneralUI_ClickToCopy" onclick="javascript:getClipboardText()" data-clipboard-text="@item.Id">@CommonBase.Substr2(item.Id.ToString(), 6, 5)</div>
+                            </div>
+                        </td>
+
+                        <td class="text-omit small" data-toggle="tooltip" title="@item.PersonName">
+                            <div class="p-0 m-0">
+                                <details class="p-0 ml-0">
+                                    <summary class="text-nowrap p-0">
+                                        <span class="pl-0 text-bold fas fa-user" data-toggle="tooltip" title="@item.PersonName"> @CommonBase.Substr(item.PersonName, 6) </span><span class="small p-0"> @item.PersonId</span>
+                                    </summary>
+                                    <div class="d-flex flex-column bd-highlight">
+                                        <div class="p-1 bd-highlight" data-toggle="tooltip" title="@item.LibName">
+                                            <i class="fas fa-sitemap"></i> @item.LibId <span class="small p-0"> @item.LibName</span>
+                                        </div>
+                                        <div class="p-1 bd-highlight" data-toggle="tooltip" title="@item.CameraId">
+                                            <span class="badge badge-secondary mt-0"> <i class="fas fa-id-card"></i> @item.CameraName</span>
+                                        </div>
+                                        <div class="p-1 bd-highlight" data-toggle="tooltip" title="@item.TaskId">
+                                            <span class="badge badge-secondary mt-0"> <i class="fas fa-tasks"></i> @item.TaskName</span>
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-column bd-highlight">
+                                <div class="text-nowrap bd-highlight pb-0 mb-1" data-toggle="tooltip" title="@string.Format("{0:yyyy-MM-dd HH:mm:ss fff}", CommonBase.ConvertLongToDateTime(item.OccurDatetime))">
+                                    <span class="badge badge-secondary text-white p-2"><i class="fas fa-calendar mr-1"> </i> @string.Format("{0:yyyy-MM-dd HH:mm:ss fff}", CommonBase.ConvertLongToDateTime(item.OccurDatetime))</span>
+                                </div>
+
+                        @{
+                                            <!--STANDARD_CARD-->
+                            if (!string.IsNullOrEmpty(item.CardNo) && deviceMediaType.AttendanceMode == EnumBusiness.AttendanceMode.STANDARD_CARD)
+                            {
+                                                        <div class="bd-highlight pt-0 mt-0" data-toggle="tooltip" title="@string.Format("{0}:{1}",Lang.GeneralUI_TAP_RECORD,EnumBusiness.AttendanceMode.STANDARD_CARD.GetDescriptionX())">
+                                                            <span class="badge badge-secondary pt-2 pb-2"><i class="fa fa-id-card text-white-50 mr-1"> </i>@item.CardNo </span>
+                                                        </div>
+                            }
+
+                                            <!--STANDARD_CARD_AND_FINGERPRINT-->
+                            if (!string.IsNullOrEmpty(item.CardNo) && deviceMediaType.AttendanceMode == EnumBusiness.AttendanceMode.STANDARD_CARD_AND_FINGERPRINT)
+                            {
+                                                        <div class="bd-highlight pt-0 mt-1" data-toggle="tooltip" title="@string.Format("{0}:{1}",Lang.GeneralUI_TAP_RECORD,EnumBusiness.AttendanceMode.STANDARD_CARD_AND_FINGERPRINT.GetDescriptionX())">
+                                                            <span class="badge badge-secondary p-1"><i class="fas fa-fingerprint text-white mr-1"></i><i class="fa fa-id-card text-white-50 mr-1"> </i>@item.CardNo </span>
+                                                        </div>
+                            }
+                        }
+                            </div>
+                        </td>
+                        <td>
+                    @if (!string.IsNullOrEmpty(item.CardNo))
+                    {
+                                        <label class="small text-nowrap rounded p-2 bg-secondary" style="border-radius:5px;">
+                                            <i class="far fa-address-card text-white mr-1"></i>
+                            @item.CardNo
+                                        </label>
+                    }
+                        </td>
+                        <td> 
+                    @{
+                        CLASSIFY classify = (CLASSIFY)item.Classify;
+                        if (classify == CLASSIFY.STRANGER)
+                        {
+                                                    <label class="label label-primary  p-1 pl-2 pr-2 bg-gradient-secondary rounded">
+                                                        <i class="fas fa-user text-dark"></i>
+                                @Lang.GeneralUI_STRANGER
+                                                    </label>
+                        }
+                        else if (classify == CLASSIFY.IS_PERSON)
+                        {
+                                                    <label class="label label-primary p-1 pl-2 pr-2 bg-gradient-secondary rounded">
+                                                        <i class="fas fa-user text-white"></i>
+                                @Lang.GeneralUI_IS_PERSON
+                                                    </label>
+                        }
+                        else
+                        {
+                                                    <label class="label label-primary  p-1 pl-2 pr-2 bg-gradient-secondary rounded">
+                                                        <i class="fas fa-exclamation-triangle text-black-50"></i> 
+                                                        OTHER
+                                                    </label>
+                        }
+                    }
+                        </td>
+                        <td>
+                            <partial name="Device/DeviceMediaType" for="@deviceMediaType" />
+
+                        </td>
+
+                        <td data-toggle="tooltip" title="@item.DeviceName">
+                            <label class="small text-nowrap rounded p-2 bg-secondary" style="border-radius:5px;"><i class="fas fa-cogs text-white mr-1"></i>@item.DeviceName @item.DeviceId</label>
+                        </td>
+                    </tr>
+        }
+    </table>
+</div>
+
+<div class="page-header btn-xs">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", new
+    {
+        MaincomId = input.MaincomId,
+        page = page,
+        Search = input.Search,
+        PageSize = input.PageSize,
+        OccurDateTimeRange = input.OccurDateTimeRange,
+        Language = LangUtilities.LanguageCode, @class = "pagination"
+    }),new PagedListRenderOptionsBase {LiElementClasses = new string[] { "page-item" }, PageClasses = new string[] { "page-link" }})
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        DateTimeRangeMultiLanguage.dateLimit = 365;
+        $('.OccurDateTimeRange').daterangepicker(DateTimeRangeMultiLanguage);
+        $('.OccurDateTimeRange').val("@input.OccurDateTimeRange");
+    });
+</script>

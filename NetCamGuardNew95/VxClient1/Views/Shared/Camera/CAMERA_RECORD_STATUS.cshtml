@@ -1,0 +1,119 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@using VideoGuard.ApiModels.CamApiModel
+@model CameraStatus
+
+<div class="modal fade" id="ChangeCameraStatusModal" tabindex="-1"
+     role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="ChangeCameraStatusModal" aria-hidden="true">
+    <form asp-action="ChangeCameraStatus" asp-controller="Cam" asp-route-Language="@LangUtilities.LanguageCode"
+          data-ajax-success="handleCameraStatus"
+          asp-ajax-onFailure="errCameraStatus" data-ajax="true" data-ajax-method="post" class="form-horizontal form-inline"
+          name="formCameraStatus" id="formCameraStatus">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6 class="modal-title">@Lang.Camera_RecordStatus_Title <span id="spName"  class="ml-2 small rounded bg-primary p-1"</span></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <input asp-for="@Model.CameraId" name="CameraId" type="hidden" class="CameraId" />
+                        <input asp-for="@Model.MaincomId" name="MaincomId" type="hidden" class="MaincomId" />
+
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label class="control-label float-left" for="Status">
+                                    <i class="fas fa-play-circle mr-1" style="color:forestgreen"></i>
+                                    @Lang.Camera_RecordStatus
+                                </label>
+                            </div>
+                            <div class="input-group">
+                                <select asp-for="@Model.RecordStatus" name="RecordStatus" asp-items="@Html.CameraRecordStatusDropDownList(Model.RecordStatus.ToString())"
+                                        class="RecordStatus border-right-0 form-control form-control-sm" style="min-width:200px;">
+                                    <option value="0">@Lang.GeneralUI_Select</option>
+                                </select>
+                                <div class="input-group-append input-group-sm">
+                                    <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Camera_RecordStatus  @Lang.GeneralUI_Required">
+                                        <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span  class="Device_StatusTips text-primary small" hidden>@Lang.Device_StatusTips</span>
+                            <span asp-validation-for="@Model.RecordStatus" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btn_submit" class="btn btn-primary btn-sm ml-3">Save changes</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<script> 
+    function handleCameraStatus(result) {
+        layer.close(layer.index);
+        console.log(result);
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'}
+         ); 
+         if (result.meta.success === true)
+         {
+                redirectLocaleUrl = "@Url.Action("QueryCameraList", "Cam",new {Language=LangUtilities.LanguageCode})";
+                redirectLocaleUrl = redirectLocaleUrl + "?search=" + result.data.cameraName;
+                console.log(redirectLocaleUrl);
+                setTimeout(
+                    function() {
+                        window.location.href = redirectLocaleUrl;
+                    }
+                , 3000);
+         }
+    }
+
+    function errCameraStatus(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errCameraStatus");
+    }
+    $('#ChangeCameraStatusModal').on('show.bs.modal', function (event) {
+        var CONST_DAVICE_TYPE_DVR = "@EnumBusiness.DeviceType.DESTOP_DVR.ToString()";
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var cameraId = button.data('cameraid');
+        var maincomId = button.data('maincomid')
+        var cameraName = button.data('name');
+        var recordStatus = button.data('recordstatus');
+        var deviceType = button.data('devicetype'); 
+        console.log("cameraId=" + cameraId + "| maincomId=" + maincomId + "| cameraName =" + cameraName +"|  recordStatus =" + recordStatus);
+        var modal = $(this);
+        modal.find('#spName').text(cameraName);
+        //field
+        modal.find('.CameraId').val(cameraId);
+        modal.find('.MaincomId').val(maincomId);
+        modal.find(".RecordStatus").val(recordStatus);
+
+        console.log(recordStatus + "-" + CONST_DAVICE_TYPE_DVR);
+        if(deviceType==CONST_DAVICE_TYPE_DVR)
+        {       
+             modal.find(".RecordStatus").attr("disabled","disabled"); 
+             modal.find(".Device_StatusTips").removeAttr("hidden"); //显示提示
+             modal.find("#btn_submit").hide(); //submit hide
+        }else{
+             
+             modal.find(".RecordStatus").removeAttr("disabled"); 
+             modal.find("#btn_submit").show(); //submit show
+        }
+    })
+</script>

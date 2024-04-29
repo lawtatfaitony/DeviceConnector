@@ -1,0 +1,164 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels.CamApiModel
+@model CameraDVRSettingModel
+<!--
+    服務器錄像機
+    -->
+<!--DeviceDVRModel Modal -->
+
+<div class="modal fade" id="CAMERA_DVR_SETTING_MODAL" tabindex="-1" role="dialog" aria-labelledby="CAMERA_DVR_SETTING_MODAL" aria-hidden="true">
+     <form asp-action="DeviceDVRServerConfig" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" data-ajax-success="handleCameraDVRsetting"
+                  onsubmit="onBeginSubmit" asp-ajax-onFailure="errCameraDVRsetting" data-ajax="true" data-ajax-method="post"
+                  class="form-horizontal" id="formCameraDVRsetting">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <input asp-for="@Model.CameraId" name="CameraId" type="hidden" class="CameraId" />
+                    <input asp-for="@Model.DeviceId" name="DeviceId" type="hidden" class="DeviceId" />
+                    <input asp-for="@Model.DeviceName" name="DeviceName" type="hidden" class="DeviceName" />
+                    <input asp-for="@Model.SiteId" name="SiteId" type="hidden" class="SiteId" />
+                    <input asp-for="@Model.MaincomId" name="MaincomId" type="hidden" class="MaincomId" />
+                    <!--Modal header-->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="CameraConfigTitle">@Lang.Camera_ConfigTitle_Title</h5>
+                        <span class="text-danger h5 p-1 ml-2">@Lang.GeneralUI_Config</span><span class="DeviceId text-danger p-1 h5 ml-2" data-toggle="tooltip" title="@Lang.Camera_CameraId">@Model.DeviceId</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-row bd-highlight mb-1">
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group pl-0 ml-0"> 
+                                    <div class=" input-group">
+                                        <input type="checkbox" name="SaveMpeg4" asp-for="SaveMpeg4" 
+                                                data-val="true" data-val-required="@Lang.GeneralUI_Required"
+                                                class="SaveMpeg4 checkboxItemBox form-control form-control-sm bold" title="@Lang.Device_ConfigDvrIp" data-toggle="tooltip" />
+                                                <label class="control-label" asp-for="SaveMpeg4">@Lang.Camera_ConfigSaveMpeg4</label>
+                                    </div> 
+                                    <span asp-validation-for="SaveMpeg4" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group "> 
+                                        <div class=" input-group">
+                                            <input type="checkbox" name="HlsOutput" asp-for="HlsOutput" data-val="true" data-val-required="@string.Format("HLS Output {0}",Lang.GeneralUI_Required)"
+                                                   class="HlsOutput form-control form-control-sm bold input-group-append" title="@Lang.Device_ConfigDvrPort" data-toggle="tooltip" />
+                                            <label class="control-label" asp-for="HlsOutput">@Lang.Camera_ConfigHlsOutput</label>
+                                    </div>
+                                    <span asp-validation-for="HlsOutput" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                             <div class="p-1 bd-highlight col-4">
+                                <div class="form-group "> 
+                                    <div class=" input-group">
+                                        <input type="checkbox" name="RtmpOutput" asp-for="RtmpOutput" data-val="true" data-val-required="@string.Format("Rtmp Output {0}",Lang.GeneralUI_Required)"
+                                                class="RtmpOutput form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigRtmpOutput" data-toggle="tooltip" />
+                                        <label class="control-label" asp-for="RtmpOutput">@Lang.Camera_ConfigRtmpOutput</label>
+                                    </div> 
+                                    <span asp-validation-for="RtmpOutput" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row bd-highlight mb-1">
+                            <div class="p-1 bd-highlight col-6">
+                                <div class="form-group pl-0 ml-0">
+                                        <div class="input-group">
+                                            <input type="checkbox" name="Recognize" asp-for="Recognize" style="display:block;"
+                                                   class="Recognize form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigRecognize" data-toggle="tooltip" />
+                                             <label class="control-label" asp-for="Recognize">@Lang.Camera_ConfigRecognize</label>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="p-1 bd-highlight col-6">
+                                <div class="form-group ">
+                                        <div class=" input-group">
+                                            <input type="checkbox" name="SavePic" asp-for="SavePic" value="@Lang.Camera_ConfigSavePic"
+                                                   class="SavePic bg-cyan form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigSavePic" data-toggle="tooltip" />
+                                            <label class="control-label" asp-for="SavePic">@Lang.Camera_ConfigSavePic</label>
+                                        </div>
+                                </div>
+                            </div> 
+                        </div>
+                         <!--FRAME OUTPUT-->
+                         <div class="d-flex flex-row bd-highlight mb-1">
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group pl-0 ml-0">
+                                    <label class="control-label" asp-for="FrameWidth">@Lang.Camera_ConfigFrameWidth</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="FrameWidth" asp-for="FrameWidth" data-val="true" data-val-required="@Lang.GeneralUI_Required"
+                                                   class="FrameWidth form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigFrameWidth" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="FrameWidth" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group ">
+                                    <label class="control-label" asp-for="FrameHeight">@Lang.Camera_ConfigFrameHeight</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="FrameHeight" asp-for="FrameHeight" data-val="true" data-val-required="@string.Format("Frame Height Output {0}",Lang.GeneralUI_Required)"
+                                                   class="FrameHeight form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigFrameHeight" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="FrameHeight" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                             <div class="p-1 bd-highlight col-4">
+                                <div class="form-group ">
+                                    <label class="control-label" asp-for="FrameRate">@Lang.Camera_ConfigFrameRate</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="FrameRate" asp-for="FrameRate" data-val="true" data-val-required="@string.Format("Rtmp Output {0}",Lang.GeneralUI_Required)"
+                                                   class="FrameRate form-control form-control-sm bold input-group-append" title="@Lang.Device_ConfigDvrPort" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="FrameRate" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"> @Lang.GeneralUI_Comfirmed </button>
+                    </div>
+           
+            </div>
+        </div>
+     </form>
+</div>
+
+<script>
+    console.log("from DeviceDvrServerConfig 錄像服務器的配置 DeviceDvrServerConfig view modal");
+
+    function onBeginSubmit() {
+        return confirm("Are you sure?");
+    }
+
+    function handleCameraDVRsetting(result) {
+
+            layer.close(layer.index);
+
+            layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: result.meta.message
+                    , btn: '@Lang.GeneralUI_OK'
+            });
+            
+            console.log(result);
+    }
+
+    function errCameraDVRsetting(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errCameraDVRsetting");
+    }
+
+</script>
+

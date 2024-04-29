@@ -1,0 +1,327 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Routing
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var routeContext = new RouteContext(httpContextAccessor.HttpContext);
+    if (routeContext.RouteData.Values["Language"] != null)
+    {
+        LangUtilities.LanguageCode = LangUtilities.StandardLanguageCode(routeContext.RouteData.Values["Language"].ToString());
+    }
+    WebCookie webCookie = new WebCookie(httpContextAccessor);
+}
+
+<!DOCTYPE html>
+<html ng-app="layout_app">
+<head>
+    <title>@ViewBag.Title | Video</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap v4.1.0 -->
+    <link href="~/AdminLTE305/plugins/bootstrap41/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style adminlte.css-->
+    <link rel="stylesheet" href="~/AdminLTE305/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/AdminLTE305/plugins/summernote/summernote-bs4.css">
+
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/css/style_glyphicon.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="~/AdminLTE305/plugins/jquery/jquery.min.js"></script>
+    <!--angularJS 1.75 To Top-->
+    <script src="~/lib/angular/angular.js"></script>
+    <!-- popper 205 before Boottrap-->
+    <script src="~/AdminLTE305/plugins/popper205/popper.js"></script>
+    <!-- Bootstrap 4 -->
+    <!--<script src="~/AdminLTE305/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+    <!-- Bootstrap 4.1 -->
+    <script src="~/AdminLTE305/plugins/bootstrap41/js/bootstrap.bundle.min.js"></script> <!--使用bundlefor tooltip-->
+    <!--layerV3.5.1-->
+    <script src="~/AdminLTE305/plugins/layerV3.5.1/layer.js"></script>
+
+    <!-- ChartJS -->
+    <script src="~/AdminLTE305/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/AdminLTE305/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/AdminLTE305/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/AdminLTE305/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/AdminLTE305/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/moment/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/AdminLTE305/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Summernote -->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!--slimscroll-->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- AdminLTE App -->
+    <script type="text/javascript" src="~/AdminLTE305/js/adminlte.js"></script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) ~/AdminLTE305/js/pages/dashboard.js-->
+    <!-- AdminLTE for demo purposes -->
+    <script type="text/javascript" src="~/AdminLTE305/js/demo.js"></script>
+
+    <!--DatetimePicker yyy-mm-dd yyyy-mm-dd hh:ii yyyy-mm-dd hh:ii:ss-->
+    <link href="~/AdminLTE305/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script src="~/AdminLTE305/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <!--clipboard-->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/clipboard/dist/clipboard.min.js"></script>
+
+    <!--jquery-validation-->
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <!--jquery-validation-unobtrusive-->
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <!--jquery.unobtrusive-ajax-->
+    <script type="text/javascript" src="~/lib/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
+
+    <!--bootstrap-treeview-->
+    <link href="~/AdminLTE305/plugins/bootstrap-treeview/bootstrap-treeview.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/AdminLTE305/plugins/bootstrap-treeview/bootstrap-treeview.js"></script>
+
+    <!--videojs-->
+    <link href="~/AdminLTE305/plugins/VideoJS/video-js.css" rel="stylesheet" />
+
+    <!--hls-->
+    <script type="text/javascript" src="~/js/hls/hls.js"></script>
+
+    <!--flv-->
+    <script type="text/javascript" src="~/AdminLTE305/plugins/flvjs/flv.js"></script>
+
+    <!--DPlayer-->
+    <script type="text/javascript" src="~/js/dplayer/DPlayer.min.js"></script>
+
+    <!--timeline-canvas-master--></>
+
+    <script src="~/AdminLTE305/plugins/timeline-canvas-master/timeline-canvas1.js" asp-append-version="true"></script>
+
+    <!--microsoft-signalr-->
+    <script src="~/lib/microsoft-signalr/signalr.js"></script>
+    <script src="~/js/mediasinalR.js"></script>
+    <!--Main.js-->
+    <script type="text/javascript" src="~/js//Main.js" asp-append-version="true"></script>
+
+
+    <script>
+        var app = angular.module('layout_app', []);
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+
+        var language = "@ViewBag.Language";
+    </script>
+
+    @RenderSection("HeaderFollowScripts", required: false)
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light p-0">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav p-0">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a class="nav-link left-menu-switch-icon1" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block" data-toggle="tooltip" title="HOME">
+                    <a asp-action="Index" asp-controller="Home" asp-route-Language="@LangUtilities.LanguageCode"
+                       title="@Lang.RegisterView_Title" data-toggle="tooltip"
+                       class="ml-3 nav-link">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-action="Register" asp-controller="Account" asp-route-Language="@LangUtilities.LanguageCode" class="ml-3 nav-link" target="_blank"><i class="fas fa-user"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-action="live" asp-controller="Hist" asp-route-Language="@LangUtilities.LanguageCode" class="ml-3 nav-link" target="_blank"><i class="fas fa-tv"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-action="list" asp-controller="HistAlarm" asp-route-Language="@LangUtilities.LanguageCode"
+                       title="@Lang.HistAlarm_Title" data-toggle="tooltip"
+                       class="ml-2 nav-link" target="_self">
+                        <i class="fas fa-list text-danger"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-action="list" asp-controller="Hist" asp-route-Language="@LangUtilities.LanguageCode"
+                       title="@Lang.HistList_Title" data-toggle="tooltip"
+                       class="ml-2 nav-link" target="_self">
+                        <i class="fas fa-tv text-warning"></i>
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a asp-action="index" asp-controller="home" asp-route-language="@LangUtilities.LanguageCode" class="brand-link">
+                <img src="~/images/videoguardlogo.jpg" class="brand-image img-circle elevation-3" hidden style="opacity: .7" />
+                <span class="brand-text font-weight-light" data-toggle="tooltip" title="Security Device System">AI Guard</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel  d-flex">
+                    <div class="text-warning nav-header pt-1">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block pl-2 text-white">@WebCookie.UserName</a>
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <!--LeftMenu Sidebar -->
+                @await Html.PartialAsync("~/Views/Home/Menu.cshtml")
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <h1 class="m-0 text-dark">@ViewBag.Title</h1>
+                        </div><!-- /.col -->
+                        <div class="col-8">
+                            <span id="ReceiveMediaMessageSpan" class="h5"></span>
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a asp-action="index" asp-controller="home" asp-route-language="@LangUtilities.LanguageCode">Home</a></li>
+                                <li class="breadcrumb-item active">@ViewBag.Title</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer p-1 bg-green">
+            <div class="align-content-center">
+                <span class="h5 small ml-2">Copyright &copy; @DateTime.Now.Year <a href="http://camguard123.com">Video Guard</a>. All rights reserved.</span>
+                <div class="h6 d-none d-sm-inline-block">
+                    <span class="small">V 2.1</span>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+
+    <script>
+
+        var bootstrapButton = $.fn.button.noConflict(); // return $.fn.button to previously assigned value
+        $.fn.bootstrapBtn = bootstrapButton;            // give $().bootstrapBtn the Bootstrap functionality
+
+        var DateTimeRangeMultiLanguage = {
+            format: '@Lang.GeneralUI_DateTimeRangeFormatJS',
+            language: '@LangUtilities.LanguageCode',
+            timePicker: true,
+            timePicker24Hour: true,
+            showCustomRangeLabel:true,
+            separator: '-',
+            ranges: {
+                //'最近1小时': [moment().subtract('hours',1), moment()],
+                '@Lang.GeneralUI_DateTime_Today': [moment().add(3,"hours",), moment(17, "HH")],
+                '@Lang.GeneralUI_DateTime_Tomorrow': [moment(9, "HH").add(1,"days"), moment(17, "HH").add(1,'days')],
+                '@Lang.GeneralUI_DateTime_NextWeek': [moment(9, "HH").add(1,"days"), moment(17, "HH").add(1,"days").add(1,"week")],
+                '@Lang.GeneralUI_DateTime_NextTwoWeek': [moment(9, "HH").add(1,"days"), moment(17, "HH").add(1,"days").add(2,"week")]
+            },
+            locale: {
+                format:  '@Lang.GeneralUI_DateTimeRangeFormatJS',
+                applyLabel: '@Lang.GeneralUI_Comfirmed',
+                cancelLabel: '@Lang.GeneralUI_Cancel',
+                fromLabel: '@Lang.GeneralUI_DateTime_StartTime',
+                toLabel: '@Lang.GeneralUI_DateTime_EndTime',
+                customRangeLabel: '@Lang.GeneralUI_DateTime_CustomDate',
+                daysOfWeek: ['@Lang.GeneralUI_DayOfWeekAbbr_Sunday', '@Lang.GeneralUI_DayOfWeekAbbr_Monday', '@Lang.GeneralUI_DayOfWeekAbbr_Tuesday', '@Lang.GeneralUI_DayOfWeekAbbr_Wednesday', '@Lang.GeneralUI_DayOfWeekAbbr_Thursday', '@Lang.GeneralUI_DayOfWeekAbbr_Friday', '@Lang.GeneralUI_DayOfWeekAbbr_Saturday'],
+                monthNames: ['@Lang.GeneralUI_Month_January', '@Lang.GeneralUI_Month_February', '@Lang.GeneralUI_Month_March', '@Lang.GeneralUI_Month_April', '@Lang.GeneralUI_Month_May', '@Lang.GeneralUI_Month_June',
+                    '@Lang.GeneralUI_Month_July', '@Lang.GeneralUI_Month_August', '@Lang.GeneralUI_Month_September', '@Lang.GeneralUI_Month_October', '@Lang.GeneralUI_Month_November', '@Lang.GeneralUI_Month_December'
+                ],
+                firstDay: 1
+            },
+            //dateLimit: {
+            //    days: 365
+            //},
+            };
+
+            $('.DateRangePicker').daterangepicker(DateTimeRangeMultiLanguage); //....!
+
+            $(document).ready(function () {
+
+                $(".table-responsive").css("min-height", window.innerHeight);
+                $(".sidebar").slimscroll({
+                    disableFadeOut: false,
+                    height: window.innerHeight + window.innerHeight
+                }); //menu height extend
+
+                //$('.site_tree_view').slimscroll({
+                //    disableFadeOut: false,
+                //    height: '280px'
+                //});
+            });
+
+    </script>
+
+    <!--RenderSection BEGIN-->
+    @RenderSection("Scripts", required: false)
+    <!--RenderSection END-->
+    <!--videojs https://vjs.zencdn.net/7.20.1/video.min.js-->
+    <script src="~/AdminLTE305/plugins/VideoJS//video.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+﻿@using VxGuardClient.Context
+@using LanguageResource
+@using EnumCode
+@using Common
+@using VideoGuard.ApiModels.LibraryApiModel
+@using VxClient.Models
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.QueryLibraryList_Title;
+    int x = 0;
+    QueryLibraryListReturn queryLibraryListReturn = Model.data as QueryLibraryListReturn;
+    QueryLibraryList queryLibraryList = ViewBag.QueryLibraryList as QueryLibraryList;
+}
+
+<div class="container mb-1 ml-0">
+    <div class="row ">
+        <form asp-action="QueryLibraryList" asp-controller="Library" asp-route-Language="@LangExtend.LanguageCode" method="get" class="form-inline" id="form_Search">
+            <div class="input-group input-group-sm">
+                <input asp-for="@queryLibraryList.Name" value="@queryLibraryList.Name" name="name" class="form-control form-control-sm col-2"
+                       style="border-right-width: 2px; border-right-style: dashed; border-right-color: #ffd800;"
+                       onclick="javascript:this.value='';" placeholder="Search" />
+                <select name="LibraryTypeCode" asp-items="@Html.LibraryTypeCodeDropDownList(ViewBag.LibraryTypeCode as string)"
+                        class="col-4 border-left-0 border-right-0 form-control form-control-sm">
+                    <option value="">@Lang.GeneralUI_Select</option>
+                </select>
+                <span class="input-group-append">
+                    <button type="submit" class="btn btn-primary btn-flat"> <i class="fas fa-search"></i>Go!</button>
+                </span>
+                <a href="@Url.Action("AddLibrary","Library")" class="ml-2 btn btn-primary btn-sm text-white " title="@Lang.GeneralUI_AddNew" data-toggle="tooltip">
+                    &nbsp;<i class="fa fa-plus-circle font-weight-bold"></i>&nbsp;
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    <div class="box-body  table-responsive" style="min-height:600px;">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th style="max-width:120px;overflow-x:hidden;">
+                    <div class="text-nowrap " title="@Lang.Library_LibId" data-toggle="tooltip">
+                        <span class="p-1"><i class="fas fa-box text-green"></i> @Lang.Library_LibId </span> <!--fa-caret-right-->
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Library_Name" data-toggle="tooltip"><span><i class="fa fa-cog text-green"></i> @Lang.Library_Name </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Library_Type" data-toggle="tooltip"><span><i class="fas fa-eye text-green"></i> @Lang.Library_Type </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Remark" data-toggle="tooltip"><span><i class="fas fa-pencil-ruler text-green"></i> @Lang.GeneralUI_Remark </span></div>
+                </th>
+                <th style="max-width:130px;overflow-x:hidden;">
+                    <div class="text-nowrap" title="@Lang.GeneralUI_CreateDate" data-toggle="tooltip"><span><i class="fas fa-calendar text-green"></i> @Lang.GeneralUI_CreateDate </span></div>
+                </th>
+                <th style="max-width:230px;overflow-x:hidden;">
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Details" data-toggle="tooltip"><span><i class="fas fa-th-list text-green"></i> @Lang.GeneralUI_Details </span></div>
+                </th>
+            </tr>
+
+            @if (queryLibraryListReturn.TotalCount != 0)
+            { 
+                foreach (var item in queryLibraryListReturn.Items)
+                {
+                    x++;
+                    LibraryTypeCode itemLibraryTypeCode = (LibraryTypeCode)item.Type;
+                    
+                    <tr id="@string.Format("tr{0}",item.LibId)">
+                        <td id="@string.Format("td{0}", item.LibId)" class="text-omit small">
+                            <span id="@string.Format("CLIDBOARD{0}", item.LibId)" class="badge badge-dark p-2 clipboard" onclick="getClipboardText()"
+                                         data-clipboard-text="@item.LibId" title="@item.LibId (click to copy)" data-toggle="tooltip" style="cursor:pointer;">@item.LibId</span>
+                        </td>
+                        <td class="text-wrap">
+                            <label class="bg-primary rounded p-2 h5">@item.Name</label>
+                        </td>
+                        <td class="text-wrap">
+                            <label class="label label-primary h5 p-1"> @LangUtilities.GetStringReflectKeyName(itemLibraryTypeCode.GetDescriptionX())</label>
+                        </td>
+                        <td class="text-wrap" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Remark)" style="max-width:260px;">
+                            <span class="omit2row"> @item.Remark </span>
+                        </td>
+                        <td class="text-wrap" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.CreateTime)">
+                            @Html.Raw(String.Format("{0:yyyy-MM-dd<br>HH:mm}", DateTime.Parse(item.CreateTime.Replace("T", " ").Replace("000", "").Trim())))
+                        </td>
+
+                        <td class="text-wrap">
+                            <div class="d-flex flex-row bd-highlight mb-3">
+                                <div class="p-2 bd-highlight">
+                                    <button class="btn btn-warning btn-sm text-nowrap" type="button" onclick="@string.Format("javascript:DeleteLibrary('{0}');", item.LibId)">
+                                        <i class="fas fa-trash-alt"></i> @Lang.GeneralUI_Delete
+                                    </button>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <a asp-action="UpdateLibrary" asp-controller="Library" asp-route-libId="@item.LibId" class="btn btn-primary btn-sm fas fa-edit">@Lang.GeneralUI_Details</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        <span class="h2"></span> @Lang.GeneralUI_NoRecord
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    if (queryLibraryListReturn.PageCount > 1)
+    {
+        <div class="Page">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("QueryLibraryList", "Library", new { Name = ViewBag.CurrentName, PageNo = 1 })" aria-label="Prev">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for (int p = 1; p <= queryLibraryListReturn.PageCount; p++)
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Action("QueryLibraryList", "Library", new { Name = ViewBag.CurrentName, PageNo = p })">@p</a></li>
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("QueryLibraryList", "Library", new { Name = ViewBag.CurrentName, PageNo = queryLibraryListReturn.PageCount })" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+}
+
+
+<script>
+    function DeleteLibrary(LibId)
+    {
+        console.log(LibId);
+
+        layer.confirm('@Lang.DeleteLibrary_ComfirmTips', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+            var httpDelUrl = "/@LangUtilities.LanguageCode/Library/DeleteLibrary";
+
+            var myparamsObject = { "LibId": LibId};
+            $.ajax({
+                url: httpDelUrl,
+                data: myparamsObject,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    console.log(JSON.stringify(data));
+                },
+                success: function (resp) {
+                        //console.log(resp);
+                        layer.open({
+                            title: '@Lang.GeneralUI_ReturnResult'
+                            , content: resp.meta.message
+                        , btn:'@Lang.GeneralUI_OK'
+                    });
+                    if (resp.meta.success == true) {
+                        var pr_obj = "#tr" + LibId;
+                        $(pr_obj).addClass("bg-warning-gradient");
+                        setTimeout(function () {
+                            $(pr_obj).remove();
+                        }, 3000);
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.DeleteLibrary_ComfirmNoTips', { icon: 1 }, {
+                    time: 6000,
+                    btn: ['@Lang.GeneralUI_Isee']
+                });
+            });
+    }
+</script>

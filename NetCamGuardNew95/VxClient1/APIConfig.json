@@ -1,0 +1,27 @@
+{
+  "http_server": {
+    "host": "http://localhost",
+    "port": 64842,
+    "root": "."
+  },
+  "api_login": {
+    "user_name": "admin",
+    "password": "admin123"
+  },
+  "storage_server": {
+    "ip": "127.0.0.1",
+    "port": 10011
+  },
+  "capture_server": {
+    "ip": "127.0.0.1",
+    "port": 10010
+  },
+  "compare_server": {
+    "ip": "127.0.0.1",
+    "port": 10012
+  },
+  "upload_server": {
+    "ip": "127.0.0.1",
+    "port": 3252
+  }
+}

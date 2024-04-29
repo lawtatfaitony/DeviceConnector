@@ -1,0 +1,119 @@
+﻿@using LanguageResource
+@using VideoGuard.ApiModels.Account
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+    ViewBag.Title = Lang.LoginViewModel_Title;
+
+}
+@if (Model.meta.Success)
+{
+    Login login = (Login)Model.data;
+    <style>
+        .center {
+            margin: auto;
+            width: 60%;
+            padding: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+    <div class="container panel" style="max-width: 500px;border-radius:10px; ">
+        <div class="alert-warning mt-5 center" role="alert" style="border-radius:5px; ">
+            <div class="panel-header">
+                <h1 class="alert-heading text-center mt-3">
+                    <a class="text-white" href='@Url.Action("index","home",new { Language =ViewBag.Language})' title="@Lang.GeneralUI_Welcome" data-toggle="tooltip" style="text-decoration:none;">
+                        @Lang.GeneralUI_Welcome
+                    </a>
+                </h1>
+            </div>
+            <div class="panel-body">
+                <div class="p-3" style="max-width: 350px;">
+                    <form asp-action="Login" asp-controller="Account" asp-route-Language="@ViewData["Language"]" asp-route-returnUrl="@ViewData["ReturnUrl"]" data-ajax="true" data-ajax-success="handleLogin" asp-ajax-onFailure="errLogin" data-ajax-method="POST" onsubmit="return handleOnbegin()" class="form-horizontal" name="form_Login" id="form_Login">
+                        <div class="form-group mb-4" title="@Lang.User_UserName" data-toggle="tooltip">
+                            <input asp-for="@login.UserName" data-val="true" class="form-control" type="text" placeholder="@Lang.User_UserName" />
+                            <span asp-validation-for="@login.UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4" title="@Lang.User_Password" data-toggle="tooltip">
+                            <input asp-for="@login.Password" class="form-control" type="password" placeholder="@Lang.User_Password" autocomplete="on" />
+                            <span asp-validation-for="@login.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary btn-block btn-flat"> @Lang.GeneralUI_Login </button>
+                        </div>
+                    </form>
+
+                    <ul class="list-unstyled">
+                        <li class="list-unstyled list-group-horizontal mb-1">
+                            <a class="text-white mr-1" href="@Url.Action("ForgotPassword", "Account")" style="text-decoration:none;"><i class="fas fa-info-circle" style="color:white"></i> @Lang.Account_ForgetPassword</a>
+                            <a class="text-white" href="@Url.Action("Register", "Account",new { returnUrl = ViewData["ReturnUrl"] })" style="text-decoration:none;"><i class="fas  fa-user" style="color:white"></i> @Lang.GeneralUI_Register</a>
+                        </li>
+                        <li class="list-unstyled ist-group-horizontal">
+                            <a class="text-white" href="@Url.Action("index", "home",new { returnUrl = ViewData["ReturnUrl"] })" style="text-decoration:none;"><i class="fas  fa-user" style="color:white"></i> @Lang.GeneralUI_Return</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{ 
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+ 
+<!--MD5-->
+<script src="~/AdminLTE305/plugins/md5/md5.js"></script>
+<script>
+    var ReturnUrl = decodeURIComponent("@ViewData["ReturnUrl"]");
+
+    function handleLogin(result) {
+        
+        layer.close(layer.index);
+        if (result.meta.Success === false) {
+
+            layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message + "-FAIL"
+                , btn: '@Lang.GeneralUI_OK'
+            });
+        }
+        else
+        {
+            layer.msg(result.meta.message);
+            if (!$.isEmptyObject(ReturnUrl)) {
+                if (result.hasOwnProperty("data")) {
+                    console.log(result.data);
+                    setTimeout(function () { window.location.href = ReturnUrl; }, 1000);
+                }
+            } else {
+                console.log("login seccess , return to home\index");
+                setTimeout(function () { window.location.href = "@Url.Action("Index","Home",new {Language = LangUtilities.LanguageCode})" }, 1000);
+            }
+        }
+    }
+
+    function handleOnbegin() {
+        //debugger;
+        var password = $("#login_Password").val();
+
+        if (password.lenght < 3) {
+            layer.msg("@Lang.User_Password_Format_TooShort");
+            return false;
+        }
+        password = md5(password);
+        $("#login_Password").val(password);
+        return true;
+    }
+    function errLogin(data) {
+        layer.close(layer.index);
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client error");
+        //layer.clear();
+    }
+</script>

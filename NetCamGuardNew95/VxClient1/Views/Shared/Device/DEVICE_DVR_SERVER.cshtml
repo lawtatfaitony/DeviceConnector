@@ -1,0 +1,181 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@model DeviceDVRModel
+<!--
+    服務器錄像機
+    -->
+<!--DeviceDVRModel Modal -->
+<div class="modal fade" id="DEVICE_DVR_SERVER_MODAL" tabindex="-1" role="dialog" aria-labelledby="DEVICE_DVR_SERVER_MODAL" aria-hidden="true">
+     <form asp-action="DeviceDVRServerConfig" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" data-ajax-success="handleDeviceDVRServerConfig"
+                  onsubmit="onBeginSubmit" asp-ajax-onFailure="errDeviceDVRServerConfig" data-ajax="true" data-ajax-method="post"
+                  class="form-horizontal" id="formDeviceDVRServerConfig">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                    <input asp-for="@Model.DeviceId" name="DeviceId" type="hidden" class="DeviceId" />
+                    <input asp-for="@Model.MaincomId" name="MaincomId" type="hidden" class="MaincomId" />
+                    <!--Modal header-->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="DeviceConfigTitle">@Lang.Device_HikKITxConfig_Title</h5>
+                        <span class="text-danger h5 p-1 ml-2">@Lang.GeneralUI_Config</span><span class="DeviceId text-danger p-1 h5 ml-2" data-toggle="tooltip" title="@Lang.Device_DeviceId">@Model.DeviceId</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group pl-0 ml-0">
+                                    <label class="control-label" asp-for="DvrIp">@Lang.Device_ConfigDvrIp</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="DvrIp" asp-for="DvrIp" data-val="true" data-val-required="@string.Format("DVR IP {0}",Lang.GeneralUI_Required)"
+                                                   class="DvrIp form-control form-control-sm bold input-group-append" title="@Lang.Device_ConfigDvrIp" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="DvrIp" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group ">
+                                    <label class="control-label" asp-for="DvrPort">@Lang.Device_ConfigDvrPort</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="DvrPort" asp-for="DvrPort" data-val="true" data-val-required="@string.Format("DVR PORT {0}",Lang.GeneralUI_Required)"
+                                                   class="DvrPort form-control form-control-sm bold input-group-append" title="@Lang.Device_ConfigDvrPort" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="DvrPort" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+
+                             <div class="p-1 bd-highlight col-4">
+                                <div class="form-group ">
+                                    <label class="control-label" asp-for="DvrPort">@Lang.Device_NvrType</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                               <select asp-for="@Model.NvrType" name="NvrType" asp-items="@Html.DeviceNVRTypeDropDownList(Model.NvrType)"
+                                                        class="NvrType border-left-0 border-right-0 form-control form-control-sm">
+                                                    <option value="">@Lang.GeneralUI_Select</option>
+                                               </select>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="NvrType" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group pl-0 ml-0">
+                                    <label class="control-label" asp-for="Account">@Lang.Device_ConfigLoginId</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="Account" asp-for="Account"
+                                                   class="Account form-control form-control-sm bold input-group-append" title="@Lang.Device_ConfigLoginId" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group ">
+                                    <label class="control-label" asp-for="Password">@Lang.Device_ConfigPassword</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="Password" asp-for="Password"
+                                                   class="Password form-control form-control-sm bold input-group-append" title="@Lang.Device_ConfigPassword" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-1 bd-highlight col-4">
+                                <div class="form-group ">
+                                    <label class="control-label" asp-for="SiteId">@Lang.Device_Site</label>
+                                    <div class="pl-0 pr-1">
+                                        <div class=" input-group">
+                                            <input type="text" name="SiteId" asp-for="SiteId"
+                                                   class="SiteId form-control form-control-sm bold input-group-append" title="@Lang.Device_Site" data-toggle="tooltip" />
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="SiteId" class="text-danger pr-3"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"> @Lang.GeneralUI_Comfirmed </button>
+                    </div>
+           
+            </div>
+        </div>
+     </form>
+</div>
+
+<script>
+    console.log("from DeviceDvrServerConfig 錄像服務器的配置 DeviceDvrServerConfig view modal");
+
+    function onBeginSubmit() {
+        return confirm("Are you sure?");
+    }
+
+    function handleDeviceDVRServerConfig(result) {
+
+            layer.close(layer.index);
+
+            layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: result.meta.message
+                    , btn: '@Lang.GeneralUI_OK'
+            });
+            
+            console.log(result);
+    }
+
+    function errDeviceDVRServerConfig(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errDeviceDVRServerConfig");
+    }
+
+    $('#DEVICE_DVR_SERVER_MODAL').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
+        var deviceId = button.data('deviceid'); //deviceid
+        var maincomId = button.data('maincomid');
+        
+        var deviceName = button.data('devicename');
+        var deviceSerialNo = button.data('deviceserialno');
+        console.log("deviceId=" + deviceId + "| maincomId=" + maincomId + "| deviceName =" + deviceName + "|  deviceSerialNo =" + deviceSerialNo);
+        var modal = $(this);
+        modal.find('.modal-title').text(deviceName);
+        //field
+        modal.find('DeviceId').text(deviceId);
+        modal.find("input[name='DeviceId']").val(deviceId); 
+        modal.find('.MaincomId').val(maincomId);
+        modal.find(".DeviceSerialNo").val(deviceSerialNo);
+
+        var returnDeviceConfigJsonUrl = "/Device/ReturnDeviceConfigJson/" + deviceId;
+        $.get(returnDeviceConfigJsonUrl, function (result, status) {
+            if (status != undefined) {
+                if (status == "success" && result.meta.success) {
+                    console.log(result);
+                    modal.find('.DeviceId').val(result.data.deviceId); 
+                    modal.find('.DvrIp').val(result.data.dvrIp); 
+                    modal.find('.DvrPort').val(result.data.dvrPort);
+                    modal.find('.NvrType').val(result.data.nvrType); 
+                    modal.find('.Account').val(result.data.account);
+                    modal.find('.Password').val(result.data.password);
+                    modal.find('.SiteId').val(result.data.siteId);
+                }
+            }
+        });
+    });
+</script>
+

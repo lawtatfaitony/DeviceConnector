@@ -1,0 +1,12 @@
+﻿********************************************************************
+*								   *	
+*   HOW to resolve the conflict between Bootstrap and jQuery UI	   *
+*								   *	
+********************************************************************
+
+<!--jquery-ui-->
+    <script src="~/AdminLTE302/plugins/jquery-ui/jquery-ui.min.js"></script>   
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip 这个影响 -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>

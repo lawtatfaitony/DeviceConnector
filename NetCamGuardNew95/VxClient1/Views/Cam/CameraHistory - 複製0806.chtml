@@ -1,0 +1,465 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels.CamApiModel
+@model VideoGuard.ApiModels.ResponseModalX
+@if (Model.meta.Success == false)
+{
+<partial name="ResponseModal" for="@Model" />
+}
+
+@{
+    var camera = Model.data as Camera;
+}
+
+
+<div class="container-fluid">
+    <div class="row pl-5 pr-5">
+
+        <div class="col-9">
+            <div id="dplayer1" class="mb-1"></div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header ui-sortable-handle" style="cursor: move;">
+                    <h3 class="card-title">
+                        <i class="fas fa-history text-danger mr-1"></i>
+                        <label class="label label-primary rounded">Media Info</label>
+                    </h3> 
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                    <div class="tab-content p-0"> 
+                        <div class="d-flex flex-column bd-highlight mb-3 ml-2 rounded" style="border-color:#00ff21;border-width:2px;">
+                            <div class="bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="@Lang.Camera_CameraId" data-toggle="tooltip">@Lang.Camera_CameraId</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoCameraId" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-1 bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="@Lang.Camera_Name" data-toggle="tooltip">@Lang.Camera_Name</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoName" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="@Lang.Site_SiteName" data-toggle="tooltip">@Lang.Site_SiteName</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoSiteName" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-1 bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="@Lang.Camera_CameraIp" data-toggle="tooltip">@Lang.Camera_CameraIp</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoCameraIp" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-1 bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="@Lang.CamMpeg_PlaySeek" data-toggle="tooltip">@Lang.CamMpeg_PlaySeek</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoSeek" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="Begin" data-toggle="tooltip">Begin Time</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoBeginTime" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="End" data-toggle="tooltip">End Time</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoEndTime" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="Media time span" data-toggle="tooltip">Media Lenght</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <label id="MdediaInfoTimeSpan" class="label bg-gray-light rounded"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bd-highlight">
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="bd-highlight col-5">
+                                        <label class="label bg-gray-light rounded" title="Media time span" data-toggle="tooltip">@Lang.GeneralUI_Download</label>
+                                    </div>
+                                    <div class="bd-highlight col-7">
+                                        <a id="MdediaInfoDownload" href="" class="btn btn-sm btn-primary" title="Right click to save" data-toggle="tooltip"><i class="fas fa-arrow-down"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.card-body -->
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <canvas id="timeline" width="1400" height="62"
+                style="cursor: pointer;border:1px solid #2b2f33;background-color: #2b2f33;"
+                ondragstart="return false;">
+        </canvas>
+    </div>
+    <div class="row mt-1">
+        <div class="d-flex flex-row bd-highlight mb-3 ml-0">
+            <div class="pt-1 bd-highlight">
+                <input type='text' id="setTimeValue" class="form-control form-control-sm" style="width:110px;" />
+            </div>
+            <div class="pt-1 bd-highlight text-nowrap  pr-2">
+                <input id="isRecent" type="checkbox" checked class="form-control form-control-sm ml-2 mr-2" width="10" height="10" title="Recent if no media" data-toggle="tooltip" />
+            </div>
+            <div class="pt-1 bd-highlight">
+                <button id="setTime" class="form-control form-control-sm">Find</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var timeScaleSpan = 0; //初始化播放刻度
+    var sheme = "http";
+    var isRecent = $('#isRecent').is(':checked');
+    var pleaseSelectaPlayerFirst = "@Lang.GeneralUI_PleaseSelectaPlayerFirst";
+    var noMediaServerStart = "@Lang.GeneralUI_NoMediaServerStart";
+    var requestFail = "@Lang.GeneralUI_RequestFail";
+    var requestFileDeleted = "@Lang.GeneralUI_Delete";
+    var corsPolicyIsNotAllowed = "@Lang.GeneralUI_CorsPolicyIsNotAllowed";
+
+    var setTimeMove = null; //时间移动计算对象
+
+    var loadingIndex = layer.msg("data loading......");
+
+    $(document).ready(function () {
+
+        $(".left-menu-switch-icon1").click(); //collapse the left menu
+
+        var cameraId = @camera.CameraId;
+        var languageCode = "@LangUtilities.LanguageCode.ToLower()";
+
+        $("#setTimeValue").val(moment().format('YYYY-MM-DD'));
+
+        $(function () {
+            $('#setTimeValue').datetimepicker({
+                format: 'YYYY-MM-DD',   //显示年月日   'YYYY-MM-DD HH:mm:ss',	//HH表示24小时,hh表示12小时(有上午和下午按钮) //
+                locale: moment.locale('zh-cn')
+            });
+        });
+
+        var timecell = []; //initialize array
+
+        var timeScaleValue = new Date($("#setTimeValue").val()).getTime();
+        GetCamHistList(timeScaleValue);
+
+        $("#setTime").click(function () {
+            var timex = new Date();
+            var timeStr = timex.getHours() + ":" + timex.getMinutes();
+            timeScaleValue = new Date($("#setTimeValue").val() + " " + timeStr).getTime();
+
+            //timeScaleValue = new Date($("#setTimeValue").val() ).getTime();
+            dt = datetimeFormat(timeScaleValue);
+            console.log("\nSetTimeValue=" + timeScaleValue + " | " + dt); //
+            $("#timeline").TimeSlider('set_time_to_middle', timeScaleValue); 
+            GetCamHistList(timeScaleValue); 
+        });
+
+        $("#timeline").mouseup(function () {
+            layer.closeAll();
+            var a = $("#timeline").TimeSlider('returnMouseupTime', null, null, function (datetime) {
+                console.log("mouseupTime = " + new Date(datetime));
+                var date = new Date(datetime);
+                timeScaleSpan = date.getTime();
+
+                dt = datetimeFormat(timeScaleSpan);
+                $("#setTimeValue").val(dt);
+                console.log("\ntimeScaleSpan=" + timeScaleSpan + " | " + dt); //
+
+                //判斷是否在獲取時間段內可以查詢到該時間點是有存在media的 //timeScaleSpan
+                var isNotExist = true;
+                isRecent = $('#isRecent').is(':checked');
+
+                if (timecell != [] || timecell != undefined) {
+                    timecell.forEach(function (item) {
+
+                        if (item.beginTime >= timeScaleSpan && timeScaleSpan <= item.endTime) {
+                            isNotExist = false;
+                            return;
+                        }
+                    });
+
+                    //最近一條記錄
+                    if (isNotExist && isRecent && timecell.length > 0) {
+                        // timecell[0]
+                        console.log( timecell[0] );
+                        timeScaleSpan = timecell[0].beginTime;
+                    }
+                }
+
+                if (isNotExist && isRecent == false) {
+                    console.log("timeScaleSpan not in timecell data list (click event not to post)");
+                    return;
+                }
+
+                var camHistWithUrl = "/" + languageCode + "/Cam/GetCamHistTimePointMediaFile/" + cameraId + "/" + timeScaleSpan;
+
+                loadingMsg = "loading...\n" + layer.msg(datetimeFormat(timeScaleSpan));
+                var loadingIndex = layer.msg(loadingMsg, {
+                    icon: 16,
+                    time: -1
+                });
+
+                $.ajax({
+                    url: camHistWithUrl,
+                    async: false, //禁止異步執行
+                    type:"get",
+                    success: function (res) {
+
+                        layer.close(loadingIndex);
+                        console.log({"GetCamHistTimePointMediaFile Response:":res});
+
+                        if (res.meta.success) {
+
+                            //layer.msg("media details loading......ok");
+                            console.log("media details loading......ok");
+                            console.log({"res.data": res.data});
+                            timeScale = res.data.camHistX;
+                            console.log({"GetCamHistTimePointMediaFile Response.data(timeScale):":timeScale });
+                            console.log({"CamHistWithUrl": res.data.camHistWithUrl });
+
+                            //toggle
+                            var camHistX = res.data.camHistX;
+                            var timecellx = [camHistX];
+                            //$("#timeline").TimeSlider('init', camHistX.beginTime, timecellx); 
+
+                            MarkSelectTimeCell(timecell, camHistX);
+                            $("#timeline").TimeSlider('init', camHistX.beginTime, timecell);
+
+                            //如果時間刻度和返回的請求時間刻度一致則定位到此處,如果沒有查詢到,而是返回最近的影片的情況下不定位
+                            var timepointRet = res.data.timepoint;
+                            //if (timepointRet == timeScaleSpan) {
+                            //    alert("timepointRet =" + timepointRet + "\ntimeScaleSpan=" + timeScaleSpan);
+                            //    $("#timeline").TimeSlider('set_time_to_middle', timeScale.beginTime);
+                            //}
+                            $("#timeline").TimeSlider('set_time_to_middle', res.data.timepoint);
+                            console.log("timepointRet =" + timepointRet + "\ntimeScaleSpan=" + timeScaleSpan);
+
+                            console.log({ "camHist": camHistX });
+                            console.log({ "timeScaleSpan": timeScaleSpan });
+
+                            console.log({ "camHistWithUrl": res.data.camHistWithUrl.playUrl });
+                            var playUrl = res.data.camHistWithUrl.playUrl;
+                            var seek = res.data.seek;
+                            var fileFomat = res.data.fileFomat;
+
+                            //display media info
+                            ShowMediaInfo(res.data);
+
+                            //驗證是否有效的媒體連接請求,否則返回並提示
+                            $.ajax({
+                                url: playUrl,
+                                type: "get",
+                                async: false,
+                                success: function (jqXHR, textStatus, errorThrown) {
+                                    //player congtrol
+                                    if (fileFomat != "flv") {
+                                        const dp1 = new DPlayer({
+                                            container: document.getElementById("dplayer1"),//"dplayer1"
+                                            screenshot: true,
+                                            autoplay: true,
+                                            mutex: false,
+                                            video: {
+                                                url: playUrl,
+                                                type: 'customHls',
+                                                autoplay: true,
+                                                mutex: false,
+                                                customType: {
+                                                    customHls: function (video, player1) {
+                                                        const hls = new Hls();
+                                                        hls.loadSource(playUrl);
+                                                        hls.attachMedia(video);
+                                                        console.log(player1);
+                                                    },
+                                                },
+                                            }
+                                        });
+                                    } else {
+                                        //flv play
+                                        const dp1 = new DPlayer({
+                                            container: document.getElementById('dplayer1'),
+                                            screenshot: true,
+                                            autoplay: true,
+                                            mutex: false,
+                                            video: {
+                                                url: playUrl,
+                                                type: 'customFlv',
+                                                customType: {
+                                                    customFlv: function (video, player) {
+                                                        const flvPlayer = flvjs.createPlayer({
+                                                            type: 'flv',
+                                                            url: video.src,
+                                                        });
+                                                        flvPlayer.attachMediaElement(video);
+                                                        flvPlayer.load();
+                                                    },
+                                                },
+                                            },
+                                        });
+                                    }
+                                    console.log({ "seek": seek });
+                                    if (seek != 0) {
+                                        dp1.seek(seek);
+                                    }
+                                    clearInterval(setTimeMove);
+                                    setTimeMove = setInterval(function () {
+                                        $("#timeline").TimeSlider('set_time_to_middle', timeScaleSpan); // new Date().getTime()
+                                    }, 1000);
+                                    console.log({ "setTimeMove": setTimeMove });
+                                }
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+
+                                var reuestFailTips = "1." + noMediaServerStart + "<br>2." + requestFail + "(" + requestFileDeleted + ")<br>3." + corsPolicyIsNotAllowed;
+                                var reuestLayerIndex = layer.msg(reuestFailTips, {
+                                    icon: 16,
+                                    time: 3000
+                                });
+                                console.log("playUrl = " + playUrl + "\n1." + noMediaServerStart + "\n2." + requestFail + "\n3." + corsPolicyIsNotAllowed);
+                                return; //返回
+                            });
+
+                        } else {
+                                console.log( res.meta.message );
+                        }
+                    },
+                    error: function(res) {
+                        console.log({ "ajaxerror": res });
+                        layer.close(loadingIndex);
+                    }
+                });
+            });
+        });
+
+        function GetCamHistList(setTimeValue) {
+            isRecent = $('#isRecent').is(':checked');
+            var requestUrl = "/" + languageCode + "/Cam/GetCamHistList/" + cameraId + "/" + timeScaleValue + "/" + isRecent;
+            console.log(requestUrl);
+
+            $.ajax({
+                url: requestUrl,
+                type: "get",
+                async: false,
+                success: function (res) {
+                    layer.close(loadingIndex);
+                    console.log({ "GetCamHistList Response:": res });
+
+                    if (res.meta.success) {
+                        layer.msg("data loaded! OK!");
+                        timecell = res.data;
+                        if(timecell==[])
+                        {
+                             layer.msg("time cells no data !");
+                        }
+                        $("#timeline").TimeSlider({
+                            init_cells: timecell
+                        });
+                    } else {
+                        layer.open({
+                            title: '@Lang.GeneralUI_ReturnResult'
+                            , content: res.meta.message + "line:246"
+                            , btn: '@Lang.GeneralUI_OK'
+                        });
+                    }
+                }
+            }); //end ajax get json data //GetCamHistList
+            console.log("timecell initialize array completed ! timecell data as follows:");
+            console.log(timecell);
+            if (timecell.length == 0)
+                layer.msg("no data loaded");
+        }
+
+        function MarkSelectTimeCell(timecell, camHistX) {
+
+            i = 0;
+            timecell.forEach(function (item) {
+
+                if (item.beginTime == camHistX.beginTime && item.endTime == camHistX.endTime) {
+                    timecell[i] = camHistX;
+                    console.log(i);
+                    console.log(timecell[i]);
+                    return;
+                }
+                i++;
+            });
+        }
+
+        function ShowMediaInfo(data) {
+            
+            var camera = data.camera;
+
+            $("#MdediaInfoCameraId").text(camera.cameraId);
+            $("#MdediaInfoName").text(camera.name);
+            $("#MdediaInfoSiteName").text(camera.siteName);
+            $("#MdediaInfoCameraIp").text(camera.cameraIp);
+
+            var camHistX = data.camHistX;
+            if (data.seek != 0) {
+                var seekTime = datetimeFormat(new Date(data.seek));
+                $("#MdediaInfoSeek").text(seekTime);
+            } else { 
+                var seekTime = datetimeFormat(new Date(camHistX.beginTime));
+                $("#MdediaInfoSeek").text(seekTime);  
+            }
+           
+
+            var beginDateTime = new Date(camHistX.beginTime);
+            $("#MdediaInfoBeginTime").text(datetimeFormat(beginDateTime));
+            var endDateTime = new Date(camHistX.endTime);
+            $("#MdediaInfoEndTime").text(datetimeFormat(endDateTime));
+
+            var timespan = camHistX.endTime - camHistX.beginTime;
+            var timespanMinutes = timespan / 60000;
+            timespanMinutes = timespanMinutes.toFixed(2);
+            $("#MdediaInfoTimeSpan").text(timespanMinutes + " mins");
+
+            //download
+            $("#MdediaInfoDownload").attr("href", data.camHistWithUrl);
+        }
+    });
+
+    layer.closeAll();
+</script>
+
+<!--https://github.com/luxiaojiang0/DPlayer/-->

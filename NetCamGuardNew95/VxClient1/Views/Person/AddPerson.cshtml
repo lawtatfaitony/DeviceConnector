@@ -1,0 +1,645 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels.LibraryApiModel
+@using VideoGuard.ApiModels
+@using Common
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.GeneralUI_AddNew;
+}
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    SelectList libList = ViewBag.LibId as SelectList;
+    SelectList genderList = ViewBag.GenderList as SelectList;
+    PersonModelInput personModelInput = Model.data as PersonModelInput;
+
+    <link href="~/AdminLTE305/plugins/cropper/cropper.min.css" rel="stylesheet" />
+    <script src="~/AdminLTE305/plugins/cropper/cropper.min.js"></script>
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
+    <script src="~/AdminLTE305/plugins/select-pure-master/dist/bundle.min.js"></script>
+    <!--MULTI-SELECT-->
+    <style>
+        .select-wrapper {
+            margin: 0;
+            max-width: 100%;
+            width: calc(100% - 40px);
+        }
+
+        .select-pure__select {
+            align-items: center;
+            background: #f9f9f8;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            color: #363b3e;
+            cursor: pointer;
+            display: flex;
+            font-size: 14px;
+            font-weight: 500;
+            justify-content: left;
+            min-height: 44px;
+            padding: 5px 10px;
+            position: relative;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .select-pure__options {
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            color: #363b3e;
+            display: none;
+            left: 0;
+            max-height: 221px;
+            overflow-y: scroll;
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .select-pure__select--opened .select-pure__options {
+            display: block;
+        }
+
+        .select-pure__option {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e4;
+            box-sizing: border-box;
+            height: 44px;
+            line-height: 25px;
+            padding: 10px;
+        }
+
+        .select-pure__option--disabled {
+            color: #e4e4e4;
+        }
+
+        .select-pure__option--selected {
+            color: #e4e4e4;
+            cursor: initial;
+            pointer-events: none;
+        }
+
+        .select-pure__option--hidden {
+            display: none;
+        }
+
+        .select-pure__selected-label {
+            align-items: "center";
+            background: #5e6264;
+            border-radius: 4px;
+            color: #fff;
+            cursor: initial;
+            display: inline-flex;
+            justify-content: "center";
+            margin: 5px 10px 5px 0;
+            padding: 3px 7px;
+        }
+
+            .select-pure__selected-label:last-of-type {
+                margin-right: 0;
+            }
+
+            .select-pure__selected-label i {
+                cursor: pointer;
+                display: inline-block;
+                margin-left: 10px;
+            }
+
+            .select-pure__selected-label img {
+                cursor: pointer;
+                display: inline-block;
+                height: 18px;
+                margin-left: 7px;
+                width: 14px;
+            }
+
+            .select-pure__selected-label i:hover {
+                color: #e4e4e4;
+            }
+
+        .select-pure__autocomplete {
+            background: #f9f9f8;
+            border-bottom: 1px solid #e4e4e4;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .select-pure__placeholder--hidden {
+            display: none;
+        }
+    </style>
+    <div ng-controller="AddNewPersonCtrl" class="container col-lg-offset-3 col-md-offset-3 pt-3" style="max-width:500px;">
+        <form asp-action="AddPerson" asp-controller="Person" asp-route-Language="@LangExtend.LanguageCode" data-ajax-success="handlePersonAddNew" onsubmit="onBeginSubmit" asp-ajax-onFailure="errPersonAddNew" data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="formPerson" id="formPerson">
+            <input type="hidden" asp-for="@personModelInput.MaincomId" hidden /> 
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title text-dark"><i class="fas fa-user" style="color:forestgreen"></i> @ViewBag.Title</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body " style="display: block;">
+                    <div class="form-group  mb-1">
+                        <label class="control-label col-12" for="LibId"><i class="fas fa-venus-mars" style="color:forestgreen"></i> @Lang.Person_Library</label>
+                        <div class="input-group col-10">
+                            <select asp-for="@personModelInput.LibId" name="LibId" asp-items="@libList" class="border-right-0 form-control form-control-sm bold"></select>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Person_Library  @Lang.GeneralUI_Optional">
+                                    <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@personModelInput.LibId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-12">
+                            <i class="fas fa-id-card-alt" style="color:forestgreen"></i> @Lang.Person_LibIdGroups
+                        </label>
+                        <div class="input-group col-12">
+                            <input asp-for="@personModelInput.LibIdGroups" name="LibIdGroups" class="LibIdGroups" type="hidden" />
+                            <div class="select-libIdGroups-list1 col-11 ml-0 mr-0 pl-0 input-group-sm border-right-0"></div>
+                        </div>
+                        <span asp-validation-for="@personModelInput.LibIdGroups" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group  mb-1">
+                        <label class="control-label  col-12" for="OuterId"><i class="fas fa-id-card" style="color:forestgreen;"></i> @Lang.Person_OuterId</label>
+                        <div class="input-group  col-10">
+                            <input asp-for="@personModelInput.OuterId" name="OuterId" data-val="true" class="border-right-0 form-control  form-control-sm" type="text" placeholder="@Lang.Person_OuterId" data-toggle="title" title="@Lang.Person_OuterId" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Person_OuterId">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span  for="OuterId"  class="text-primary small">@Lang.Person_OuterId_Tips</span>
+                        <span asp-validation-for="@personModelInput.OuterId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group  mb-1">
+                        <label class="control-label  col-12" for="Name"><i class="fas fa-id-card" style="color:forestgreen;"></i> @Lang.Person_Name</label>
+                        <div class="input-group  col-10">
+                            <input asp-for="@personModelInput.Name" name="Name" data-val="true" class="border-right-0 form-control  form-control-sm" type="text" placeholder="@Lang.Person_Name" data-toggle="title" title="@Lang.Person_Name" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" id="guestnameTips" data-guestname="@Lang.PersonCategory_GUEST" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.AddPerson_GuestRuleTips">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@personModelInput.Name" class="text-danger"></span>
+                    </div>
+                    <!--Person Picture & Sex-->
+                    <div class="d-flex justify-content-start ">
+                        <div class="p-0  bd-highlight">
+                            <div class="form-group mb-0">
+                                <label class="control-label col-12" for="PicUrl"><strong><i class="fas fa-portrait" style="color:forestgreen;"></i></strong> @Lang.Person_PicUrl</label>
+                                <div class="input-group  col-10 m-0">
+                                    <input asp-for="@personModelInput.PicUrl" name="PicUrl" class="PicUrl" type="hidden" />
+                                    <span asp-validation-for="@personModelInput.PicUrl" class="text-danger"></span>
+
+                                    <input asp-for="@personModelInput.PicClientUrl" name="PicClientUrl" class="PicClientUrl" type="hidden" />
+
+                                    <ul class="list-unstyled list-inline mb-0 pb-0" id="ul_PicUrl">
+                                        <li>
+                                            <a id="OpenDialog" style="width:110px;display:block;">
+                                                @if (string.IsNullOrEmpty(personModelInput.PicUrl))
+                                                {
+                                                    <img id="uploadPicResult1" src="@Url.Content("~/images/AddPicture_a.png")" width="100" class="img-thumbnail uploadPicResult1" />
+                                                }
+                                                else
+                                                {
+                                                    <img id="uploadPicResult1" src="@personModelInput.PicUrl" alt="@Lang.GeneralUI_Browse" width="100" class="img-thumbnail uploadPicResult1" />
+                                                }
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <input type="file" value="@Lang.GeneralUI_Browse" id="file_uploadPic1" PictureId="uploadPicResult1" InputboxId="PicUrl" SrvUrl="/@LangUtilities.LanguageCode/Utility/UploadProcess?Prefix=P&SubPath=Person"
+                                                   mime_type="image/jpeg" accept="image/jpeg" class="UploadPicChange " hidden /> <!-- !Important : UploadPicChange hide hidden -->
+                                        </li>
+                                        <li>
+                                            <span class="small" id="spPicUrl" ng-bind="PicUrl"></span>
+                                            <p for="PicUrl" class="badge badge-warning small text-nowrap p-1"><i class="fas fa-angle-double-right"></i> @Lang.Person_PicUrlTips</p>
+                                            <span asp-validation-for="@personModelInput.PicUrl" class="DateTimeRange text-danger"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span asp-validation-for="@personModelInput.PicClientUrl" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="p-0 bd-highlight">
+                            <div class="form-group">
+                                <label class="control-label col-12" for="Gender"><i class="fas fa-venus-mars" style="color:forestgreen"></i> @Lang.GeneralUI_Gender</label>
+                                <div class="input-group col-10" style="min-width:160px;">
+                                    <select asp-for="@personModelInput.Sex" name="Sex" asp-items="@Html.GendersDropDownList(personModelInput.Sex.ToString())" class="border-right-0 form-control form-control-sm bold"></select> <!--genderList-->
+                                    <div class="input-group-append input-group-sm">
+                                        <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.GeneralUI_Gender  @Lang.GeneralUI_Optional">
+                                            <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-12" for="Gender">
+                                    <i class="fas fa-venus-mars" style="color:forestgreen"></i>
+                                    @Lang.Person_Category 
+                                    <i class="far fa-question-circle" data-toggle="tooltip" title="@Lang.Person_CategoryTips"></i>
+                                </label>
+                                <div class="input-group col-10" style="min-width:160px;">
+                                    <select asp-for="@personModelInput.Category" name="Category" asp-items="@Html.PersonCategoryDropDownList(personModelInput.Category.ToString())" class="border-right-0 form-control form-control-sm bold"></select>  
+                                    <div class="input-group-append input-group-sm">
+                                        <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Person_Category  @Lang.GeneralUI_Optional">
+                                            <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modal_crop_picurl">
+                        <div class="modal-dialog modal-md">
+
+                            <div class="modal-content  modal-md">
+                                <div class="modal-header p-1">
+                                    <h5 class="modal-title" id="modal_title"><i class="fas fa-picture-o text-success"></i>Cropper</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body p-0" style="min-height:400px;">
+                                    <div class="container p-0 m-0">
+                                        <img id="image_for_crop_picurl" src="~/images/picture.jpg" alt="Picture">
+                                    </div>
+                                </div>
+                                <div class="modal-footer p-1">
+                                    <button id="btnCrop" type="button" class="btn btn-primary btn-sm"><i class="fas fa-crop"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group  mb-1">
+                        <div class="d-flex flex-row bd-highlight mb-1">
+                            <div class="p-1 bd-highlight col-5">
+                                <label class="control-label col-12" for="CardNo">
+                                    <i class="fas fa-id-card-alt" style="color:forestgreen"></i> @Lang.Person_CardNo
+                                </label>
+                                <div class="input-group ml-1 ">
+                                    <input asp-for="@personModelInput.CardNo" name="CardNo" data-val="true" class="border-right-0 form-control  form-control-sm col-8" type="text" placeholder="@Lang.Person_CardNo" data-toggle="title" title="@Lang.Person_CardNo" />
+                                    <div class="input-group-append input-group-sm">
+                                        <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Person_CardNo">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="@personModelInput.CardNo" class="text-danger"></span>
+                            </div>
+                            <div class="p-1 bd-highlight col-6">
+                                <label class="control-label col-12" for="PassKey">
+                                    <i class="fas fa-id-card-alt" style="color:forestgreen"></i> @Lang.Person_PassKey
+                                </label>
+                                <div class="input-group ml-1 pr-1">
+                                    <input asp-for="@personModelInput.PassKey" name="PassKey" data-val="true" class="border-right-0 form-control  form-control-sm col-8" type="text" placeholder="@Lang.Person_PassKey" data-toggle="title" title="@Lang.Person_PassKey" />
+                                    <div class="input-group-append input-group-sm">
+                                        <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Person_PassKey">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="@personModelInput.PassKey" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group  mb-1">
+                        <label class="control-label col-12" for="Phone"><i class="fas fa-mobile-alt" style="color:forestgreen"></i> @Lang.Person_Phone</label>
+                        <div class="input-group  col-10">
+                            <input asp-for="@personModelInput.Phone" name="Phone" data-val="true" class="border-right-0 form-control  form-control-sm" type="text" placeholder="@Lang.Person_Phone" data-toggle="title" title="@Lang.Person_Phone" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Person_Phone">
+                                    <i class="fas fa-angle-double-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@personModelInput.Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-1">
+                        <label class="control-label col-12" for="Phone"><i class="fas fa-pencil-ruler" style="color:forestgreen"></i> @Lang.GeneralUI_Remark</label>
+                        <div class="input-group  col-10">
+                            <textarea id="Name" asp-for="@personModelInput.Remark" name="Remark" rows="2" data-val="true" class="border-right-0 form-control form-control-sm" type="text" placeholder="@Lang.GeneralUI_Remark" data-toggle="title" title="@Lang.GeneralUI_Remark"></textarea>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.GeneralUI_Remark">
+                                    <i class="fas fa-angle-double-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@personModelInput.Remark" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div style="display: block;" class="">
+                <div class="container card-footer">
+                    <div class="row pl-3">
+                        <div class="margin-left5 padding-left5">
+                            <button type="submit" id="btnaddnew" class="btn btn-primary padding-left15 margin-left5">
+                                @Lang.GeneralUI_AddNew
+                            </button>
+                            <a asp-action="QueryPersonList" asp-controller="Person" class="btn btn-primary pl-2">@string.Format("{0}{1}", Lang.GeneralUI_Return, Lang.GeneralUI_List)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--CP-->
+<script>
+
+    var SrvUrlCrop = "/@LangUtilities.LanguageCode/Utility/UploadProcess?Prefix=P&SubPath=Person";
+     
+    var UrlPathFileName;
+
+    let cropper;
+    var cropBoxData;
+    var canvasData;
+    const image = document.getElementById('image_for_crop_picurl');
+
+    function cropx() {
+        const image2 = document.getElementById('image_for_crop_picurl');
+        var cropper = new Cropper(image2, {
+            aspectRatio: 3 / 4,
+            responsive: true,
+            dragMode: "move",
+            modal:true,
+            viewMode: 1,
+            minContainerWidth: "500",//minContainerWidth default val：200； //  minContainerHeight default val:"100"
+            minContainerHeight: "400",
+            restore: true,
+            ready: function (event) {
+                // Zoom the image to its natural size
+                //cropper.zoomTo(1);
+            },
+            crop: function (event) {
+                    //console.log(JSON.stringify(cropper.getData()));
+                    //console.log(JSON.stringify(cropper.getCropBoxData()));
+            },
+            zoom: function (event) {
+                // Keep the image in its natural size
+                if (event.detail.oldRatio === 1) {
+                    event.preventDefault();
+                }
+            },
+        });
+        return cropper;
+    }
+
+    $("#modal_crop_picurl").on("show.bs.modal", function () {
+        cropper = cropx();
+        console.log("popup modal");
+    });
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        cropper = cropx();
+    });
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
+    $("#uploadPicResult1").click(function () {
+        $("#file_uploadPic1").click();
+    }); // In Mainjs
+
+    $(".UploadPicChange").change(function () {
+        //debugger;
+        var DialogInputId = $(this).attr('id');
+        var fileInfo = document.getElementById(DialogInputId).files[0];
+        var SrvUrl = $(this).attr('SrvUrl');
+        console.log(SrvUrl);
+        var form = new FormData();
+        form.append("file", fileInfo);
+
+        $.ajax({
+            url: SrvUrl,
+            type: 'POST',
+            data: form,
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,  // tell jQuery not to set contentType
+            success: function (data) {
+                console.log(data);
+                var json1 = data;
+
+                var picClientUrl = json1.picClientUrl;
+                var picClientUrlAbsolutePath = json1.picClientUrlAbsolutePath;
+
+                    //debugger;
+                    $("input[name='PicUrl']").val(picClientUrl);
+                    $("input[name='PicClientUrl']").val(picClientUrl);
+
+                    $("#uploadPicResult1").attr("src",picClientUrlAbsolutePath);
+                    $("#image_for_crop_picurl").attr("src", picClientUrlAbsolutePath);
+
+
+                    $("img").css("max-width", "100%");
+                    $('#modal_crop_picurl').modal('show');
+            },
+            error: function (data) { alert("server error ,POSIBLE:[ @Lang.FILE_BACKEND_CLOSED ]"); }
+        });
+
+        if (layer !== undefined) {
+            setTimeout(
+                function () {
+                    layer.close(layer.index);
+                }, 2800);
+        }
+    });
+
+    function handlePersonAddNew(result) {
+        layer.close(layer.index);
+        console.log(result);
+
+         layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+            });
+
+        if (result.meta.success === true) {
+
+
+            redirectLocaleUrl = "@Url.Action("QueryPersonList", "Person")";
+            console.log(redirectLocaleUrl);
+            setTimeout(
+                function () {
+                    window.location.href = redirectLocaleUrl;
+                }
+                , 3000);
+
+        } 
+    }
+    function errPersonAddNew(data) {
+        layer.close('loading');
+
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errPersonAddNew");
+    }
+
+    $("#btnCrop").click(function () {
+        //debugger;
+        var cropCanvas = cropper.getCroppedCanvas();
+        if (cropCanvas == null) {
+            cropper = cropx();
+            cropCanvas = cropper.getCroppedCanvas();
+        }
+        console.log(cropCanvas);
+        var cropUrl = cropCanvas.toDataURL('image/jpeg', 1);
+        var formData = new FormData();
+        formData.append('file', dataURItoBlob(cropUrl),"cropUrl123.jpg");
+            $.ajax(SrvUrlCrop, {
+                method: "post",
+                data: formData,
+                processData: false,
+                contentType: false,
+                    success: function (result) {
+                        console.log(result);
+
+                        var picClientUrl = result.picClientUrl;
+                        var picClientUrlAbsolutePath = result.picClientUrlAbsolutePath;
+
+                        //debugger;
+                        $("input[name='personModelInput.PicUrl']").val(picClientUrl);
+                        $("input[name='personModelInput.PicClientUrl']").val(picClientUrl);
+
+                        $("#uploadPicResult1").attr("src", picClientUrlAbsolutePath);
+
+                        layer.close(layer.index);
+                        $('#modal_crop_picurl').modal('hide');
+                },
+                error: function () {
+                    console.log('Upload error');
+                }
+            });
+    });
+    function dataURItoBlob(base64Data) {
+        var byteString;
+        if (base64Data.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(base64Data.split(',')[1]);
+        else
+            byteString = unescape(base64Data.split(',')[1]);
+        var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ia], {
+            type: mimeString
+        });
+    }
+
+    var queryLibGroupUrl = '/' + '@LangUtilities.LanguageCode' + '/Library/GetLibraryList/@personModelInput.MaincomId';
+    app.controller('AddNewPersonCtrl', function ($scope, $http) {
+            $http({
+                method: 'GET',
+                url: queryLibGroupUrl
+            }).then(function successCallback(response) {
+
+                console.log(response.data);
+                if (response.data.meta.success === true) {
+                    GetLibGroupListJson = response.data.data;
+
+                    console.log("GetLibraryListJson:");
+                    console.log(GetLibGroupListJson)
+
+                    var libIdGroupsInput = $(".LibIdGroups").val();
+                    if (libIdGroupsInput == 0)
+                        libIdGroupsInput = "";
+
+                    var libIdGroupsArray1 = libIdGroupsInput.split(',');
+
+                    if (libIdGroupsArray1 instanceof Array === false) {
+                        console.log("Just CameraArray1 is Array or not:");
+                        console.log(libIdGroupsArray1 instanceof Array);
+                    }
+
+                    //Required 沒有所屬的人員群組,則默認為所列的第一個位默認群組
+                    if (libIdGroupsArray1[0] == "") {
+                        libIdGroupsArray1 = [GetLibGroupListJson[0].value];
+                        layer.open({
+                            title: '@Lang.GeneralUI_InfoTips'
+                            , content: "@Lang.QueryLibraryList_Title @Lang.GeneralUI_NoRecord"
+                            , btn: '@Lang.GeneralUI_OK'
+                        });
+                    }
+                    //debugger;
+                    console.log("===============================================================================================");
+                    console.log({ "GetLibGroupListJson": GetLibGroupListJson });
+                    console.log({ "libIdGroupsArray1": libIdGroupsArray1 });
+                    InitializeLibIdGroups(".select-libIdGroups-list1", GetLibGroupListJson, ".LibIdGroups", libIdGroupsArray1);
+                }
+                else {
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: "Get Camera list :" + response.data.meta.message
+                        , btn: '@Lang.GeneralUI_OK'
+                    });
+                    console.log("UpdateTaskCtrl OK: \n\r" + response.data);
+                }
+
+            }, function errorCallback(response) {
+                console.log("UpdateTaskCtrl : \n\r" + response.data);
+            });
+    });
+
+        function InitializeLibIdGroups(select_css_id, libIdGroupsList, TargetObject, arr_value) {
+        //debugger;
+        var autocomplete = new SelectPure(select_css_id, {
+            options: libIdGroupsList,
+            value: arr_value, //arr_value
+            multiple: true,
+            autocomplete: true,
+            icon: "fas fa-times",
+            placeholder: "-Please select-",
+            onChange: value => {
+                console.log("arr_value.length " + arr_value.length);
+                $(TargetObject).val(value);  // $(TargetObject).val(value);
+            },
+            classNames: {
+                select: "select-pure__select",
+                dropdownShown: "select-pure__select--opened",
+                multiselect: "select-pure__select--multiple",
+                label: "select-pure__label",
+                placeholder: "select-pure__placeholder",
+                dropdown: "select-pure__options",
+                option: "select-pure__option",
+                autocompleteInput: "select-pure__autocomplete",
+                selectedLabel: "select-pure__selected-label",
+                selectedOption: "select-pure__option--selected",
+                placeholderHidden: "select-pure__placeholder--hidden",
+                optionHidden: "select-pure__option--hidden",
+            }
+        });
+    }
+
+    $("#guestnameTips").click(function(e){
+        $("input[name='Name']").val($(this).data("guestname"));
+    });
+</script>
+
+}

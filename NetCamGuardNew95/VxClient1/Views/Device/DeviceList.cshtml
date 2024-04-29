@@ -1,0 +1,485 @@
+﻿@using LanguageResource
+@using Common
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using Microsoft.AspNetCore.Http
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@using VxClient.Models
+@inject IHttpContextAccessor httpContextAccessor
+@model IEnumerable<Device>
+
+@{
+    ViewBag.Title = Lang.DeviceList_Title;
+    WebCookie.httpContextAccessor = httpContextAccessor;
+
+    DeviceSearchInput input = ViewBag.DeviceSearchInput as DeviceSearchInput;
+}
+
+<form asp-action="DeviceList" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" method="get" class="form-horizontal" id="form_DeviceUserList">
+    <div class="d-flex flex-row bd-highlight">
+        <div class="bd-highlight">
+            <div class="form-group form-group-sm">
+                <div class="input-group input-group-sm">
+
+                    <input asp-for="@input.MainComId" name="MainComId" type="hidden" />
+                    <input asp-for="@input.Page" name="Page" type="hidden" />
+                    <input asp-for="@input.PageSize" name="Page" type="hidden" />
+                    <input asp-for="@input.TotalCount" name="TotalCount" type="hidden" />
+                    <input asp-for="@input.TotalPage" name="TotalPage" type="hidden" />
+
+                    <input type="text" asp-for="@input.Search" name="Search" style="border-right-width:2px;border-right-color:#4e4eed;border-right-style:dashed;background-color:#faf9eb;"
+                           ondblclick="javascript:this.value='';" class="form-control form-control-sm border-right-0" placeholder="Search" />
+                    <select asp-for="@input.DeviceType" name="DeviceType" asp-items="@Html.DeviceTypeDropDownList(input.DeviceType)"
+                            class="border-left-0 border-right-0 form-control form-control-sm">
+                        <option value="">@Lang.GeneralUI_Select</option>
+                    </select>
+                    <div class="input-group-append input-group-sm">
+                        <button type="submit" class="btn btn-sm btn-primary text-white"><i class="fas fa-search"></i> Go!</button>
+                    </div>
+
+                    <div class="input-sm input-group-sm">
+                        <a asp-action="Add"
+                           asp-controller="Device"
+                           asp-route-Language="@LangUtilities.LanguageCode"
+                           class="btn btn-dark btn-sm text-white ml-1 pl-2 pr-2 bg-gradient-success"
+                           data-toggle="tooltip" title="@Lang.GeneralUI_AddNew" taget="_blank">
+                            <i class="fas fa-plus fa-1x font-weight-bold p-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="box-body  table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <!--1 DeviceId-->
+                <th>
+                    <div class="text-nowrap " title="@Lang.Device_DeviceId" data-toggle="tooltip">
+                        <span><i class="fas fa-cog text-green mr-1"></i> @Lang.Device_DeviceId</span>
+                    </div>
+                </th>
+                <!--2 DeviceName-->
+                <th>
+                    <div class="text-nowrap " title="@Lang.Device_DeviceName" data-toggle="tooltip">
+                        <span><i class="fas fa-cog text-green mr-1"></i> @Lang.Device_DeviceName </span>
+                    </div>
+                </th>
+                <!--3 DeviceSerialNo-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Device_DeviceSerialNo" data-toggle="tooltip">
+                        <span><i class="fas fa-qrcode text-green mr-1"></i> @Lang.Device_DeviceSerialNo </span>
+                    </div>
+                </th>
+                <!--4 DeviceType-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Device_DeviceType" data-toggle="tooltip">
+                        <span><i class="fas fa-bezier-curve text-success mr-1"></i> @Lang.Device_DeviceType </span>
+                    </div>
+                </th>
+                <!--5 Site-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Device_Site" data-toggle="tooltip">
+                        <span><i class="fas fa-sitemap text-green mr-1"></i> @Lang.Device_Site </span>
+                    </div>
+                </th>
+                <!--6 Status-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.Device_Status" data-toggle="tooltip">
+                        <span><i class="fas fa-play-circle text-green"></i> @Lang.Device_Status </span>
+                    </div>
+                </th>
+                <!--7 CreateDate-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_OperateDateTime" data-toggle="tooltip">
+                        <span><i class="fas fa-calendar text-green"></i> @Lang.GeneralUI_OperateDateTime </span>
+                    </div>
+                </th>
+                <!--8 Operate-->
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Operate" data-toggle="tooltip">
+                        <span><i class="fas fa-th-list text-warning"></i> @Lang.GeneralUI_Operate </span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int x = 0;
+            }
+            @foreach (var item in Model)
+            {
+                x++;
+                <tr id="@string.Format("tr{0}", item.DeviceId)">
+                    <!--1 DeviceId-->
+                <td id="@string.Format("td{0}", item.DeviceId)" class="text-omit" data-toggle="tooltip"
+                    title="@item.DeviceName))">
+                        <div class="d-flex flex-column m-0 p-0">
+                            <div class="bd-highlight  m-0 p-0">
+                                <div id="@string.Format("div{0}", item.DeviceId)" class="text-nowrap d-flex flex-row" style="cursor:pointer;">
+                                    <div class="mr-1" data-toggle="tooltip" title="@Lang.Device_DeviceId">
+                                        <span id="@string.Format("sp{0}", item.DeviceId)" class="badge badge-dark" data-toggle="tooltip" style="cursor:pointer;">@x</span>
+                                    </div>
+                                    <div id="@string.Format("CLIDBOARD{0}", item.DeviceId)" class="pl-1 pr-1 text-white text-bold clipboard rounded bg-gradient-gray"
+                                     style="cursor:pointer;" title="@Lang.GeneralUI_ClickToCopy" onclick="getClipboardText()"
+                                     data-clipboard-text="@item.DeviceId">
+                                        @item.DeviceId.ToString()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <!--2 DeviceName-->
+                <td data-toggle="tooltip" title="@item.DeviceName">
+                        <a asp-action="Update" asp-controller="Device" asp-route-deviceid="@item.DeviceId" class="bg-primary rounded p-2 text-nowrap">
+                            <span class="mr-2 text-nowrap">@item.DeviceName</span>
+                            <i class="fas fa-edit text-bold text-danger" title="@Lang.Device_Update_Title" data-toggle="tooltip"></i>
+                        </a>
+                    </td>
+                    <!--3 DeviceSerialNo-->
+                <td style="cursor:pointer;">
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="p-1 bd-highlight overflow-hidden" style="cursor:pointer;max-width:30px;">
+                                <a id="@string.Format("lbl{0}DeviceSerialNo", item.DeviceId)" asp-action="DeviceList" asp-controller="Device" asp-route-search="@item.DeviceSerialNo" class="overflow-hidden text-nowrap"
+                               style="cursor:pointer;" data-toggle="tooltip" title="@Lang.Device_DeviceSerialNo">@item.DeviceSerialNo</a>
+                            </div>
+                            <div id="@string.Format("CLIDBOARD{0}", item.DeviceSerialNo)" class="p-1 rounded bd-highlight bg-primary clipboard"
+                             style="cursor:pointer;" title="@Lang.GeneralUI_ClickToCopy" onclick="javascript:getClipboardText()"
+                             data-clipboard-text="@item.DeviceSerialNo">
+                                copy
+                            </div>
+                            <div class="bd-highlight" data-toggle="tooltip" title="@string.Format("{0}{1}",Lang.GeneralUI_Config,Lang.Device_DeviceSerialNo)">
+                                <button class="btnConfig btn btn-sm btn-outline-danger p-1 ml-1"
+                                    data-deviceid="@item.DeviceId"
+                                    data-maincomid="@item.MaincomId"
+                                    data-devicename="@item.DeviceName"
+                                    data-deviceserialno="@item.DeviceSerialNo"
+                                    data-deviceentrymode="@item.DeviceEntryMode"
+                                    data-toggle="modal"
+                                    data-target="#DeviceSerialNoUpdModal" data-backdrop="static" style="cursor:pointer;">
+                                    @Lang.GeneralUI_Config
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <!--4 DeviceType-->
+                <td class="text-nowrap">
+                        @switch (item.DeviceType)
+                        {
+                            case EnumBusiness.DeviceType.DESTOP_DVR:
+                                <span class="bg-gradient-warning rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-devicetype="@item.DeviceType"
+                          data-toggle="modal" data-target="#DEVICE_DVR_SERVER_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-record-vinyl text-danger mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc <i class="far fa-edit text-bold text-danger mr-1"></i>
+                                </span>
+                                <a class="m-1 btn btn-outline-primary btn-sm" target="_blank" asp-action="ScreenFour" asp-controller="device" asp-route-language="@LangUtilities.LanguageCode" asp-route-maincomid="@item.MaincomId" asp-route-deviceid="@item.DeviceId">
+                                    <i class="fas fa-expand text-bold text-success mr-1"></i>
+                                </a>
+                                break;
+                            <!--HIK_DEVICE-->
+                            case EnumBusiness.DeviceType.HIK_DEVICE:
+                                <span class="bg-primary rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DEVICE_HIK_DS_KIT_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc
+                                    <i class="far fa-edit text-bold text-white mr-1"></i>
+                                </span>
+                                <!--DeviceEntryMode-->
+                                <span class="bg-gradient-yellow rounded p-1 ml-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DeviceEntryModeModal" data-backdrop="static" style="cursor:pointer;">
+                                    <i class="fas fa-door-open text-bold text-white mr-1" title="@Lang.Device_DeviceEntryMode" data-toggle="tooltip"></i>
+                                    <i class="fas fa-door-closed text-black-50 mr-1"></i>
+                                </span>
+                                break;
+                            case EnumBusiness.DeviceType.HIK_DS_KIT341BMW:
+                                <span class="bg-primary rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DEVICE_HIK_DS_KIT_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc
+                                    <i class="far fa-edit text-bold text-white mr-1"></i>
+                                </span>
+                                <!--DeviceEntryMode-->
+                                <span class="bg-gradient-yellow rounded p-1 ml-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DeviceEntryModeModal" data-backdrop="static" style="cursor:pointer;">
+                                    <i class="fas fa-door-open text-bold text-white mr-1" title="@Lang.Device_DeviceEntryMode" data-toggle="tooltip"></i>
+                                    <i class="fas fa-door-closed text-black-50 mr-1"></i>
+                                </span>
+                                break;
+                            case EnumBusiness.DeviceType.HIK_DS_KIT804MF:
+                                <span class="bg-primary rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DEVICE_HIK_DS_KIT_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc
+                                    <i class="far fa-edit text-bold text-white mr-1"></i>
+                                </span>
+
+                                <!--DeviceEntryMode-->
+                                <span class="bg-gradient-yellow rounded p-1 ml-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DeviceEntryModeModal" data-backdrop="static" style="cursor:pointer;">
+                                    <i class="fas fa-door-open text-bold text-white mr-1" title="@Lang.Device_DeviceEntryMode" data-toggle="tooltip"></i>
+                                    <i class="fas fa-door-closed text-black-50 mr-1"></i>
+                                </span>
+
+                                break;
+                            case EnumBusiness.DeviceType.NFCCIC_CHECK:
+                                <span class="bg-primary rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DEVICE_CIC_CARD_INFO_ATTDAR_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc
+                                    <i class="far fa-edit text-bold text-white mr-1"></i>
+                                </span>
+
+                                <!--DeviceEntryMode-->
+                                <span class="bg-gradient-yellow rounded p-1 ml-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DeviceEntryModeModal" data-backdrop="static" style="cursor:pointer;">
+                                    <i class="fas fa-door-open text-bold text-white mr-1" title="@Lang.Device_DeviceEntryMode" data-toggle="tooltip"></i>
+                                    <i class="fas fa-door-closed text-black-50 mr-1"></i>
+                                </span>
+
+                                break;
+                            <!--QQ-->
+                            case EnumBusiness.DeviceType.QQ:
+                                <span class="bg-primary rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#QQ_MAP_API_MODEL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc
+                                    <i class="far fa-edit text-bold text-white mr-1"></i>
+                                </span>
+                                break;
+                            case EnumBusiness.DeviceType.NFCCIC_TAP:
+                                <span class="bg-primary rounded p-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DEVICE_CIC_CARD_INFO_ATTDAR_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc
+                                    <i class="far fa-edit text-bold text-white mr-1"></i>
+                                </span>
+
+                                <!--DeviceEntryMode-->
+                                <span class="bg-gradient-yellow rounded p-1 ml-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DeviceEntryModeModal" data-backdrop="static" style="cursor:pointer;">
+                                    <i class="fas fa-door-open text-bold text-white mr-1" title="@Lang.Device_DeviceEntryMode" data-toggle="tooltip"></i>
+                                    <i class="fas fa-door-closed text-black-50 mr-1"></i>
+                                </span>
+                                break;
+
+                            default:
+                                <span class="bg-primary rounded p-1 text-nowrap" title="@Lang.Device_DeviceTypeTips" data-toggle="tooltip">
+                                    <i class="fas fa-arrow-circle-right text-bold text-white mr-1" title="@Lang.Device_DeviceType" data-toggle="tooltip"></i>
+                                    @item.DeviceTypeDesc <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                                <!--DeviceEntryMode-->
+                                <span class="bg-gradient-yellow rounded p-1 ml-1 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceentrymode="@item.DeviceEntryMode"
+                          data-toggle="modal" data-target="#DeviceEntryModeModal" data-backdrop="static" style="cursor:pointer;">
+                                    <i class="fas fa-door-open text-bold text-white mr-1" title="@Lang.Device_DeviceEntryMode" data-toggle="tooltip"></i>
+                                    <i class="fas fa-door-closed text-black-50 mr-1"></i>
+                                </span>
+                                break;
+                        }
+
+                        <span class="bg-gradient-gray rounded p-1 text-nowrap ml-1"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-deviceserialno="@item.DeviceSerialNo"
+                          data-libid="@item.LibId"
+                          data-libname="@item.LibraryName"
+                          data-devicetype="@item.DeviceType"
+                          data-toggle="modal" data-target="#DEVICE_LIBRARY_ASIGN_MODAL" data-backdrop="static" style="cursor:pointer;">
+
+                            <i class="fas fa-users-cog text-white" title="@Lang.Device_LibraryName" data-toggle="tooltip"></i>
+                            @Lang.Device_LibraryName
+                        </span>
+
+                        <a class="bg-gradient-gray rounded p-1 text-nowrap ml-1" asp-action="DevicePersonList" asp-controller="DeviceManage" asp-route-language="@LangUtilities.LanguageCode" asp-route-deviceid="@item.DeviceId">
+                            <i class="fas fa-list text-white" title="@Lang.Device_LibraryName @Lang.GeneralUI_List" data-toggle="tooltip"></i>
+                        </a>
+                    </td>
+                    <!--5 Site-->
+                <td data-toggle="tooltip" title="@item.SiteName">
+                        <span class="bg-secondary rounded p-1">@item.SiteName</span>
+                    </td>
+                    <!--6 Status-->
+                <td style="cursor:pointer;">
+                        @if (item.Status == GeneralStatus.ACTIVE)
+                        {
+                            ViewBag.StatusBackground = "bg-success";
+                        }
+                        else
+                        {
+                            ViewBag.StatusBackground = "bg-secondary";
+                        }
+                        <span class="@ViewBag.StatusBackground rounded text-bold p-2 text-nowrap"
+                          data-deviceid="@item.DeviceId"
+                          data-maincomid="@item.MaincomId"
+                          data-devicename="@item.DeviceName"
+                          data-status="@item.Status"
+                          data-devicetype="@item.DeviceType"
+                          data-toggle="modal" data-target="#deviceStatusModal" data-backdrop="static">
+                            @item.StatusDesc
+                            <span class="ml-1 mr-1" data-toggle="tooltip" title="@item.StatusDesc">
+                                <i class="fas fa-edit text-bold text-white"></i>
+                            </span>
+                        </span>
+                    </td>
+                    <!--7 UpdateTime-->
+                <td>
+                        <div class="d-flex flex-column bd-highlight">
+                            <div class="p-0 bd-highlight" data-toggle="tooltip" title="@Lang.GeneralUI_CreateDate">
+                                <span class="fas fa-stop text-dark text-nowrap"> @string.Format("{0:yyyy-MM-dd HH:mm}", item.CreateTime)</span>
+                            </div>
+                            <div class="p-0 bd-highlight" data-toggle="tooltip" title="@Lang.GeneralUI_UpdateTime">
+                                <span class="fas fa-circle text-dark text-nowrap"> @string.Format("{0:yyyy-MM-dd HH:mm}", item.UpdateTime)</span>
+                            </div>
+                        </div>
+                    </td>
+                    <!--8 Operate-->
+                <td class="info" data-toggle="tooltip" title="@Lang.GeneralUI_Operate" style="cursor:pointer;">
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="p-0 bd-highlight">
+
+                                <span class="bg-primary rounded p-1"
+                                  data-deviceid="@item.DeviceId"
+                                  data-maincomid="@item.MaincomId"
+                                  data-devicename="@item.DeviceName"
+                                  data-deviceserialno="@item.DeviceSerialNo"
+                                  data-deviceentrymode="@item.DeviceEntryMode"
+                                  data-toggle="modal" data-target="#DeviceDeleteModal" data-backdrop="static" style="cursor:pointer;">
+
+                                    <i class="fas fa-trash text-bold text-white"></i>
+                                </span>
+                            </div>
+                            <div class="p-0 bd-highlight">
+                                <!-- Remain to other function -->
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    DeviceStatus deviceStatus = new DeviceStatus { MaincomId = input.MainComId, Status = GeneralStatus.ACTIVE };
+    <partial name="Device/ModiDeviceStatus" for="@deviceStatus" />
+
+    DeviceSerialNoUpd deviceSerialNoUpd = new DeviceSerialNoUpd { MaincomId = input.MainComId };
+    <partial name="Device/ModalDeviceSerialNo" for="@deviceSerialNoUpd" />
+
+    DeviceHikConfA deviceHikConfA = new DeviceHikConfA();
+    <partial name="Device/DEVICE_HIK_DS_KIT" for="@deviceHikConfA" />
+
+    DeviceCicModel deviceCicModel = new DeviceCicModel();
+    <partial name="Device/DEVICE_CIC_CARD_INFO_ATTDAR" for="@deviceCicModel" />
+
+    <!--服務器錄像機-->
+    DeviceDVRModel deviceDVRModel = new DeviceDVRModel();
+    <partial name="Device/DEVICE_DVR_SERVER" for="@deviceDVRModel" />
+
+    QQmapApiModel qQmapApiModel = new QQmapApiModel();
+    <partial name="Device/DEVICE_QQ_MAP_GPS" for="@qQmapApiModel" />
+
+    DeviceDelModel deviceDel = new DeviceDelModel();
+    <partial name="Device/DEVICE_DELETE" for="@deviceDel" />
+
+    DeviceEntryModeInput deviceEntryModeInput = new DeviceEntryModeInput { MainComId = WebCookie.MainComId };
+    <partial name="Device/DeviceEntryModeModal" for="@deviceEntryModeInput" />
+
+    DeviceLibInput deviceLibInput = new DeviceLibInput { MainComId = WebCookie.MainComId };
+    <partial name="Device/DeviceLibraryAsignModal" for="@deviceLibInput" />
+}
+
+<div class="btn-xs">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("DeviceList", "Device", new { Language = LangUtilities.LanguageCode, Search = ViewBag.CurrentFilter, SiteId = ViewBag.CurrentSiteId, sortOrder = ViewBag.CurrentSort, page = page }), new PagedListRenderOptionsBase
+    {
+    ContainerDivClasses = new[] { "pagination pagination-sm" },
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+    MaximumPageNumbersToDisplay = 15
+    })
+</div>
+
+@section scripts {
+
+<script>
+    $(document).ready(function () {
+
+        console.log("READY");
+        $(".table-responsive").css("min-height", window.innerHeight);
+    });
+</script>
+}

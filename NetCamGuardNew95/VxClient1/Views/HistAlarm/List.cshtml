@@ -1,0 +1,202 @@
+﻿@using LanguageResource
+@using EnumCode
+@using Common
+@using VxClient.Models
+@using VideoGuard.ApiModels
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using DataBaseBusiness.ModelHistory
+
+@model IEnumerable<DataBaseBusiness.ModelHistory.HistAlarm>
+@{
+    ViewBag.Title = Lang.HistAlarm_Title;
+    int x = 0;
+    HistAlarmListInput input = ViewBag.HistAlarmListInput as HistAlarmListInput;
+    //string EntriesLogImagesPath = ViewBag.EntriesLogImagesPath as string;
+}
+
+
+<style>
+    .layui-layer.layui-layer-loading .layui-layer-content {
+        width: 100px;
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 5px;
+        background-image: url(/images/loading2.gif);
+        background-position: top center;
+        background-position-y: 15px;
+        background-repeat: no-repeat;
+        background-size: 50px;
+        color: #FFFFFF;
+        height: auto;
+        padding-top: 70px;
+        padding-left: 10px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+<div class="container-fluid mb-1 ml-0">
+    <div class="row">
+        <div class="col-6">
+            <form asp-action="List" asp-controller="HistAlarm" asp-route-Language="@LangUtilities.LanguageCode" method="get" class="" name="form1" id="form1">
+                <div class="input-group input-group-sm">
+                    <input asp-for="@input.MaincomId" name="MaincomId" type="hidden" />
+                    <input asp-for="@input.Page" name="Page" type="hidden" />
+                    <input asp-for="@input.PageSize" name="PageSize" type="hidden" />
+                    <input asp-for="@input.OccurDateTimeRange" name="OccurDateTimeRange" ondblclick="javascript:this.value='';" class="OccurDateTimeRange form-control form-control-sm border-right-0" style="max-width:280px;" type="text" autocomplete="off" title="The max rang is 3 months" data-toggle="tooltip" />
+
+                    <input asp-for="@input.Search" name="Search" ondlbclick="javascript:this.value='';" class="form-control  form-control-sm border-right-0" style="max-width:180px;border-left-width:2px;border-left-color:#e1da7d;border-left-style:dashed;" type="text" />
+
+                    <span class="input-group-append">
+                        <button type="submit" class="btn btn-success btn-flat loading"><i class="fas fa fa-search"></i> Go!</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <!--Hub Status-->
+            <div id="connection" class="float-right"><h3 id="connectionState"></h3></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="box-body  table-responsive pb-5" style="min-height:600px;">
+    <table class="table records table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_RecordId" data-toggle="tooltip">
+                        <span><i class="fa fa-id-card" style="color:mediumslateblue"> </i>ID </span> <!--fa-caret-right-->
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_Name" data-toggle="tooltip" style="max-width:120px;overflow-x:hidden"><span><i class="far fa-id-card" style="color:mediumslateblue"> </i>Title&Desc </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_OccurDateTime" data-toggle="tooltip">
+                        <span><i class="fa fa-user" style="color:mediumslateblue"> </i>@Lang.GeneralUI_OccurDateTime </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap hidden-xs" title="@Lang.GeneralUI_AlarmLevel" data-toggle="tooltip"><span><i class="far fa-address-card" style="color:mediumslateblue"> </i>@Lang.GeneralUI_AlarmLevel</span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap hidden-xs" title="@Lang.HistAlarm_OBJ_SHORT_DESC" data-toggle="tooltip"><span><i class="fas fa-exclamation-triangle text-warning"> </i>@Lang.HistAlarm_OBJ_SHORT_DESC</span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap hidden-xs" title="@Lang.HistAlarm_CAPTURE_PATH" data-toggle="tooltip"><span><i class="fas fa-images text-warning"> </i>@Lang.HistAlarm_CAPTURE_PATH</span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap hidden-xs text-nowrap" title="@Lang.GeneralUI_Device" data-toggle="tooltip">
+                        <span><i class="fa fa-cog" style="color:mediumslateblue"> </i>@Lang.GeneralUI_Device </span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="AlarmListTbody" class="">
+            @foreach (var item in Model)
+            {
+                x++;
+                long lOccurDatetime = item.OccurDatetime ?? 0;
+                DateTime occurDatetime = DateTimeHelp.ConvertToDateTime(lOccurDatetime);
+                TaskType taskType = (TaskType)item.TaskType;
+                AlarmLevel alarmLevel = (AlarmLevel)item.AlarmLevel;
+                <tr>
+                    <td id="@string.Format("td{0}",item.HistAlarmId)" class="text-omit small" data-toggle="tooltip" title="@item.HistAlarmId">
+                        <div id="@string.Format("div{0}",item.HistAlarmId)" class="text-nowrap d-flex flex-row" style="cursor:pointer;">
+                            <div class="mr-1">
+                                <span id="@string.Format("sp{0}",item.HistAlarmId)" class="badge badge-dark" data-toggle="tooltip" style="cursor:pointer;">@x</span>
+                            </div>
+                            <div id="@string.Format("CLIDBOARD{0}",item.HistAlarmId)" class="p-0 text-dark clipboard" style="cursor:pointer;" title="@Lang.GeneralUI_ClickToCopy" onclick="javascript:getClipboardText()" data-clipboard-text="@item.HistAlarmId">@item.HistAlarmId.ToString()</div>
+                        </div>
+                    </td>
+
+                    <td class="text-omit small">
+                        <div class="p-0 m-0">
+                            <details class="p-0 ml-0">
+                                <summary class="text-nowrap p-0">
+                                    <span class="pl-0 text-bold fas fa-user" data-toggle="tooltip" title="@item.ObjName"> @CommonBase.Substr(item.ObjName, 8) </span><span class="small p-0"> @item.ObjName</span>
+                                </summary>
+                                <div class="d-flex flex-column bd-highlight">
+                                    <div class="p-1 bd-highlight" data-toggle="tooltip" title="@item.TaskName">
+                                        <i class="fas fa-sitemap"></i> @item.TaskId <span class="small p-0"> @item.TaskName</span>
+                                    </div>
+                                    <div class="p-1 bd-highlight" data-toggle="tooltip" title="@item.ObjName">
+                                        <span class="badge badge-secondary mt-0"> <i class="fas fa-id-card"></i> @item.ObjName</span>
+                                    </div>
+                                    <div class="p-1 bd-highlight" data-toggle="tooltip" title="@item.ObjShortDesc">
+                                        <span class="badge badge-secondary mt-0"> <i class="fas fa-tasks"></i> @item.ObjShortDesc</span>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="d-flex flex-column bd-highlight">
+                            <div class="text-nowrap bd-highlight pb-0 mb-1" data-toggle="tooltip" title="@string.Format("{0:yyyy-MM-dd HH:mm:ss fff}", occurDatetime)">
+                                <span class="badge badge-secondary text-white p-2"><i class="fas fa-calendar mr-1"> </i> @string.Format("{0:yyyy-MM-dd HH:mm:ss fff}", occurDatetime)</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="@string.Format("divALARMLEVEL{0}_{1}",item.AlarmLevel,item.HistAlarmId)"
+                         class="p-1 rounded p-2 bg-secondary clipboard" style="cursor:pointer;border-radius:5px;" title="@Lang.GeneralUI_ClickToCopy"
+                         onclick="javascript:getClipboardText()" data-clipboard-text="@alarmLevel.ToString()">
+                            @alarmLevel.GetDescription()
+                        </div>
+                    </td>
+                    <td>
+                        <label class="label label-primary  p-1 pl-2 pr-2 bg-gradient-secondary rounded">
+                            <i class="fas fa-user text-dark"></i>
+                            @item.ObjShortDesc
+                        </label>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.CapturePath))
+                        {
+                            <div class="text-nowrap"
+                         data-toggle="tooltip" title="@item.CapturePath">
+                                <a href="@item.CapturePath" target="_blank">
+                                    <img src="@string.Format("{0}s60X60.jpg", item.CapturePath)" width="60" onclick="showBigImg(this);" class="hist_alarm_tr_border_style2" />
+                                </a>
+                            </div>
+                        }
+                    </td>
+
+                    <td data-toggle="tooltip" title="@item.CameraName">
+                        <label class="small text-nowrap rounded p-2 bg-secondary" style="border-radius:5px;"><i class="fas fa-cogs text-white mr-1"></i>@item.CameraName @item.CameraId</label>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="page-header btn-xs">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", new
+    {
+    MaincomId = input.MaincomId,
+    page = page,
+    Search = input.Search,
+    PageSize = input.PageSize,
+    OccurDateTimeRange = input.OccurDateTimeRange,
+    Language = LangUtilities.LanguageCode, @class = "pagination"
+    }),new PagedListRenderOptionsBase {LiElementClasses = new string[] { "page-item" }, PageClasses = new string[] { "page-link" }})
+</div>
+
+<script>
+    var language = "@LangUtilities.LanguageCode"
+    $(document).ready(function () {
+        DateTimeRangeMultiLanguage.dateLimit = 365;
+        $('.OccurDateTimeRange').daterangepicker(DateTimeRangeMultiLanguage);
+        $('.OccurDateTimeRange').val("@input.OccurDateTimeRange");
+    });
+
+</script>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/HistAlarmHub.js"></script>

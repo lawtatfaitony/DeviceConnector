@@ -1,0 +1,194 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@model DeviceCicModel
+<!--
+    CIC 拍卡賬號配置
+    -->
+<!--DeviceFlatConfig Modal -->
+<div class="modal fade" id="DEVICE_CIC_CARD_INFO_ATTDAR_MODAL" tabindex="-1" role="dialog" aria-labelledby="DEVICE_HIK_DS_KIT_MODAL" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form asp-action="SetDeviceCicModel" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" data-ajax-success="handleDeviceHikDSKIT"
+                  onsubmit="onBeginSubmit" asp-ajax-onFailure="errDeviceHikDSKIT" data-ajax="true" data-ajax-method="post"
+                  class="form-horizontal" id="formDeviceHikDSKIT">
+                <input asp-for="MainComId" type="hidden" name="MainComId" class="MainComId" />
+                <input asp-for="DeviceId" type="hidden" name="DeviceId" class="DeviceId" />
+                <input asp-for="DeviceSerialNo" type="hidden" name="DeviceSerialNo" class="DeviceSerialNo" />
+                <!--Modal header-->
+                <div class="modal-header">
+                    <h5 class="modal-title">@Lang.Device_DeviceCicModel_Title</h5>
+                    <span class="text-danger h5 p-1 ml-2">@Lang.GeneralUI_Config</span><span class="DeviceId text-danger p-1 h5 ml-2" data-toggle="tooltip" title="@Lang.Device_DeviceId">@Model.DeviceId</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DeviceId">@Lang.Device_DeviceId</label>
+                                <div class="">
+                                    <input type="text" name="DeviceId" asp-for="DeviceId" data-val="true" readonly="readonly"
+                                           data-val-required="@string.Format("Device ID {0}",Lang.GeneralUI_Required)"
+                                           class="DeviceId form-control form-control-sm bold" title="LoginId" data-toggle="tooltip" />
+                                    <span asp-validation-for="DeviceId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DeviceName">@Lang.Device_DeviceName</label>
+                                <div class="">
+                                    <input type="text" name="DeviceName" asp-for="DeviceName" data-val="true"
+                                           data-val-required="@string.Format("{0}{1}",Lang.Device_DeviceName,Lang.GeneralUI_Required)"
+                                           class="DeviceName form-control form-control-sm bold" title="@Lang.Device_DeviceName" data-toggle="tooltip" />
+                                    <span asp-validation-for="DeviceName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="CicAccount">@Lang.DeviceCicModel_CicAccount</label>
+                                <div class="pr-1">
+                                    <input type="text" name="CicAccount" asp-for="CicAccount" data-val="true" data-val-required="@string.Format("{0} {1}",Lang.DeviceCicModel_CicAccount,Lang.GeneralUI_Required)"
+                                           class="CicAccount form-control form-control-sm" title="@Lang.DeviceCicModel_CicAccount" data-toggle="tooltip" />
+                                    <span asp-validation-for="CicAccount" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight  col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="CicPassword">@Lang.DeviceCicModel_CicPassword</label>
+                                <div class="pr-1">
+                                    <input type="text" name="CicPassword" asp-for="CicPassword" data-val="true" data-val-required="@string.Format("{0} {1}",Lang.DeviceCicModel_CicPassword,Lang.GeneralUI_Required)"
+                                           class="TypeName form-control form-control-sm" title="@Lang.DeviceCicModel_CicPassword" data-toggle="tooltip" />
+                                    <span asp-validation-for="CicPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-6">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DeviceEntryMode">@Lang.Device_DeviceEntryMode</label>
+                                <div class="pr-1">
+                                    <select asp-for="DeviceEntryMode" name="DeviceEntryMode" asp-items="@Html.DeviceEntryModeDropDownList(Model.DeviceEntryMode.ToString())"
+                                            title="@Lang.Device_DeviceEntryModeTips" data-toggle="tooltip" class="DeviceEntryMode form-control form-control-sm bold">
+                                        <option value="0">@Lang.GeneralUI_Select</option>
+                                    </select>
+                                    <span asp-validation-for="DeviceEntryMode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="SiteId">@Lang.Device_Site</label>
+                                <div class="pr-1">
+                                    <input type="text" name="SiteId" asp-for="SiteId" title="@Lang.Device_CicSiteTips" data-toggle="tooltip"
+                                           class="SiteId form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="IsReverseHex">@Lang.Device_IsReverseHex</label>
+                                <div class="pr-1">
+                                    <input type="checkbox" name="IsReverseHex" asp-for="IsReverseHex" title="@Lang.Device_IsReverseHexTips" data-toggle="tooltip"
+                                           class="IsReverseHex form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="mb-2"> <span class="label bg-gradient-secondary rounded small p-1">@Lang.Device_DeviceEntryModeTips</span></li>
+                        <li class="mb-2"> <span class="label bg-gradient-secondary rounded small p-1">@Lang.Device_CicSiteTips</span></li>
+                        <li class="mb-2"> <span class="label bg-gradient-secondary rounded small p-1">@Lang.Device_IsReverseHexTips</span></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="AddNewComfirmed" class="btn btn-primary"> @Lang.GeneralUI_Comfirmed </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        console.log("from HIK KITxxx型號配置 device config partial view");
+
+        function onBeginSubmit() {
+            return confirm("Are you sure?");
+        }
+
+        function handleDeviceHikDSKIT(result) {
+
+            layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: result.meta.message
+                    , btn: '@Lang.GeneralUI_OK'
+            });
+
+            //layer.close(layer.index);
+            console.log(result);
+        }
+
+        function errDeviceHikDSKIT(data) {
+       
+            console.log(JSON.stringify(data));
+            alert('@Lang.GeneralUI_ServerError' + "--client errDeviceStatus");
+            layer.close('loading');
+        }
+
+        $('#DEVICE_CIC_CARD_INFO_ATTDAR_MODAL').on('show.bs.modal', function (event) {
+           
+            var button = $(event.relatedTarget) // Button that triggered the modal
+           
+            var deviceId = button.data('deviceid');
+            var maincomId = button.data('maincomid')
+            var deviceName = button.data('devicename');
+            var deviceSerialNo = button.data('deviceserialno');
+            console.log("deviceId=" + deviceId + "| maincomId=" + maincomId + "| deviceName =" + deviceName + "|  deviceSerialNo =" + deviceSerialNo);
+            var modal = $(this);
+            modal.find('.modal-title').text(deviceName);
+            //field
+            modal.find('.DeviceId').text(deviceId);
+            modal.find('.DeviceId').val(deviceId);
+            modal.find('.MainComId').val(maincomId);
+            modal.find(".DeviceSerialNo").val(deviceSerialNo);
+
+            var returnDeviceConfigJsonUrl = "/Device/ReturnDeviceConfigJson/" + deviceId;
+            $.get(returnDeviceConfigJsonUrl, function (result, status) {
+                if (status != undefined) {
+                    if (status == "success" && result.meta.success) {
+                        console.log(result);
+                        modal.find('.CicAccount').val(result.data.cicAccount);
+                        modal.find('.CicPassword').val(result.data.cicPassword);
+                        modal.find('.DeviceName').val(result.data.deviceName);//
+                        switch (result.data.deviceEntryMode) {
+                            case -1:
+                                modal.find('.DeviceEntryMode').val("UNDEFINED");
+                                break;
+                            case 0:
+                                modal.find('.DeviceEntryMode').val("IN");
+                                break;
+                            case 1:
+                                modal.find('.DeviceEntryMode').val("OUT");
+                                break;
+                            case 2:
+                                modal.find('.DeviceEntryMode').val("INOUT");
+                                break; 
+                        }
+                       
+                        modal.find('.SiteId').val(result.data.siteId);
+                        modal.find('.IsReverseHex').val(result.data.isReverseHex);
+                    }
+                }
+            });
+        });
+    </script>
+

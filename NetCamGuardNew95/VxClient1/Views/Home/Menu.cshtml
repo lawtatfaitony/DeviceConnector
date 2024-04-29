@@ -1,0 +1,326 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Routing
+@using FunctionProtected
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    Layout = null;
+
+    var routeContext = new RouteContext(httpContextAccessor.HttpContext);
+    if (routeContext.RouteData.Values["Language"] != null)
+    {
+        LangUtilities.LanguageCode = LangUtilities.StandardLanguageCode(routeContext.RouteData.Values["Language"].ToString());
+    }
+    WebCookie webCookie = new WebCookie(httpContextAccessor);
+
+    bool D1_AIG_DVR_ENABLE = true;
+}
+
+<!-- Sidebar Menu -->
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item has-treeview menu-open" hidden>
+            <!--暂时不用这块-->
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                    统计仪表板2
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                    统计仪表板
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas  fa-cogs text-warning"></i>
+                <p>
+                    @Lang.DEVICE_DeviveManagement
+                    <i class="fas fa-stop text-success right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-action="DeviceList" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            @Lang.DeviceList_Title
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Add" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" class="nav-link">
+                        <i class="fas fa-plus-square nav-icon"></i>
+                        <p>@Lang.Device_AddNew_Title</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        @if (D1_AIG_DVR_ENABLE)
+        {
+            <!--CAMERA-->
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-video text-warning"></i>
+                    <p>
+                        @Lang.CamManagement_Title
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-action="QueryCameraList" asp-controller="Cam" asp-route-Language="@LangUtilities.LanguageCode" class="nav-link">
+                            <i class="fas fa-video nav-icon"></i>
+                            <p>@Lang.Cam_QueryCameraList</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Add" asp-controller="Cam" asp-route-Language="@LangUtilities.LanguageCode" class="nav-link">
+                            <i class="nav-icon fas fa-file-video"></i>
+                            <p>
+                                @Lang.CamAdd_Title
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <!--CAMERA-->
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-video text-warning"></i>
+                    <p>
+                        <i class="fas fa-angle-left right"></i>
+                        @Lang.CamManagement_Title @ViewBag.V2_D1
+                        <br />
+                        <span class="bg-danger p-1 rounded">NO LICENSE</span>
+                    </p>
+                </a>
+            </li>
+        }
+        <!--Site Admin-->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link expandHeight">
+                <i class="nav-icon fas fa-sitemap"></i>
+                <p>
+                    @Lang.UpdateSite_Title
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-action="AddSite" asp-controller="Site" asp-route-Language="@LangUtilities.LanguageCode" class="nav-link">
+                        <i class="nav-icon fas fa-tree text-warning"></i>
+                        <p>
+                            @Lang.AddSite_Title
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <div id="treeviewOfSiteUpdate" class="site_tree_view" style="overflow-y:auto;">
+                        <i class="fas fa-spinner fa-spin fa-3x m-5 text-success"></i>
+                    </div>
+                </li>
+            </ul>
+
+        </li>
+        <!--Library-->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fab fa-connectdevelop"></i>
+                <p>
+                    @Lang.LibraryManagement_Title
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("AddLibrary","Library",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="nav-icon fab fa-connectdevelop"></i>
+                        <p>
+                            @Lang.AddLibrary_Title
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("QueryLibraryList","Library",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="fas fa-list-ol nav-icon"></i>
+                        <p>@Lang.QueryLibraryList_Title</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!--Task-->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                    @Lang.Task_Management
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("AddTask","Task",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.AddTask_Add</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("QueryTaskList","Task",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.Task_QueryTaskList_Title</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    @Lang.Person_Management
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("QueryPersonList","Person",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.QueryPersonList_Title</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("AddPerson","Person",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.AddPerson_Add </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item has-treeview menu-open">
+            <!--門禁管理-->
+            <a asp-action="DoorTreePanel" asp-controller="Door" asp-route-language="@LangUtilities.LanguageCode" asp-route-sDoorId="0" class="nav-link">
+                <i class="nav-icon fas fa-door-open text-warning"></i>
+                <p>
+                    @Lang.DoorTreePanel_Title
+                    <i class="fas fa-stop text-warning right"></i>
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-header">@Lang.GeneralUI_SystemSetting</li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-user"></i>
+                <p>
+                    @Lang.Account_SystemUser
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@string.Format("/{0}/Account/Register", LangUtilities.LanguageCode)" class="nav-link">
+                        <i class="far fa-circle"></i>
+                        <span>@Lang.Account_RegisterAddNew</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@string.Format("/{0}/Account/PasswordModify", LangUtilities.LanguageCode)" class="nav-link">
+                        <i class="fas fa-user-edit"></i>
+                        <span>@Lang.GeneralUI_PasswordModify</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        @if (!string.IsNullOrEmpty(WebCookie.AccessToken))
+        {
+            <li class="nav-item nav-icon">
+                <a href="@string.Format("/{0}/Account/SignOut", LangUtilities.LanguageCode)" class="nav-link">
+                    <i class="far fa-sign-out"></i>
+                    <p>@Lang.GeneralUI_SignOut </p>
+                </a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item nav-icon">
+                <a href="@Url.Action("login","Account",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                    <span class="fas fa-user-plus pl-1"> @Lang.Login_Title </span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+<!-- /.sidebar-menu -->
+
+<script>
+    function loadSiteTreeUpdateX(ID, LanguageCode, MaincomId, ParentsId) {
+
+        var treeUrl = "/" + LanguageCode + "/Site/GetNodeOfSites/" + MaincomId + "/parentsSiteId=" + ParentsId;
+
+        console.log(treeUrl);
+        $.ajax({
+            url: treeUrl,
+            success: function (data) {
+                var result = $.parseJSON(data);
+                //console.log(result);
+                $(ID).treeview({
+                    enableLinks: true,
+                    expandIcon: "glyphicon glyphicon-stop",
+                    collapseIcon: "glyphicon glyphicon-unchecked",
+                    nodeIcon: "glyphicon glyphicon-user",
+                    color: "#FCFCFC",
+                    backColor: "#222D32",
+                    onhoverColor: "#374A51",
+                    borderColor: "white",
+                    showBorder: false,
+                    levels: 0,
+                    showTags: true,
+                    highlightSelected: true,
+                    selectedColor: "yellow",
+                    selectedBackColor: "#374A51",
+                    data: result,
+                    nodeCollapsed: function (event, node) {
+                        console.log("nodeid=" + node.nodeid + ";text=" + node.text);
+                    },
+                    onNodeSelected: function (event, node) {
+
+                        var updateSiteUrl = "/" + LanguageCode + "/Site/UpdateSite/" + node.nodeid;
+                        window.location.href = updateSiteUrl
+                    }
+                });
+                // console.log(data)
+            }
+        });//end ajax get json data
+    }
+
+    $(document).ready(function () {
+
+        loadSiteTreeUpdateX("#treeviewOfSiteUpdate", "@LangUtilities.LanguageCode", "@WebCookie.MainComId", 0);
+
+
+        $(".expandHeight").click(function () {
+            /*$("#treeviewOfSiteUpdate").css("height", "500px");*/
+            $('#treeviewOfSiteUpdate').slimscroll({
+                 disableFadeOut: false,
+                 height: '320px',
+                 size:"8px", //滚动条宽度
+                 color:"#8B1313", //滚动条颜色,默认#000000 // 暗紅色=#8B1313
+                 alwaysVisible: true, //是否禁用隐藏滚动条,默认false
+                 opacity:1  // 滚动条透明度
+            });
+        });
+    });
+</script>

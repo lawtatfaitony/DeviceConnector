@@ -1,0 +1,486 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels.Task
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.Task_Update_Title;
+}
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    TaskUpdateInput taskUpdateInput = Model.data as TaskUpdateInput;
+    <script src="~/AdminLTE305/plugins/select-pure-master/dist/bundle.min.js"></script>
+    <!--MULTI-SELECT-->
+    <style>
+        .select-wrapper {
+            margin: 0;
+            max-width: 100%;
+            width: calc(100% - 40px);
+        }
+
+        .select-pure__select {
+            align-items: center;
+            background: #f9f9f8;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            color: #363b3e;
+            cursor: pointer;
+            display: flex;
+            font-size: 14px;
+            font-weight: 500;
+            justify-content: left;
+            min-height: 44px;
+            padding: 5px 10px;
+            position: relative;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .select-pure__options {
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            color: #363b3e;
+            display: none;
+            left: 0;
+            max-height: 221px;
+            overflow-y: scroll;
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .select-pure__select--opened .select-pure__options {
+            display: block;
+        }
+
+        .select-pure__option {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e4;
+            box-sizing: border-box;
+            height: 44px;
+            line-height: 25px;
+            padding: 10px;
+        }
+
+        .select-pure__option--disabled {
+            color: #e4e4e4;
+        }
+
+        .select-pure__option--selected {
+            color: #e4e4e4;
+            cursor: initial;
+            pointer-events: none;
+        }
+
+        .select-pure__option--hidden {
+            display: none;
+        }
+
+        .select-pure__selected-label {
+            align-items: "center";
+            background: #5e6264;
+            border-radius: 4px;
+            color: #fff;
+            cursor: initial;
+            display: inline-flex;
+            justify-content: "center";
+            margin: 5px 10px 5px 0;
+            padding: 3px 7px;
+        }
+
+            .select-pure__selected-label:last-of-type {
+                margin-right: 0;
+            }
+
+            .select-pure__selected-label i {
+                cursor: pointer;
+                display: inline-block;
+                margin-left: 10px;
+            }
+
+            .select-pure__selected-label img {
+                cursor: pointer;
+                display: inline-block;
+                height: 18px;
+                margin-left: 7px;
+                width: 14px;
+            }
+
+            .select-pure__selected-label i:hover {
+                color: #e4e4e4;
+            }
+
+        .select-pure__autocomplete {
+            background: #f9f9f8;
+            border-bottom: 1px solid #e4e4e4;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .select-pure__placeholder--hidden {
+            display: none;
+        }
+    </style>
+
+    <div ng-controller="UpdateTaskCtrl" class="container col-lg-offset-3 col-md-offset-3 pt-3" style="max-width:500px;">
+        <form asp-action="UpdateTask" asp-controller="Task" asp-route-Language="@LangExtend.LanguageCode" data-ajax-success="handleTaskUpdate" asp-ajax-onFailure="errTaskUpdate" data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="form_Task" id="form_Task">
+            <input asp-for="@taskUpdateInput.TaskId" name="TaskId" type="hidden" />
+            <input asp-for="@taskUpdateInput.session" name="session" type="hidden" />
+
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title text-dark"><i class="fas fa-user" style="color:forestgreen"></i> @ViewBag.Title</h3>
+                </div>
+                <!-- /.card-header -->
+            <div class="card-body " style="display: block;">
+                    <div class="form-group">
+                        <label class="control-label  col-12" for="Name"><i class="fas fa-id-card" style="color:forestgreen;"></i> @Lang.Task_TaskName</label>
+                        <div class="input-group  col-11">
+                            <input asp-for="@taskUpdateInput.Name" name="Name" data-val="true" class="border-right-0 form-control form-control form-control-sm" type="text" placeholder="@Lang.Task_TaskName" data-toggle="title" title="@Lang.Task_TaskName" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Task_TaskName">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@taskUpdateInput.Name" class="text-danger"></span>
+                    </div>
+
+                    <!--Type-->
+                <div class="form-group">
+                        <label class="control-label col-12" for="Type">
+                            <i class="fas fa-venus-mars" style="color:forestgreen"></i>
+                            @Lang.Task_Type
+                            <i class="far fa-question-circle" data-toggle="tooltip" title="@Lang.Task_Type"></i>
+                        </label>
+                        <div class="input-group col-11">
+                            <!--@taskUpdateInput.Type.ToString()-->
+                        <select asp-for="@taskUpdateInput.Type" name="Type" id="Type" asp-items="@Html.TaskTypeDropDownList(taskUpdateInput.Type.ToString())" class="border-right-0 form-control form-control-sm bold"></select>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Task_Type  @Lang.GeneralUI_Optional">
+                                    <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12">
+                            <i class="fas fa-id-card-alt" style="color:forestgreen"></i> @Lang.Task_CameraList1
+                        </label>
+                        <div class="input-group col-12">
+                            <input asp-for="@taskUpdateInput.CameraList1" value="@taskUpdateInput.CameraList1" name="CameraList1" class="CameraArray1" type="hidden" />
+                            <div class="autocomplete-select-camera-list1 col-11 ml-0 mr-0 pl-0 input-group-sm border-right-0"></div>
+                        </div>
+                        <span asp-validation-for="@taskUpdateInput.CameraList1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-12">
+                            <i class="fas fa-id-card-alt" style="color:forestgreen"></i> @Lang.Task_CameraList2
+                        </label>
+                        <div class="input-group col-12">
+                            <input asp-for="@taskUpdateInput.CameraList2" value="@taskUpdateInput.CameraList2" name="CameraList2" class="CameraArray2" type="hidden" />
+                            <div class="autocomplete-select-camera-list2 col-11 ml-0 mr-0 pl-0 input-group-sm border-right-0"></div>
+                        </div>
+                        <span asp-validation-for="@taskUpdateInput.CameraList2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-12" for="LibList">
+                            <i class="fas fa-id-card-alt" style="color:forestgreen"></i> @Lang.Task_LibList
+                        </label>
+                        <div class="input-group col-12">
+                            <input asp-for="@taskUpdateInput.LibList" value="@taskUpdateInput.LibList" name="LibList" class="LibList" type="hidden" />
+                            <div class="autocomplete-select-lib-list col-11 ml-0 mr-0 pl-0 input-group-sm border-right-0"></div>
+                        </div>
+                        <span asp-validation-for="@taskUpdateInput.LibList" class="text-danger"></span>
+                    </div>
+
+
+                    <!--Interval & Threshold-->
+                <div class="form-group  mb-1">
+                        <div class="d-flex flex-row bd-highlight mb-1">
+                            <div class="p-1 bd-highlight col-5">
+                                <label class="control-label col-12" for="Interval">
+                                    <i class="fas fa-history" style="color:forestgreen"></i> @Lang.Task_Interval
+                                </label>
+                                <div class="input-group ml-1 ">
+                                    <input asp-for="@taskUpdateInput.Interval" name="Interval" data-val="true" class="border-right-0 form-control  form-control-sm col-8" type="text" placeholder="@Lang.Task_Interval" data-toggle="title" title="@Lang.Task_Interval" />
+                                    <div class="input-group-append input-group-sm">
+                                        <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Task_Interval">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="@taskUpdateInput.Interval" class="text-danger"></span>
+                            </div>
+                            <div class="p-1 bd-highlight col-6">
+                                <label class="control-label col-12" for="Threshold">
+                                    <i class="fas fa-thermometer-half" style="color:forestgreen"></i> @Lang.Task_Threshold
+                                </label>
+                                <div class="input-group ml-1 pr-1">
+                                    <input asp-for="@taskUpdateInput.Threshold" name="Threshold" data-val="true" class="border-right-0 form-control  form-control-sm col-8" type="text" placeholder="@Lang.Task_Threshold" data-toggle="title" title="@Lang.Task_Threshold" />
+                                    <div class="input-group-append input-group-sm">
+                                        <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Task_Threshold">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="@taskUpdateInput.Threshold" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--last two item-->
+
+                <div class="form-group">
+                        <label class="control-label col-12" for="Plan"><i class="fas fa-pencil-ruler" style="color:forestgreen"></i> @Lang.Task_Plan</label>
+                        <div class="input-group  col-11">
+                            <textarea asp-for="@taskUpdateInput.Plan" name="Plan" rows="2" data-val="true" class="border-right-0 form-control form-control-sm" type="text" placeholder="@Lang.Task_Plan" data-toggle="title" title="@Lang.Task_Plan"></textarea>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Task_Plan">
+                                    <i class="fas fa-angle-double-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@taskUpdateInput.Plan" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Remark"><i class="fas fa-pencil-ruler" style="color:forestgreen"></i> @Lang.GeneralUI_Remark</label>
+                        <div class="input-group  col-11">
+                            <input asp-for="@taskUpdateInput.Remark" name="Remark" class="border-right-0 form-control form-control-sm" type="text" placeholder="@Lang.GeneralUI_Remark" data-toggle="title" title="@Lang.GeneralUI_Remark" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.GeneralUI_Remark">
+                                    <i class="fas fa-angle-double-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        <div style="display: block;" class="">
+                <div class="container card-footer">
+                    <div class="row pl-3">
+                        <div class="margin-left5 padding-left5">
+                            <button type="submit" id="btnUpdate" class="btn btn-primary padding-left15 margin-left5">
+                                @Lang.GeneralUI_Update
+                            </button>
+                            <a asp-action="QueryTaskList" asp-controller="Task" class="btn btn-primary pl-2">@string.Format("{0}{1}", Lang.GeneralUI_Return, Lang.GeneralUI_List)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleTaskUpdate(result) {
+            layer.close(layer.index);
+            console.log(result);
+            layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+            });
+            if (result.meta.success === true) {
+                redirectLocaleUrl = "@Url.Action("QueryTaskList", "Task",new{language=LangUtilities.LanguageCode})";
+                console.log(redirectLocaleUrl);
+                setTimeout(
+                    function () {
+                        window.location.href = redirectLocaleUrl;
+                    }
+                    , 3000);
+            }
+        }
+        function errTaskUpdate(data) {
+            layer.close('loading');
+            console.log(JSON.stringify(data));
+            alert('@Lang.GeneralUI_ServerError' + "--client errTaskUpdate");
+        }
+    </script>
+
+    <script>
+
+        var GetCameraListJson;
+
+        app.controller('UpdateTaskCtrl', function ($scope, $http) {
+            $http({
+                method: 'GET',
+                url: '/' + '@LangUtilities.LanguageCode' + '/task/GetCameraList'
+            }).then(function successCallback(response) {
+
+                console.log(response.data);
+                if (response.data.meta.success === true) {
+                    GetCameraListJson = response.data.data;
+                    var defaultCameraValue = GetCameraListJson[0].value;
+                    console.log("GetCameraListJson:");
+                    console.log(GetCameraListJson)
+
+                    var CameraArray1Input = $(".CameraArray1").val();
+                    var CameraArray1 = CameraArray1Input.split(',');
+
+                    if (CameraArray1 instanceof Array === false) {
+                        console.log("Just CameraArray1 is Array or not:");
+                        console.log(CameraArray1 instanceof Array);
+                        $(".CameraArray1").val();
+                    }
+                    var CameraArray2Input = $(".CameraArray2").val();
+                    var CameraArray2 = CameraArray2Input.split(',');
+
+                    if (CameraArray2 instanceof Array === false) {
+                        console.log("Just CameraArray2 is Array or not:");
+                        console.log(CameraArray2 instanceof Array);
+                    }
+
+                    //Required
+                    if (CameraArray1[0] == "") {
+                        CameraArray1 = [defaultCameraValue];
+                        $(".CameraArray1").val(defaultCameraValue);
+                        layer.open({
+                            title: '@Lang.GeneralUI_InfoTips'
+                            , content: "@Lang.Task_CameraList1 @Lang.Task_CaseOfNoCameraListVal"
+                            , btn: '@Lang.GeneralUI_OK'
+                        });
+                    }
+
+                    if (CameraArray2[0] == "") {
+                        CameraArray2 = [defaultCameraValue];
+                        $(".CameraArray2").val(defaultCameraValue);
+                        layer.open({
+                            title: '@Lang.GeneralUI_InfoTips'
+                            , content: "@Lang.Task_CameraList2 @Lang.Task_CaseOfNoCameraListVal"
+                            , btn: '@Lang.GeneralUI_OK'
+                        });
+                    }
+
+                    InitializeCameraList(".autocomplete-select-camera-list1", GetCameraListJson, ".CameraArray1", CameraArray1);
+                    InitializeCameraList(".autocomplete-select-camera-list2", GetCameraListJson, ".CameraArray2", CameraArray2);
+                }
+                else {
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: "Get Camera list :" + response.data.meta.message
+                        , btn: '@Lang.GeneralUI_OK'
+                    });
+                    console.log("UpdateTaskCtrl OK: \n\r" + response.data);
+                }
+
+            }, function errorCallback(response) {
+                console.log("UpdateTaskCtrl : \n\r" + response.data);
+            });
+
+            //------------------------------------------------------------
+            $http({
+                method: 'GET',
+                url: '/' + '@LangUtilities.LanguageCode' + '/Task/QueryLibraryListSelect/@taskUpdateInput.MaincomId'
+            }).then(function successCallback(response) {
+
+
+                if (response.data.meta.success === true) {
+                    GetLibListJson = response.data.data;
+                    console.log("GetLibListJson:");
+                    console.log(GetLibListJson)
+
+                    var LibList1Val = $(".LibList").val();
+
+                    var LibList1arr = LibList1Val.split(',');
+
+                    if (LibList1Val == "" || LibList1arr == []) {
+                        console.log(LibList1arr);
+                        LibList1arr = [GetLibListJson[0].value];
+                        $(".LibList").val(GetLibListJson[0].value);
+                    }
+
+                    InitializeLibList(".autocomplete-select-lib-list", GetLibListJson, ".LibList", LibList1arr);  //LibList1arr
+                }
+                else {
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: "Get Libary list :" + response.data.meta.message
+                        , btn: '@Lang.GeneralUI_OK'
+                    });
+                    console.log("UpdateTaskCtrl OK: \n\r" + response.data);
+                }
+
+            }, function errorCallback(response) {
+                console.log("UpdateTaskCtrl : \n\r" + response.data);
+            });
+        });
+
+
+        function InitializeCameraList(select_css_id, cameraList, TargetObject, arr_value) {
+
+            var autocomplete = new SelectPure(select_css_id, {
+                options: cameraList,
+                value: arr_value,
+                multiple: true,
+                autocomplete: true,
+                icon: "fa fa-times",
+                placeholder: "-Please select-",
+                onChange: value => {
+                    console.log("arr_value.length " + arr_value.length);
+                    console.log("value" + value);
+                    $(TargetObject).val(value);
+                },
+                classNames: {
+                    select: "select-pure__select",
+                    dropdownShown: "select-pure__select--opened",
+                    multiselect: "select-pure__select--multiple",
+                    label: "select-pure__label",
+                    placeholder: "select-pure__placeholder",
+                    dropdown: "select-pure__options",
+                    option: "select-pure__option",
+                    autocompleteInput: "select-pure__autocomplete",
+                    selectedLabel: "select-pure__selected-label",
+                    selectedOption: "select-pure__option--selected",
+                    placeholderHidden: "select-pure__placeholder--hidden",
+                    optionHidden: "select-pure__option--hidden",
+                }
+            });
+        }
+
+        function InitializeLibList(select_css_id, libList, TargetObject, arr_value) {
+
+            var autocomplete = new SelectPure(select_css_id, {
+                options: libList,
+                value: arr_value,
+                multiple: true,
+                autocomplete: true,
+                icon: "fa fa-times",
+                placeholder: "-select-",
+                onChange: value => {
+                   $(TargetObject).val(value);
+                },
+                classNames: {
+                    select: "select-pure__select",
+                    dropdownShown: "select-pure__select--opened",
+                    multiselect: "select-pure__select--multiple",
+                    label: "select-pure__label",
+                    placeholder: "select-pure__placeholder",
+                    dropdown: "select-pure__options",
+                    option: "select-pure__option",
+                    autocompleteInput: "select-pure__autocomplete",
+                    selectedLabel: "select-pure__selected-label",
+                    selectedOption: "select-pure__option--selected",
+                    placeholderHidden: "select-pure__placeholder--hidden",
+                    optionHidden: "select-pure__option--hidden",
+                }
+            });
+        }
+    </script>
+}

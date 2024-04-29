@@ -1,0 +1,472 @@
+﻿@using LanguageResource
+@using EnumCode
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels.Task
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.QueryTaskList_Title;
+    int x = 0;
+    QueryTaskListInfoReturn queryTaskListInfoReturn = Model.data as QueryTaskListInfoReturn;
+
+    QueryTaskListInput queryTaskListInput = ViewBag.QueryTaskListInput as QueryTaskListInput;
+
+}
+
+<form asp-action="QueryTaskList" asp-controller="Task" asp-route-Language="@LangExtend.LanguageCode" method="get" placeholder="Search" class="form-inline ml-1" id="form_Search">
+
+    <div class="row mb-1">
+        <div class="input-group input-group-sm mb-3">
+            <input asp-for="@queryTaskListInput.Name" name="Name" value="@queryTaskListInput.Name" class="form-control form-control-navbar" onclick="javascript:this.value='';" placeholder="Search" />
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-flat"> <i class="fas fa-search"></i>Go!</button>
+            </span>
+        </div>
+        <div class="d-inline pull-right ml-3">
+            <a href="@Url.Action("AddTask","Task")" class="btn btn-primary btn-sm text-white pt-1 pb-1 pr-2 pl-2 " title="@Lang.GeneralUI_AddNew" data-toggle="tooltip">
+                <i class="fa fa-plus-circle font-weight-bold"></i>
+            </a>
+        </div>
+    </div>
+</form>
+
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    <div class="box-body  table-responsive" style="min-height:600px;">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>
+                    <div class="text-nowrap " title="@Lang.Task_TaskId" data-toggle="tooltip">
+                        <span class="text-blue"><i class="fas fa-id-badge"></i> ID </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap " title="@Lang.Task_TaskName" data-toggle="tooltip">
+                        <span><i class="fas fa-box text-green"></i> @Lang.Task_TaskName </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap " title="@Lang.Task_Type" data-toggle="tooltip">
+                        <span><i class="fas fa-box text-green"></i> @Lang.Task_Type </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Task_State" data-toggle="tooltip">
+                        <span><i class="fas fa-pencil-ruler text-green"></i> @Lang.Task_State </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Task_CameraList1" data-toggle="tooltip">
+                        <span><i class="fas fa-camera-retro text-green"></i> @Lang.Task_CameraList1 </span>
+                    </div>
+
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Task_CameraList2" data-toggle="tooltip">
+                        <span><i class="fas fa-camera-retro text-green"></i> @Lang.Task_CameraList2 </span>
+                    </div>
+                </th>
+                <!--Person_LibIdGroups-->
+            <th>
+                    <div class="text-nowrap" title="@Lang.Person_LibIdGroups" data-toggle="tooltip">
+                        <span><i class="fas fa-users text-green"></i> @Lang.Person_LibIdGroups </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Task_Interval" data-toggle="tooltip">
+                        <span><i class="fa fa-cog text-green"></i> @Lang.Task_Interval </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Task_Threshold" data-toggle="tooltip">
+                        <span><i class="fas fa-eye text-green"></i> @Lang.Task_Threshold </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Task_Plan" data-toggle="tooltip">
+                        <span><i class="fas fa-calendar text-green"></i> @Lang.Task_Plan </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Remark" data-toggle="tooltip">
+                        <span><i class="fas fa-pen text-green"></i> @Lang.GeneralUI_Remark </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_CreateDate" data-toggle="tooltip">
+                        <span><i class="fas fa-calendar text-green"></i> @Lang.GeneralUI_CreateDate </span>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Details" data-toggle="tooltip"><span><i class="fas fa-th-list text-green"></i> @Lang.GeneralUI_Details </span></div>
+                </th>
+            </tr>
+
+            @if (queryTaskListInfoReturn.TotalCount != 0)
+            {
+                foreach (var item in queryTaskListInfoReturn.Items)
+                {
+                    x++;
+                    <tr id="@string.Format("tr{0}",item.TaskId)" class="@string.Format("css{0}",item.TaskId)">
+                        <td id="@string.Format("td{0}", item.TaskId)" class="text-omit" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.TaskId)">
+                            <span id="@string.Format("sp{0}", item.TaskId)" class="badge badge-dark p-1" data-toggle="tooltip" style="cursor:pointer;">@item.TaskId</span>
+                        </td>
+                        <td class="text-wrap">
+                            <label class="rounded bg-black text-primary p-1">@item.Name</label>
+                        </td>
+                        <td class="text-wrap">
+                            @{
+                                EnumCode.TaskType taskType = (EnumCode.TaskType)item.Type;
+                                if (taskType == TaskType.UNDEFINED)
+                                {
+                                    <label class="label label-primary p-1 bg-secondary rounded text-nowrap" title="@Lang.TASK_TYPE_UNDEFINED" data-toggle="tooltip">
+                                        <i class="fas fa-lock text-danger"></i>
+                                        @Lang.TASK_TYPE_UNDEFINED
+                                    </label>
+                                }
+                                else if (taskType == TaskType.FACE_RECOGNITION)
+                                {
+                                    <label class="label label-primary p-1 bg-gradient-dark rounded text-nowrap" title="@Lang.TASK_TYPE_FACE_RECOGNITION" data-toggle="tooltip">
+                                        <i class="fas fa-unlock text-warning"></i>
+                                        @Lang.TASK_TYPE_FACE_RECOGNITION
+                                    </label>
+                                }
+                                else if (taskType == TaskType.WORK_CLOTHES_RECOGNITION)
+                                {
+                                    <label class="label label-primary p-1 bg-gradient-pink rounded text-nowrap" title="@Lang.TASK_TYPE_WORK_CLOTHES_RECOGNITION" data-toggle="tooltip">
+                                        <i class="fas fa-user-clock text-warning"></i>
+                                        @Lang.TASK_TYPE_WORK_CLOTHES_RECOGNITION
+                                    </label>
+                                }
+                                else if (taskType == TaskType.WEARING_HELMET_RECOGNITION)
+                                {
+                                    <label class="label label-primary p-1 bg-gradient-green rounded text-nowrap" title="@Lang.TASK_TYPE_WEARING_HELMET_RECOGNITION" data-toggle="tooltip">
+                                        <i class="fas fa-user-clock text-warning"></i>
+                                        @Lang.TASK_TYPE_WEARING_HELMET_RECOGNITION
+                                    </label>
+                                }
+                                else if (taskType == TaskType.CAR_PLATE_RECOGNITION)
+                                {
+                                    <label class="label label-primary p-1 bg-gradient-dark rounded text-nowrap" title="@Lang.TASK_TYPE_CAR_PLATE_RECOGNITION" data-toggle="tooltip">
+                                        <i class="fas fa-user-clock text-warning"></i>
+                                        @Lang.TASK_TYPE_CAR_PLATE_RECOGNITION
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="label label-primary p-1 bg-gradient-gray-dark rounded text-nowrap" title="@Lang.TASK_TYPE_UNDEFINED" data-toggle="tooltip">
+                                        <i class="fas fa-user text-success"></i>
+                                        OTHER
+                                    </label>
+                                }
+                            }
+                        </td>
+                        <td class="text-wrap">
+                            @if (item.State == (int)GeneralStatus.ACTIVE)
+                            {
+                                <label class="badge badge-primary"> @Lang.GeneralUI_ACTIVE</label>
+                            }
+                            else
+                            {
+                                <label class="badge badge-primary"> @Lang.GeneralUI_DEACTIVE</label>
+                            }
+                        </td>
+                        <td class="text-wrap small">
+                            @if (item.CameraList1.Count > 0)
+                            {
+                                <ul class="list-unstyled">
+                                    @foreach (var itemCam in item.CameraList1)
+                                    {
+                                        <li class="list-group text-nowrap mb-1">
+
+                                            @if (itemCam.State == (int)TaskErrorCode.TASK_IS_VISIBLE)
+                                            {
+                                                <span class="bg-primary text-bold p-1 rounded"><i class="fas fa-eye ml-1"></i> @itemCam.Name</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="bg-primary text-bold p-1 rounded"><i class="fas fa-eye-slash"></i> @itemCam.Name</span>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span>no list</span>
+                            }
+                        </td>
+                        <td class="text-wrap small">
+                            @if (item.CameraList2.Count > 0)
+                            {
+                                <ul class="list-unstyled">
+                                    @foreach (var itemCam2 in item.CameraList2)
+                                    {
+                                        <li class="list-group text-nowrap mb-1">
+
+                                            @if (itemCam2.State == (int)TaskErrorCode.TASK_IS_VISIBLE)
+                                            {
+                                                <span class="bg-primary text-bold p-1 rounded"><i class="fas fa-eye ml-1"></i> @itemCam2.Name</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="bg-primary text-bold p-1 rounded"><i class="fas fa-eye-slash"></i> @itemCam2.Name</span>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span class="text-bold">no list</span>
+                            }
+                        </td>
+
+                        <td class="text-wrap">
+                            @if (item.LibIdGroupsList?.Count() > 0)
+                            {
+                                <details class="p-0 ml-0">
+                                    <summary class="text-nowrap p-0">
+                                        <span class="p-1 text-bold text-white bg-primary rounded">@Lang.Person_LibIdGroups </span>
+                                    </summary>
+                                    <p>
+                                        <div class="d-flex flex-column bd-highlight">
+                                            @foreach (var lib in item.LibIdGroupsList)
+                                            {
+                                                <div class="p-1 bd-highlight" data-toggle="tooltip" title="@lib.Name">
+                                                    <span class="p-1 bg-secondary rounded text-bold"><i class="fas fa-stop-circle-o"></i> @lib.Id  @lib.Name</span>
+                                                </div>
+                                            }
+                                        </div>
+                                    </p>
+                                </details>
+                            }
+                        </td>
+
+                        <td class="text-wrap">
+                            <label class="badge badge-primary"> @string.Format("{0:f1}", item.Interval)</label>
+                        </td>
+                        <td class="text-wrap">
+                            <label class="badge badge-primary">@string.Format("{0:f2}", item.Threshold)</label>
+                        </td>
+                        <td class="text-wrap" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Plan)" style="word-break:break-all;max-width:250px;">
+                            <p class="lead  small">@item.Plan</p>
+                        </td>
+
+                        <td class="text-wrap" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Remark)" style="word-break:break-all;max-width:250px;">
+                            <span class="omit3row small"> @item.Remark</span>
+                        </td>
+                        <td class="text-wrap small h6" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.CreateTime)">
+                            @String.Format("{0:yyyy-MM-dd\nhh:mm:ss}", item.CreateTime)
+                        </td>
+                        <td class="text-wrap">
+                            <div class="d-flex flex-row-reverse bd-highlight">
+                                <div class="p-1 bd-highlight">
+                                    <button class="btn btn-warning btn-sm text-nowrap" type="button" onclick="@string.Format("javascript:DeleteTask({0});", item.TaskId)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+
+                                @if (item.State != (int)TaskErrorCode.TASK_IS_VISIBLE)
+                                {
+                                    <div class="p-1 bd-highlight">
+                                        <button class="btn btn-success btn-sm text-nowrap" type="button" id="@string.Format("TaskRunBtn{0}",item.TaskId)" data-state="@item.State" data-toggle="tooltip" data-orginal-title="@Lang.TASK_STOP_STATUS_DESC" title="@Lang.TASK_STOP_STATUS_DESC" onclick="@string.Format("javascript:TaskRun({0});", item.TaskId)">
+                                            <i id="@string.Format("BtnIcon{0}",item.TaskId)" class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                    <div class="p-1 bd-highlight">
+                                        <button class="btn btn-danger btn-sm text-nowrap" type="button" id="@string.Format("TaskRunBtn{0}",item.TaskId)" data-state="@item.State" data-toggle="tooltip" data-orginal-title="@Lang.TASK_START_STATUS_DESC" title="@Lang.TASK_START_STATUS_DESC" onclick="@string.Format("javascript:TaskRun({0});", item.TaskId)">
+                                            <i id="@string.Format("BtnIcon{0}",item.TaskId)" class="fas fa-stop"></i>
+                                        </button>
+                                    </div>
+                                }
+
+                                <div class="p-1 bd-highlight">
+                                    <a class="btn btn-success btn-sm" href="@Url.Action("UpdateTask", "Task",new { taskId = item.TaskId})" target="_blank">
+                                        <span class=""><i class="fas fa-pen"></i> </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td><span class="h2"> @Lang.GeneralUI_NoRecord</span></td></tr>
+            }
+
+        </table>
+    </div>
+
+    if (queryTaskListInfoReturn.PageCount > 1)
+    {
+        int p;
+        <div class="Page">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    @if (queryTaskListInfoReturn.PageNo != 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QueryPersonList", "Person", new { Name = ViewBag.CurrentName, PageNo = 1 })" aria-label="Prev">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+
+                    @for (p = 1; p <= queryTaskListInfoReturn.PageCount; p++)
+                    {
+                        string ActiveCssTab = queryTaskListInfoReturn.PageNo == p ? "active" : "";
+                        <li class="page-item  @ActiveCssTab"><a class="page-link" href="@Url.Action("QueryTaskList", "Task", new { Name = ViewBag.CurrentName, PageNo = p })">@p</a></li>
+                    }
+                    @if (queryTaskListInfoReturn.PageNo != queryTaskListInfoReturn.PageCount)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QueryTaskList", "Task", new { Name = ViewBag.CurrentName, PageNo = queryTaskListInfoReturn.PageCount })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+}
+<script>
+
+    function DeleteTask(TaskId)
+    {
+        console.log(TaskId);
+
+        layer.confirm('@Lang.DeleteTask_ComfirmTips', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+            var httpDelUrl = "/@LangUtilities.LanguageCode/Task/DeleteTask";
+
+            var myparamsObject = { "TaskId":TaskId};
+            $.ajax({
+                url: httpDelUrl,
+                data: myparamsObject,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    alert("ERROR");
+                    console.log(JSON.stringify(data));
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+
+                    var pr_obj = "#td" + TaskId;
+                    var objTr = "#tr" + TaskId;
+                    $(objTr).addClass("bg-warning-gradient");
+
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: data.meta.message
+                    , btn:'@Lang.GeneralUI_OK'
+                    });
+
+                    if (data.meta.success == true)
+                    {
+                        console.log($.isEmptyObject(pr_obj));
+                        setTimeout(function () {
+                            $(pr_obj).parent().remove();
+                        }, 3000);
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.DeleteTask_ComfirmNoTips', { icon: 1 }, {
+                    time: 6000,
+                    btn: ['@Lang.GeneralUI_Isee']
+                });
+            });
+    }
+
+    function TaskRun(TaskId)
+    {
+        console.log(TaskId);
+
+        layer.confirm('@Lang.GeneralUI_Comfirm', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+                var state = 0;
+                var httpUrl;
+                var httpStopTaskUrl = "/@LangUtilities.LanguageCode/Task/StopTask";
+                var httpStartTaskUrl = "/@LangUtilities.LanguageCode/Task/StartTask";
+
+                var idx = "#TaskRunBtn" + TaskId;
+                console.log("idx = " + idx);
+                state = $(idx).data("state");
+                console.log("state = " + state);
+
+                if ($(idx).data("state") == "1") {
+                    state = 1;
+                    httpUrl = httpStopTaskUrl;
+                } else {
+                    state = 0;
+                    httpUrl = httpStartTaskUrl;
+                }
+            var myparamsObject = { "TaskId":TaskId};
+            $.ajax({
+                url: httpUrl,
+                data: myparamsObject,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    alert("ERROR");
+                    console.log(JSON.stringify(data));
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: data.meta.message
+                    , btn:'@Lang.GeneralUI_OK'
+                    });
+                    if (data.meta.success == true) {
+                        var pr_obj = "#td" + TaskId;
+                        console.log(pr_obj);
+                        console.log($.isEmptyObject(pr_obj));
+
+                        $(pr_obj).addClass("bg-warning-gradient");
+                        setTimeout(function () {
+                            if (data.data.state = 0) {
+                                $(idx).data("state", data.data.state);
+                                $(idx).html("<i class='fas fa-stop'></i>");
+                                $(idx).removeClass("btn-success");
+                                $(idx).addClass("btn-danger");
+                                $(idx).attr("title","@Lang.TASK_STOP_STATUS_DESC");
+
+                            } else {
+                                $(idx).data("state", data.data.state);
+                                $(idx).html("<i class='fas fa-play'></i>");
+                                $(idx).removeClass("btn-danger");
+                                $(idx).addClass("btn-success");
+                                $(idx).attr("title", "@Lang.TASK_START_STATUS_DESC");
+                            }
+                        }, 2000);
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.GeneralUI_Isee', { icon: 1 }, {
+                    time: 6000,
+                    btn: ['@Lang.GeneralUI_OK']
+                });
+            });
+    }
+</script>

@@ -1,0 +1,138 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels.CamApiModel
+@using VideoGuard.ApiModels
+@model DeviceModelInput
+@{
+    ViewBag.Title = Lang.Device_AddNew_Title; 
+} 
+    <div class="container col-lg-offset-3 col-md-offset-3 pt-3" style="max-width:500px;">
+        <form asp-action="Add" asp-controller="Device" asp-route-Language="@LangExtend.LanguageCode" data-ajax-success="handleDeviceAddNew" asp-ajax-onFailure="errDeviceAddNew" data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="form_DeviceAddNew" id="form_DeviceAddNew">
+            <input type="hidden" asp-for="@Model.DeviceId" name="DeiveId" />
+            <input type="hidden" asp-for="@Model.MainComId" name="MainComId" />
+            <input type="hidden" asp-for="@Model.Status" name="Status" />
+            <input type="hidden" asp-for="@Model.DeviceEntryMode" name="DeviceEntryMode" />
+            <input type="hidden" asp-for="@Model.IsReverseHex" name="IsReverseHex" />
+            <input type="hidden" asp-for="@Model.OperatedUser" name="OperatedUser" />
+            <input type="hidden" asp-for="@Model.SiteName" name="SiteName" />
+
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title text-dark">@Lang.Device_AddNew_Title</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body " style="display: block;">
+                    <div class="form-group">
+                        <label class="control-label col-12" for="DeviceName"><i class="fas fa-cog text-green" style="color:forestgreen"></i> @Lang.Device_DeviceName</label>
+                        <div class="input-group">
+                            <input asp-for="@Model.DeviceName" name="DeviceName" data-val="true" class="border-right-0 form-control form-control form-control-sm" type="text" data_toggle="title" title="@Lang.Device_DeviceName" placeholder="@Lang.Device_DeviceName" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Device_DeviceName">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@Model.DeviceName" class="text-danger"></span>
+                    </div>
+                    <!--DeviceSerialNo-->
+                    <div class="form-group">
+                        <label class="control-label col-12" for="DeviceSerialNo"><i class="fas fa-qrcode text-green" style="color:forestgreen"></i> @Lang.Device_DeviceSerialNo</label>
+                        <div class="input-group">
+                            <input asp-for="@Model.DeviceSerialNo" name="DeviceSerialNo" data-val="true" class="border-right-0 form-control form-control form-control-sm" type="text" data_toggle="title" title="@Lang.Device_DeviceSerialNo" placeholder="@Lang.Device_DeviceSerialNo" />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Device_DeviceSerialNo">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@Model.DeviceSerialNo" class="text-danger"></span>
+                    </div>
+
+                    <!--DeviceType-->
+                    <div class="form-group">
+                        <label class="control-label col-12" for="DeviceType"><i class="fas fa-venus-mars" style="color:forestgreen"></i> @Lang.Device_DeviceType</label>
+                        <div class="input-group">
+                            <select asp-for="@Model.DeviceType" name="DeviceType" asp-items="@Html.DeviceTypeDropDownList(Model.DeviceType.ToString())" class="border-right-0 form-control form-control-sm bold">
+                                    <option value="0">@Lang.GeneralUI_Select</option>
+                            </select>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Person_Library  @Lang.GeneralUI_Optional">
+                                    <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@Model.DeviceType" class="text-danger"></span>
+                    </div>
+                    <!--SiteId-->
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label class="control-label" for="SiteId"><i class="fas fa-cog text-success mr-1"></i>@Lang.Device_Site  <label id="lblSiteName" class="ml-3 control-label text-danger hide"></label></label>
+                        </div>
+                        <div class="input-group">
+                            <input asp-for="@Model.SiteId" id="SiteId" name="SiteId" data-val="true"
+                                   type="hidden"/> 
+                        </div>
+                        <span asp-validation-for="@Model.SiteId" class="text-danger"></span>
+                        <div id="treeviewOfSite">
+                            <i class="fas fa-spinner fa-spin fa-3x m-5"></i>
+                        </div>
+                        <span class="text-danger">@Lang.Device_SiteTips</span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div style="display: block;" class="">
+                <div class="container card-footer">
+                    <div class="row">
+                        <div class="margin-left5 padding-left5">
+                            <button type="submit" id="btnaddnew" class="btn btn-primary padding-left15 margin-left5">
+                                @Lang.GeneralUI_AddNew
+                            </button>
+                            <a asp-action="DeviceList" asp-controller="Device" class="btn btn-primary padding-left15 margin-left5">@string.Format("{0}{1}", Lang.GeneralUI_Return, Lang.GeneralUI_List)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script>
+
+    $(document).ready(function () {
+
+        loadSiteTreeView("#treeviewOfSite", "@LangUtilities.LanguageCode", "@Model.MainComId", 0, "#SiteId","#lblSiteName");
+        $('#treeviewOfSite').slimscroll({
+            disableFadeOut: false,
+            height: '180px'
+        }); 
+    });
+
+    function handleDeviceAddNew(result) {
+        layer.close(layer.index);
+        console.log(result);
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+            });
+        if (result.meta.success === true)
+        {
+            redirectLocaleUrl = "@Url.Action("DeviceList", "Device",new {Language=LangUtilities.LanguageCode})";
+            console.log(redirectLocaleUrl);
+            setTimeout(
+                function() {
+                    window.location.href = redirectLocaleUrl;
+                }
+            , 3000);
+        }
+    } 
+
+    function errDeviceAddNew(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errDeviceAddNew");
+    }
+</script>
+
+
+

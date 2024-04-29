@@ -1,0 +1,139 @@
+﻿@using LanguageResource
+@using Common
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels
+@using VideoGuard.ApiModels.ApiModels
+@model SiteInputEntry
+@{
+    ViewBag.Title = Lang.AddSite_Title;
+}
+
+<div class="container col-lg-offset-3 col-md-offset-3 pt-3" style="max-width:500px;">
+    <form asp-action="AddSite" asp-controller="Site" asp-route-Language="@LangExtend.LanguageCode" data-ajax-success="handleAddSite" asp-ajax-onFailure="errAddSite" data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="form_SiteAddNew" id="form_SiteAddNew">
+        <input asp-for="@Model.MaincomId" name="MainComId" type="hidden" />
+        <input asp-for="@Model.SiteId" name="Type" type="hidden" />
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title text-dark">@Lang.AddSite_Title</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body " style="display: block;">
+                <div class="form-group">
+                    <label class="control-label col-12" for="Name">@Lang.Site_SiteName</label>
+                    <div class="input-group">
+                        <input asp-for="@Model.SiteName" name="SiteName" data-val="true" class="border-right-0 form-control form-control  form-control-sm" type="text" placeholder="@Lang.Site_SiteName" data-toggle="title" title=Site_SiteName />
+                        <div class="input-group-append input-group-sm">
+                            <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Site_SiteName">
+                                <i class="fas fa-asterisk"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="@Model.SiteName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-12">
+                        <label class="control-label" for="ParentsId">@Lang.Site_ParentsSiteName  <label id="lblParentsSiteName" class="ml-3 control-label text-danger hide"></label></label>
+                        <input type="checkbox" id="chkRoot" checked="checked" value="0" class="text-white bg-primary" style="width: 15px; height: 15px; padding-bottom: 0; margin-bottom: 0;" /><label class="control-label">@Lang.GeneralUI_Root</label>
+                    </div>
+
+                    <div class="input-group" hidden>
+                        <input asp-for="@Model.ParentsId" name="ParentsId" data-val="true" class="border-right-0 form-control  form-control-sm" type="text" placeholder="@Lang.Site_ParentsSiteName" data-toggle="title" title="@Lang.Site_ParentsSiteName" />
+                        <div class="input-group-append input-group-sm">
+                            <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Site_ParentsSiteName">
+                                <i class="fas fa-angle-double-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="@Model.ParentsId" class="text-danger"></span>
+                    <div id="treeviewOfSite" class="site_tree_view" style="overflow-y:auto;height:280px;"></div>
+                    <span class="text-danger">@Lang.Site_SiteEditSelectParentsIdTips</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Remark">@Lang.Site_Address</label>
+                    <div class="input-group">
+                        <input asp-for="@Model.Address" name="Address" data-val="true" class="border-right-0 form-control  form-control-sm" type="text" placeholder="@Lang.Site_Address" data-toggle="title" title="@Lang.Site_Address" />
+                        <div class="input-group-append input-group-sm">
+                            <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.Site_Address">
+                                <i class="fas fa-angle-double-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                </div>
+                <div id="treeview1">
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div style="display: block;" class="">
+            <div class="container card-footer">
+                <div class="row">
+                    <div class="margin-left5 padding-left5">
+                        <button type="submit" id="btnaddnew" class="btn btn-primary padding-left15 margin-left5">
+                            @Lang.GeneralUI_AddNew
+                        </button>
+                        <a asp-action="AddSite" asp-controller="Site" class="btn btn-primary pl-2 ml-2 ">@Lang.GeneralUI_Return</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="~/js/Main.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        loadSiteTreeView("#treeviewOfSite", "@LangUtilities.LanguageCode", "@Model.MaincomId", 0, "#ParentsId","#lblParentsSiteName");
+        $('.site_tree_view').slimscroll({
+            disableFadeOut: false,
+            height: '320px',
+            size:"8px", //滚动条宽度
+            color:"#8B1313", //滚动条颜色,默认#000000 // 暗紅色=#8B1313
+            alwaysVisible: true, //是否禁用隐藏滚动条,默认false
+            opacity:1  // 滚动条透明度
+        });
+
+        $("[type=checkbox]").click(function () {
+            if ($(this).is(":checked") == true) {
+                $("#ParentsId").val("0");
+                $("#lblParentsSiteName").text("Root");
+            }
+        })
+    });
+</script>
+
+<script>
+    function handleAddSite(result) {
+        layer.close(layer.index);
+        console.log(result);
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+            });
+        if (result.meta.success === true)
+        {
+            redirectLocaleUrl = "@Url.Action("Index", "Home",new { Language = LangUtilities.LanguageCode})";
+            console.log(redirectLocaleUrl);
+            setTimeout(
+                function() {
+                    window.location.href = redirectLocaleUrl;
+                }
+            , 3000);
+        }
+    }
+
+    function errAddSite(data) {
+        layer.close('loading');
+        layer.close(layer.index);
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errerrAddSite");
+    }
+
+
+</script>

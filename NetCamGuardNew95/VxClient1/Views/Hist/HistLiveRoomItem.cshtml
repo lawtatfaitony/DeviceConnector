@@ -1,0 +1,41 @@
+﻿@using LanguageResource
+@using Common
+@using VideoGuard.ApiModels
+@using FastConnector.HistRecognize
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    Layout = null;
+}
+@if (Model.meta.Success)
+{
+    HistoryLiveRoomSRV historyLiveRoomSRV = (HistoryLiveRoomSRV)Model.data;
+
+    <td id='@string.Format("td{0}", historyLiveRoomSRV.Id)' class='text-omit small' data-toggle='tooltip' title='@historyLiveRoomSRV.Id'>
+        <div id='@string.Format("div{0}", historyLiveRoomSRV.Id)' class='text-nowrap d-flex flex-row' style='cursor:pointer;'>
+            <div class='mr-1'>
+                <div id='@string.Format("CLIDBOARD{0}", historyLiveRoomSRV.Id)' class='p-1 btn btn-warning text-bold text-black clipboard h5' style='cursor:pointer;' title='@Lang.GeneralUI_ClickToCopy' onclick='getClipboardText()' data-clipboard-text='@historyLiveRoomSRV.Id'>@CommonBase.Substr2(historyLiveRoomSRV.Id.ToString(), 6, 5)</div>
+            </div>
+        </div>
+    </td>
+    <td class='' data-toggle='tooltip' title='@historyLiveRoomSRV.LibName)'>
+        <div class='h5 p-2 mt-1 ' style='border-color:darkorange;border-width:2px;border-radius:6px;border-style:dashed;'>@historyLiveRoomSRV.LibName @historyLiveRoomSRV.Id</div>
+    </td>
+    <td class='text-omit small' data-toggle='tooltip' title='@historyLiveRoomSRV.PersonId)'>
+        <div class='d-flex flex-column bd-highlight'>
+            <div class='pl-1 pr-1 bd-highlight h4'><span class='h4 text-bold badge badge-primary'><i class='fas fa-user-clock'></i>@string.Format("{0:yyyy-MM-dd HH:mm:ss}", historyLiveRoomSRV.ConvetToDateTime()) </span></div>
+            <div class='pl-1 pr-1 bd-highlight h5'> @CommonBase.Substr(historyLiveRoomSRV.PersonName, 8)</div>
+        </div>
+    </td>
+    <td data-toggle='tooltip' title='@historyLiveRoomSRV.PicPath'>
+        <div class='text-nowrap' style='max-width:160px;max-height:160px;overflow:hidden'>
+            <a href='@historyLiveRoomSRV.CapturePath' target='_blank'><img src='@historyLiveRoomSRV.CapturePath' class='img-responsive img-thumbnail' /></a>
+        </div>
+    </td>
+    <td>
+        <div class='text-nowrap' data-toggle='tooltip' title='@string.Format("{0:yyyy-MM-dd HH:mm:ss}", historyLiveRoomSRV.ConvetToDateTime())'>
+            <div class='text-nowrap' style='max-width:100px;max-height:100px;overflow:hidden'>
+                <a href='@historyLiveRoomSRV.PicPath' target='_blank'><img src='@historyLiveRoomSRV.PicPath' class='img-responsive img-thumbnail' /></a>
+            </div>
+        </div>
+    </td>
+}

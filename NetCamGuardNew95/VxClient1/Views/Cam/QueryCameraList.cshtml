@@ -1,0 +1,509 @@
+﻿@using LanguageResource
+@using EnumCode
+@using VxGuardClient.Context
+@using Common
+@using VideoGuard.ApiModels.CamApiModel
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.Cam_QueryCameraList;
+    int x = 0;
+    QueryCameraListInfoReturn queryCameraListInfoReturn = Model.data as QueryCameraListInfoReturn;
+    QueryCameraListInput queryCameraListInput = ViewBag.QueryCameraListInput as QueryCameraListInput;
+}
+<form asp-action="QueryCameraList" asp-controller="Cam" asp-route-Language="@LangExtend.LanguageCode" method="get" placeholder="Search" class="form-inline ml-1" id="form_Search">
+
+    <div class="row ">
+        <div class="input-group input-group-sm mb-3">
+            <input asp-for="@queryCameraListInput.MaincomId" value="@queryCameraListInput.MaincomId" name="MaincomId" type="hidden" class="form-control form-control-sm" />
+            <input asp-for="@queryCameraListInput.Name" value="@queryCameraListInput.Name" name="Name" class="form-control form-control-sm" ondblclick="javascript:this.value='';" placeholder="Search"
+                   style="border-right-width:2px;border-right-style:dashed;border-right-color:darkgreen;" />
+            <select asp-for="@queryCameraListInput.DeviceId" name="DeviceId" asp-items="@Html.DeviceDropDownList(queryCameraListInput.MaincomId,queryCameraListInput.DeviceId)"
+                    class="border-left-0 border-right-0 form-control form-control-sm">
+                <option value="0">@Lang.GeneralUI_Select</option>
+            </select>
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-flat"> <i class="fas fa-search"></i>Go!</button>
+            </span>
+        </div>
+        <div class="d-inline pull-right ml-3">
+            <a href="@Url.Action("Add","Cam")" class="btn btn-primary btn-sm text-white " title="@Lang.GeneralUI_AddNew" data-toggle="tooltip">
+                &nbsp;<i class="fa fa-plus-circle font-weight-bold"></i>&nbsp;
+            </a>
+        </div>
+    </div>
+</form>
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" for="@Model" />
+}
+else
+{
+    <div class="box-body  table-responsive" style="min-height:600px;">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>
+                    <div class="text-nowrap " title="@Lang.Camera_CameraId" data-toggle="tooltip">
+                        <span><i class="fas fa-camera text-green"></i> ID </span> <!--fa-caret-right-->
+                </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Camera_Name" data-toggle="tooltip"><span><i class="fa fa-cog text-green"></i> @Lang.Camera_Name </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Camera_Rtsp" data-toggle="tooltip"><span><i class="fas fa-link text-green"></i> @Lang.Camera_Rtsp </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Camera_Type" data-toggle="tooltip"><span><i class="fas fa-eye text-green"></i> @Lang.Camera_Type </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Site_SiteName" data-toggle="tooltip"><span><i class="fas fa-sitemap text-green"></i> @Lang.Site_SiteName </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Camera_Online" data-toggle="tooltip"><span><i class="fas fa-globe-asia text-green"></i> @Lang.Camera_Online </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Camera_OfDevice" data-toggle="tooltip"><span><i class="fas fa-cogs text-warning"></i> @Lang.Camera_OfDevice </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Camera_RecordStatus @Lang.GeneralUI_Status" data-toggle="tooltip">
+                        <i class="fas fa-record-vinyl text-danger"></i>@Lang.Camera_RecordStatus
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Remark" data-toggle="tooltip"><span><i class="fas fa-pencil-ruler text-green"></i> @Lang.GeneralUI_Remark </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Details" data-toggle="tooltip"><span><i class="fas fa-th-list text-green"></i> @Lang.GeneralUI_Details </span></div>
+                </th>
+            </tr>
+
+            @if (queryCameraListInfoReturn.TotalCount != 0)
+            {
+                foreach (var item in queryCameraListInfoReturn.Items)
+                {
+                    x++;
+                    <tr id="@string.Format("tr{0}", item.CameraId)">
+                        <td id="@string.Format("td{0}", item.CameraId)" class="text-omit" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.CameraId)">
+                            <span id="@string.Format("sp{0}", item.CameraId)" class="badge badge-dark p-2" data-toggle="tooltip" style="cursor:pointer;">@item.CameraId</span>
+                        </td>
+                        <td class="text-wrap">
+                            <div class="d-flex flex-column bd-highlight">
+                                <div class="bd-highlight">
+                                    <label class="bg-primary rounded p-1 h6">@item.Name</label>
+                                </div>
+                                <div class="bd-highlight small" title="@Lang.GeneralUI_CreateDate">
+                                    @if (DateTime.TryParse(item.CreateTime, out DateTime create))
+                                    {
+                                        <span class="small" style="line-height:inherit.8em">@Html.DateTimeFormate(create)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="small" style="line-height:inherit.8em">@item.CreateTime</span>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-wrap">
+                            <div id="@string.Format("CLIDBOARD{0}", item.CameraId)" class="p-1 rounded small bd-highlight bg-primary clipboard"
+                     style="cursor:pointer;" title="@Lang.GeneralUI_ClickToCopy" onclick="javascript:getClipboardText()"
+                     data-clipboard-text="@item.Rtsp">
+                                <span class="text-wrap small" style="max-width:240px;word-break:break-all;font-size:9px;">@item.Rtsp </span>
+                                <span class="badge badge-warming small bg-warning">copy</span>
+                            </div>
+                        </td>
+                        <td class="text-wrap">
+                            <label class="badge badge-primary"> @item.Type</label>
+                        </td>
+                        <td class="text-wrap">
+                            @if (item.SiteId != 0)
+                            {
+                                <label class="bg-gradient-gray rounded p-1" title="@string.Format("SiteId = {0}",item.SiteId)"> @item.SiteName </label>
+                            }
+                            else
+                            {
+                                <label title="@string.Format("SiteId = {0}",item.SiteId)"> @item.SiteName </label>
+                            }
+                        </td>
+                        <td class="text-wrap" data-toggle="tooltip" title="@string.Format("Visible ={0} Tips:{1}",item.Online,Lang.Camera_CameraList_VisibleTips)">
+                            <button id="@string.Format("btnSetVisible{0}",item.CameraId)" class="btn btn-primary btn-sm text-nowrap" type="button" onclick="javascript:SetCameraVisible('@item.CameraId','@item.MaincomId')">
+                                <i class="fas fa-circle"></i> @item.Online
+                            </button>
+                        </td>
+                        <td class="text-wrap" data-toggle="tooltip" title="@item.DeviceName">
+                            @if (!string.IsNullOrEmpty(item.DeviceName))
+                            {
+                                <span class="bg-success p-1 rounded text-nowrap">@item.DeviceName</span>
+                            }
+                        </td>
+                        <!--录像状态-->
+            <td class="text-nowrap">
+                            @{
+                                CameraRecordStatus recordStatus = (CameraRecordStatus)item.RecordStatus;
+                                switch (recordStatus)
+                                {
+                                    case CameraRecordStatus.IN_RECORD:
+                                        <span class="h3" id="@string.Format("spRecordStatus",item.CameraId)" data-toggle="modal" data-target="#ChangeCameraStatusModal"
+                          data-cameraid="@item.CameraId"
+                          data-maincomid="@item.MaincomId"
+                          data-name="@item.Name"
+                          data-recordstatus="@item.RecordStatus"
+                          data-devicetype="@item.DeviceType"
+                          data-backdrop="static" style="cursor:pointer;">
+
+                                            <i class="fas fa-play-circle text-success"
+                           data-toggle="tooltip" title="@string.Format("{0}{1}",Lang.Camera_RecordStatus,Lang.GeneralUI_Status)"></i>
+                                        </span>
+                                        break;
+                                    case CameraRecordStatus.IN_STOP:
+                                        <span class="h3" id="@string.Format("spRecordStatus",item.CameraId)" data-toggle="modal" data-target="#ChangeCameraStatusModal"
+                          data-cameraid="@item.CameraId"
+                          data-maincomid="@item.MaincomId"
+                          data-name="@item.Name"
+                          data-recordstatus="@item.RecordStatus"
+                          data-devicetype="@item.DeviceType"
+                          data-backdrop="static" style="cursor:pointer;">
+
+                                            <i class="fas fa-stop-circle text-danger"
+                           data-toggle="tooltip" title="@string.Format("{0}{1}",Lang.Camera_RecordStatus,Lang.GeneralUI_Status)"></i>
+                                        </span>
+                                        break;
+                                    case CameraRecordStatus.SUSPEND_RECORD:
+                                        <span class="h3" id="@string.Format("spRecordStatus",item.CameraId)" data-toggle="modal" data-target="#ChangeCameraStatusModal"
+                          data-cameraid="@item.CameraId"
+                          data-maincomid="@item.MaincomId"
+                          data-name="@item.Name"
+                          data-recordstatus="@item.RecordStatus"
+                          data-devicetype="@item.DeviceType"
+                          data-backdrop="static" style="cursor:pointer;">
+                                            <i class="fas fa-pause-circle text-danger" data-toggle="tooltip" title="@string.Format("{0}{1}",Lang.Camera_RecordStatus,Lang.GeneralUI_Status)">
+                                            </i>
+                                        </span>
+                                        break;
+                                    default:
+                                        <span class="h3"><i class="fas fa-exclamation-triangle text-danger"></i></span>
+                                        break;
+                                }
+                            }
+                            <span class="h3"
+                      data-cameraid="@item.CameraId"
+                      data-maincomid="@item.MaincomId"
+                      data-name="@item.Name"
+                      data-siteid="@item.SiteId"
+                      data-deviceid="@item.DeviceId"
+                      data-devicename="@item.DeviceName"
+                      data-devicetype="@item.DeviceType"
+                      data-toggle="modal" data-target="#CAMERA_DVR_SETTING_SCHEDULE_MODAL" data-backdrop="static" style="cursor:pointer;">
+                                <i class="fas fa-tools text-danger"></i>
+                            </span>
+
+                            @if (item.DeviceType == EnumBusiness.DeviceType.DESTOP_DVR)
+                            {
+                                if (item.Onlive)
+                                {
+                                    <span onclick="javascript: openlive('@item.MaincomId', @item.CameraId);" onl class="h3" id="@string.Format("spOnlive",item.CameraId)" title="@Lang.Camera_IsOnlive" data-toggle="tooltip" style="cursor:pointer;">
+                                        <i class="fas fa-video text-success"></i>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="h3" id="@string.Format("spOnlive",item.CameraId)" title="@Lang.Camera_IsOnlive" data-toggle="tooltip" style="cursor:pointer;">
+                                        <i class="fas fa-video text-black-50"></i>
+                                    </span>
+                                }
+                                <span class="h3 mt-0">
+                                    <a asp-action="CameraHistory" asp-controller="Cam" asp-route-Language="@LangUtilities.LanguageCode" asp-route-cameraId="@item.CameraId" title="@Lang.CameraHistory_Title" data-toggle="tooltip" target="_blank" class="btn btn-outline-danger btn-sm" style="cursor:pointer;">
+                                        <i class="fas fa-history"></i>
+                                    </a>
+                                </span>
+
+                            }
+                        </td>
+                        <td class="text-wrap" data-toggle="tooltip" title="@item.Remark">
+                            <span class="small omit2row">@item.Remark</span>
+                        </td>
+                        <td class="text-wrap">
+                            <div class="d-flex flex-row bd-highlight mb-3">
+                                <div class="p-2 bd-highlight">
+                                    <a asp-action="Update" asp-controller="Cam" asp-route-CameraId="@item.CameraId" class="btn btn-primary btn-sm text-nowrap">
+                                        <i class="fas fa-edit mr-1"></i>
+                                        @Lang.GeneralUI_Edit
+                                    </a>
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <button class="btn btn-warning btn-sm text-nowrap" type="button" onclick="javascript:DeleteCamera('@item.CameraId')">
+                                        <i class="fas fa-trash-alt"></i> @Lang.GeneralUI_Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        <span class="h2"></span> @Lang.GeneralUI_NoRecord
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    if (queryCameraListInfoReturn.PageCount > 1)
+    {
+        int p;
+        <div class="Page">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    @if (queryCameraListInfoReturn.PageNo != 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QueryCameraList", "Cam", new { Name = ViewBag.CurrentName, PageNo = 1 })" aria-label="Prev">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+
+                    @for (p = 1; p <= queryCameraListInfoReturn.PageCount; p++)
+                    {
+                        string ActiveCssTab = queryCameraListInfoReturn.PageNo == p ? "active" : "";
+                        <li class="page-item  @ActiveCssTab"><a class="page-link" href="@Url.Action("QueryCameraList", "Cam", new { Name = ViewBag.CurrentName, PageNo = p })">@p</a></li>
+                    }
+                    @if (queryCameraListInfoReturn.PageNo != queryCameraListInfoReturn.PageCount)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QueryCameraList", "Cam", new { Name = ViewBag.CurrentName, PageNo = queryCameraListInfoReturn.PageCount })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+}
+@{
+    CameraStatus cameraStatus = new CameraStatus();
+    <partial name="Camera/CAMERA_RECORD_STATUS" for="@cameraStatus" />
+
+
+    <partial name="Camera/CAMERA_DVR_SETTING_SCHEDULE" />
+}
+
+<script>
+    function DeleteCamera(CameraId)
+    {
+        console.log(CameraId);
+
+        layer.confirm('@Lang.Camera_InfoTips2', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+            var httpDelUrl = "/@LangUtilities.LanguageCode/Cam/Delete";
+
+            var myparamsObject = { "CameraId": CameraId};
+            $.ajax({
+                url: httpDelUrl,
+                data: myparamsObject,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    alert("error");
+                    console.log(JSON.stringify(data));
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: data.meta.message
+                    , btn:'@Lang.GeneralUI_OK'
+                    });
+                    if (data.meta.success) {
+                        var tr_obj = "#tr" + CameraId;
+                        $(tr_obj).removeClass("bg-warning-gradient");
+                        $(tr_obj).addClass("bg-warning-gradient");
+
+                        setTimeout(function () {
+                            $(tr_obj).remove();
+                        }, 3000);
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.CameraList_ComfirmNoTips', { icon: 1 }, {
+                    time: 80000,
+                    btn: ['@Lang.GeneralUI_Isee']
+                });
+            });
+    }
+
+    //CameraVisible 是否使用中
+    function SetCameraVisible(CameraId,MaincomId)
+    {
+        console.log(CameraId);
+
+        layer.confirm('@Lang.Camera_CameraVisibleTips', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+            var httpDelUrl = "/@LangUtilities.LanguageCode/Cam/ChangeCameraVisible";
+
+            var cameraVisibleInput = { "CameraId": CameraId,"MaincomId":MaincomId};
+
+            $.ajax({
+                url: httpDelUrl,
+                data: cameraVisibleInput,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    alert("error");
+                    console.log(JSON.stringify(data));
+                },
+                success: function (result) {
+                    console.log(JSON.stringify(result));
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: result.meta.message
+                    , btn:'@Lang.GeneralUI_OK'
+                    });
+                    if (result.meta.success) {
+
+                        var btn = "#btnSetVisible" + CameraId;
+                        if(result.data.cameraVisible=="VISIBLE")
+                        {
+                             $(btn).innerHtml("<i class=\"fas fa-eye text-success\"></i>" + result.data.cameraVisibleDesc);
+                        }else
+                        {
+                             $(btn).innerHtml("<i class=\"fas fa-eye text-gray\"></i>" + result.data.cameraVisibleDesc);
+                        }
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.CameraList_ComfirmNoTips', { icon: 1 }, {
+                    time: 80000,
+                    btn: ['@Lang.GeneralUI_Isee']
+                });
+            });
+    }
+    var daxiao=3;
+    function screen() {
+          //获取当前窗口的宽度
+          var width = $(window).width();
+          if (width > 1200) {
+              return daxiao=3;   //大屏幕
+          } else if (width > 992) {
+              return daxiao=2;   //中屏幕
+          } else if (width > 768) {
+              return daxiao=1;   //小屏幕
+          } else {
+              return daxiao=0;   //超小屏幕
+          }
+     }
+     screen();
+
+    function openlive(mainconId, cameraId) {
+
+        //http://localhost:5002/zh-hk/Cam/CamOnliveUrl/6000014/11
+        var onlieUrl = "@Url.Action("CamOnliveUrl","Cam",new { Language=LangUtilities.LanguageCode})" + "/" + mainconId + "/" + cameraId;
+
+        //test
+        //onlieUrl = "http://192.168.0.145/";
+
+        layer.open({
+            type: 2,
+            title: ['CAM '+ cameraId],
+            shadeClose: true,
+            scrollbar: false,
+            iframeAuto: false,
+            shade: false,
+            maxmin: false, //开启最大化最小化按钮
+            //area: ['720px', '480px'],
+            area: daxiao < 2 ? ['100%', '40%'] : ['720px', '480px'],  //这里引用变量daxiao
+            content:onlieUrl,
+            success: function(res) {
+               var iframe = $(res).find('iframe');
+
+               $(res).find('.layui-layer-title').css("height","40px");
+
+               var titleHeight=$(res).find('.layui-layer-title').height();
+
+               console.log({ "titleHeight": titleHeight });
+
+                var iframeHeight = iframe[0].contentDocument.body.scrollHeight;
+                console.log({ "iframeHeight_scrollHeight": iframeHeight });
+                if (iframeHeight < 200) {
+                    iframeHeight = 480;
+                }
+
+               var height= iframeHeight + titleHeight + 3;
+
+               if(window.innerHeight * 0.99 > height) {
+                  $(res).css('height', height);
+                  iframe.css('height', iframeHeight );
+                  console.log({ "iframeHeight": iframeHeight});
+               } else {
+                   $(res).css('height', '96%');
+                   iframeHeight = $(res).height()-titleHeight;
+                   iframe.css('height', iframeHeight);
+                   console.log({ "iframeHeight": iframeHeight });
+                }
+                console.log("layerUI open success!!!");
+            },
+            full: function (layero, index) {
+                //debugger;
+                var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：
+                //layer.iframeAuto(index);  //auto adapt
+                //onlieUrl = "https://www.baidu.com/";
+                //layer.iframeSrc(index, onlieUrl);
+                layer.setTop(layero);
+
+                //layui-layer-iframe1
+                var iframe = $(layero).find('iframe');
+                heightpx = window.innerHeight + "px";
+                iframe.css('height', heightpx);
+                console.log("window.innerHeight =" + window.innerHeight)
+                console.log({ "iframeWin": iframeWin });
+
+                var body = layer.getChildFrame('body', index);
+                var video = body.find('video');
+                video.attr("width", window.innerHeight - 15);
+                video.attr("height", window.innerWidth);
+                console.log({ "video": video });
+            },
+            restore: function (res, index) {
+                console.log("restore");
+                var iframe = $(res).find('iframe');
+                $(res).find('.layui-layer-title').css("height", "40px");
+                var titleHeight = $(res).find('.layui-layer-title').height();
+                console.log({ "titleHeight": titleHeight });
+                var iframeHeight = iframe[0].contentDocument.body.scrollHeight;
+                console.log({ "iframeHeight_scrollHeight": iframeHeight });
+                if (iframeHeight < 200) {
+                    iframeHeight = 480;
+                }
+
+                var height = iframeHeight + titleHeight + 3;
+
+                if (window.innerHeight * 0.99 > height) {
+                    $(res).css('height', height);
+                    iframe.css('height', iframeHeight);
+                    console.log({ "iframeHeight": iframeHeight });
+                } else {
+                    $(res).css('height', '96%');
+                    iframeHeight = $(res).height() - titleHeight;
+                    iframe.css('height', iframeHeight);
+                    console.log({ "iframeHeight": iframeHeight });
+                }
+                console.log("layerUI open success!!!");
+            }
+        });
+    }
+</script>
+
+

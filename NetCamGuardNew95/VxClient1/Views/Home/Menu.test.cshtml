@@ -1,0 +1,235 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Routing
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var routeContext = new RouteContext(httpContextAccessor.HttpContext);
+    if (routeContext.RouteData.Values["Language"] != null)
+    {
+        LangUtilities.LanguageCode = LangUtilities.StandardLanguageCode(routeContext.RouteData.Values["Language"].ToString());
+    }
+    WebCookie webCookie = new WebCookie(httpContextAccessor);
+
+    Layout = null;
+}
+ 
+<!-- Sidebar Menu -->
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item has-treeview menu-open" hidden> <!--暂时不用这块-->
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                    统计仪表板2
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                    统计仪表板
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-video-slash"></i>
+                <p>
+                    <!--@Lang.CamManagement_Title-->Jing Tou 
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@string.Format("/{0}/Cam/Add",LangUtilities.LanguageCode)" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                         Add JINGTOU
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@string.Format("/{0}/Cam/QueryCameraList",LangUtilities.LanguageCode)" class="nav-link">
+                        <i class="fas fa-sitemap nav-icon"></i>
+                        <p>UPDATE JINGTOU</p>
+                    </a>
+                </li>  
+            </ul>
+        </li>
+        <!--Site Admin-->
+        <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link expandHeight">
+                        <i class="nav-icon fas fa-sitemap"></i>
+                        <p>
+                            @Lang.UpdateSite_Title
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="AddSite" asp-controller="Site" asp-route-Language="@LangUtilities.LanguageCode" class="nav-link">
+                                <i class="nav-icon fas fa-tree text-warning"></i>
+                                <p>
+                                    @Lang.AddSite_Title
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <div id="treeviewOfSiteUpdate"></div>
+                        </li>
+                    </ul>
+                       
+                </li>
+        <!--Library-->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fab fa-connectdevelop"></i>
+                <p>
+                    @Lang.LibraryManagement_Title
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("AddLibrary","Library",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="nav-icon fab fa-connectdevelop"></i>
+                        <p>
+                            @Lang.AddLibrary_Title
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("QueryLibraryList","Library",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="fas fa-list-ol nav-icon"></i>
+                        <p>@Lang.QueryLibraryList_Title</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tree"></i>
+                        <p>
+                            实时devicam
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!--Task-->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                    @Lang.Task_Management
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("AddTask","Task",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.AddTask_Add</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("QueryTaskList","Task",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.Task_QueryTaskList_Title</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    @Lang.Person_Management
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("QueryPersonList","Person",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.QueryPersonList_Title</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("AddPerson","Person",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>@Lang.AddPerson_Add </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-header">@Lang.GeneralUI_SystemSetting</li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-user"></i>
+                <p>
+                    @Lang.Account_SystemUser
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@string.Format("/{0}/Account/Register", LangUtilities.LanguageCode)" class="nav-link">
+                        <i class="far fa-circle"></i>
+                        <span>@Lang.Account_RegisterAddNew</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@string.Format("/{0}/Account/PasswordModify", LangUtilities.LanguageCode)" class="nav-link">
+                        <i class="fas fa-user-edit"></i>
+                        <span>@Lang.GeneralUI_PasswordModify</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @if (!string.IsNullOrEmpty(WebCookie.AccessToken))
+        {
+            <li class="nav-item nav-icon">
+                <a href="@string.Format("/{0}/Account/SignOut", LangUtilities.LanguageCode)" class="nav-link">
+                    <i class="far fa-sign-out"></i>
+                    <p>@Lang.GeneralUI_SignOut </p>
+                </a>
+            </li>
+
+        }
+        else
+        {
+            <li class="nav-item nav-icon">
+                <a href="@Url.Action("login","Account",new { Language=LangUtilities.LanguageCode})" class="nav-link">
+                    <span class="fas fa-user-plus pl-1"> @Lang.Login_Title </span>
+                </a>
+            </li>
+        } 
+    </ul>
+</nav>
+<!-- /.sidebar-menu -->
+
+<script>
+
+    $(document).ready(function () {
+
+        loadSiteTreeUpdate("#treeviewOfSiteUpdate", "@LangUtilities.LanguageCode", "@WebCookie.MainComId", 0);
+
+        //$('#treeviewOfSiteUpdate').slimscroll({
+        //    disableFadeOut: false,
+        //    height: '180px'
+        //});
+
+        $(".expandHeight").click(function () {
+            /*$("#treeviewOfSiteUpdate").css("height", "500px");*/
+            $('#treeviewOfSiteUpdate').slimscroll({
+                disableFadeOut: false,
+                height: '300px'
+            });
+        });
+    });
+</script>

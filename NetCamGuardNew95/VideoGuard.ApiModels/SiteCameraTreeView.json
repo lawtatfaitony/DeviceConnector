@@ -1,0 +1,32 @@
+﻿[
+  {
+    "nodeid": 10,
+    "text": "6樓",
+    "parentsId": 0,
+    "deviceId": 3006,
+    "nodes": [
+      {
+        "nodeid": 6,
+        "text": "CAM232AXIS",
+        "cameraId": 6,
+        "deviceId": 3006,
+        "siteId": 10
+      }
+    ]
+  },
+  {
+    "nodeid": 13,
+    "text": "8樓",
+    "parentsId": 0,
+    "deviceId": 3006,
+    "nodes": [
+      {
+        "nodeid": 11,
+        "text": "CAM_AXIS_DOOR",
+        "cameraId": 11,
+        "deviceId": 3006,
+        "siteId": 13
+      }
+    ]
+  }
+]

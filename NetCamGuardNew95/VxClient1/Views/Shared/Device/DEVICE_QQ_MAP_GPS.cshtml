@@ -1,0 +1,162 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@model QQmapApiModel
+<!--
+    CIC 拍卡賬號配置
+    -->
+<!--DeviceFlatConfig Modal -->
+<div class="modal fade" id="QQ_MAP_API_MODEL" tabindex="-1" role="dialog" aria-labelledby="QQ_MAP_API_MODEL" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form asp-action="SetQQmapApiModel" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" data-ajax-success="handleSetQQmapApiModel"
+                  onsubmit="onBeginSubmit" asp-ajax-onFailure="errSetQQmapApiModel" data-ajax="true" data-ajax-method="post"
+                  class="form-horizontal" id="formSetQQmapApiModel">
+                <input asp-for="MaincomId" type="hidden" name="MainComId" class="MainComId" />
+                
+                <!--Modal header-->
+                <div class="modal-header">
+                    <h5 class="modal-title">@Lang.Device_QQmapApiModel_Title</h5>
+                    <span class="text-danger h5 p-1 ml-2">@Lang.GeneralUI_Config</span>
+                    <span class="DeviceId text-danger p-1 h5 ml-2" data-toggle="tooltip" title="@Lang.Device_DeviceId">@Model.DeviceId</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DeviceId">@Lang.Device_DeviceId</label>
+                                <div class="">
+                                    <input type="text" name="DeviceId" asp-for="DeviceId" data-val="true" readonly="readonly"
+                                           data-val-required="@string.Format("Device ID {0}",Lang.GeneralUI_Required)"
+                                           class="DeviceId form-control form-control-sm bold" title="LoginId" data-toggle="tooltip" />
+                                    <span asp-validation-for="DeviceId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DeviceName">@Lang.Device_DeviceName</label>
+                                <div class="">
+                                    <input type="text" name="DeviceName" asp-for="DeviceName" data-val="true"
+                                           data-val-required="@string.Format("{0}{1}",Lang.Device_DeviceName,Lang.GeneralUI_Required)"
+                                           class="DeviceName form-control form-control-sm bold" title="@Lang.Device_DeviceName" data-toggle="tooltip" />
+                                    <span asp-validation-for="DeviceName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="MapApiKey">@Lang.QQmapApiModel_Key</label>
+                                <div class="">
+                                    <input type="text" name="MapApiKey" asp-for="MapApiKey"
+                                           class="MapApiKey form-control form-control-sm bold" title="@Lang.QQmapApiModel_Key" data-toggle="tooltip" /> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="MapApiIp">@Lang.QQmapApiModel_MapApiIp</label>
+                                <div class="">
+                                    <input type="text" name="MapApiIp" asp-for="MapApiIp"  
+                                           class="MapApiIp form-control form-control-sm bold" title="LoginId" data-toggle="tooltip" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="ApiOutput">@Lang.QQmapApiModel_ApiOutput</label>
+                                <div class="">
+                                    <input type="text" name="ApiOutput" asp-for="ApiOutput" 
+                                           class="ApiOutput form-control form-control-sm bold" title="@Lang.QQmapApiModel_ApiOutput" data-toggle="tooltip" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="ApiCallback">@Lang.QQmapApiModel_ApiCallback</label>
+                                <div class="">
+                                    <input type="text" name="ApiCallback" asp-for="ApiCallback" 
+                                           class="ApiCallback form-control form-control-sm bold" title="@Lang.QQmapApiModel_ApiCallback" data-toggle="tooltip" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="label bg-secondary rounded p-2">
+                        @Lang.QQmapApiModel_tips
+                    </span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"> @Lang.GeneralUI_Comfirmed </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        console.log("from QQmapApiModel型號配置 device config partial view");
+
+        function onBeginSubmit() {
+            return confirm("Are you sure?");
+        }
+
+        function handleSetQQmapApiModel(result) {
+
+            layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: result.meta.message
+                    , btn: '@Lang.GeneralUI_OK'
+            });
+
+            //layer.close(layer.index);
+            console.log(result);
+        }
+
+        function errSetQQmapApiModel(data) {
+       
+            console.log(JSON.stringify(data));
+            alert('@Lang.GeneralUI_ServerError' + "--client errDeviceStatus");
+            layer.close('loading');
+        }
+
+        $('#QQ_MAP_API_MODEL').on('show.bs.modal', function (event) {
+           
+            var button = $(event.relatedTarget) // Button that triggered the modal
+           
+            var deviceId = button.data('deviceid');
+            var maincomId = button.data('maincomid')
+            var deviceName = button.data('devicename'); 
+            console.log("deviceId=" + deviceId + "| maincomId=" + maincomId + "| deviceName =" + deviceName );
+            var modal = $(this);
+            modal.find('.modal-title').text(deviceName);
+            //field
+            modal.find('.DeviceId').text(deviceId);
+            modal.find('.DeviceId').val(deviceId);
+            modal.find('.MainComId').val(maincomId); 
+            modal.find('.DeviceName').val(deviceName);
+
+            var returnDeviceConfigJsonUrl = "/Device/ReturnDeviceConfigJson/" + deviceId;
+            $.get(returnDeviceConfigJsonUrl, function (result, status) {
+                if (status != undefined) {
+                    if (status == "success" && result.meta.success) {
+                        console.log(result);
+                        modal.find('.MapApiIp').val(result.data.mapApiIp);
+                        modal.find('.MapApiKey').val(result.data.mapApiKey);
+                        modal.find('.ApiOutput').val(result.data.apiOutput);//
+                        modal.find('.ApiCallback').val(result.data.apiCallback);
+                    }
+                }
+            });
+        });
+    </script>
+

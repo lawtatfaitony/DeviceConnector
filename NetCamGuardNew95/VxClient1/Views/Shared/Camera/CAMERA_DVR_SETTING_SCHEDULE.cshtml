@@ -1,0 +1,627 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels.CamApiModel
+
+<!--
+    服務器錄像機
+    -->
+<!--CameraDVRSettingNSchedule Modal -->
+<!--Plugin CSS file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css" />
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+
+<div class="modal fade" id="CAMERA_DVR_SETTING_SCHEDULE_MODAL" tabindex="-1" role="dialog" aria-labelledby="CAMERA_DVR_SETTING_SCHEDULE_MODAL" aria-hidden="true">
+    <form asp-action="CameraDVRSettingSchedule" asp-controller="Cam" asp-route-Language="@LangUtilities.LanguageCode" data-ajax-success="handleCameraDVRsettingSchedule"
+          onsubmit="onBeginSubmit" asp-ajax-onFailure="errCameraDVRsettingSchedule" data-ajax="true" data-ajax-method="post"
+          class="form-horizontal" id="formCameraDVRsettingSchedule">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <input name="CameraId" type="hidden" class="CameraId" />
+                <input name="DeviceId" type="hidden" class="DeviceId" />
+                <input name="DeviceName" type="hidden" class="DeviceName" />
+                <input name="SiteId" type="hidden" class="SiteId" /> <!--from camera-->
+                <input name="MaincomId" type="hidden" class="MaincomId" />
+                <!--Modal header-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="CameraConfigTitle">@Lang.Camera_ConfigTitle_Title</h5>
+                    <span id="spName" class="text-danger h5 p-1 ml-2">@Lang.GeneralUI_Config</span>
+                    <span class="CameraId text-danger p-1 h5 ml-2" style="font-weight:900;" data-toggle="tooltip" title="@Lang.Camera_CameraId"></span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul class="list-inline ml-2">
+                                <li class="list-inline-item">
+                                    <div class="d-inline-block">
+                                        <input type="checkbox" id="PolicyIsStart" name="PolicyIsStart"
+                                               class="PolicyIsStart form-control form-control-sm bold" title="@Lang.Camera_PolicyIsStartTips" data-toggle="tooltip" />
+                                        <label class="control-label">@Lang.Camera_PolicyIsStart</label>
+                                    </div>
+                                </li>
+                                <!--SaveVideo-->
+                                <li class="list-inline-item">
+                                    <div class="d-inline-block">
+                                        <input type="checkbox" id="SaveVideo" name="SaveVideo"
+                                               class="SaveVideo form-control form-control-sm bold" title="SAVE VIDEO SWITCH" data-toggle="tooltip" />
+                                        <label class="control-label">@Lang.Camera_ConfigSaveVideo</label>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item">
+                                    <div class="d-inline-block">
+                                        <input type="checkbox" id="SaveMpeg4" name="SaveMpeg4"
+                                               class="SaveMpeg4 form-control form-control-sm bold" title="@Lang.Camera_ConfigSaveMpeg4Tips" data-toggle="tooltip" />
+                                        <label class="control-label">@Lang.Camera_ConfigSaveMpeg4</label>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item">
+                                    <div class="d-inline-block">
+                                        <input type="checkbox" id="HlsOutput" name="HlsOutput"
+                                               class="HlsOutput form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigHlsOutputTips" data-toggle="tooltip" />
+                                        <label class="control-label">@Lang.Camera_ConfigHlsOutput</label>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item invisible">
+                                    <div class="d-inline-block">
+                                        <input type="checkbox" id="RtmpOutput" name="RtmpOutput"
+                                               class="RtmpOutput form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigRtmpOutput" data-toggle="tooltip" />
+                                        <label class="control-label">@Lang.Camera_ConfigRtmpOutput</label>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item">
+                                    <div class="d-inline-block">
+                                        <input type="checkbox" id="SavePic" name="SavePic"
+                                               class="SavePic form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigSavePic" data-toggle="tooltip" />
+                                        <label class="control-label" title="Save the photo stream to start the species recognition task" data-toggle="tooltip">
+                                            @Lang.Camera_ConfigSavePic
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item">
+                                    <div class="d-inline-block">
+                                        <input type="number" id="SavePictRate" name="SavePictRate" style="width:55px;" value="25"
+                                               class="SavePictRate form-control form-control-sm bold input-group-append" title="@Lang.Camera_ConfigSavePictRate" data-toggle="tooltip" />
+                                        <label class="control-label" title="value 50 = 2 seconds * 25 frame rate" data-toggle="tooltip">
+                                            @Lang.Camera_ConfigSavePictRate
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row pb-2"><span class="text-black-50">@Lang.Camera_ConfigSaveMpeg4Tips</span></div>
+                        <div class="row">
+                            <div class="alert alert-light col-12" role="alert">
+                                <h5 class="alert-heading">@Lang.Camera_ConfigSchedule_Title</h5>
+                                <p class="h6 lead small d-block">@Lang.Camera_ConfigSchedule_Tips</p>
+                            </div>
+                        </div> <!--row end-->
+                        <!--week seetting-->
+                        <div class="row mb-3">
+                            <!--Monday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Monday" data-toggle="tooltip">@Lang.GeneralUI_Monday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row">
+                                    <input id="MondayStart" name="MondayStart" type="hidden" class="MondayStart defaultValueStart" />
+                                    <input id="MondayEnd" name="MondayEnd" type="hidden" class="MondayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" id="monday-slider" class="monday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+
+                        <div class="row mb-3">
+                            <!--Tuesday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Tuesday" data-toggle="tooltip">@Lang.GeneralUI_Tuesday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row">
+                                    <input id="TuesdayStart" name="TuesdayStart" type="hidden" class="TuesdayStart defaultValueStart" />
+                                    <input id="TuesdayEnd" name="TuesdayEnd" type="hidden" class="TuesdayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" class="tuesday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+
+                        <div class="row mb-3">
+                            <!--Wednesday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Wednesday" data-toggle="tooltip">@Lang.GeneralUI_Wednesday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row">
+                                    <input id="WednesdayStart" name="WednesdayStart" type="hidden" class="WednesdayStart defaultValueStart" />
+                                    <input id="WednesdayEnd" name="WednesdayEnd" type="hidden" class="WednesdayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" class="wednesday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+
+                        <div class="row mb-3">
+                            <!--Thursday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Thursday" data-toggle="tooltip">@Lang.GeneralUI_Thursday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row">
+                                    <input id="ThursdayStart" name="ThursdayStart" type="hidden" class="ThursdayStart defaultValueStart" />
+                                    <input id="ThursdayEnd" name="ThursdayEnd" type="hidden" class="ThursdayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" class="thursday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+
+                        <div class="row mb-3">
+                            <!--Friday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Friday" data-toggle="tooltip">@Lang.GeneralUI_Friday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row">
+                                    <input id="FridayStart" name="FridayStart" type="hidden" class="FridayStart defaultValueStart" />
+                                    <input id="FridayEnd" name="FridayEnd" type="hidden" class="FridayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" class="friday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+
+                        <div class="row mb-3">
+                            <!--Saturday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Saturday" data-toggle="tooltip">@Lang.GeneralUI_Saturday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row">
+                                    <input id="SaturdayStart" name="SaturdayStart" type="hidden" class="SaturdayStart defaultValueStart" />
+                                    <input id="SaturdayEnd" name="SaturdayEnd" type="hidden" class="SaturdayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" class="saturday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+
+                        <div class="row mb-3">
+                            <!--Sunday-->
+                            <div class="col-2" style="max-width:130px;overflow-x:hidden;">
+                                <label class="control-label" title="@Lang.GeneralUI_Sunday" data-toggle="tooltip">@Lang.GeneralUI_Sunday</label>
+                            </div>
+                            <div class="col-10">
+                                <div class="row hide">
+                                    <input id="SundayStart" name="SundayStart" type="hidden" class="SundayStart defaultValueStart" />
+                                    <input id="SundayEnd" name="SundayEnd" type="hidden" class="SundayEnd defaultValueEnd" />
+                                </div>
+                                <div class="row">
+                                    <div class="container no-padding no-margin">
+                                        <input type="text" class="sunday-slider" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--row end-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary"> @Lang.GeneralUI_Comfirmed </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    console.log("from CAMERA_DVR_SETTING_SCHEDULE_MODAL  ----------------  CAMERA_DVR_SETTING_SCHEDULE_MODAL view modal");
+
+    var custom_values = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750, 780, 810, 840, 870, 900, 930, 960, 990, 1020, 1050, 1080, 1110, 1140, 1170, 1200, 1230, 1260, 1290, 1320, 1350, 1380, 1410, 1440];
+
+    function onBeginSubmit() {
+        return confirm("Are you sure?");
+    }
+
+    function handleCameraDVRsettingSchedule(result) {
+
+        layer.close(layer.index);
+
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+        });
+
+        console.log(result);
+
+        redirectLocaleUrl = "@Url.Action("QueryCameraList", "Cam",new {Language=LangUtilities.LanguageCode})";
+
+        console.log(redirectLocaleUrl);
+        setTimeout(
+            function() {
+                window.location.href = redirectLocaleUrl;
+            }
+        , 3000);
+    }
+
+    function errCameraDVRsettingSchedule(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errCameraDVRsettingSchedule");
+    }
+    $('#CAMERA_DVR_SETTING_SCHEDULE_MODAL').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var cameraId = button.data('cameraid');
+
+        var maincomId = button.data('maincomid');
+        var cameraName = button.data('name');
+        var deviceId = button.data('deviceid');
+        var deviceName = button.data('devicename');
+        var siteId = button.data('siteid');
+        console.log("cameraId=" + cameraId + "| maincomId=" + maincomId + "|  cameraId =" + cameraId + "| cameraName =" + cameraName + "|  deviceId =" + deviceId +"|  deviceName =" + deviceName);
+        var modal = $(this);
+        modal.find('#spName').text(deviceName + "-" + cameraName);
+        modal.find('.CameraId').text(cameraId);
+        //field
+        modal.find('.CameraId').val(cameraId);
+        modal.find('.MaincomId').val(maincomId);
+        modal.find(".SiteId").val(siteId);
+        modal.find(".DeviceName").val(deviceName);
+        modal.find(".DeviceId").val(deviceId);
+
+        //Get schedule config
+        var returnCameraConfigJsonUrl = "/Cam/ReturnCamerScheduleConfigJson/" + cameraId;
+        $.get(returnCameraConfigJsonUrl, function (result, status) {
+            if (status != undefined) {
+                if (status == "success") {
+                    if (result.meta.success) {
+                        //debugger;
+                        console.log(result);
+                        //modal.find("input[name='SaveVideo']").val(result.data.saveVideo);
+                        layer.msg("SaveVideo =" + result.data.saveVideo);
+                        if (result.data.saveVideo) {
+                            modal.find("input[name='SaveVideo']").prop("checked", true);
+                        } else {
+                            modal.find("input[name='SaveVideo']").prop("checked", false);
+                        }
+
+                        modal.find("input[name='SavePic']").val(result.data.savePic);
+                        if (result.data.savePic) {
+                            modal.find("input[name='SavePic']").prop("checked", true);
+                        } else {
+                            modal.find("input[name='SavePic']").prop("checked", false);
+                        }
+                        console.log(result.data.savePic);
+
+                        modal.find("input[name='SavePictRate']").val(result.data.savePictRate);
+                        console.log(result.data.savePictRate);
+                        modal.find("input[name='SundayStart']").val(result.data.sundayStart);
+                        console.log(result.data.sundayStart);
+                        modal.find("input[name='SundayEnd']").val(result.data.sundayEnd);
+                        console.log(result.data.sundayEnd);
+                        modal.find("input[name='MondayStart']").val(result.data.mondayStart);
+                        console.log(result.data.mondayStart);
+                        modal.find("input[name='MondayEnd']").val(result.data.mondayEnd);
+                        console.log(result.data.mondayEnd);
+                        modal.find("input[name='TuesdayStart']").val(result.data.tuesdayStart);
+                        console.log(result.data.tuesdayStart);
+                        modal.find("input[name='TuesdayEnd']").val(result.data.tuesdayEnd);
+                        console.log(result.data.tuesdayEnd);
+                        modal.find("input[name='WednesdayStart']").val(result.data.wednesdayStart);
+                        console.log(result.data.wednesdayStart);
+                        modal.find("input[name='WednesdayEnd']").val(result.data.wednesdayEnd);
+                        console.log(result.data.wednesdayEnd);
+                        modal.find("input[name='ThursdayStart']").val(result.data.thursdayStart);
+                        console.log(result.data.thursdayStart);
+                        modal.find("input[name='ThursdayEnd']").val(result.data.thursdayEnd);
+                        console.log(result.data.thursdayEnd);
+                        modal.find("input[name='FridayStart']").val(result.data.fridayStart);
+                        console.log(result.data.fridayStart);
+                        modal.find("input[name='FridayEnd']").val(result.data.fridayEnd);
+                        console.log(result.data.fridayEnd);
+                        modal.find("input[name='SaturdayStart']").val(result.data.saturdayStart);
+                        console.log(result.data.saturdayStart);
+                        modal.find("input[name='SaturdayEnd']").val(result.data.saturdayEnd);
+                        console.log(result.data.saturdayEnd);
+
+                        modal.find("input[name='PolicyIsStart']").val(result.data.policyIsStart);
+                        if (result.data.policyIsStart) {
+                            modal.find("input[name='PolicyIsStart']").prop("checked", true);
+                        } else {
+                            modal.find("input[name='PolicyIsStart']").prop("checked", false);
+                        }
+
+                        modal.find("input[name='SaveMpeg4']").val(result.data.saveMpeg4);
+                        if (result.data.saveMpeg4) {
+                            modal.find("input[name='SaveMpeg4']").prop("checked", true);
+                        } else {
+                            modal.find("input[name='SaveMpeg4']").prop("checked", false);
+                        }
+
+                        console.log("hlsOutput=" + result.data.hlsOutput);
+                        modal.find("input[name='HlsOutput']").val(result.data.hlsOutput);
+                        if (result.data.hlsOutput) {
+                            modal.find("input[name='HlsOutput']").prop("checked", true);
+                        } else {
+                            modal.find("input[name='HlsOutput']").prop("checked", false);
+                        }
+
+                        console.log(result.data.rtmpOutput);
+
+                    } else {
+                        layer.open({
+                                title: '@Lang.GeneralUI_ReturnResult'
+                                , content: result.meta.message
+                                , btn: '@Lang.GeneralUI_OK'
+                        });
+                        //defaultValueEnd
+                        modal.find('.defaultValueStart').val("00:00:00");
+                        modal.find('.defaultValueEnd').val("23:59:00");
+                    }
+                }
+            }
+        });
+    });
+    $('#CAMERA_DVR_SETTING_SCHEDULE_MODAL').on('shown.bs.modal', function (event) {
+         var modal = $(this);
+         var cameraId = modal.find('.CameraId').val();
+         console.log("modal.find.CameraId = " + cameraId);
+
+         //初始化Schedule and Setting
+         initializeSettingSchedule();
+    });
+
+    $('#CAMERA_DVR_SETTING_SCHEDULE_MODAL').on('hidden.bs.modal', function (event) {
+
+        var redirectLocaleUrl = "@Url.Action("QueryCameraList", "Cam",new {Language=LangUtilities.LanguageCode})";
+
+        setTimeout(
+            function() {
+                window.location.href = redirectLocaleUrl;
+            }
+        , 500);
+    })
+    $("input[name='PolicyIsStart']").click(function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "INPUT") {
+            var tc = target.checked;
+            target.checked = tc;
+            target.value = tc;
+        }
+    });
+
+    $("input[name='SaveVideo']").click(function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "INPUT") {
+            var tc = target.checked;
+            target.checked = tc;
+            target.value = tc;
+        }
+    });
+
+    $("input[name='SaveMpeg4']").click(function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "INPUT") {
+            var tc = target.checked;
+            target.checked = tc;
+            target.value = tc;
+        }
+    });
+
+    $("input[name='HlsOutput']").click(function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "INPUT") {
+            var tc = target.checked;
+            target.checked = tc;
+            target.value = tc;
+        }
+    });
+
+    $("input[name='RtmpOutput']").click(function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "INPUT") {
+            var tc = target.checked;
+            target.checked = tc;
+            target.value = tc;
+        }
+    });
+
+    function resetSlider() {
+        document.getElementById("monday-slider").reset();
+    }
+    function initializeSettingSchedule() {
+
+        //Moday
+        var MondayStart = $("#MondayStart").val();
+        var MondayStartInex = MinsScaleIndex(MondayStart);
+
+        var MondayEnd = $("#MondayEnd").val();
+        var MondayEndInex = MinsScaleIndex(MondayEnd);
+
+        $(".monday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#MondayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#MondayEnd").val(my_prettify(data.to_value));
+
+                //---------------------------------
+                var $inp = $(this);
+                var from = $inp.prop("value"); // reading input value
+                var from2 = $inp.data("from"); // reading input data-from attribute
+
+                console.log(from, from2); // FROM value
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: MondayStartInex,
+            to: MondayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+
+        //Tuesday
+        var TuesdayStart = $("#TuesdayStart").val();
+        var TuesdayStartInex = MinsScaleIndex(TuesdayStart);
+
+        var TuesdayEnd = $("#TuesdayEnd").val();
+        var TuesdayEndInex = MinsScaleIndex(TuesdayEnd);
+        $(".tuesday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#TuesdayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#TuesdayEnd").val(my_prettify(data.to_value));
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: TuesdayStartInex,
+            to: TuesdayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+
+        //Wednesday
+        var WednesdayStart = $("#WednesdayStart").val();
+        var WednesdayStartInex = MinsScaleIndex(WednesdayStart);
+
+        var WednesdayEnd = $("#WednesdayEnd").val();
+        var WednesdayEndInex = MinsScaleIndex(WednesdayEnd);
+        $(".wednesday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#WednesdayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#WednesdayEnd").val(my_prettify(data.to_value));
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: WednesdayStartInex,
+            to: WednesdayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+
+        //Thursday
+        var ThursdayStart = $("#ThursdayStart").val();
+        var ThursdayStartInex = MinsScaleIndex(ThursdayStart);
+
+        var ThursdayEnd = $("#ThursdayEnd").val();
+        var ThursdayEndInex = MinsScaleIndex(ThursdayEnd);
+        $(".thursday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#ThursdayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#ThursdayEnd").val(my_prettify(data.to_value));
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: ThursdayStartInex,
+            to: ThursdayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+
+        //Friday
+        var FridayStart = $("#FridayStart").val();
+        var FridayStartInex = MinsScaleIndex(FridayStart);
+
+        var FridayEnd = $("#FridayEnd").val();
+        var FridayEndInex = MinsScaleIndex(FridayEnd);
+        $(".friday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#FridayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#FridayEnd").val(my_prettify(data.to_value));
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: FridayStartInex,
+            to: FridayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+
+        //Saturday
+        var SaturdayStart = $("#SaturdayStart").val();
+        var SaturdayStartInex = MinsScaleIndex(SaturdayStart);
+
+        var SaturdayEnd = $("#SaturdayEnd").val();
+        var SaturdayEndInex = MinsScaleIndex(SaturdayEnd);
+        $(".saturday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#SaturdayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#SaturdayEnd").val(my_prettify(data.to_value));
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: SaturdayStartInex,
+            to: SaturdayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+
+        //Sunday
+        var SundayStart = $("#SundayStart").val();
+        var SundayStartInex = MinsScaleIndex(SundayStart);
+
+        var SundayEnd = $("#SaturdayEnd").val();
+        var SundayEndInex = MinsScaleIndex(SundayEnd);
+        $(".sunday-slider").ionRangeSlider({
+
+            onChange: function (data) {
+                $("#SundayStart").val(my_prettify(data.from_value));
+                console.log(data.to_value);
+                $("#SundayEnd").val(my_prettify(data.to_value));
+            },
+            skin: "sharp",
+            type: "double",
+            grid: true,
+            from: SundayStartInex,
+            to: SundayEndInex,
+            values: custom_values,
+            prettify: my_prettify
+        });
+    }
+</script>
+

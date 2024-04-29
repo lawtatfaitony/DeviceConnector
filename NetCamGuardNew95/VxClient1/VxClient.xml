@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>VxGuardClient</name>
+  </assembly>
+  <members>
+    <member name="M:VxGuardClient.LoggeServiceExt.UseLog4net(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+      <param name="app"></param>
+      <returns></returns>
+    </member>
+  </members>
+</doc>

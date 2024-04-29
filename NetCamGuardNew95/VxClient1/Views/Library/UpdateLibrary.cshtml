@@ -1,0 +1,121 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using VideoGuard.ApiModels.LibraryApiModel 
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.Library_Title;
+}
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    LibraryApiModelUpateInput libraryApiModelUpateInput = Model.data as LibraryApiModelUpateInput; 
+
+    <div class="container col-lg-offset-3 col-md-offset-3 pt-3" style="max-width:500px;">
+        <form asp-action="UpdateLibrary" asp-controller="Library" asp-route-Language="@LangExtend.LanguageCode" data-ajax-success="handleAddLibrary" asp-ajax-onFailure="errAddLibrary" data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="form_LibAddNew" id="form_LibAddNew">
+            <input asp-for="@libraryApiModelUpateInput.LibId" name="LibId" type="hidden" />
+            <input asp-for="@libraryApiModelUpateInput.session" name="session" type="hidden" />
+           
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title text-dark">@Lang.Library_Title @Lang.GeneralUI_Update</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body " style="display: block;">
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Name">@Lang.Library_Name</label>
+                        <div class="input-group">
+                            <input id="Name" asp-for="@libraryApiModelUpateInput.Name" name="Name" data-val="true" class="border-right-0 form-control form-control  form-control-sm" type="text" placeholder="@Lang.Library_Name" data-toggle="title" title=Lang.Library_Name />
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Library_Name">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@libraryApiModelUpateInput.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Name">@Lang.Library_Type</label>
+                        <div class="input-group">
+                            <select asp-for="@libraryApiModelUpateInput.LibraryTypeCode" name="LibraryTypeCode" asp-items="@Html.LibraryTypeCodeDropDownList(libraryApiModelUpateInput.LibraryTypeCode.ToString())"
+                                    class="border-left-0 border-right-0 form-control form-control-sm">
+                                <option>@Lang.GeneralUI_Select</option>
+                            </select>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0" style="background-color:#faf9eb;font-size:9px;color:#ff0000;cursor:help;" data-toggle="tooltip" title="@Lang.Library_Type">
+                                    <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@libraryApiModelUpateInput.LibraryTypeCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Remark">@Lang.GeneralUI_Remark</label>
+                        <div class="input-group">
+                            <textarea rows="2" id="Remark" name="Remark" asp-for="@libraryApiModelUpateInput.Remark" data-val="true" class="border-right-0 form-control  form-control-sm"
+                                      placeholder="@Lang.Library_Remark" data-toggle="title" title="@Lang.Library_Remark"></textarea>
+                            <div class="input-group-append input-group-sm">
+                                <span class="input-group-text border-left-0 font-red small" style="background-color:#faf9eb;color:#0bc936;font-size:9px;cursor:help;" data-toggle="tooltip" title="@Lang.GeneralUI_Remark">
+                                    <i class="fas fa-angle-double-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="@libraryApiModelUpateInput.Remark" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div style="display: block;" class="">
+                <div class="container card-footer">
+                    <div class="row">
+                        <div class="margin-left5 padding-left5">
+                            <button type="submit" id="btnaddnew" class="btn btn-primary padding-left15 margin-left5">
+                                @Lang.GeneralUI_Submit
+                            </button>
+                            <a asp-action="QueryLibraryList" asp-controller="Library" class="btn btn-primary padding-left15 margin-left5">@string.Format("{0}{1}", Lang.GeneralUI_Return, Lang.GeneralUI_List)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+    <script>
+        function handleAddLibrary(result) {
+            layer.close(layer.index);
+            console.log(result);
+            layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: result.meta.message
+                    , btn: '@Lang.GeneralUI_OK'
+                });
+            if (result.meta.success === true)
+            {
+                redirectLocaleUrl = "@Url.Action("QueryLibraryList", "Library")";
+                console.log(redirectLocaleUrl);
+                setTimeout(
+                    function() {
+                        window.location.href = redirectLocaleUrl;
+                    }
+                , 3000);
+            }
+        }
+
+        function errAddLibrary(data) {
+            layer.close('loading');
+            layer.close(layer.index);
+            console.log(JSON.stringify(data));
+            alert('@Lang.GeneralUI_ServerError' + "--client errAddLibrary");
+        }
+    </script>
+
+
+
+
+
+
+

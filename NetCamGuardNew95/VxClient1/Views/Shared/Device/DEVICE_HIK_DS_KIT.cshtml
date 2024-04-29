@@ -1,0 +1,246 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@model DeviceHikConfA
+<!--
+    海康考勤機和拍卡機設備的配置頁面
+    HIK_DS_KIT341BMW = 1002,
+    HIK_DS_KIT804MF = 1003,
+    -->
+<!--DeviceFlatConfig Modal -->
+<div class="modal fade" id="DEVICE_HIK_DS_KIT_MODAL" tabindex="-1" role="dialog" aria-labelledby="DEVICE_HIK_DS_KIT_MODAL" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form asp-action="DeviceHIK_DS_KIT" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode" data-ajax-success="handleDeviceHikDSKIT"
+                  onsubmit="onBeginSubmit" asp-ajax-onFailure="errDeviceHikDSKIT" data-ajax="true" data-ajax-method="post"
+                  class="form-horizontal" id="formDeviceHikDSKIT">
+                <input asp-for="@Model.DeviceId" name="DeviceId" type="hidden" class="DeviceId" />
+                <input asp-for="@Model.MainComId" name="MaincomId" type="hidden" class="MaincomId" />
+                <!--Modal header-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DeviceConfigTitle">@Lang.Device_HikKITxConfig_Title</h5>
+                    <span class="text-danger h5 p-1 ml-2">@Lang.GeneralUI_Config</span><span class="DeviceId text-danger p-1 h5 ml-2" data-toggle="tooltip" title="@Lang.Device_DeviceId">@Model.DeviceId</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group pl-0 ml-0">
+                                <label class="control-label" asp-for="DevIp">@Lang.Device_ConfigIp</label>
+                                <div class="pl-0 pr-1">
+                                    <div class=" input-group">
+                                        <input type="text" id="DevIp" name="DevIp" asp-for="DevIp" data-val="true" data-val-required="@string.Format("IP {0}",Lang.GeneralUI_Required)"
+                                               class="DevIp form-control form-control-sm bold input-group-append" title="IP" data-toggle="tooltip" />
+                                    </div>
+                                </div>
+                                <span asp-validation-for="DevIp" class="text-danger pr-3"></span>
+                            </div>
+                        </div>
+
+                        <div class="p-1 bd-highlight col-2">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DevIpPort">@Lang.Device_ConfigPort</label>
+                                <div class="pr-1">
+                                    <input type="text" id="DevIpPort" name="DevIpPort" asp-for="DevIpPort"
+                                           data-val="true" data-val-required="@string.Format("PORT {0}",Lang.GeneralUI_Required)"
+                                           class="DevIpPort form-control form-control-sm bold" title="PORT" , data-toggle="tooltip" />
+                                    <span asp-validation-for="DevIpPort" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="LoginId">@Lang.Device_ConfigLoginId</label>
+                                <div class="">
+                                    <input type="text" id="LoginId" name="LoginId" asp-for="LoginId" data-val="true" data-val-required="@string.Format("LOGIN ID {0}",Lang.GeneralUI_Required)"
+                                           class="LoginId form-control form-control-sm bold" title="LoginId" data-toggle="tooltip" />
+                                    <span asp-validation-for="LoginId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group ">
+                                <label class="control-label " asp-for="LoginPassword">@Lang.Device_ConfigPassword</label>
+                                <div class="pr-1">
+                                    <input type="text" id="LoginPassword" name="LoginPassword" asp-for="LoginPassword" data-val="true" data-val-required="@string.Format("PASSWORD {0}",Lang.GeneralUI_Required)"
+                                           class="LoginPassword form-control form-control-sm" title="LoginPawwword" data-toggle="tooltip" />
+                                    <span asp-validation-for="LoginPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group">
+                                <label class="control-label col-12  d-inline" asp-for="TypeName">@Lang.Device_ConfigTypeName</label>
+                                <div class="pt-2">
+                                    <input type="text" id="TypeName" name="TypeName" asp-for="TypeName" data-val-required="@string.Format("Type Name {0}",Lang.GeneralUI_Required)"
+                                           class="TypeName form-control form-control-sm  col-12" title="TypeName" data-toggle="tooltip" />
+                                    <span asp-validation-for="TypeName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group">
+                                <label class="control-label col-12  d-inline" asp-for="TypeNo">@Lang.Device_ConfigTypeNo</label>
+                                <div class="pt-2">
+                                    <input type="text" id="TypeNo" name="TypeNo" asp-for="TypeNo" data-val-required="@string.Format("TypeNo {0}",Lang.GeneralUI_Required)"
+                                           class="TypeNo form-control form-control-sm  col-12" title="TypeNo" data-toggle="tooltip" />
+                                    <span asp-validation-for="TypeNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-4">
+                            <div class="form-group">
+                                <label class="control-label col-12 d-inline" style="max-width:135px;overflow-x:hidden;" asp-for="EmployeeNoPrefix"  title="@Lang.Device_EmployeeNoPrefixTips" data-toggle="tooltip">
+                                    @Lang.Device_EmployeeNoPrefix
+                                </label>
+                                <div class="pt-2">
+                                    <input type="text" id="EmployeeNoPrefix" name="EmployeeNoPrefix" asp-for="EmployeeNoPrefix"
+                                           class="EmployeeNoPrefix form-control form-control-sm  col-12" title="@Lang.Device_EmployeeNoPrefixTips" data-toggle="tooltip" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group">
+                                <label class="control-label col-12  d-inline" asp-for="MaxFace">@Lang.Device_ConfigMaxFace</label>
+                                <div class="pt-2">
+                                    <input type="text" id="MaxFace" name="MaxFace" asp-for="MaxFace" data-val-required="@string.Format("Max Faces {0}",Lang.GeneralUI_Required)"
+                                           class="MaxFace form-control form-control-sm  col-12" title="@Lang.Device_ConfigMaxFaceTips" data-toggle="tooltip" />
+                                    <span asp-validation-for="MaxFace" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group">
+                                <label class="control-label col-12  d-inline" asp-for="MaxAccessCard">@Lang.Device_ConfigMaxCards</label>
+                                <div class="pt-2">
+                                    <input type="text" id="MaxAccessCard" name="MaxAccessCard" asp-for="MaxAccessCard" data-val-required="@string.Format("Max Cards {0}",Lang.GeneralUI_Required)"
+                                           class="MaxAccessCard form-control form-control-sm  col-12" title="@Lang.Device_ConfigMaxAccessCardTips" data-toggle="tooltip" />
+                                    <span asp-validation-for="MaxAccessCard" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group">
+                                <label class="control-label col-12 d-inline" style="max-width:135px;overflow-x:hidden;" asp-for="MaxFingerPrint">@Lang.Device_ConfigMaxFingerPrint</label>
+                                <div class="pt-2">
+                                    <input type="text" id="MaxFingerPrint" name="MaxFingerPrint" asp-for="MaxFingerPrint" data-val-required="@string.Format("Max FingerPrint {0}",Lang.GeneralUI_Required)"
+                                           class="MaxFingerPrint form-control form-control-sm  col-12" title="@Lang.Device_ConfigMaxFingerPrintTips" data-toggle="tooltip" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-1 bd-highlight col-3">
+                            <div class="form-group">
+                                <label class="control-label col-12 d-inline" style="max-width:135px;overflow-x:hidden;" asp-for="MaxFingerPrint">@Lang.Device_ConfigMaxPassKey</label>
+                                <div class="pt-2">
+                                    <input type="text" id="MaxPassKey" name="MaxPassKey" asp-for="MaxPassKey" data-val-required="@string.Format("Max MaxPassKey {0}",Lang.GeneralUI_Required)"
+                                           class="MaxFingerPrint form-control form-control-sm  col-12" title="@Lang.Device_ConfigMaxFingerPrintTips" data-toggle="tooltip" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ConfigParamsTips-->
+                    <span class="label bg-gradient-secondary rounded small p-1 mb-5">@Lang.Device_ConfigParamsTips</span>
+
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="p-1 bd-highlight col-12">
+                            <div class="form-group ">
+                                <label class="control-label" asp-for="DeviceSerialNo">@Lang.Device_ConfigSerialNo</label>
+                                <div class="pr-1">
+                                    <input type="text" id="DeviceSerialNo" name="DeviceSerialNo" asp-for="DeviceSerialNo" readonly="readonly" data-val="true" data-val-required="@string.Format("{0} - {1}",Lang.Device_ConfigSerialNo,Lang.GeneralUI_Required)"
+                                           class="DeviceSerialNo SetServiceDateRange form-control form-control-sm" />
+                                    <span asp-validation-for="DeviceSerialNo" class="text-danger"></span>
+                                    <span class="label bg-gradient-secondary rounded small p-1">@Lang.Device_ConfigSerialNoTips</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"> @Lang.GeneralUI_Comfirmed </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    <script>
+        console.log("from HIK KITxxx型號配置 device config partial view");
+
+        function onBeginSubmit() {
+            return confirm("Are you sure?");
+        }
+
+        function handleDeviceHikDSKIT(result) {
+           
+            layer.open({
+                    title: '@Lang.GeneralUI_ReturnResult'
+                    , content: result.meta.message
+                    , btn: '@Lang.GeneralUI_OK'
+            }); 
+            layer.close(layer.index);
+            console.log(result);
+        }
+
+        function errDeviceHikDSKIT(data) {
+            layer.close('loading');
+            console.log(JSON.stringify(data));
+            alert('@Lang.GeneralUI_ServerError' + "--client errDeviceStatus");
+        }
+
+        $('#DEVICE_HIK_DS_KIT_MODAL').on('show.bs.modal', function (event) {
+           
+            var button = $(event.relatedTarget) // Button that triggered the modal
+           
+            var deviceId = button.data('deviceid');
+            var maincomId = button.data('maincomid')
+            var deviceName = button.data('devicename');
+            var deviceSerialNo = button.data('deviceserialno');
+            console.log("deviceId=" + deviceId + "| maincomId=" + maincomId + "| deviceName =" + deviceName + "|  deviceSerialNo =" + deviceSerialNo);
+            var modal = $(this);
+            modal.find('.modal-title').text(deviceName);
+            //field
+            modal.find('.DeviceId').text(deviceId);
+            modal.find('.DeviceId').val(deviceId);
+            modal.find('.MaincomId').val(maincomId);
+            modal.find(".DeviceSerialNo").val(deviceSerialNo);
+
+            var returnDeviceConfigJsonUrl = "/Device/ReturnDeviceConfigJson/" + deviceId;
+            $.get(returnDeviceConfigJsonUrl, function (result, status) {
+                if (status != undefined) {
+                    if (status == "success" && result.meta.success) {
+                        console.log(result);
+                        modal.find('.DevIp').val(result.data.devIp);
+                        modal.find('.DevIpPort').val(result.data.devIpPort);
+                        modal.find('.LoginId').val(result.data.loginId);
+                        modal.find('.LoginPassword').val(result.data.loginPassword);
+                        modal.find('.TypeName').val(result.data.typeName);
+                        modal.find('.TypeNo').val(result.data.typeNo);
+                        modal.find('.EmployeeNoPrefix').val(result.data.employeeNoPrefix);
+                        console.log(result.data.employeeNoPrefix);
+                        modal.find('.MaxFace').val(result.data.maxFace);
+                        modal.find('.MaxFingerPrint').val(result.data.maxFingerPrint);
+                        modal.find('.MaxAccessCard').val(result.data.maxAccessCard);
+                        modal.find('.MaxPassKey').val(result.data.maxPassKey); 
+                    }
+                }
+            });
+        });
+    </script>
+

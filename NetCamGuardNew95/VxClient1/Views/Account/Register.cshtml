@@ -1,0 +1,86 @@
+﻿@using LanguageResource
+@model VideoGuard.ApiModels.Account.AccountModelInput
+@{ 
+    ViewBag.Title = Lang.RegisterView_Title; 
+}
+
+<div class="container-fluid">
+    <div class="offset-lg-3 offset-md-3">
+        <div class="register-box bg-gradient-light pl-3 pr-3" style="border-radius:2%;">
+            <div class="register-logo small">
+                <div class="text-nowrap pl-1 pt-3 text-justify">
+                    <i class="fas fa-user-alt"></i><span class="register-box-msg small">@Lang.RegisterView_Title</span>
+                </div>
+            </div>
+            <div class="register-box-body"> 
+                <form asp-action="Register" asp-controller="Account" asp-route-Language="@ViewData["Language"]" onsubmit="return handleOnbegin()" data-ajax-success="handleRegister" asp-ajax-onFailure="errRegister" data-ajax="true" data-ajax-method="POST" class="form-horizontal" name="form_Register" id="form_Register">
+                    <div class="form-group">
+                        <input asp-for="UserName" data-val="true" class="form-control mb-3" type="text" placeholder="@Lang.User_UserName" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group ">
+                        <input asp-for="Password" data-val="true" class="form-control" type="password" placeholder="@Lang.User_Password" />
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="ConfirmPassword" data-val="true" class="form-control" type="password" placeholder="@Lang.User_Password_Comfirmed" />
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="2" asp-for="Remark" data-val="true" class="form-control" type="text" placeholder="@Lang.GeneralUI_Remark" ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">@Lang.GeneralUI_Register</button>
+                    </div>
+                    <div class="social-auth-links  text-left">
+                        <i class="fas fa-info-circle text-white"></i> <a href="@Url.Action("Login", "Account",new { returnUrl = ViewBag.returnUrl })" class="text-white">@Lang.RegisterView_HasRegistedToLogin</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/AdminLTE305/plugins/md5/md5.js"></script>
+<script>
+        function handleOnbegin() {
+        
+        var Password = $("#Password").val();
+        var ConfirmPassword = $("#ConfirmPassword").val();
+        if (Password.lenght < 3 || ConfirmPassword.lenght < 3) {
+            layer.msg("@Lang.User_Password_Format_TooShort");
+            return false;
+        } 
+
+        Password = md5(Password);
+        ConfirmPassword = md5(ConfirmPassword);
+             
+        $("#Password").val(Password);
+        $("#ConfirmPassword").val(ConfirmPassword);
+
+        return true;
+    }
+    function handleRegister(result) {
+        
+        layer.close(layer.index);
+        if (result.meta.Success === false) {
+
+            layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+            });
+        }
+        else
+        {
+            layer.msg(result.meta.message); 
+        }
+    }
+    function errRegister(data) {
+        layer.close(layer.index);
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client error");
+        //layer.clear();
+    }
+</script>

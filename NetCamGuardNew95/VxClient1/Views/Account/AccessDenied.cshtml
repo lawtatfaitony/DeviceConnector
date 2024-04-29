@@ -1,0 +1,21 @@
+﻿@using LanguageResource
+@{
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+    ViewBag.Title = Lang.LoginViewModel_Title;
+}
+<div class="container">
+    <div class="row m-5">
+        <div class="col-12 ">
+            <div class="box info-box-text">
+                <div class="text-center">
+                    <br>
+                    <br>
+                    <br>
+                    <p class="text-danger fas fa-exclamation-triangle fa-4x mb-3"><h1>@Lang.GeneralUI_AccessDenied </h1></p>
+                    <a href="@Url.Action("login","Account")"><p class="text-success fas fa-user"><h4>@Lang.GeneralUI_Login </h4></p></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Small boxes (Stat box) -->

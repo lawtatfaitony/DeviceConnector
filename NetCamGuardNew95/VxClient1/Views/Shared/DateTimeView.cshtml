@@ -1,0 +1,25 @@
+﻿@model DateTime
+
+@{
+    DateTime dt = DateTime.Now;
+    TimeSpan timeSpan = dt.Subtract(Model);
+    int xSpan = timeSpan.Hours == 0 ? timeSpan.Minutes : timeSpan.Hours;
+    xSpan = timeSpan.Days > 0 ? timeSpan.Days : xSpan;
+}
+@if (timeSpan.Days>365)
+{
+    <span class="badge badge-primary"></span>
+}
+
+@if (timeSpan.Days > 0)
+{
+    <span class="badge badge-primary">@string.Format("{0} Days ago", xSpan)</span>
+}
+@if (timeSpan.Hours >= 1 && timeSpan.Hours <= 23 && timeSpan.Days == 0)
+{
+    <span class="badge badge-primary">@string.Format("{0} Hours ago", xSpan)</span>
+}
+@if (timeSpan.Hours < 1 && timeSpan.Days == 0)
+{
+    <span class="badge badge-primary">@string.Format("{0} Mins ago", xSpan)</span>
+}

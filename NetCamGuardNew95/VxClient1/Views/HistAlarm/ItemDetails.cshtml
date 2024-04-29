@@ -1,0 +1,85 @@
+﻿@using LanguageResource
+@using EnumCode
+@using Common
+@using VxClient.Models
+@using VideoGuard.ApiModels
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@using X.PagedList
+@using DataBaseBusiness.ModelHistory
+
+@model DataBaseBusiness.ModelHistory.HistAlarm
+
+@{
+    Layout = null;
+
+    AlarmLevel alarmLevel = (AlarmLevel)Model.AlarmLevel;
+}
+<td id="@string.Format("td{0}",Model.HistAlarmId)" class="text-omit small" data-toggle="tooltip" title="@Model.HistAlarmId">
+    <div id="@string.Format("div{0}",Model.HistAlarmId)" class="text-nowrap d-flex flex-row" style="cursor:pointer;">
+        <div class="mr-1">
+            <span id="@string.Format("sp{0}",Model.HistAlarmId)" class="badge badge-dark" data-toggle="tooltip" style="cursor:pointer;">
+                <i class="fas fa-plus"></i>
+            </span>
+        </div>
+        <div id="@string.Format("CLIDBOARD{0}",Model.HistAlarmId)" class="p-0 text-dark clipboard" style="cursor:pointer;" title="@Lang.GeneralUI_ClickToCopy" onclick="javascript:getClipboardText()" data-clipboard-text="@Model.HistAlarmId">@CommonBase.Substr2(Model.HistAlarmId.ToString(), 6, 5)</div>
+    </div>
+</td>
+<td class="text-omit small">
+    <div class="p-0 m-0">
+        <details class="p-0 ml-0">
+            <summary class="text-nowrap p-0">
+                <span class="pl-0 text-bold fas fa-user" data-toggle="tooltip" title="@Model.ObjName"> @CommonBase.Substr(Model.ObjName, 8) </span><span class="small p-0"> @Model.ObjName</span>
+            </summary>
+            <div class="d-flex flex-column bd-highlight">
+                <div class="p-1 bd-highlight" data-toggle="tooltip" title="@Model.TaskName">
+                    <i class="fas fa-sitemap"></i> @Model.TaskId <span class="small p-0"> @Model.TaskName</span>
+                </div>
+                <div class="p-1 bd-highlight" data-toggle="tooltip" title="@Model.ObjName">
+                    <span class="badge badge-secondary mt-0"> <i class="fas fa-id-card"></i> @Model.ObjName</span>
+                </div>
+                <div class="p-1 bd-highlight" data-toggle="tooltip" title="@Model.ObjShortDesc">
+                    <span class="badge badge-secondary mt-0"> <i class="fas fa-tasks"></i> @Model.ObjShortDesc</span>
+                </div>
+            </div>
+        </details>
+    </div>
+</td>
+
+<td>
+    <div class="d-flex flex-column bd-highlight">
+        <div class="text-nowrap bd-highlight pb-0 mb-1" data-toggle="tooltip" title="@string.Format("{0:yyyy-MM-dd HH:mm:ss fff}", Model.CaptureTime)">
+            <span class="badge badge-secondary text-white p-2"><i class="fas fa-calendar mr-1"> </i> @string.Format("{0:yyyy-MM-dd HH:mm:ss fff}", Model.CaptureTime)</span>
+        </div>
+    </div>
+</td>
+<td>
+
+    <div id="@string.Format("divALARMLEVEL{0}_{1}",alarmLevel.ToString(),Model.HistAlarmId)"
+         class="p-1 rounded p-2 bg-secondary clipboard" style="cursor:pointer;border-radius:5px;" title="@Lang.GeneralUI_ClickToCopy"
+         onclick="javascript:getClipboardText()" data-clipboard-text="@alarmLevel.ToString()">
+        @alarmLevel.GetDescription()
+    </div>
+</td>
+<td>
+    <label class="label label-primary  p-1 pl-2 pr-2 bg-gradient-secondary rounded">
+        <i class="fas fa-user text-dark"></i>
+        @Model.ObjShortDesc
+    </label>
+</td>
+<td>
+    @if (!string.IsNullOrEmpty(Model.CapturePath))
+    {
+        <div class="text-nowrap"
+         data-toggle="tooltip" title="@Model.CapturePath">
+            <a href="@Model.CapturePath" target="_blank">
+                <img src="@string.Format("{0}s60X60.jpg", Model.CapturePath)" width="60" onclick="showBigImg(this);" class="hist_alarm_tr_border_style2" />
+            </a>
+        </div>
+    }
+</td>
+
+<td data-toggle="tooltip" title="@Model.CameraName">
+    <label class="small text-nowrap rounded p-2 bg-secondary" style="border-radius:5px;"><i class="fas fa-cogs text-white mr-1"></i>@Model.CameraName @Model.CameraId</label>
+</td> 

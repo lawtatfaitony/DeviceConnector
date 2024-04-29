@@ -1,0 +1,93 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.Device
+@model OperateStatusSubmitInput
+
+<!--DevicePersonDownInsertStatus PersonId DeviceId-->
+<div class="modal fade" id="DEVICE_PERSON_DOWN_MODAL" tabindex="-1"
+     role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="deviceStatusModal" aria-hidden="true">
+    <form asp-action="DevicePersonDownSubmit" asp-controller="DeviceManage" asp-route-Language="@LangUtilities.LanguageCode"
+          data-ajax-success="handleDevicePersonDownSubmit"
+          asp-ajax-onFailure="errDevicePersonDownSubmit" data-ajax="true" data-ajax-method="post" class="form-horizontal form-inline"
+          name="formDevicePersonDownSubmit" id="formDevicePersonDownSubmit">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6 class="modal-title">@Lang.Device_LibraryName</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-12">
+                         <input name="MainComId" type="hidden" class="MainComId" />
+                         <input name="DeviceId" type="hidden" class="DeviceId" />
+                         <input name="PersonId" type="hidden" class="PersonId" />
+                       
+                         <select name="DeviceOperateMode" asp-items="@Html.DeviceOperateModeDropDownList()" class="form-control form-control-sm bold" style="min-width:230px;">
+                         </select>
+                        <label class="label label-dark rounded" style="min-width:210px;"> @Lang.DevicePersonDownSubmitTips</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm ml-3">Save changes</button>
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                </div> 
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    function handleDevicePersonDownSubmit(result) {
+        layer.close(layer.index);
+        console.log(result);
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'}
+         );
+         if (result.meta.success === true)
+         {
+                redirectLocaleUrl = "@Url.Action("DevicePersonList", "DeviceManage",new {Language=LangUtilities.LanguageCode})";
+                redirectLocaleUrl = redirectLocaleUrl + "?deviceId="+result.data.deviceId+"&search=" + result.data.personId;
+                console.log(redirectLocaleUrl);
+                setTimeout(
+                    function() {
+                        window.location.href = redirectLocaleUrl;
+                    }
+                , 3000);
+         }
+    }
+
+    function errDevicePersonDownSubmit(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "\n--client errDevicePersonDownSubmit");
+    }
+    $('#DEVICE_PERSON_DOWN_MODAL').on('shown.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        $(button).text("Wait...");
+        var deviceId = button.data('deviceid');
+        var personId = button.data('personid');
+        var maincomId = button.data('maincomid')
+        var deviceoperatemode = button.data('deviceoperatemode');
+       
+        console.log({deviceId,personId,maincomId,deviceoperatemode});
+
+        var modal = $(this);
+        modal.find('.modal-title').text('@Lang.GeneralUI_Device@Lang.QueryPersonList_Title');
+        //field $("input[name=myname]")
+        modal.find("input[name=DeviceId]").val(deviceId); 
+        modal.find("input[name=MainComId]").val(maincomId); 
+        modal.find("input[name=PersonId]").val(personId); 
+        console.log(deviceoperatemode);
+        modal.find("select[name=DeviceOperateMode]").val(deviceoperatemode);  
+       
+    })
+</script>

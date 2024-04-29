@@ -1,0 +1,33 @@
+﻿@model VideoGuard.ApiModels.ResponseModalX
+@{ 
+    ViewBag.Title = $"ERROR : {Model.meta.ErrorCode}";
+}
+<div class="container">
+    <div class="row m-5">
+        <div class="col-12 ">
+            <div class="box info-box-text">
+                <div class="text-center">
+                    <br>
+                    <br>
+                    @if (Model.meta.Success == false)
+                    {
+                        <p class="h1 text-danger"><i class="fas fa-exclamation-triangle fa-3x"></i></p>
+                        <p class="h5 text-danger"> @Model.meta.Message </p>
+                        <details class="p-0 m-0">
+                            <!--class="open" or <details open>-->
+                            <summary class="text-nowrap text-primary pb-0 mb-0 ">
+                                <span class="font-red"><i class="far fa-frown"></i>  ErrorCode : @Model.meta.ErrorCode</span> 
+                            </summary>
+                            <p class="small pb-0 pt-0 mb-0">
+                                <span class="">
+                                    Success : @Model.meta.Success
+                                </span>
+                            </p>
+                        </details>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

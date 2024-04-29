@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\VxClient_Release\VER202303</_PublishTargetUrl>
+    <History>True|2023-06-14T13:15:37.0319083Z;True|2023-06-13T00:17:50.8496272+08:00;True|2023-05-29T01:58:13.3015364+08:00;True|2023-03-18T01:30:24.5764979+08:00;True|2023-03-18T01:16:45.4990092+08:00;True|2023-03-18T01:13:29.3204569+08:00;True|2023-03-18T01:12:28.4774981+08:00;True|2023-03-18T01:07:34.5115200+08:00;</History>
+  </PropertyGroup>
+</Project>

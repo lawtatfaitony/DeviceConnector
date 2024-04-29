@@ -1,0 +1,103 @@
+﻿@using LanguageResource
+@using Common
+@using EnumCode
+@using VxGuardClient.Context
+@using DataBaseBusiness.Models
+@using VideoGuard.ApiModels
+@model DeviceDelModel
+
+<div class="modal fade" id="DeviceDeleteModal" tabindex="-1"
+     role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="DeviceDeleteModal" aria-hidden="true">
+       <form asp-action="DeviceDelete" asp-controller="Device" asp-route-Language="@LangUtilities.LanguageCode"
+                      data-ajax-success="handleDeviceDelete"
+                      asp-ajax-onFailure="errDeviceDelete" data-ajax="true" data-ajax-method="post" class="form-horizontal form-inline"
+                      name="formDeviceDelete" id="formDeviceDelete">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content"> 
+                        <div class="modal-header">
+                            <h5 class="modal-title">@Lang.Device_DeviceDeleteTitle</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"> 
+                                <div class="container-fluid">
+                                    <input asp-for="@Model.DeviceId" name="DeviceId" type="hidden" class="DeviceId" />
+                                    <input asp-for="@Model.MaincomId" name="MaincomId" type="hidden" class="MaincomId" />
+
+                                    <div class="form-group">
+                                        <div class="col-12 mb-1">
+                                            <label class="control-label float-left" for="DeviceName">
+                                             <i class="fas fa-cogs mr-1" style="color:forestgreen"></i>
+                                                @Lang.Device_DeviceName
+                                            </label>
+                                        </div>
+                                        <div class="input-group col-9">
+                                            <input asp-for="@Model.DeviceName" name="DeviceName" readonly="readonly"
+                                                   class="DeviceName border-right-0 text-danger form-control form-control-sm bold" style="font-weight:800;color:red"/>
+                                            <div class="input-group-append input-group-sm">
+                                                <span class="input-group-text border-left-0" style="background-color:#faf9eb" data-toggle="tooltip" title="@Lang.Device_DeviceName">
+                                                    <i class="fas fa-angle-double-right" style="color:forestgreen;font-size:11px"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span asp-validation-for="@Model.DeviceName" class="text-danger"></span>
+                                    </div>
+                                </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" onclick="javascript:return confirm("are you sure?");" class="btn btn-primary btn-sm ml-3">@Lang.GeneralUI_Delete</button>
+                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                        </div>  
+                </div>
+            </div>
+      </form>
+</div>
+
+<script>
+
+    function handleDeviceDelete(result) {
+        layer.close(layer.index);
+        console.log(result);
+        layer.open({
+                title: '@Lang.GeneralUI_ReturnResult'
+                , content: result.meta.message
+                , btn: '@Lang.GeneralUI_OK'
+        });
+        if (result.meta.success === true)
+        {
+            redirectLocaleUrl = "@Url.Action("DeviceList", "Device",new {Language=LangUtilities.LanguageCode})";
+            redirectLocaleUrl = redirectLocaleUrl + "?search=" + result.data.deviceName;
+            console.log(redirectLocaleUrl);
+                 
+            var tr_obj = "#tr" + result.data.deviceId;
+            $(tr_obj).removeClass("bg-warning-gradient");
+            $(tr_obj).addClass("bg-warning-gradient");
+
+            setTimeout(function () {
+                 layer.close(layer.index);
+                $(tr_obj).remove();
+            }, 3000); 
+        }
+    }
+
+    function errDeviceDelete(data) {
+        layer.close('loading');
+        console.log(JSON.stringify(data));
+        alert('@Lang.GeneralUI_ServerError' + "--client errDeviceStatus");
+    }
+    $('#DeviceDeleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var deviceId = button.data('deviceid');
+        var maincomId = button.data('maincomid')
+        var deviceName = button.data('devicename');
+        var deviceSerialNo = button.data('deviceserialno');
+        console.log("deviceId=" + deviceId + "| maincomId=" + maincomId + "| deviceName =" + deviceName );
+        var modal = $(this);
+        //modal.find('.modal-title').text(deviceName);
+        //field
+        modal.find('.DeviceId').val(deviceId);
+        modal.find('.MaincomId').val(maincomId);
+        modal.find(".DeviceName").val(deviceName);
+    });
+</script>

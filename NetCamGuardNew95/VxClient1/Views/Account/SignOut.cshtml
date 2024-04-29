@@ -1,0 +1,28 @@
+﻿@using LanguageResource
+@{
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+}
+<div class="container align-content-center">
+    <div class="row m-5">
+        <div class="col-12 ">
+            <div class="box info-box-text">
+                <div class="text-center">
+                    <br>
+                    <br>
+                    <br>
+                    <p class="text-danger fas fa-exclamation-triangle fa-4x mb-3"><h1>@Lang.GeneralUI_SignOutSuccess </h1></p>
+                    <div class="d-flex justify-content-center">
+                        <div class="p-3">
+                            <a href="@Url.Action("login","Account",new { language = LangUtilities.LanguageCode,})"><h4><i class="text-success fas fa-user"></i>@Lang.GeneralUI_Login </h4></a>
+                        </div>
+                        <div  class="p-3">
+                            <a href="@Url.Action("Index","Home",new { language = LangUtilities.LanguageCode,})"><h4><i class="text-success fas fa-home"></i>@Lang.GeneralUI_Home </h4></a>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Small boxes (Stat box) -->

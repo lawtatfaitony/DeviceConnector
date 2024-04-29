@@ -1,0 +1,179 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <FileVersion>2.1.0.0</FileVersion>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+    <StartupObject></StartupObject>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <UserSecretsId>3d36cd82-cf30-453b-a6e9-8bf070423773</UserSecretsId>
+    <SignAssembly>False</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Context\Authentication\**" />
+    <Compile Remove="Context\NewFolder\**" />
+    <Compile Remove="Log\**" />
+    <Compile Remove="Service\**" />
+    <Compile Remove="wwwroot\AdminLTE305\**" />
+    <Compile Remove="wwwroot\Upload\DeviceConfig\**" />
+    <Compile Remove="wwwroot\Upload\EntriesLogImages\**" />
+    <Compile Remove="wwwroot\Upload\Person\**" />
+    <Content Remove="Context\Authentication\**" />
+    <Content Remove="Context\NewFolder\**" />
+    <Content Remove="Log\**" />
+    <Content Remove="Service\**" />
+    <Content Remove="wwwroot\AdminLTE305\**" />
+    <Content Remove="wwwroot\Upload\DeviceConfig\**" />
+    <Content Remove="wwwroot\Upload\EntriesLogImages\**" />
+    <Content Remove="wwwroot\Upload\Person\**" />
+    <EmbeddedResource Remove="Context\Authentication\**" />
+    <EmbeddedResource Remove="Context\NewFolder\**" />
+    <EmbeddedResource Remove="Log\**" />
+    <EmbeddedResource Remove="Service\**" />
+    <EmbeddedResource Remove="wwwroot\AdminLTE305\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\DeviceConfig\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\EntriesLogImages\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\Person\**" />
+    <None Remove="Context\Authentication\**" />
+    <None Remove="Context\NewFolder\**" />
+    <None Remove="Log\**" />
+    <None Remove="Service\**" />
+    <None Remove="wwwroot\AdminLTE305\**" />
+    <None Remove="wwwroot\Upload\DeviceConfig\**" />
+    <None Remove="wwwroot\Upload\EntriesLogImages\**" />
+    <None Remove="wwwroot\Upload\Person\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\HomeController - 复制.cs" />
+    <Compile Remove="Startup12.cs" />
+    <Compile Remove="StartupCopy.cs" />
+    <Compile Remove="StartupCopyV3_COOKIEandJWT - Copy.cs" />
+    <Compile Remove="StartupMixByMicrosoft - Copy.cs" />
+    <Compile Remove="StartupMixByMicrosoft - 复制.cs" />
+    <Compile Remove="StartupMixByMicrosoft.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\DeviceManageForApi列表.MD" />
+    <None Remove="Views\Cam\CameraHistory - 複製0806.chtml" />
+    <None Remove="Views\Device\ScreenFourREADME.MD" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Cam\CameraHistory - 複製0806.chtml" />
+    <Content Include="Views\Device\ScreenFourREADME.MD" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Context\Authentication\CookieBase-Login.MD" />
+    <None Include="Context\Authentication\ResponseStatusCode.MD" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="jQuery" Version="3.5.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.Log4NetAppender" Version="2.14.0" />
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.5.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.5.1" />
+    <PackageReference Include="System.Management" Version="4.7.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonBase\CommonBase.csproj" />
+    <ProjectReference Include="..\DataBaseBusiness\DataBaseBusiness.csproj" />
+    <ProjectReference Include="..\EnumCode\EnumCode.csproj" />
+    <ProjectReference Include="..\FunctionProtected\FunctionProtected.csproj" />
+    <ProjectReference Include="..\LangResouceLib\LangResouceLib.csproj" />
+    <ProjectReference Include="..\LogHelper\LogHelperCore.csproj" />
+    <ProjectReference Include="..\VideoGuard.ApiModels\VideoGuard.ApiModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Encryption">
+      <HintPath>bin\Encryption.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Upload\" />
+  </ItemGroup>
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TypeScriptTarget>ES2016</TypeScriptTarget>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+</Project>

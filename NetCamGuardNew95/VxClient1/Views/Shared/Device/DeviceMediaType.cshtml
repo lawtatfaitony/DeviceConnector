@@ -1,0 +1,92 @@
+﻿@using LanguageResource
+@using EnumCode
+@using Common
+@using VideoGuard.ApiModels
+@using VxClient.Models;
+@model DeviceMediaType
+
+    <div class="d-flex flex-row bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+            @switch (Model.AttendanceMode)
+            {
+                case EnumBusiness.AttendanceMode.STANDARD_CARD_AND_FINGERPRINT:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.STANDARD_CARD_AND_FINGERPRINT.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-id-card fa-2x text-fuchsia ml-1"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.HIK_CARD:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.HIK_CARD.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-id-card fa-2x text-warning ml-1"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.CIC_CARD:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.CIC_CARD.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-id-card fa-2x text-primary ml-1"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.STANDARD_CARD:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.STANDARD_CARD.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-id-card fa-2x text-primary ml-1"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.FINGERPRINT:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2  text-white-50" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.FINGERPRINT.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-fingerprint fa-2x text-white-50 ml-1"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.QQ:
+                    <div class="bg-secondary align-content-center pl-3 pr-3 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.QQ.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-map-marker fa-2x text-primary"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.GPS:
+                    <div class="bg-secondary align-content-center pl-3 pr-3 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.GPS.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;background-image:url('/wwwroot/images/Global.jpg');">
+                        <i class="fas fa-map-marker fa-2x text-danger"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.CARD_FINGERPRINT_PASSWD:
+                    <div class="align-content-center pl-3 pr-3 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.CARD_FINGERPRINT_PASSWD.GetDescriptionX()" style="background-color: #bdd4e7; background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%);width: 60px; height: 45px; border-width: 2px; border-color: black; border-radius: 4px;">
+                        <i class="fas fa-fingerprint fa-2x text-danger"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.PASSWORD: <!--BG STYLE REF : https://www.eggradients.com/category/blue-gradient-->
+                    <div class="align-content-center pl-3 pr-3 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.PASSWORD.GetDescriptionX()" style="background-color: #045de9;background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);width: 60px; height: 45px; border-width: 2px; border-color: black; border-radius: 4px;">
+                        <i class="fas fa-key fa-2x text-danger"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.COMBINE_VERIFY:
+                    <div class="align-content-center pl-3 pr-3 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.COMBINE_VERIFY.GetDescriptionX()" style="background-color #20bf55; background-image linear-gradient(315deg, #20bf55 0%, #01baef 74%);width: 60px; height: 45px; border-width: 2px; border-color: black; border-radius: 4px;">
+                        <i class="far fa-object-group fa-2x text-danger"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.FACE:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.STANDARD_CARD_AND_FINGERPRINT.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="fas fa-id-card fa-2x text-fuchsia ml-1"></i>
+                    </div>
+                    break;
+                case EnumBusiness.AttendanceMode.FACE_CARD_VERIFY:
+                    <div class="bg-secondary align-content-center pl-2 pr-2 pt-2 pb-2" data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.FACE_CARD_VERIFY.GetDescriptionX()" style="width:60px;height:45px;border-width:2px;border-color:black;border-radius:4px;">
+                        <i class="far fa-user-circle fa-2x text-fuchsia ml-1"></i>
+                    </div>
+
+                    break;
+
+                default:
+
+                    <i class="fas fa-question-circle-o fa-2x text-danger" data-toggle="tooltip" title="UNKNOWN"></i>
+                    break;
+            }
+        </div>
+        <div class="p-0 bd-highlight"> 
+            @if (!string.IsNullOrEmpty(Model.CatchPictureFileNameIfHave))
+            {
+                <div class="text-nowrap img-thumbnail"  style="max-width:60px;max-height:60px;overflow:hidden"
+                     data-toggle="tooltip" title="@EnumBusiness.AttendanceMode.FACE_CARD_VERIFY.GetDescriptionX()">
+                    <a href="@Model.CatchPictureFileNameIfHave" target="_blank">
+                        <img src="@string.Format("{0}s60X60.jpg", Model.CatchPictureFileNameIfHave)" width="60" onclick="showBigImg(this);" />
+                    </a>
+                </div>
+            }
+        </div> 
+    </div>
+

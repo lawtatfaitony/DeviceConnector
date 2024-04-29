@@ -1,0 +1,315 @@
+﻿@using LanguageResource
+@using VxGuardClient.Context
+@using VxClient.Models
+@using VideoGuard.ApiModels 
+@model VideoGuard.ApiModels.ResponseModalX
+@{
+    ViewBag.Title = Lang.QueryPersonList_Title;
+    int x = 0;
+    QueryPersonListInfoReturn queryPersonListInfoReturn = Model.data as QueryPersonListInfoReturn;
+    QueryPersonListInput input = ViewBag.QueryPersonListInput as QueryPersonListInput; 
+}
+<form asp-action="QueryPersonList" asp-controller="Person" asp-route-Language="@LangExtend.LanguageCode" method="get" placeholder="Search" class="form-inline ml-1" id="form_Search">
+
+    <div class="row mb-1">
+        <div class="input-group input-group-sm mb-3">
+            <input asp-for="@input.MaincomId" value="@input.MaincomId" type="hidden" name="MaincomId" />
+            <input asp-for="@input.Name" value="@input.Name" name="Name" class="form-control form-control-navbar" onclick="javascript:this.value='';" placeholder="Search" />
+            <select name="Category" asp-items="@Html.PersonCategoryDropDownList(input.Category)" class="border-right-0 form-control form-control-sm bold">
+                <option value="">@Lang.GeneralUI_Select</option>
+            </select>
+
+            <select asp-for="@input.LibraryId" name="LibraryId" asp-items="@Html.LibraryDropDownList(input.MaincomId,input.LibraryId)" class="form-control form-control-sm">
+                <option value="">@Lang.GeneralUI_Select</option>
+            </select>
+
+            <input asp-for="@input.RequiredPic" value="@input.RequiredPic" type="hidden" name="ReqUiredPic" />
+
+            <input type="checkbox" name="IsReqUiredPic" checked="@ViewBag.IsReqUiredPic" title="@Lang.QueryPersonListInput_ReqUiredPic" data-toggle="tooltip" class="ml-1 mr-1" style="display:flex;width:25px;height:25px;background-color:#faf9eb;border-color:navy" />
+
+            <span class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-flat"> <i class="fas fa-search"></i>Go!</button>
+            </span>
+        </div>
+        <div class="d-inline pull-right ml-3">
+            <a href="@Url.Action("AddPerson","Person")" class="btn btn-primary btn-sm text-white pt-1 pb-1 pr-2 pl-2 " title="@Lang.GeneralUI_AddNew" data-toggle="tooltip">
+                <i class="fa fa-plus-circle font-weight-bold"></i>
+            </a>
+        </div>
+    </div>
+</form>
+
+@if (Model.meta.Success == false)
+{
+    <partial name="~/Views/Base/ResponseModal.cshtml" , for="@Model" />
+}
+else
+{
+    <div class="box-body  table-responsive" style="min-height:600px;">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>
+                    <div class="text-nowrap " title="@string.Format("{0} OR {1}",Lang.Person_Id,Lang.Person_OuterId)" data-toggle="tooltip">
+                        <span><i class="fas fa-box text-green"></i> ID</span> <!--fa-caret-right-->
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap " title="@Lang.Person_PicUrl" data-toggle="tooltip">
+                        <span><i class="fas fa-icons text-green"></i> @Lang.Person_PicUrl </span> <!--fa-caret-right-->
+                    </div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Library_NameTips" data-toggle="tooltip"><span><i class="fas fa-cogs text-green"></i> @Lang.Library_Name </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_Name" data-toggle="tooltip"><span><i class="fas fa-id-card text-green"></i> @Lang.Person_Name </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_CategoryTips" data-toggle="tooltip"><span><i class="fas fa-network-wired text-green"></i> @Lang.Person_Category </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_CardNo" data-toggle="tooltip"><span><i class="fas fa-id-badge text-green"></i> @Lang.Person_CardNo </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.Person_Phone" data-toggle="tooltip"><span><i class="fas fa-phone text-green"></i> @Lang.Person_Phone </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Remark" data-toggle="tooltip"><span><i class="fas fa-pencil-ruler text-green"></i> @Lang.GeneralUI_Remark </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_CreateDate" data-toggle="tooltip"><span><i class="fas fa-calendar text-green"></i> @Lang.GeneralUI_CreateDate </span></div>
+                </th>
+                <th>
+                    <div class="text-nowrap" title="@Lang.GeneralUI_Details" data-toggle="tooltip"><span><i class="fas fa-th-list text-green"></i> @Lang.GeneralUI_Details </span></div>
+                </th>
+            </tr>
+
+            @if (queryPersonListInfoReturn.TotalCount != 0)
+            {
+                foreach (var item in queryPersonListInfoReturn.Items)
+                {
+                    x++;
+            <tr id="@string.Format("tr{0}",item.PersonId)" class="ui-controlgroup-item">
+                <td id="@string.Format("td{0}", item.PersonId)" class="text-omit">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="bd-highlight">
+                            <span id="@string.Format("sp{0}", item.PersonId)" class="text-white bg-black rounded pl-1 pr-1" title="@Lang.Person_Id " data-toggle="tooltip" style="cursor:pointer;">@item.PersonId</span>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.OuterId))
+                        {
+                            <div class="bd-highlight">
+                                <label id="@string.Format("CLIDBOARD{0}", item.OuterId)" title="@Lang.Person_OuterId (@Lang.GeneralUI_ClickToCopy)" data-toggle="tooltip" class="clipboard p-1 small text-white text-bold bg-gradient-lightblue rounded" style="cursor:pointer;" onclick="getClipboardText()"
+                                       data-clipboard-text="@item.OuterId">@item.OuterId</label>
+                                </div>
+                            }
+                    </div>
+                </td>
+                <td class="text-wrap pt-2">
+                    <img src="@item.PicClientUrl" class="img-responsive img-thumbnail img-size-64" />
+                </td>
+                <td class="text-wrap">
+                    <label class="rounded bg-black text-primary p-2" data-toggle="tooltip" title="@Lang.Library_Name">
+                        <span class="badge badge-danger pt-2 pl-1 pr-1 pb-1 mr-1">@item.LibId</span>@item.LibName
+                    </label>
+                    @if (item.LibIdGroupsList?.Count() > 0)
+                    {
+                        <details class="p-0 ml-0">
+                            <summary class="text-nowrap p-0">
+                                <span class="p-1 text-bold text-white bg-primary rounded">@Lang.Person_LibIdGroups </span>
+                            </summary>
+                            <p>
+                                <div class="d-flex flex-column bd-highlight">
+                                    @foreach (var lib in item.LibIdGroupsList)
+                                    {
+                                        <div class="p-1 bd-highlight bg-secondary rounded mb-1" data-toggle="tooltip" title="@lib.Name">
+                                            <span class="p-1 text-bold"><i class="fas fa-stop"></i> @lib.Id  @lib.Name </span>
+                                        </div>
+                                    }
+                                </div>
+                            </p>
+                        </details>
+                    }
+                </td>
+                <td class="text-wrap">
+                    <label class="rounded bg-black text-nowrap text-primary p-1">@item.Name</label>
+                </td>
+                <td class="text-wrap">
+                    @{
+                        PersonCategory category = (PersonCategory)item.Category;
+                        if (category == PersonCategory.BLOCKED)
+                        {
+                            <label class="label label-primary p-1 bg-secondary rounded text-nowrap" title="@Lang.Person_CategoryTips" data-toggle="tooltip">
+                                <i class="fas fa-lock text-danger"></i>
+                                @Lang.PersonCategory_BLOCKED
+                            </label>
+                        }
+                        else if (category == PersonCategory.UNBLOCKED)
+                        {
+                            <label class="label label-primary p-1 bg-gradient-dark rounded text-nowrap" title="@Lang.Person_CategoryTips" data-toggle="tooltip">
+                                <i class="fas fa-unlock text-warning"></i>
+                                @Lang.PersonCategory_UNBLOCKED
+                            </label>
+                        }
+                        else if (category == PersonCategory.GUEST)
+                        {
+                            <label class="label label-primary p-1 bg-gradient-pink rounded text-nowrap" title="@Lang.Person_CategoryTips" data-toggle="tooltip">
+                                <i class="fas fa-user-clock text-warning"></i>
+                                @Lang.PersonCategory_GUEST
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="label label-primary p-1 bg-gradient-gray-dark rounded text-nowrap" title="@Lang.Person_CategoryTips" data-toggle="tooltip">
+                                <i class="fas fa-user text-success"></i>
+                                OTHER
+                            </label>
+                        }
+                    }
+                </td>
+
+                <td class="text-wrap">
+                    @if (!string.IsNullOrEmpty(item.CardNo))
+                    {
+                        <label class="badge badge-primary pt-2 pl-1 pr-1 pb-1 text-nowrap"> @item.CardNo</label>
+                    }
+                </td>
+
+                <td class="text-wrap">
+                    @if (!string.IsNullOrEmpty(item.Phone))
+                    {
+                        <label class="badge badge-primary pt-2 pl-1 pr-1 pb-1 text-nowrap"> @item.Phone</label>
+                    }
+                </td>
+
+
+                <td class="text-wrap" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Remark)">
+                    <span class="omit3row small"> @item.Remark</span>
+                </td>
+                <td class="text-wrap small" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.CreateTime)">
+                    @String.Format("{0:yyyy-MM-dd HH:mm}", item.CreateTime)
+                </td>
+
+                <td class="text-wrap  pt-0">
+                    <div class="d-flex flex-row bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            @Html.ActionLink(string.Format(" {0}", Lang.GeneralUI_Edit), "UpdatePerson", "person", new { PersonId = item.PersonId }, new { @class = "btn btn-primary btn-sm fas fa-edit text-nowrap" })
+                        </div>
+                        <div class="p-2 bd-highlight" data-toggle="tooltip" title="@Lang.DeletePerson_RuleTips">
+                            <button class="btn btn-warning btn-sm text-nowrap" type="button" onclick="@string.Format("javascript:DeletePerson({0},{1});", item.LibId,item.PersonId)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        <span class="h2"></span> @Lang.GeneralUI_NoRecord
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    </div>
+
+    if (queryPersonListInfoReturn.PageCount > 1)
+    {
+        int p;
+        <div class="Page">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    @if (queryPersonListInfoReturn.PageNo != 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QueryPersonList", "Person", new { Name = input.Name,Category=input.Category, PageNo = 1 })" aria-label="Prev">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+
+                    @for (p = 1; p <= queryPersonListInfoReturn.PageCount; p++)
+                    {
+                        string ActiveCssTab = queryPersonListInfoReturn.PageNo == p ? "active" : "";
+                        <li class="page-item  @ActiveCssTab"><a class="page-link" href="@Url.Action("QueryPersonList", "Person", new { Name = input.Name,Category=input.Category,PageNo = p })">@p</a></li>
+                    }
+                    @if (queryPersonListInfoReturn.PageNo != queryPersonListInfoReturn.PageCount)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("QueryPersonList", "Person", new { Name = input.Name,Category=input.Category, PageNo = queryPersonListInfoReturn.PageCount })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+}
+<script>
+    function DeletePerson(LibId,PersonId)
+    {
+        console.log(LibId);
+
+        layer.confirm('@Lang.DeletePerson_ComfirmTips', {
+            title:'@Lang.GeneralUI_InfoTips',
+            btn: ['@Lang.GeneralUI_Yes', '@Lang.GeneralUI_NO'] //btn
+        }, function () {
+            //TODO
+            var httpDelUrl = "/@LangUtilities.LanguageCode/Person/DeletePerson";
+
+            var myparamsObject = { "LibId": LibId,"PersonId":PersonId};
+            $.ajax({
+                url: httpDelUrl,
+                data: myparamsObject,
+                type: "post",
+                dataType: "json",
+                error: function (data) {
+                    console.log(JSON.stringify(data));
+                },
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    layer.open({
+                        title: '@Lang.GeneralUI_ReturnResult'
+                        , content: data.meta.message
+                    , btn:'@Lang.GeneralUI_OK'
+                    });
+                    if (data.meta.Success == true) {
+                        var pr_obj = "#tr" + PersonId;
+                        $(pr_obj).addClass("bg-warning-gradient");
+                        setTimeout(function () {
+                            $(pr_obj).remove();
+                        }, 3000);
+                    }
+                }
+            });
+
+            }, function () {
+                layer.msg('@Lang.GeneralUI_ComfirmNoTips', { icon: 1 }, {
+                    time: 6000,
+                    btn: ['@Lang.GeneralUI_Isee']
+                });
+            });
+    }
+
+    $("#IsReqUiredPic").on("click", "#use_max", function () {
+
+        onUseMax(); //调用onUseMax函数，但函数运行时的checked的值获取的是undefined
+
+    });
+
+    $('#IsReqUiredPic').click(function () {
+        if ($(this).is(':checked')) {
+
+            $("input[name='ReqUiredPic']").val('true');
+        }
+        else {
+            $("input[name='ReqUiredPic']").val('false');
+        }
+    });
+</script>
+
