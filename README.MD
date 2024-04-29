@@ -1,4 +1,4 @@
-# AI GUARD 系統開發日誌
+# AI GUARD 系統
 
 ## 簡述:
 
