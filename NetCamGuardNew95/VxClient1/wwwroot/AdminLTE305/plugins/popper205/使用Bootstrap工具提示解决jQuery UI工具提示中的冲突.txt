@@ -1,0 +1,24 @@
+﻿使用Bootstrap工具提示解决jQuery UI工具提示中的冲突
+    <!-- popper V1.1.6 ~/AdminLTE302/plugins/popper/umd/popper.js   version 1.16.0-->
+    <!-- popper V1.14.3 ~/AdminLTE302/plugins/popperV1143/umd/popper.js   version 1.14.3-->
+    @{ ViewBag.UnpkgV1143 = "~/AdminLTE302/plugins/popperV1143/umd/popper.js";}
+    @{ ViewBag.UnpkgV116 = "~/AdminLTE302/plugins/popper/umd/popper.js";}
+    @{ ViewBag.UnpkgDevelopment205 = "https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"; }
+    @{ ViewBag.UnpkgProduction205 = "https://unpkg.com/@popperjs/core@2";}
+    <script src="@ViewBag.UnpkgDevelopment205"></script>
+<!--jquery-ui-->
+    <script src="~/AdminLTE302/plugins/jquery-ui/jquery-ui.min.js"></script>   
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip 这个影响 -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+
+
+还没得到解决，以上是来源于 AdminLTE 3.02版本的 提示和解决办法！但是测试不过
+
+使用 bootstrap提供的办法可以解决：
+初始化加入：
+var bootstrapButton = $.fn.button.noConflict(); // return $.fn.button to previously assigned value
+$.fn.bootstrapBtn = bootstrapButton;            // give $().bootstrapBtn the Bootstrap functionality
+
+【最后】 还是去掉 jquery-ui 引用才能解决问题。AdminLTE的 $.widget.bridge('uibutton', $.ui.button) 办法不行的。
