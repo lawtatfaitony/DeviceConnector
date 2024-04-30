@@ -13,8 +13,9 @@ https://github.com/lawtatfaitony/DeviceConnector
 3. CIC(建造業議會)考勤拍卡數據雲端同步
 4. Media.exe 錄像與直播系統的鏈接與媒體雲端轉錄(雲端安全備份)
 5. MediaGuard V3 版本的 錄像數據同步與設備管理 https://github.com/lawtatfaitony/MediaGuardCmakeV3
-
 6. ELV 弱電系統與管理 通過Orange PI GPIO 實現對電路管理控制,也可以遠端遠程控制.
+
+開發日誌 DeviceConnector/tree/main/NetCamGuardNew95/readme.md
 
 ## CLOUD And Edge Device 
 
