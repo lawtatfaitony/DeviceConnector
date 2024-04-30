@@ -70,3 +70,9 @@ chrome://flags/  配置具体的项目
  https://docs.microsoft.com/zh-tw/aspnet/core/tutorials/signalr?WT.mc_id=dotnet-35129-website&view=aspnetcore-3.1&tabs=visual-studio
  dotnet dev-certs https --clean
 dotnet dev-certs https --trust
+
+## 直接打開導致樣式問題
+
+如果不是Visual Studio Ctrl+F5打開localhost, 而是直接bin/debug 可能因為沒有找到樣式文件導致頁面變形,這是net core 框架常識問題.
+
+<img src="README_IMGs/direct_to_open_VxClien.jpg" alt="direct_to_open_VxClien" style="zoom:50%;" />
