@@ -19,3 +19,11 @@ AI GUARD : 又稱為 DeviceConnector 設備鏈接器,是一款 基於 CCTV行業
 雲端 與 邊緣設備 願景
 
 <img src="README_IMGs/Could_and_Edge_Computing.jpg" alt="Could_and_Edge_Computing" style="zoom: 33%;" />
+
+## VxClient.xml
+
+```
+File name: '\VxClient1\bin\Debug\netcoreapp3.1\VxClient.xml'
+注意:第一次啟動需要把文件複製到bin運行目錄下,這是 SwaggerUI API組件必須的
+```
+
