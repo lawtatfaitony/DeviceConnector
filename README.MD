@@ -2,7 +2,7 @@
 
 ## 簡述:
 
-AI GUARD : 又稱為 DeviceConnector 設備鏈接器,是一款 基於 CCTV行業上的 AI 應用 與 IoT應用 的系統,主要考慮的場景是建築物的系統級別的AI, IoT上的應用,鏈接萬物,識別萬物,智能警報等等方向思考的一套系統. 由於比較行業性質的應用,設計界面力求簡單方向思考.
+AI GUARD 系統 : 又稱為 DeviceConnector 設備鏈接器,是一款 基於 CCTV行業上的 AI 應用 與 IoT應用 的系統,主要考慮的場景是建築物的系統級別的AI, IoT上的應用,鏈接萬物,識別萬物,智能警報等等方向思考的一套系統. 由於比較行業性質的應用,設計界面力求簡單方向思考.
 
 目前掛載的獨立子系統包括:
 
@@ -40,10 +40,6 @@ AI GUARD : 又稱為 DeviceConnector 設備鏈接器,是一款 基於 CCTV行業
 
 ​		智能算法 處理的結果, 最後如果落地,具體表現,得需要通過ELV弱電系統實現對感應器的控制.
 
-## VxClient.xml
 
-```
-File name: '\VxClient1\bin\Debug\netcoreapp3.1\VxClient.xml'
-注意:第一次啟動需要把文件複製到bin運行目錄下,這是 SwaggerUI API組件必須的
-```
 
+## AI 識別與警報與ELV 感應器 
