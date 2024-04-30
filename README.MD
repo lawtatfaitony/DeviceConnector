@@ -12,13 +12,33 @@ AI GUARD : 又稱為 DeviceConnector 設備鏈接器,是一款 基於 CCTV行業
 4. Media.exe 錄像與直播系統的鏈接與媒體雲端轉錄(雲端安全備份)
 5. MediaGuard V3 版本的 錄像數據同步與設備管理 https://github.com/lawtatfaitony/MediaGuardCmakeV3
 
-​	
+6. ELV 弱電系統與管理 通過Orange PI GPIO 實現對電路管理控制,也可以遠端遠程控制.
 
 ## CLOUD And Edge Device 
 
 雲端 與 邊緣設備 願景
 
 <img src="README_IMGs/Could_and_Edge_Computing.jpg" alt="Could_and_Edge_Computing" style="zoom: 33%;" />
+
+​							這只是早期圖片草圖 只表達CLOUD 與 EDGE 關係
+
+目前 OrangePI AI PRO 更強大更適合邊緣AI計算
+
+### 雲端與邊緣設備概覽
+
+​	實現雲端/LAN 佈局下,控制跨樓宇的屋苑物業的ELV系統/CCTV系統控制/AI智能警報.
+
+#### 	ELV系統
+
+​		ELV弱電控制 通過 雲端>邊緣設備>感應設備 等等模式,實現IoT系統的萬物互聯的最佳解決方案.
+
+#### 	CCTV系統 
+
+​		引入新的監控模式: AI 智能警報,減少人力資源,降低營運成本.
+
+#### 	 AI 識別與警報 
+
+​		智能算法 處理的結果, 最後如果落地,具體表現,得需要通過ELV弱電系統實現對感應器的控制.
 
 ## VxClient.xml
 
