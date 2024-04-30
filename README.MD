@@ -4,6 +4,8 @@
 
 AI GUARD 系統 : 又稱為 DeviceConnector 設備鏈接器,是一款 基於 CCTV行業上的 AI 應用 與 IoT應用 的系統,主要考慮的場景是建築物的系統級別的AI, IoT上的應用,鏈接萬物,識別萬物,智能警報等等方向思考的一套系統. 由於比較行業性質的應用,設計界面力求簡單方向思考.
 
+https://github.com/lawtatfaitony/DeviceConnector
+
 目前掛載的獨立子系統包括:
 
 1. 海康設備數據同步和聯連事件控制與警報
