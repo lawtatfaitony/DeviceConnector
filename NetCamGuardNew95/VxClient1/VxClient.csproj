@@ -110,12 +110,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Encryption">
-      <HintPath>bin\Encryption.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -138,6 +132,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Upload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Encryption">
+      <HintPath>..\bin_ref\Encryption.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
